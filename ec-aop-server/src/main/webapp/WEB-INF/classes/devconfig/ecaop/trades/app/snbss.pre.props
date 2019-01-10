@@ -1,0 +1,5 @@
+#陕西预受理
+ecaop.core.app.map.snbss.pre=snbss
+ecaop.core.app.snbss.def={"code":"snbss", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.snbss.timeslimit=max 100 per 1 minute
+ecaop.core.app.snbss.allow={appkey:"snbss",allow:"qrtb,qrta,tsos", deny:null}

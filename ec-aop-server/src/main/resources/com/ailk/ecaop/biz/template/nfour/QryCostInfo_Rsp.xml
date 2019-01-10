@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CurrentMonthFeeRsp mappedOut="true">
+    <RealTimeFee constraint="?"  length="V10"  mappedName="realTimeFee" />
+    <RealTimeBalance length="V10" constraint="?"  mappedName="realTimeBalance" />
+        <Para constraint="*" mappedName="para">
+            <ParaId mappedName="paraId" />
+            <ParaValue mappedName="paraValue" />
+        </Para>
+</CurrentMonthFeeRsp>

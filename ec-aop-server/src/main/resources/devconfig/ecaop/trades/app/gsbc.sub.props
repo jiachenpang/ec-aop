@@ -1,0 +1,5 @@
+#甘肃BSS国政通测试
+ecaop.core.app.map.gsbc.sub=gsbc
+ecaop.core.app.gsbc.def={"code":"gsbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gsbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.gsbc.allow={appkey:"gsbc",allow:"crck,qrtb,seft", deny:null}

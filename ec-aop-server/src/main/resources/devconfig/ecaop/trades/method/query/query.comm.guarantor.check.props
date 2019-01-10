@@ -1,0 +1,51 @@
+#担保信息校验
+#method定义
+ecaop.core.method.map.ecaop.trades.query.comm.guarantor.check=qcgc
+ecaop.core.method.qcgc.def={"mothod":"qcgc","remark":"担保信息校验"}
+
+ecaop.core.method.qcgc.params=[\
+     {"param":"msg",type:"JSON",required:false, validator:"@JSONSchema(ecaop.ecsb.qcgc.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+    ]
+ecaop.ecsb.qcgc.param.msg={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+opeSysType:{type:"Number(1)",required:true},\
+certType:{type:"String(2)",required:true},\
+certNum:{type:"String(30)",required:true},\
+para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#定义processors
+ecaop.core.method.qcgc.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.qcgc.masb.flowConfig)
+
+ecaop.core.method.qcgc.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.masb.qcgc.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#定义处理器
+ecaop.masb.qcgc.processors=@ParametersMapper(ecaop.ecsb.qcgc.ParametersMapping)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.ecsb.qcgc.template)
+                                 
+ecaop.ecsb.qcgc.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00027",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"GuarantorChkReq",temp:true},\   
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.qcgc.template@3GE"}\
+]
+#请求和返回报文模版路径
+ecaop.ecsb.qcgc.template=com/ailk/ecaop/biz/template/guarantor/GuarantorActCheck

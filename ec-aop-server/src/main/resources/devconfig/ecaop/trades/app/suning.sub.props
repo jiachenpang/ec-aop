@@ -1,0 +1,5 @@
+#苏宁商城
+ecaop.core.app.map.suning.sub=snsb
+ecaop.core.app.snsb.def={"code":"snsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.snsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.snsb.allow={appkey:"snsb",allow:"cuck", deny:null}

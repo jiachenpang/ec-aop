@@ -1,0 +1,65 @@
+#宽带趸交验证
+ecaop.core.method.map.ecaop.trades.sell.brd.yearly.pay.check=bypc
+ecaop.core.method.bypc.def={"mothod":"bypc","remark":"宽带趸交验证"}
+ecaop.core.method.bypc.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.bypc.MsgCheck)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#写卡结果校验
+ecaop.ecsb.bypc.MsgCheck={\
+   operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    accessType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    inModeCode:{type:"String(4)",required:true,validators:null},\
+    areaCode:{type:"String(6)",required:true,validators:null},\
+    queryType:{type:"Number(1)",required:true,validators:"@FixedLen(1)"},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    orderNo:{type:"String(30)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+ }
+
+#定义processors
+ecaop.core.method.bypc.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.bypc.flowConfig)
+#配置跳转
+ecaop.core.method.bypc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->04 *->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"03", processor:"AopHandler(ecaop.core.method.bypc4G.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.core.method.bypcN25.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#宽带趸交4G 暂时未启用
+ecaop.core.method.bypc4G.processors=@brdYearlyPayCheck4G()
+
+#宽带趸交25
+ecaop.core.method.bypcN25.processors=@brdYearlyPayCheckN25()
+
+#欠费信息查询
+ecaop.core.brd.qryOweFeeInfoParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"PaymentSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryOweFeeInfo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_OWE_FEE_INFO_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.core.brd.qryOweFeeInfoTemplate@FBS@QRY_OWE_FEE_INFO_INPUT@n-1529397156@QRY_OWE_FEE_INFO_REQ"}\
+]
+
+#指定模板路径
+ecaop.core.brd.qryOweFeeInfoTemplate=com/ailk/ecaop/biz/template/cbss/QryOweFeeInfo

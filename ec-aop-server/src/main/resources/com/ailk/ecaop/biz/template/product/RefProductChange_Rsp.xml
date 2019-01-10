@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+  <REF_PRODUCT_CHANGE_RSP  mappedOut="true">
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!-- 应答描述  -->
+    </RESP_DESC>
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!-- 应答编码0000 成功8888其他失败原因（见应答描述） -->
+    </RESP_CODE>
+    <PARA constraint="*" mappedName="para">
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!-- 保留字段ID -->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!-- 保留字段值 -->
+      </PARA_VALUE>
+    </PARA>
+  </REF_PRODUCT_CHANGE_RSP>
+</UNI_BSS_BODY>

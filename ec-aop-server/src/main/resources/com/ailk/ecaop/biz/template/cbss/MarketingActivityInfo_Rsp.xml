@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+  <ACTIVITYCANCLEINFO_RSP mappedOut="true">
+    <RESP_CODE length="F4" mappedName="code">
+      <!--应答编码, 0000成功,8888 其他错误 -->
+    </RESP_CODE>
+    <RESP_DESC length="V500" mappedName="detail">
+      <!--应答描述 -->
+    </RESP_DESC>
+    
+
+      <PRODUCT_INFO constraint="*" mappedName="productInfo">
+        <PRODUCT_ID length="V8" constraint="?" mappedName="productId"/>
+        <PRODUCT_NAME length="V100" constraint="?" mappedName="productName"/>
+        <PROVINCE_CODE length="F2" constraint="?" mappedName="provinceCode"/>
+        <PRODUCT_ACTIVE_TIME length="F14" constraint="?" mappedName="productActiveTime"/>
+        <PRODUCT_INACTIVE_TIME length="F14" constraint="?" mappedName="productInactiveTime"/>
+        <ACTIVITY_ID length="V28" constraint="?" mappedName="activityId"/>
+        <ACTIVITY_NAME length="V128" constraint="?" mappedName="activityName"/>
+        <ACTIVITY_ACTIVE_TIME length="F14" constraint="?" mappedName="activityActiveTime"/>
+        <ACTIVITY_INACTIVE_TIME length="F14" constraint="?" mappedName="activityInactiveTime"/>
+        <DISCNT_INFO constraint="*" mappedName="discntInfo">
+            <PACKAGE_ID length="V8" constraint="?" mappedName="packageId" />
+            <DISCNT_CODE length="V8" constraint="?" mappedName="discntCode" />
+            <DISCNT_NAME length="V1000" constraint="?" mappedName="discntName" />
+            <START_DATE length="F14" constraint="?" mappedName="startDate" />
+            <END_DATE length="F14" constraint="?" mappedName="endDate" />
+            <ITEM_ID length="V40" constraint="?" mappedName="itemId"/>
+            <TRADE_ID length="V40" constraint="?" mappedName="tradeId"/>
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" constraint="?" mappedName="attrCode"/>
+                <ATTR_VALUE length="V2000" constraint="?" mappedName="attrValue"/>
+                <START_DATE length="F14" constraint="?" mappedName="startDate" />
+                <END_DATE length="F14" constraint="?" mappedName="endDate" />
+          </ATTR_INFO>
+      </DISCNT_INFO>
+      </PRODUCT_INFO>
+      
+      <CANCLE_FEE_INFO constraint="*" mappedName="cancleFeeInfo">
+        <CANCLE_FEE_TYPE length="V2" constraint="?" mappedName="cancleFeeType"/>
+        <CANCLE_FEE length="V30" constraint="?" mappedName="cancleFee"/>
+      </CANCLE_FEE_INFO>
+      
+      <PARA constraint="*" mappedName="para">
+        <!--保留字段 -->
+        <PARA_ID length="V20" mappedName="paraId">
+          <!--保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE length="V60" mappedName="paraValue">
+          <!--保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+  </ACTIVITYCANCLEINFO_RSP>
+</UNI_BSS_BODY>

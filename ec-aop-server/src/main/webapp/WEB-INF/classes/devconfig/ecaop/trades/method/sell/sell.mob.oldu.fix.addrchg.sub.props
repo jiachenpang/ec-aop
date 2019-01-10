@@ -1,0 +1,27 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.fix.addrchg.sub=mofs
+ecaop.core.method.mofs.def={"mothod":"mofs","remark":"固网移机处理提交"}
+
+ecaop.core.method.mofs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.mofs.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(20)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.mofs.param.msg={\
+     operatorId:{type:"String(20)",required:true,validators:null},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true,validators:null},\
+     channelId:{type:"String(20)",required:true,validators:null},\
+     channelType:{type:"String(7)",required:true,validators:null},\
+     provOrderId:{type:"String(30)",required:true,validators:null},\
+     ordersId:{type:"String(30)",required:true,validators:null},\
+     origTotalFee:{type:"String(10)",required:true,validators:null},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+
+#定义processors
+
+ecaop.core.method.mofs.processors=BroadChangeSub()
+

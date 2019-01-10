@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_REMOTECARDINFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_REMOTECARDINFO_REQ>
+            <EMPTY_CARD_ID constraint="1" length="V30" mappedName="emptyCardId" />
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"/>          
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+        </QRY_REMOTECARDINFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_REMOTECARDINFO_INPUT>

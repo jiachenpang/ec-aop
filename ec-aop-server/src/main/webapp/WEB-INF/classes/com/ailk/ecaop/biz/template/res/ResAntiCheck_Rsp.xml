@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <RES_ANTI_RSP mappedOut="true">
+        <!--资源预判结果编码, 0000：存在可用资源, 1761：无可用资源, 1763: 竞争对手独家进线, 8888：其它错误, （不可加装、不可单装时候返回，其他错误在错误描述中体现） -->
+        <RESP_CODE constraint="1" length="F4" mappedName="code"></RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail"><!--资源预判描述信息或预判失败原因等 -->
+        </RESP_DESC>
+        <BRAND_LIST constraint="?" mappedName="brandList"><!--产品类列表接入方式列 -->
+            <BRAND_CODE constraint="*" length="V4" mappedName="brandCode"><!--产品类编码 -->
+            </BRAND_CODE>
+            <ACCESS_LIST constraint="*" mappedName="accessList"><!--接入方式列表 -->
+                <ACCESS_TYPE constraint="1" length="V20" mappedName="accessType" ><!--接入方式编码 -->
+                </ACCESS_TYPE>
+                <ACCESS_TYPE_NAME constraint="1" length="V250" mappedName="accessTypeName"><!--接入方式名称 -->
+                </ACCESS_TYPE_NAME>
+                <MAX_RATE constraint="?" length="V250" mappedName="maxRate"><!--最大可承载带宽，单位：M(资源预判类型为‘0’的时候必传) -->
+                </MAX_RATE>
+                <IP_TYPE constraint="?" length="V250" mappedName="ipType"><!--IP地址种类 -->
+                </IP_TYPE>
+            </ACCESS_LIST>
+        </BRAND_LIST>
+        <EXCH_LIST constraint="*" mappedName="exchList"><!--局向列表 -->
+            <EXCH_CODE constraint="1" length="V64" mappedName="exchCode"><!--局向编码 -->
+            </EXCH_CODE>
+            <EXCH_NAME constraint="1" length="V100" mappedName="exchName"><!--局向名称 -->
+            </EXCH_NAME>
+        </EXCH_LIST>
+        <BUILD_RSC_INF constraint="1" mappedName="bulidRscInf" mappedOut="true"><!--在建工程信息 -->
+            <FINISH_DATE constraint="?" length="V20" mappedName="finishDate"><!--预计完成时间 -->
+            </FINISH_DATE>
+            <ACCESS_DESCR constraint="?" length="V250"  mappedName="accessDescr"><!--工程新接入方式 -->
+            </ACCESS_DESCR>
+            <PROCESS_DESCR constraint="?" length="V500" mappedName="accessDescr"><!--工程建设进度 -->
+            </PROCESS_DESCR>
+            <MAX_RATE constraint="?" length="V250"  mappedName="maxRate"><!--最大可承载带宽 -->
+            </MAX_RATE>
+            <IS_ADD constraint="?" length="F1" mappedName="isAdd"><!--针对共线时依据共线信息进行判断；, 1可加装, 2可单装 -->
+            </IS_ADD>
+        </BUILD_RSC_INF>
+        <INSTALL_ADDRESS constraint="?" length="V256" mappedName="installAddress"><!--装机地址（安装地址）, （可加装的时候必须返回） -->
+        </INSTALL_ADDRESS>
+        <SERVICE_CODE constraint="?" length="V20" mappedName="serviceCode"><!--业务区编码, （可加装的时候返回） -->
+        </SERVICE_CODE>
+        <EXCH_CODE constraint="?" length="V64" mappedName="exchCode"><!--局向编码, （可加装的时候返回） -->
+        </EXCH_CODE>
+        <ADDRESS_CODE constraint="?" length="V300" mappedName="addressCode"><!--标准地址编码, （可加装的时候返回） -->
+        </ADDRESS_CODE>
+        <ADDRESS_NAME constraint="?" length="V200" mappedName="addressName"><!--标准地址名称, （可加装的时候返回） -->
+        </ADDRESS_NAME>
+        <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </RES_ANTI_RSP>
+</UNI_BSS_BODY>

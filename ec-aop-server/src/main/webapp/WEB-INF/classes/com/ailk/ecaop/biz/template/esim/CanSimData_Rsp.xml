@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+  <CAN_SIM_DATA_RSP mappedOut="true">
+    <RESP_CODE constraint="1"  length="F4"  mappedName="code">
+      <!-- 应答编码：0000 成功8888其他错误 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1"  length="V500"  mappedName="detail">
+      <!-- 应答描述 -->
+    </RESP_DESC>
+    <RESP_INFO constraint="*" mappedName="respInfo">
+      <RESULT_CODE constraint="1" length="V4" mappedName="resultCode">
+        <!-- 状态编码 -->
+      </RESULT_CODE>
+      <RESULT_NAME constraint="1" length="V200" mappedName="resultName">
+        <!-- 状态信息 -->
+      </RESULT_NAME>
+    </RESP_INFO>
+    <PARA constraint="*" mappedName="para">
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!-- 保留字段ID -->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!-- 保留字段值 -->
+      </PARA_VALUE>
+    </PARA>
+  </CAN_SIM_DATA_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,37 @@
+#空中卡数据同步
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.otaopencarddate.syn=snos
+ecaop.core.method.snos.def={"mothod":"snos","remark":"空中卡数据同步"}
+ecaop.core.method.snos.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.gdjk.cdsn.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#定义method别名为snos的processors
+ecaop.core.method.snos.processors=@route\
+                           @FlowProcessor(ecaop.core.method.snos.route.flowConfig)
+#根据省份路由 走北六还是南25(南25与广东集客处理方法一致)
+ecaop.core.method.snos.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.ota.snos.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#广东集团客户开户卡数据同步
+ecaop.ota.snos.processors=@ParametersMapper(ecaop.ota.snos.CardDateSyncParametersMapping)\
+                           @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                           @Xml2JsonMapper(ecaop.ota.snos.template)
+
+#请求参数
+ecaop.ota.snos.CardDateSyncParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00029",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"OrderSubReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.ota.snos.template@3GE"}\
+]
+#请求和返回报文模版路径
+ecaop.ota.snos.template=com/ailk/ecaop/biz/template/simcard/OtaOpenCardSync

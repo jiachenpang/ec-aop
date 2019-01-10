@@ -1,0 +1,50 @@
+#ECS商城
+ecaop.core.app.map.ecs.sub=ecsb
+#新增bizAllow
+ecaop.core.app.ecsb.def={"code":"ecsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow",remark:"ECS商城",userId:"123123"}
+ 
+#接入方对应的业务的基本信息，目前bizs字段尚不用于校验
+#ecaop.core.app.ecsb.biz={"bizs":"0001,0002,0003"}
+
+#ecaop.core.app.ecsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.ecsb.allow=\
+   {appkey:"ecsb",allow:"coto,sccc,sc4s,qauq,quuq,qouq,quaq,qurq,qoqy,qobq,qctc,cbpn,byps,mcba,bypc,mcbd,qbcq,crck,dvck,\
+   qcgc,2324,234o,opsb,oupc,cmck,qcsp,crck,tscs,nboc,snqy,cbpq,spec,spes,ccpq,mcps,smnp,mpsb,cgqe,smcom,scrat", deny:null}
+
+#接入方允许的业务定义
+#ecaop.core.app.ecsb.bizAllow={allow:"0001,0002",deny:"0003"}
+#业务校验的参数，校验checkers在biz.props的业务定义中
+#ecaop.core.app.ecsb.0001.provinceInBizAllow={allow:"10,11,19,34",deny:"89"}
+#ecaop.core.app.ecsb.0001.bizTimesLimit=max 10 per 1 minute
+
+#当修改redis中的以ecaop.core.app.ecsb.0001为开始的配置后(如上面的两条)，
+#修改如下reids中的值为当前时间的毫秒数，1分钟以后修改的配置就会生效了(目前对provinceInBizAllow，bizTimesLimit有效)
+ecaop.core.app.ecsb.0001.timestamp=0
+#同理，可以修改如下reids中的值为当前时间的毫秒数，1分钟后，修改后的接入方的配置会生效(目前对allow，bizAllow有效)
+ecaop.core.app.ecsb.timestamp=0
+
+#ecsb接入方的0001业务，异常信息，0点-当前，5min重新统计一次
+#priority是为用来排序的优先级——优先级不超过2位！！
+#ecaop.core.exception.ecsb.0001.excps={"exceptions":[{"excpCode":"EcAopRequestBizTimesLimitException","count":"9","priority":"55"},\
+                                                      {"excpCode":"EcAopRequestProvinceAllowException","count":"1","priority":"32"},\
+                                                      {"excpCode":"EcAopServerBizException","count":"1","priority":"98"}],\
+                                   "appCode":"ecsb","biz":"0001"}
+
+#不写校验的配置则表示该校验不进行
+#allow:"*"--表示所有
+#deny:null--表示null,跟不写一样
+
+
+#ecaop.core.app.ecsb.mock={"method":"qurq", "mocked":"true", "mockid":"mockqurq"}
+
+ecaop.core.app.map.ecs.realclient=rlct
+ecaop.core.app.rlct.def={"code":"rlct", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.rlct.allow={appkey:"rlct",allow:"crck,qcfc,qcfd", deny:null}
+
+ecaop.core.app.map.ecs.phservhall=pshl
+ecaop.core.app.pshl.def={"code":"pshl", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.pshl.allow={appkey:"pshl",allow:"crck", deny:null}
+
+ecaop.core.app.map.ecs.smsservhall=mshl
+ecaop.core.app.mshl.def={"code":"mshl", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.mshl.allow={appkey:"mshl",allow:"crck", deny:null}

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY >
+ <QRY_USER_PRODUCT_RSP mappedOut="true" >
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+        <!--应答码, 0000成功,  8888:其他错误 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="1" length="V500" mappedName="detail">
+        <!--错误描述 -->
+        </RESP_DESC>
+        <PRODUCT_INFO constraint="*" mappedName="productInfo">
+                <!--子产品信息 -->
+                <PRODUCT_ID length="V8" mappedName="productId">
+                    <!--产品编码 -->
+                </PRODUCT_ID>
+                <PRODUCT_NAME length="V100" mappedName="productName">
+                    <!--产品名称 -->
+                </PRODUCT_NAME>
+                <PRODUCT_MODE length="F2" mappedName="productMode">
+                <!--产品名称 -->
+                </PRODUCT_MODE>
+                <PRODUCT_ACTIVE_TIME length="F14" mappedName="productActiveTime">
+                    <!--生效时间YYYYMMDDHHMMSS -->
+                </PRODUCT_ACTIVE_TIME>
+                <PRODUCT_INACTIVE_TIME length="F14" mappedName="productInactiveTime">
+                    <!--失效时间YYYYMMDDHHMMSS -->
+                </PRODUCT_INACTIVE_TIME>
+            </PRODUCT_INFO>
+            <ACTIVITY_INFO constraint="*" mappedName="activityInfo">
+                <!--活动信息 -->
+                <ACTIVITY_ID length="V28" mappedName="activityId">
+                    <!--活动ID -->
+                </ACTIVITY_ID>
+                <ACTIVITY_NAME length="V128" mappedName="activityName">
+                    <!--活动名称 -->
+                </ACTIVITY_NAME>
+                <ACTIVITY_ACTIVE_TIME length="F14" mappedName="activityActiveTime">
+                    <!--生效时间YYYYMMDDHHMMSS -->
+                </ACTIVITY_ACTIVE_TIME>
+                <ACTIVITY_INACTIVE_TIME length="F14" mappedName="activityInactiveTime">
+                    <!--失效时间,格式：YYYYMMDDHHMMSS -->
+                </ACTIVITY_INACTIVE_TIME>
+            </ACTIVITY_INFO>
+            <DISCNT_INFO constraint="*" mappedName="discntInfo">
+                <USER_ID_A length="V16" mappedName="userIdA" />
+                <PRODUCT_ID length="V8" mappedName="productId" />
+                <PACKAGE_ID length="V8" mappedName="packageId" />
+                <DISCNT_CODE length="V8" mappedName="discntCode" />
+                <DISCNT_NAME length="V100" mappedName="discntName" />
+                <SPEC_TAG length="V1" mappedName="specTag" />
+                <RELATION_TYPE_CODE length="V4" constraint="?" mappedName="relationTypeCode" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <ITEM_ID length="V16" constraint="?" mappedName="itemId" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </DISCNT_INFO>
+            <SVC_INFO constraint="*" mappedName="svcInfo">
+                <SERVICE_ID length="V8" mappedName="serviceId" />
+                <MAIN_TAG length="V1" mappedName="mainTag" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <ITEM_ID length="V16" mappedName="itemId" />
+                <PACKAGE_ID length="V8" constraint="?" mappedName="packageId" />
+                <USER_ID_A length="V16" mappedName="userIdA" />
+                <PRODUCT_ID length="V8" constraint="?" mappedName="productId" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </SVC_INFO>
+            <SP_INFO constraint="*" mappedName="spInfo">
+                <PARTY_ID length="V10" constraint="?" mappedName="partyId" />
+                <SP_ID length="V10" constraint="?" mappedName="spId" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <SP_NAME length="V100" constraint="?" mappedName="spName" />
+                <PACKAGE_ID length="V8" constraint="?" mappedName="packageId" />
+                <SP_PRODUCT_ID length="V40" constraint="?" mappedName="spProductId" />
+                <SP_PRODUCT_NAME length="V200" constraint="?" mappedName="spProductName" />
+                <FIRST_BUY_TIME length="F14" constraint="?" mappedName="firstBuyTime" />
+                <PAY_SERIAL_NUMBER length="V40" constraint="?" mappedName="paySerialNumber" />
+                <PRODUCT_ID length="V8" constraint="?" mappedName="productId" />
+                <UPDATE_TIME length="F14" constraint="?" mappedName="updateTime" />
+                <PAY_USER_ID length="V16" constraint="?" mappedName="payUserId" />
+                <SP_SERVICE_ID length="V8" constraint="?" mappedName="spServiceId" />
+                <ITEM_ID length="V16" constraint="?" mappedName="itemId" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </SP_INFO>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </QRY_USER_PRODUCT_RSP>
+</UNI_BSS_BODY>

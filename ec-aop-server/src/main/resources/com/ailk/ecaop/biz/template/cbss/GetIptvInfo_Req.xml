@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GET_IPTV_INFO4G_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <!-- 5.1.11 获取IPTV/互联网电视账号 -->
+        <GET_IPTV_INFO4G_REQ>
+            <!-- 营业区编码 -->          
+            <CITY_CODE length="V20" mappedName="city"/>
+            <!-- 查询类型:1：获取IPTV相关信息（IPTV账号、IPTV专线号码、IPTV专属账号）；2：获取互联网电视相关信息-->
+            <QRY_TYPE length="F1" mappedName="qryType"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V60" mappedName="paraValue"/>
+            </PARA>
+        </GET_IPTV_INFO4G_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</GET_IPTV_INFO4G_INPUT>

@@ -1,0 +1,65 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.brd.yearly.opt.mod.check=bymc
+ecaop.core.method.bymc.def={"mothod":"bymc","remark":"宽带包年续费验证-加强版"}
+ecaop.core.method.bymc.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.bymc.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.bymc.msgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:null},\
+    markingTag:{type:"String(1)",required:false,validators:null},\
+    queryType:{type:"String(1)",required:true,validators:null},\
+    inModeCode:{type:"String(4)",required:true,validators:null},\
+    areaCode:{type:"String(46)",required:true,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    orderNo:{type:"String(30)",required:true,validators:null},\
+    changeTag:{type:"String(1)",required:false,validators:null},\
+    speedLevel:{type:"String(10)",required:false,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.bymc.productInfo)"},\
+    boradDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.bymc.boradDiscntInfo)"},\
+    recomInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.bymc.recomInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.bymc.recomInfo={\
+    recomPersonId:{type:"String(30)",required:true,validators:null},\
+    recomPersonName:{type:"String(128)",required:true,validators:null},\
+    recomDepartId:{type:"String(128)",required:false,validators:null},\
+    recomCity:{type:"String(3)",required:false,validators:null},\
+}
+
+ecaop.trades.bymc.boradDiscntInfo={\
+    boradDiscntId:{type:"String(20)",required:true,validators:null},\
+    boradDiscntAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.bymc.boradDiscntAttr)"}\
+}
+ecaop.trades.bymc.boradDiscntAttr={\
+    delayType:{type:"String(20)",required:false,validators:null},\
+    delayDiscntId:{type:"String(20)",required:false,validators:null},\
+    delayDiscntType:{type:"String(20)",required:false,validators:null}\
+}
+
+ecaop.trades.bymc.productInfo={\
+    oldProductId:{type:"String(20)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    optType:{type:"String(2)",required:true,validators:null}\
+}
+#配置跳转
+ecaop.core.method.bymc.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.bymc.flowConfig)
+
+ecaop.core.method.bymc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->03 N6->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->04 2->05"},\
+{id:"03", processor:"AopHandler(ecaop.trades.bymc.3gn25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.trades.bymc.3gn6.processors)", selector:"Noop", transitions:"*->STOP"}\
+{id:"05", processor:"AopHandler(ecaop.trades.bymc.4g.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.trades.bymc.3gn25.processors=@yearPayEcs4South25Check()
+ecaop.trades.bymc.3gn6.processors=@yearPayEcs4N6Check()
+ecaop.trades.bymc.4g.processors=@yearPayEcs4CBSSCheck()

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <SGL_PRODUCT_CHG_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+        </RESP_DESC>
+        <RSP_INFO constraint="?" mappedName="rspInfo">
+            <PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="provOrderId"/>
+            <PRE_FEE_INFO_RSP constraint="*" mappedName="feeInfo">
+                <FEE_MODE constraint="1" length="V20" mappedName="feeMode"/>
+                <FEE_TYPE_CODE constraint="1" length="V8" mappedName="feeTypeCode"/>
+                <FEE_TYPE_NAME constraint="1" length="V50" mappedName="feeTypeName"/>
+                <MAX_DERATE_FEE constraint="1" length="V11" mappedName="maxDerateFee"/>
+                <OLDFEE constraint="1" length="V11" mappedName="fee"/>
+                <OPERATE_TYPE constraint="1" length="F1" mappedName="operateType"/>
+            </PRE_FEE_INFO_RSP>
+            <TOTAL_FEE constraint="1" length="V11" mappedName="totalFee"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </RSP_INFO>
+    </SGL_PRODUCT_CHG_RSP>
+</UNI_BSS_BODY>

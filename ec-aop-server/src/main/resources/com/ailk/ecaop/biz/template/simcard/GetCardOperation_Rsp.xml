@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetCardOperationRsp mappedOut="true">
+    <RspCode length="F4" mappedName="code" />
+    <RspDesc length="V256" mappedName="detail" />
+    <OperationInfo constraint="?" mappedOut="true" mappedName="operationInfo">
+        <ChannelID length="V20" mappedName="channelId"/>
+        <ChannelType length="F7" mappedName="channelType"/>
+        <ICCID length="V22" mappedName="iccid" />
+        <OperationType constraint="?" length="V2" mappedName="operationType"/>
+        <ResetScriptInfo constraint="?" mappedName="resetScriptInfo">
+            <IMSIScript length="V1024" constraint="?" mappedName="imsiScript" />
+            <OrtherScriptSeq length="V256" constraint="?" mappedName="ortherScriptSeq" />
+        </ResetScriptInfo>
+    </OperationInfo>
+    <ReservPara length="V60" constraint="?" mappedName="ParaValue" />
+</GetCardOperationRsp>

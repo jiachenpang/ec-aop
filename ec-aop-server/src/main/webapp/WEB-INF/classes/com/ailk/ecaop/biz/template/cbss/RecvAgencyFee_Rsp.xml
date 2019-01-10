@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <AGENT_RECV_FEE_RSP mappedOut="true"><!-- 缴费应答 -->
+        <RESP_CODE length="F4" mappedName="code"/><!-- 应答码 0000成功 8888 其他错误 -->
+        <RESP_DESC length="V5000" mappedName="detail"/><!--应答描述 -->
+        <AGENT_RECV_FEE_RESU constraint="?" mappedName="AgentRecvFeeResu"><!-- 缴费结果信息 -->
+            <AGENT_AGENT_INFO constraint="?" mappedName="AgentAgentInfo"><!-- 代理商信息 -->
+                <AGENT_ID constraint="1" length="V20" mappedName="AgentId"/><!-- 代理商号码 -->
+                <AGENT_MONEY constraint="1" length="V11" mappedName="AgentMoney"/><!-- 代理商剩余保证金 -->
+            </AGENT_AGENT_INFO>
+            <CHARGE_ID constraint="1" length="V20" mappedName="ChagreId"/><!-- 省分BSS收费流水号 -->
+            <OUTER_TRADE_ID constraint="1" length="V30" mappedName="outerTradeId"/><!-- 总部收费流水号 -->
+            <ACCT_ID constraint="1" length="V16" mappedName="acctId"/><!-- 账户标识 -->
+            <BALANCE constraint="?" length="V11" mappedName="balance"/><!-- 余额 -->
+            <START_DATE constraint="?" length="F14" mappedName="startDate"/><!-- 余额有效期开始时间 -->
+            <END_DATE constraint="?" length="F14" mappedName="endDate"/><!-- 余额有效期结束时间 -->
+            <PAY_NAME constraint="1" length="V100" mappedName="payName"/><!-- 付费名称:当前名称。如果多账期想打印当前名称，则取此字段 -->
+            <SERVICE_CLASS_CODE constraint="?" length="V4" mappedName="serviceClassCode"/><!--电信业务网别 -->
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode"/><!--长途区号 -->
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"/><!-- 服务号码：如果按账户缴费，依据省份规则返回该账户当前代表服务号码或客户在前台报的服务号码。如果多账期想打印当前代表号码则取此字段 -->
+            <AGENT_NOTE_PRINT_INFO constraint="*" mappedName="AgentNotePrintInfo"> <!-- 发票信息 -->
+                <ACCT_ID constraint="1" length="V16" mappedName="acctId"/><!--帐户标识 -->
+                <PAY_NAME constraint="1" length="V100" mappedName="payName"/><!-- 付费名称 -->
+                <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode"/><!--电信业务网别 -->
+                <AREA_CODE constraint="?" length="V6" mappedName="areaCode"/><!--长途区号 -->
+                <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"/><!-- 服务号码 -->
+                <CYCLE_ID constraint="1" length="F6" mappedName="cycleId"/><!-- 账期标识 -->
+                <START_ACYC_ID constraint="?" length="F6" mappedName="startAcycId"/><!-- 账期起始时间，按活动缴费不需要此字段，可空 -->
+                <END_ACYC_ID constraint="?" length="F6" mappedName="endAcycId"/><!-- 账期结束时间，按活动缴费不需要此字段，可空 -->
+                <TEMPLET_TYPE constraint="1" length="F5" mappedName="templetType"/><!-- 票据类型，数据编码参见数据模型规范编码分册；10000发票 20000数据 -->
+                <AGENT_NOTE_SOURCE_INFO constraint="?" mappedName="agentNoteSourceInfo"><!-- 发票资源信息 -->
+                    <NOTE_BATCH_NO constraint="1" length="V30" mappedName="noteBatchNo"/><!-- 发票批次号 -->
+                    <NOTE_NO constraint="1" length="V20" mappedName="noteNo"/><!-- 票据号 -->
+                    <TAX_NO constraint="?" length="V20" mappedName="taxNo"/><!-- 税务号 -->
+                </AGENT_NOTE_SOURCE_INFO>
+                <TAX_FEE constraint="1" length="V11" mappedName="taxFee"/><!-- 发票打印金额 -->
+                <AGENT_NOTE_PRINT_DETAIL_INFO constraint="+" mappedName="agentNotePrintDetailInfo"><!-- 发票明细信息 -->
+                    <ITEM_CODE constraint="1" length="V8" mappedName="itemCode"/><!-- 票据项目代码 -->
+                    <ITEM_NAME constraint="1" length="V20" mappedName="itemName"/><!-- 票据项目中文名称 -->
+                    <ITEM_ENG_NAME constraint="?" length="V30" mappedName="itemEngName"/><!-- 票据项目英文名称 -->
+                    <PRINT_ORDER constraint="1" length="V4" mappedName="printOrder"/><!-- 打印顺序 -->
+                    <Fee constraint="1" length="V11" mappedName="fee"/><!-- 项目金额 -->
+                </AGENT_NOTE_PRINT_DETAIL_INFO>
+                <PRINT_TIMES constraint="1" length="V4" mappedName="printItems"/><!-- 打印次数 -->
+                <AD_MESSAGE constraint="?" length="V100" mappedName="adMessage"/><!-- 广告 -->
+                <X_ASPAY_FEE constraint="?" length="V11" mappedName="xAspayFee"/><!-- 本月发生费用 -->
+                <WRITEOFF_FEE2 constraint="?" length="V11" mappedName="writeoffFee2"/><!-- 本月冲销费用 -->
+                <OLDFEE constraint="?" length="V11" mappedName="oleFee"/><!-- 本月应缴费用 -->
+                <CURREAL_FEE constraint="?" length="V11" mappedName="currealFee"/><!-- 实时费用 -->
+                <SPAY_FEE constraint="?" length="V11" mappedName="spayFee"/><!-- 本次应缴 -->
+                <PRINT_ID constraint="1" length="V30" mappedName="printId"/><!-- 单据流水 -->
+                <COMPANY_NAME constraint="1" length="V20" mappedName="companyName"/><!-- 收款单位 -->
+                <RECV_STAFF_ID constraint="1" length="V20" mappedName="recvStaffId"/><!-- 收款员工工号 -->
+                <PRINT_TIME constraint="?" length="F14" mappedName="printTime"/><!-- 打印时间 -->
+            </AGENT_NOTE_PRINT_INFO>
+            <PARA constraint="*" mappedName="para">
+                <!--保留字段 -->
+                <PARA_ID length="V20" mappedName="paraId">
+                    <!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE length="V4000" mappedName="paraValue">
+                    <!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </AGENT_RECV_FEE_RESU>
+        
+        
+        
+    </AGENT_RECV_FEE_RSP>
+</UNI_BSS_BODY>

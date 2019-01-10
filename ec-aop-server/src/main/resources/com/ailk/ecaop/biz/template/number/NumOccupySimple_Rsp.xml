@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckNumRsp mappedOut="true">
+    <RespCode length="F4" range="0000,0001,9999" mappedName="code"/>
+    <RespDesc length="V100" mappedName="detail"/>
+    <ResourcesRsp constraint="+" mappedName="resourcesRsp">
+        <!-- 资源类型 03 移动电话04 上网卡05 上网本 -->
+        <ResourcesType length="F2" mappedName="resourcesType"/>
+        <!-- 资源唯一标识 -->
+        <ResourcesCode length="V30" mappedName="resourcesCode"/>
+        <!-- 资源状态编码：0000 资源可用0001 资源已被占0002 无此资源信息0003 资源不可售0004 资源状态是非可用 0005 0006 资源空闲，不能释放0007 资源已售，不能释放 资源归属渠道错误9999 
+            其它失败原因 -->
+        <RscStateCode range="0000,0001,0002,0003,0004,0005,0006,0007,9999" mappedName="rscStateCode"/>
+        <!-- 资源校验结果描述 -->
+        <RscStateDesc length="V100" mappedName="rscStateDesc"/>
+        <SalePrice constraint="?" length="V10" mappedName="salePrice"/>
+        <ReservaPrice constraint="?" length="V10" mappedName="reservaPrice"/>
+        <ProductIds constraint="*" mappedName="productIds">
+            <ProductId length="V20" mappedName="productId"/>
+        </ProductIds>
+    </ResourcesRsp>
+    <Para constraint="*" mappedName="para">
+        <ParaID mappedName="paraId" />
+        <ParaValue mappedName="paraValue" />
+    </Para>
+</CheckNumRsp>

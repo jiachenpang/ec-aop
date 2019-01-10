@@ -1,0 +1,96 @@
+﻿#老用户做存费送费业务
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.fee.chg=mofc
+ecaop.core.method.mofc.def={"mothod":"mofc","remark":"老用户做存费送费业务"}
+ecaop.core.method.mofc.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.mofc.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg校验
+ecaop.trades.mofc.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    eModeCode:{type:"String(8)",required:false,validators:null},\
+    custId:{type:"String(20)",required:true,validators:null},\
+    serialNumber:{type:"String(20)",required:true,validators:null},\
+    opeSysType:{type:"String(1)",required:false,validators:null},\
+    saleModType:{type:"String(1)",required:false,validators:null},\
+    markingTag:{type:"String(1)",required:false,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofc.productInfo)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofc.activityInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+ecaop.trades.mofc.productInfo={\
+     productId:{type:"String(20)",required:true,validators:null},\
+     productMode:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+     packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofc.packageElement)"}\
+     }
+
+ecaop.trades.mofc.activityInfo={\
+     actPlanId:{type:"String(20)",required:true,validators:null},\
+     packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofc.packageElement)"}\
+     }
+
+ecaop.trades.mofc.packageElement={\
+     packageId:{type:"String(20)",required:true,validators:null},\
+     elementId:{type:"String(20)",required:true,validators:null},\
+     elementType:{type:"String(2)",required:true,validators:null}\
+     }
+#定义processors
+#定义处理器
+ecaop.core.method.mofc.processors=@route\
+                                  @FlowProcessor(ecaop.trades.method.mofc.flowConfig)
+ecaop.trades.method.mofc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.trades.mofc.oprocessors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.n6.mofc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.trades.mofc.oprocessors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#cb存费送费
+ecaop.trades.mofc.oprocessors=@olduOpenProcessor()
+#北六存费送费
+ecaop.n6.mofc.processors=@n6OldOpenProcessor()
+                                 
+ecaop.trades.mofc.nprocessors=@ParametersMapper(ecaop.trades.sell.mofc.paramtersmapping)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.mofc.ess.template)
+#准备老用户存费送费处理提交（T3M00054）的参数
+ecaop.trades.sell.mofc.paramtersmapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00054",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"OldUserFeeReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.mofc.ess.template@3GE"}]
+ecaop.mofc.ess.template=com/ailk/ecaop/biz/template/oldUser/OldUserFee
+
+#N6预提交
+ecaop.trades.mofc.N6.cancelPre.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancelPre.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}]

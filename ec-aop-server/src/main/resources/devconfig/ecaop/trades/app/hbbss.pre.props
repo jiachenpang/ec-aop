@@ -1,0 +1,4 @@
+#湖北bss
+ecaop.core.app.map.hbbss.pre=hbbpr
+ecaop.core.app.hbbpr.def={"code":"hbbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.hbbpr.allow={appkey:"hbbpr",allow:"qrtb,tsos,seft", deny:null}

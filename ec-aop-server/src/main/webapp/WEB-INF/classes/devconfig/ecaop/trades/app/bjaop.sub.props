@@ -1,0 +1,9 @@
+#北京能力开放平台
+ecaop.core.app.map.bjaop.sub=bjaop
+ecaop.core.app.bjaop.def={"code":"bjaop", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.bjaop.timeslimit=max 100 per 1 minute
+ecaop.core.app.bjaop.allow={appkey:"bjaop",allow:"cmck,snqy,nboc,qrtc,opap,opsb,cdsn,cdqy,cdnt,sccc,\
+ucca,cumd,chph,qctc,trao,oupc,2324,234o,sc4s,codc,oata,mold,dvqy,qrta,ccic,syps,sack,cack,qrsq,qrsc,\
+qcsq,qcsc,csaq,smnp,mpsb,ppoq,adnu,bsop,odsb,smno,mpdsb,crck,crdk,cuck,qcsp,scob,tscs,qccq,isoa,bypc,\
+byps,spec,spes,mofc,ofcs,smct,orta,modr,mvoa,msoa,sfso,sfss,ofps,ofpc,baoa,sbaos,sjxs,qrtac,sctr,mccr,\
+mccn,scac,scaf,sbcs,psoa,psos,bsoa,sbso,234s,234t,23l4,mixk,scmc,sgfs,scccs,kdwy", deny:null}

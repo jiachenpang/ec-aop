@@ -1,0 +1,9 @@
+#天津预受理系统
+ecaop.core.app.map.tjpre.sub=tjpr
+ecaop.core.app.tjpr.def={"code":"tjpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.tjpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.tjpr.allow={appkey:"tjpr",allow:"opap,opsb,qcsc,qcsq,crck,cuck,ccic,syps,nobc,snqy,qrtc,cdqy,cdnt,cdsn,\
+                           2324,234o,sc4s,smnp,mpsb,scmc,cmck,sccc,bsop,odsb,baoa,sbaos,bsoa,sbso,psoa,psos,faoa,fasb,\
+                           sfso,sfss,tzcx,23l4,234s,234t,qcbl,qofq,kdwy,qcsc,qcsq,csaq,oupc,quuq,qctq,smosa,smoss,cbpq,\
+                           spec,spes,bsop,ofpc,ofps,adnu,qrtb,qctc,spfs,spff,qcpq,qcpa,smct,nboc,tsos,jffx,qcfq,smcc,mxcg,\
+                           qcfc,otck,snos,sooq,scon,seft,cack,sbaq,sbrc,mofc,ofcs,qcsp,mscg,mpsb,qcaq,ipry,mmrs",deny:null}

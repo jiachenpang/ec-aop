@@ -1,0 +1,205 @@
+#融合业务开户处理申请
+ecaop.core.method.map.ecaop.trades.sell.mix.newu.open.app=smnp
+ecaop.core.method.smnp.def={"mothod":"smnp","remark":"融合业务开户处理申请"}
+ecaop.core.method.smnp.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smnp.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg主体校验
+ecaop.trades.smnp.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    markingTag:{type:"String(1)",required:false,validators:null},\
+    eModeCode:{type:"String(2)",required:false,validators:null},\
+    ordersId:{type:"String(20)",required:true,validators:null},\
+    mixTemplate:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.mixTemplate)"},\
+    broadBandTemplate:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.broadBandTemplate)"},\
+    phoneTemplate:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.phoneTemplate)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+#融合产品节点
+ecaop.trades.smnp.mixTemplate={\
+    mixCustInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.mixCustInfo)"},\
+    productInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.productInfo)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.activityInfo)"},\
+    acctInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.acctInfo)"}}
+#融合业务客户信息
+ecaop.trades.smnp.mixCustInfo={\
+    custType:{type:"String(1)",required:true,validators:null},\
+    custId:{type:"String(20)",required:false,validators:null},\
+    certType:{type:"String(20)",required:false,validators:null},\
+    certNum:{type:"String(20)",required:false,validators:null},\
+    certAdress:{type:"String(200)",required:false,validators:null},\
+    customerName:{type:"String(128)",required:false,validators:null},\
+    certExpireDate:{type:"String(8)",required:false,validators:null},\
+    checkType:{type:"String(2)",required:false,validators:null}}
+#开户时选择的产品信息
+ecaop.trades.smnp.productInfo={\
+    productId:{type:"String(20)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    firstMonBillMode:{type:"String(2)",required:true,validators:null}}
+#开户时选择的活动信息
+ecaop.trades.smnp.activityInfo={\
+    actPlanId:{type:"String(20)",required:true,validators:null},\
+    activityFee:{type:"String(10)",required:false,validators:null}}
+#帐户信息
+ecaop.trades.smnp.acctInfo={\
+    createOrExtendsAcct:{type:"String(1)",required:true,validators:null},\
+    accountPayType:{type:"String(2)",required:true,validators:null},\
+    debutySn:{type:"String(20)",required:false,validators:null}}
+#固网模板信息
+ecaop.trades.smnp.broadBandTemplate={\
+    broadBandCustInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.broadBandCustInfo)"},\
+    installMode:{type:"String(1)",required:true,validators:null},\
+    acctSerialNumber:{type:"String(40)",required:true,validators:null},\
+    accountCode:{type:"String(40)",required:false,validators:null},\
+    accessMode:{type:"String(10)",required:false,validators:null},\
+    speedLevel:{type:"String(10)",required:false,validators:null},\
+    exchCode:{type:"String(200)",required:true,validators:null},\
+    exchInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.exchInfo)"},\
+    addressCode:{type:"String(300)",required:false,validators:null},\
+    addressName:{type:"String(1000)",required:false,validators:null},\
+    installAddress:{type:"String(200)",required:false,validators:null},\
+    bookingDateType:{type:"String(1)",required:false,validators:null},\
+    bookingDate:{type:"String(14)",required:false,validators:null},\
+    broadBandProduct:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.broadBandProduct)"},\
+    broadBandRecomInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.broadBandRecomInfo)"}}
+#固网客户信息
+ecaop.trades.smnp.broadBandCustInfo={\
+    custType:{type:"String(1)",required:true,validators:null},\
+    bandCustId:{type:"String(20)",required:false,validators:null},\
+    certType:{type:"String(2)",required:false,validators:null},\
+    certNum:{type:"String(20)",required:false,validators:null},\
+    certAdress:{type:"String(200)",required:false,validators:null},\
+    customerName:{type:"String(128)",required:false,validators:null},\
+    certExpireDate:{type:"String(8)",required:false,validators:null},\
+    contactPerson:{type:"String(20)",required:true,validators:null},\
+    contactPhone:{type:"String(20)",required:true,validators:null},\
+    contactAddress:{type:"String(256)",required:true,validators:null},\
+    checkType:{type:"String(2)",required:false,validators:null}}
+#选址信息（要求包含EXCH_CODE）
+ecaop.trades.smnp.exchInfo={\
+    key:{type:"String(30)",required:true,validators:null},\
+    value:{type:"String(30)",required:true,validators:null}}
+#开户时选择的产品信息（组合版用，共享版不需要）
+ecaop.trades.smnp.broadBandProduct={\
+    productId:{type:"String(8)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.packageElement)"}}
+#产品下附加包及包元素（资费，服务）
+ecaop.trades.smnp.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}}
+#发展人信息
+ecaop.trades.smnp.broadBandRecomInfo={\
+    recomPersonId:{type:"String(30)",required:true,validators:null},\
+    recomPersonName:{type:"String(128)",required:true,validators:null},\
+    recomDepartId:{type:"String(128)",required:false,validators:null},\
+    recomCity:{type:"String(10)",required:false,validators:null}}
+#移网模板信息
+ecaop.trades.smnp.phoneTemplate={\
+    mainNumberTag:{type:"String(1)",required:true,validators:null},\
+    installMode:{type:"String(1)",required:true,validators:null},\
+    phoneCustInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.phoneCustInfo)"},\
+    serialNumber:{type:"String(11)",required:true,validators:null},\
+    serType:{type:"String(1)",required:true,validators:null},\
+    niceNumberInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.niceNumberInfo)"},\
+    phoneProduct:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.phoneProduct)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.phoneActivityInfo)"},\
+    phoneRecomInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smnp.phoneRecomInfo)"}}
+#移网客户信息
+ecaop.trades.smnp.phoneCustInfo={\
+    custType:{type:"String(1)",required:true,validators:null},\
+    custId:{type:"String(20)",required:false,validators:null},\
+    certType:{type:"String(2)",required:false,validators:null},\
+    certNum:{type:"String(20)",required:false,validators:null},\
+    certAdress:{type:"String(100)",required:false,validators:null},\
+    customerName:{type:"String(128)",required:false,validators:null},\
+    certExpireDate:{type:"String(8)",required:false,validators:null},\
+    contactPerson:{type:"String(20)",required:true,validators:null},\
+    contactPhone:{type:"String(20)",required:true,validators:null},\
+    contactAddress:{type:"String(256)",required:true,validators:null},\
+    checkType:{type:"String(2)",required:false,validators:null}}
+#靓号信息
+ecaop.trades.smnp.niceNumberInfo={\
+    classId:{type:"String(1)",required:true,validators:null},\
+    advancePay:{type:"String(11)",required:false,validators:null},\
+    lowFee:{type:"String(11)",required:false,validators:null},\
+    protocolTime:{type:"String(5)",required:false,validators:null}}
+#开户时选择的产品信息（组合版用，共享版不需要）
+ecaop.trades.smnp.phoneProduct={\
+    productId:{type:"String(8)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.packageElement)"}}
+#开户时活动信息（组合版用，共享版不需要）
+ecaop.trades.smnp.phoneActivityInfo={\
+    actPlanId:{type:"String(20)",required:true,validators:null},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smnp.packageElement)"},\
+    resourcesCode:{type:"String(30)",required:false,validators:null}}
+#发展人信息
+ecaop.trades.smnp.phoneRecomInfo={\
+    recomPersonId:{type:"String(30)",required:true,validators:null},\
+    recomPersonName:{type:"String(128)",required:true,validators:null},\
+    recomDepartId:{type:"String(128)",required:false,validators:null},\
+    recomCity:{type:"String(10)",required:false,validators:null}}
+#流程一:获取IPTV信息
+#请求参数checkUserInfo
+ecaop.trades.smnp.getIPTVInfo4GParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"Number4GSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"getIPTVInfo4G",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"GET_IPTV_INFO4G_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.smnp.getIPTVInfo4GTemplate@FBS@GET_IPTV_INFO4G_INPUT"}\
+]
+#指定模板路径
+ecaop.trades.smnp.getIPTVInfo4GTemplate=com/ailk/ecaop/biz/template/number4gser/GetIPTVInfo4G
+#CB统一预提交
+ecaop.smnp.preSub.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.smnp.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.smnp.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+#此模板为改了CITY_CODE和TRADE_CITY_CODE映射值的预提交使用
+ecaop.trades.city.cancelPre.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,@50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.city.cancelPre.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+ecaop.trades.city.cancelPre.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4GCity 
+#定义processors
+ecaop.core.method.smnp.processors=@mixOpenProcessor()

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY> 
+  <ADD_WO_ACCOUNT_RSP mappedOut="true">
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!--应答编码 0000 成功   8888 其它 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!--应答描述-->
+    </RESP_DESC>
+    <RESP_INFO constraint="*" mappedName="respInfo">
+      <!--客户信息-->
+      <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+        <!--客户标识-->
+      </SERIAL_NUMBER>
+      <WO_ACCOUNT_ID constraint="1" length="V40" mappedName="woAccountId">
+        <!--客户名称-->
+      </WO_ACCOUNT_ID>
+      <WO_ACCOUNT_LEVEL constraint="1" length="F1" mappedName="woAccountLevel">
+        <!--客户名称-->
+      </WO_ACCOUNT_LEVEL>
+      <CERT_TYPE constraint="1" length="F2" mappedName="certType">
+        <!--客户名称-->
+      </CERT_TYPE>
+      <CERT_CODE constraint="1" length="V40" mappedName="certCode">
+        <!--客户名称-->
+      </CERT_CODE>
+      <CERT_NAME constraint="1" length="V40" mappedName="certName">
+        <!--客户名称-->
+      </CERT_NAME>
+    </RESP_INFO>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+  </ADD_WO_ACCOUNT_RSP> 
+</UNI_BSS_BODY>
+

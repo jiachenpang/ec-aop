@@ -1,0 +1,37 @@
+<UniBSS>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont mappedOut="true">
+        <TerminalStateChgReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId" />
+            <!-- 省分 -->
+            <Province length="F2" mappedName="province" />
+            <!-- 地市 -->
+            <City length="F3" mappedName="city" />
+            <!-- 区县 -->
+            <District length="V10" mappedName="district" />
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId" />
+            <!-- 渠道类型，参考附录渠道类型编码 -->
+            <ChannelType length="F7" mappedName="channelType" />
+            <!-- 接入类型，01 WEB；02短信；03WAP； 99其他 -->
+            <AccessType length="F2" range="01,02,03,99" defaultValue="01" />
+            <!-- 总部订单 -->
+            <SubscribeID length="V20" mappedName="subscribeID" />
+            <!-- 原销售订单 -->
+            <OldSubscribeID length="V20" mappedName="oldSubscribeID" />
+            <!-- 操作类型 -->
+            <OperType length="F2" range="01,02,03" mappedName="operType" />
+            <!-- 资源类型，参见10.5 -->
+            <ResourcesType length="F2" range="01~09,13~15" mappedName="resourcesType" defaultValue="07" />
+            <!-- 请求标准包类型：参见10.4(资源类型在05、06时用) -->
+            <PackageType constraint="?" length="F2" mappedName="packageType" />
+            <!-- 资源串号（终端IMEI或ICCID） -->
+            <ResourcesCode length="V30" mappedName="resourcesCode" />
+            <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </TerminalStateChgReq>
+    </SvcCont>
+</UniBSS>

@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <CHECK_USER_INFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--应答编码, 0000 成功, 1204 号码不存在, 1202欠费号码, 1203?该用户是黑名单用户, 1205 密码错误, 1406该用户在锁定期或充值期内, 1014 客户资料不完整, 1305 该用户为后付费用户, 
+                1306 该用户为预付费用户, 1307 用户在协议期内, 1303 用户为集团成员, 1309 融合业务/增值业务未退订, 1325 该用户为准预付费用户, 1404此用户不允许做携号转网, 1488 固网号码不能跨服务区受理, 1489 
+                初始密码不允许办理, 1490 必须先解散亲情关系, 1491 出账日限制, 1413 未办理预约销户, 1492预约正式拆机未到期, 1402 该用户不能加装, 1493 当前用户存在在途工单, 1021虚假客户资料（业务受理类型为0065 
+                基本信用额度调整（初始、动态）, 0126 临时信用额度调整时错误编码有效）, 1014 客户信息不完整, 1124 老客户证件不合规, 1125 身份证件需要升位；, 1126 客户资料未返档, , 8888 其他失败原因 -->
+        </RESP_CODE>
+        <RESP_DESC length="V5000" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <CUST_INFO constraint="*" mappedName="custInfo">
+            <!--客户信息 -->
+            <CUST_ID length="V20" constraint="?" mappedName="custId">
+                <!--客户标识 -->
+            </CUST_ID>
+            <CUST_COMPL_FLAG length="V1" constraint="?" mappedName="custComplFlag">
+                <!--客户资料实录标志, 0：未补录, 1：已补录 -->
+            </CUST_COMPL_FLAG>
+            <CUST_NAME length="V100" constraint="?" mappedName="custName">
+                <!--客户名称 -->
+            </CUST_NAME>
+            <CUST_TYPE length="V1" constraint="?" mappedName="custType">
+                <!--客户类型编码，数据模型编码CUI_000012 -->
+            </CUST_TYPE>
+            <CUST_STATE length="V1" constraint="?" mappedName="custState">
+                <!--客户状态编码，统一数据模型编码CUI_000013 -->
+            </CUST_STATE>
+            <CERT_END_DATE constraint="?" length="F14" mappedName="certEndDate">
+                <!--证件有效期,格式YYYYMMDD -->
+            </CERT_END_DATE>
+            <CERT_ADDR constraint="?" length="V256" mappedName="certAddr">
+                <!--证件地址 -->
+            </CERT_ADDR>
+            <CERT_TYPE_CODE length="V2" constraint="?" mappedName="certTypeCode">
+                <!--证件类别编码，见附录 -->
+            </CERT_TYPE_CODE>
+            <CERT_TYPE length="V100" constraint="?" mappedName="certType" />
+            <CERT_CODE length="V100" constraint="?" mappedName="certCode">
+                <!--证件号码 -->
+            </CERT_CODE>
+            <PROVINCE_CODE constraint="?" length="V2" mappedName="provinceCode">
+                <!--省份编码，统一数据模型编码SHS_000001 -->
+            </PROVINCE_CODE>
+            <EPARCHY_CODE length="V6" constraint="?" mappedName="eparchyCode">
+                <!--归属地市 -->
+            </EPARCHY_CODE>
+            <AUDIT_NUM constraint="?" length="V10" mappedName="auditNum">
+                <!--稽核次数 -->
+            </AUDIT_NUM>
+            <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId">
+                <!--发展渠道 -->
+            </DEVELOP_DEPART_ID>
+            <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId">
+                <!--发展员工 -->
+            </DEVELOP_STAFF_ID>
+            <IN_DEPART_ID constraint="?" length="V20" mappedName="inDepartId">
+                <!--建档渠道 -->
+            </IN_DEPART_ID>
+            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId">
+                <!--建档员工 -->
+            </IN_STAFF_ID>
+            <IN_DATE length="F14" constraint="?" mappedName="inDate">
+                <!--建档时间，格式YYYYMMDDHH24MISS -->
+            </IN_DATE>
+            <REMOVE_DATE constraint="?" length="F14" mappedName="removeDate">
+                <!--销档时间，格式YYYYMMDDHH24MISS -->
+            </REMOVE_DATE>
+            <REMARK constraint="?" length="V500" mappedName="remark">
+                <!--备注 -->
+            </REMARK>
+            <CUST_CLASS_TYPE constraint="?" length="V3" mappedName="custClassType">
+                <!--客户级别编码，统一数据模型编码CUI_000015 -->
+            </CUST_CLASS_TYPE>
+            <CUSTOMER_LEVEL constraint="?" length="V3" mappedName="customerLevel">
+                <!--客户等级编码，统一数据模型编码CUI_000082 -->
+            </CUSTOMER_LEVEL>
+            <CREDIT_CLASS constraint="?" length="V8" mappedName="creditClass">
+                <!--信用等级，编码见PRD_000054 -->
+            </CREDIT_CLASS>
+            <CUSTOMER_LOC constraint="?" length="V1" mappedName="customerLoc">
+                <!--本外地标志编码，统一数据模型编码CLB_000015 -->
+            </CUSTOMER_LOC>
+            <SEX constraint="?" length="V1" mappedName="sex">
+                <!--客户性别编码，统一数据模型编码SHO_000020 -->
+            </SEX>
+            <BIRTHDAY constraint="?" length="F14" mappedName="birthday">
+                <!--阳历生日，格式YYYYMMDD -->
+            </BIRTHDAY>
+            <BIRTHDAY_LUNAR constraint="?" length="V50" mappedName="birthdayLunar">
+                <!--阴历生日 -->
+            </BIRTHDAY_LUNAR>
+            <BIRTHDAY_FLAG constraint="?" length="V1" mappedName="birthdayFlag">
+                <!--阴阳历生日标记编码，统一数据模型编码CUI_000100 -->
+            </BIRTHDAY_FLAG>
+            <POST_ADDRESS constraint="?" length="V256" mappedName="postAddress">
+                <!--通信地址 -->
+            </POST_ADDRESS>
+            <POST_CODE constraint="?" length="F6" mappedName="postCode">
+                <!--邮政编码 -->
+            </POST_CODE>
+            <POST_PERSON constraint="?" length="V50" mappedName="postPerson">
+                <!--收件人 -->
+            </POST_PERSON>
+            <PHONE length="V40" constraint="?" mappedName="phone">
+                <!--联系电话 -->
+            </PHONE>
+            <FAX_NBR constraint="?" length="V40" mappedName="faxNbr">
+                <!--传真号码 -->
+            </FAX_NBR>
+            <EMAIL constraint="?" length="V50" mappedName="email">
+                <!--电子邮件 -->
+            </EMAIL>
+            <HOME_ADDRESS constraint="?" length="V256" mappedName="homeAddress">
+                <!--家庭地址 -->
+            </HOME_ADDRESS>
+            <HOME_PHONE constraint="?" length="V40" mappedName="homePhone">
+                <!--家庭电话 -->
+            </HOME_PHONE>
+            <CONTACT length="V60" constraint="?" mappedName="contact">
+                <!--联系人姓名 -->
+            </CONTACT>
+            <CONTACT_PHONE length="V40" constraint="?" mappedName="contactPhone">
+                <!--联系人电话 -->
+            </CONTACT_PHONE>
+            <NATIONALITY_CODE constraint="?" length="V4" mappedName="nationalityCode">
+                <!--国籍编码，统一数据模型编码CUI_000030 -->
+            </NATIONALITY_CODE>
+            <LOCAL_NATIVE_CODE constraint="?" length="V4" mappedName="localNativeCode">
+                <!--籍贯编码，统一数据模型编码SHS_000001 -->
+            </LOCAL_NATIVE_CODE>
+            <CONTACT_TYPE constraint="?" length="V20" mappedName="contactType" />
+            <WORK_NAME constraint="?" length="V80" mappedName="workName" />
+            <WORK_PHONE constraint="?" length="V40" mappedName="workPhone" />
+            <WORK_ADDRESS constraint="?" length="V100" mappedName="workAddress" />
+            <JOB_TYPE_CODE constraint="?" length="V10" mappedName="jobTypeCode" />
+            <JOB constraint="?" length="V20" mappedName="job" />
+            <MARRIAGE constraint="?" length="V2" mappedName="marriage" />
+            <FOLK_CODE constraint="?" length="V2" mappedName="folkCode" />
+            <REVENUE_LEVEL_CODE constraint="?" length="V4" mappedName="revenueLevelCode" />
+            <CHARACTER_TYPE_CODE constraint="?" length="V4" mappedName="characterTypeCod" />
+            <EDUCATE_DEGREE_CODE constraint="?" length="V6" mappedName="educateDegreeCode" />
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </ATTR_INFO>
+            <VIP_CUST_INFO constraint="?" mappedName="vipCustInfo">
+                <!--大客户信息 -->
+                <VIP_ID length="V10" constraint="?" mappedName="vipId">
+                    <!--VIP标识 -->
+                </VIP_ID>
+                <USER_ID constraint="?" length="V16" mappedName="userId">
+                    <!--用户标识 -->
+                </USER_ID>
+                <VIP_CLASS_ID_B constraint="?" length="V50" mappedName="vipClassIdB" />
+                <CUST_MANAGER_NAME constraint="?" length="V100" mappedName="custManagerName" />
+                <CUST_MANAGER_NUMBER constraint="?" length="V40" mappedName="custManagerNumber">
+                    <!--客户经理手机号码 -->
+                </CUST_MANAGER_NUMBER>
+                <VIP_TYPE_CODE length="V3" constraint="?" mappedName="vipTypeCode">
+                    <!--大客户类型编码，统一数据模型编码CUI_000049 -->
+                </VIP_TYPE_CODE>
+                <VIP_CLASS_ID length="V3" constraint="?" mappedName="vipClassId">
+                    <!--VIP级别，统一数据模型编码CUI_000049 -->
+                </VIP_CLASS_ID>
+                <CLASS_CHANGE_DATE length="F14" constraint="?" mappedName="classChangeDate">
+                    <!--级别变更时间 -->
+                </CLASS_CHANGE_DATE>
+                <VIP_CARD_INFO constraint="?" mappedName="vipCardInfo">
+                    <!--VIP卡信息 -->
+                    <VIP_CARD_NO length="V20" constraint="?" mappedName="vipCardNo">
+                        <!--VIP卡号 -->
+                    </VIP_CARD_NO>
+                    <VIP_CARD_TYPE length="V1" constraint="?" mappedName="vipCardType">
+                        <!--VIP卡类型，统一数据模型编码CLB_000008 -->
+                    </VIP_CARD_TYPE>
+                    <VIP_CARD_STATE length="V1" constraint="?" mappedName="vipCardState">
+                        <!--VIP卡状态，统一数据模型编码CLB_000007 -->
+                    </VIP_CARD_STATE>
+                    <VIP_CARD_START_DATE constraint="?" length="F14" mappedName="vipCardStartDate">
+                        <!--VIP卡有效起始时间 -->
+                    </VIP_CARD_START_DATE>
+                    <VIP_CARD_END_DATE constraint="?" length="F14" mappedName="cipCardEndDate">
+                        <!--VIP卡有效终止时间 -->
+                    </VIP_CARD_END_DATE>
+                    <VIP_CARD_CHANGE_DATE constraint="?" length="F14" mappedName="vipCardChangeDate">
+                        <!--VIP卡变更时间 -->
+                    </VIP_CARD_CHANGE_DATE>
+                    <VIP_CARD_CHANGE_REASON constraint="?" length="V300" mappedName="vipCardChangeReason">
+                        <!--VIP卡变更原因 -->
+                    </VIP_CARD_CHANGE_REASON>
+                </VIP_CARD_INFO>
+                <CUST_MANAGER_ID constraint="?" length="V20" mappedName="custManagerId">
+                    <!--客户经理A -->
+                </CUST_MANAGER_ID>
+                <CUST_MANAGER_ID_B constraint="?" length="V20" mappedName="custManagerIdB">
+                    <!--客户经理B -->
+                </CUST_MANAGER_ID_B>
+            </VIP_CUST_INFO>
+            <GROUP_CUST_INFO constraint="*" mappedName="groupCustInfo">
+                <GROUP_ID length="V40" mappedName="groupId" />
+                <CUST_NAME length="V100" mappedName="custName" />
+                <GROUP_TYPE constraint="?" length="V1" mappedName="groupType" />
+                <CLASS_ID constraint="?" length="V5" mappedName="classId" />
+                <LAST_CLASS_ID constraint="?" length="V5" mappedName="lastClassId" />
+                <CLASS_CHANGE_DATE constraint="?" length="F14" mappedName="classChangeDate" />
+                <CUST_CLASS_TYPE constraint="?" length="V1" mappedName="custClassType" />
+                <GROUP_ATTR constraint="?" length="V1" mappedName="groupAttr" />
+                <GROUP_STATUS constraint="?" length="V1" mappedName="groupStatus" />
+                <GROUP_ADDR constraint="?" length="V200" mappedName="groupAddr" />
+                <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode" />
+                <CITY_CODE constraint="?" length="V1" mappedName="cityCode" />
+                <SUPER_GROUP_ID constraint="?" length="V40" mappedName="superGroupId" />
+                <MP_GROUP_CUST_CODE constraint="?" length="V30" mappedName="mpGroupCustCode" />
+                <UNIFY_PAY_CODE constraint="?" length="V30" mappedName="untifyPayCode" />
+                <ORG_STRUCT_CODE constraint="?" length="V30" mappedName="orgStructCode" />
+                <CUST_MANAGER_ID constraint="?" length="V20" mappedName="custManagerId" />
+                <CUST_MANAGER_APPR constraint="?" length="V300" mappedName="custManagerAppr" />
+                <ASSIGN_DATE constraint="?" length="F14" mappedName="assignDate" />
+                <ASSIGN_STAFF_ID constraint="?" length="V20" mappedName="assignStaffId" />
+                <CALLING_TYPE_CODE constraint="?" length="V6" mappedName="callingTypeCode" />
+                <SUB_CALLING_TYPE_CODE constraint="?" length="V6" mappedName="subCallingTypeCode" />
+                <CALLING_AREA_CODE constraint="?" length="V1" mappedName="callingAreaCode" />
+                <GROUP_CONTACT_PHONE constraint="?" length="V40" mappedName="groupContactPhone" />
+                <ENTERPRISE_TYPE_CODE constraint="?" length="V1" mappedName="enterpriseTypeCode" />
+                <ENTERPRISE_SIZE_CODE constraint="?" length="V3" mappedName="enterpriseSizeCode" />
+                <ENTERPRISE_SCOPE constraint="?" length="V1" mappedName="enterpriseScope" />
+                <JURISTIC_TYPE_CODE constraint="?" length="V1" mappedName="juristicTypeCode" />
+                <JURISTIC_CUST_ID constraint="?" length="V16" mappedName="juristicCustCode" />
+                <JURISTIC_NAME constraint="?" length="V30" mappedName="juristicName" />
+                <BUSI_LICENCE_TYPE constraint="?" length="V1" mappedName="busiLinenceType" />
+                <BUSI_LICENCE_NO constraint="?" length="V50" mappedName="busiLienceNo" />
+                <BUSI_LICENCE_VALID_DATE constraint="?" length="F14" mappedName="busiLinenceValidDate" />
+                <GROUP_MEMO constraint="?" length="V500" mappedName="groupMemo" />
+                <BANK_ACCT constraint="?" length="V50" mappedName="bankAcct" />
+                <BANK_NAME constraint="?" length="V50" mappedName="bankName" />
+                <REG_MONEY constraint="?" length="V11" mappedName="regMoney" />
+                <REG_DATE constraint="?" length="F14" mappedName="regDate" />
+                <CUST_AIM constraint="?" length="V200" mappedName="custAim" />
+                <SCOPE constraint="?" length="V500" mappedName="scope" />
+                <MAIN_BUSI constraint="?" length="V500" mappedName="mainBusi" />
+                <MAIN_TRADE constraint="?" length="V500" mappedName="mainTrade" />
+                <EMP_LSAVE constraint="?" length="V100" mappedName="empLsave" />
+                <LATENCY_FEE_SUM constraint="?" length="V11" mappedName="latencyFeeSum" />
+                <YEAR_GAIN constraint="?" length="V11" mappedName="yearGain" />
+                <TURNOVER constraint="?" length="V11" mappedName="turnover" />
+                <CONSUME constraint="?" length="V50" mappedName="consume" />
+                <COMM_BUDGET constraint="?" length="V12" mappedName="commBudget" />
+                <GTEL_BUDGET constraint="?" length="V12" mappedName="gtelBudget" />
+                <LTEL_BUDGET constraint="?" length="V12" mappedName="ltelBudget" />
+                <GROUP_ADVERSARY constraint="?" length="V50" mappedName="groupAdversary" />
+                <VPMN_GROUP_ID constraint="?" length="V400" mappedName="vpmnGroupId" />
+                <VPMN_NUM constraint="?" length="V12" mappedName="vpmnNum" />
+                <USER_NUM constraint="?" length="V10" mappedName="userNum" />
+                <EMP_NUM_LOCAL constraint="?" length="V10" mappedName="empNumLocal" />
+                <EMP_NUM_CHINA constraint="?" length="V10" mappedName="empNumChina" />
+                <EMP_NUM_ALL constraint="?" length="V10" mappedName="empNumAll" />
+                <TELECOM_NUM_GH constraint="?" length="V10" mappedName="telecomNumGh" />
+                <TELECOM_NUM_XLT constraint="?" length="V10" mappedName="telecomNumXlt" />
+                <MOBILE_NUM_CHINAGO constraint="?" length="V10" mappedName="mobileNumChinago" />
+                <MOBILE_NUM_GLOBAL constraint="?" length="V10" mappedName="moblieNumGlobal" />
+                <MOBILE_NUM_MZONE constraint="?" length="V10" mappedName="moblieNumMzone" />
+                <MOBILE_NUM_LOCAL constraint="?" length="V10" mappedName="mobileNumLocal" />
+                <UNICOM_NUM_G constraint="?" length="V10" mappedName="unicomNumG" />
+                <UNICOM_NUM_C constraint="?" length="V10" mappedName="unicomNumC" />
+                <UNICOM_NUM_GC constraint="?" length="V10" mappedName="unicomNumGc" />
+                <PRODUCT_NUM_LOCAL constraint="?" length="V10" mappedName="productNumLocal" />
+                <PRODUCT_NUM_OTHER constraint="?" length="V10" mappedName="productNumLOther" />
+                <PRODUCT_NUM_USE constraint="?" length="V10" mappedName="productNumUse" />
+                <EMPLOYEE_ARPU constraint="?" length="V10" mappedName="employeeArpu" />
+                <NETRENT_PAYOUT constraint="?" length="V10" mappedName="netrentPayout" />
+                <MOBILE_PAYOUT constraint="?" length="V10" mappedName="mobilePayout" />
+                <UNICOM_PAYOUT constraint="?" length="V10" mappedName="unicomPayout" />
+                <TELECOM_PAYOUT_XLT constraint="?" length="V10" mappedName="telecomPayoutXlt" />
+                <GROUP_PAY_MODE constraint="?" length="V500" mappedName="groupPayMode" />
+                <PAYFOR_WAY_CODE constraint="?" length="V1" mappedName="payforWayCode" />
+                <WRITEFEE_COUNT constraint="?" length="V8" mappedName="writefeeCount" />
+                <WRITEFEE_SUM constraint="?" length="V11" mappedName="writefeeSum" />
+                <USER_NUM_FULLFREE constraint="?" length="V11" mappedName="userNumFullfree" />
+                <USER_NUM_WRITEOFF constraint="?" length="V11" mappedName="userNumWriteoff" />
+                <BOSS_FEE_SUM constraint="?" length="V11" mappedName="bossFeeNum" />
+                <DOYEN_STAFF_ID constraint="?" length="V40" mappedName="doyenStaffId" />
+                <NEWTRADE_COMMENT constraint="?" length="V500" mappedName="newtradeComment" />
+                <LIKE_MOBILE_TRADE constraint="?" length="V500" mappedName="likeMoblieTrade" />
+                <LIKE_DISCNT_MODE constraint="?" length="V500" mappedName="likeDiscntMode" />
+                <FINANCE_EARNING constraint="?" length="V12" mappedName="financeEarning" />
+                <SUBCLASS_ID constraint="?" length="V1" mappedName="subclassId" />
+                <WEBSITE constraint="?" length="V60" mappedName="website" />
+                <FAX_NBR constraint="?" length="V40" mappedName="faxNbr" />
+                <EMAIL constraint="?" length="V80" mappedName="email" />
+                <POST_CODE constraint="?" length="F6" mappedName="postCode" />
+                <REMOVE_TAG constraint="?" length="V1" mappedName="removeTag" />
+                <REMOVE_DATE constraint="?" length="F14" mappedName="removeDate" />
+                <REMOVE_STAFF_ID constraint="?" length="V20" mappedName="removeStaffId" />
+                <REMOVE_CHANGE constraint="?" length="V250" mappedName="removeChange" />
+                <UPDATE_TIME constraint="?" length="F14" mappedName="updateTime" />
+                <UPDATE_STAFF_ID constraint="?" length="V20" mappedName="updateStaffId" />
+                <UPDATE_DEPART_ID constraint="?" length="V10" mappedName="updateDepartId" />
+                <REMARK constraint="?" length="V500" mappedName="remark" />
+                <RSRV_STR1 constraint="?" length="V20" mappedName="rsrvStr1" />
+                <RSRV_STR2 constraint="?" length="V20" mappedName="rsrvStr2" />
+                <RSRV_STR3 constraint="?" length="V20" mappedName="rsrvStr3" />
+                <RSRV_STR4 constraint="?" length="V20" mappedName="rsrvStr4" />
+                <RSRV_STR5 constraint="?" length="V100" mappedName="rsrvStr5" />
+                <RSRV_STR6 constraint="?" length="V200" mappedName="rsrvStr6" />
+                <RSRV_TAG1 constraint="?" length="V1" mappedName="rsrvTag1" />
+                <RSRV_TAG2 constraint="?" length="V1" mappedName="rsrvTag2" />
+                <RSRV_TAG3 constraint="?" length="V1" mappedName="rsrvTag3" />
+                <CLASS_ID2 constraint="?" length="V5" mappedName="classId2" />
+                <ACCEPT_CHANNEL constraint="?" length="V5" mappedName="acceptChannel" />
+                <CALL_TYPE constraint="?" length="V5" mappedName="callType" />
+                <AGREEMENT constraint="?" length="V5" mappedName="agreement" />
+                <BUSI_TYPE constraint="?" length="V5" mappedName="busiType" />
+                <REMOVE_FLAG constraint="?" length="V5" mappedName="removeFlag" />
+                <REMOVE_METHOD constraint="?" length="V5" mappedName="remoceMethod" />
+                <REMOVE_REASON_CODE constraint="?" length="V5" mappedName="removeReasonCode" />
+                <AUDIT_STATE constraint="?" length="V1" mappedName="auditState" />
+                <AUDIT_DATE constraint="?" length="F14" mappedName="auditDate" />
+                <AUDIT_STAFF_ID constraint="?" length="V20" mappedName="auditStaffId" />
+                <AUDIT_NOTE constraint="?" length="V200" mappedName="auditNote" />
+                <EARNING_ORDER constraint="?" length="V100" mappedName="earningOrder" />
+                <PNATIONAL_GROUP_ID constraint="?" length="V40" mappedName="pnationalGroupId" />
+                <PROVINCE_CODE constraint="?" length="V30" mappedName="provinceCode" />
+                <PNATIONAL_GROUP_NAME constraint="?" length="V300" mappedName="pnationalGroupName" />
+                <GROUP_VALID_SCORE constraint="?" length="V12" mappedName="groupValidScore" />
+                <GROUP_SUM_SCORE constraint="?" length="V12" mappedName="groupSumScore" />
+                <GROUP_MGR_SN constraint="?" length="V40" mappedName="groupMgrSn" />
+                <GROUP_MGR_USER_ID constraint="?" length="V16" mappedName="groupMgrUserId" />
+                <GROUP_MGR_CUST_NAME constraint="?" length="V100" mappedName="groupMgrCustName" />
+                <BASE_ACCESS_NO constraint="?" length="V50" mappedName="baseAccessNo" />
+                <BASE_ACCESS_NO_KIND constraint="?" length="V5" mappedName="baseAccessNoKind" />
+                <CUST_SERV_NBR constraint="?" length="V100" mappedName="custServNbr" />
+                <IF_SHORT_PIN constraint="?" length="V5" mappedName="ifShortPin" />
+                <CALLING_POLICY_FORCE constraint="?" length="V100" mappedName="callingPolicyNo" />
+                <CALLING_TYPE_CODE_DETAIL constraint="?" length="V6" mappedName="callingTypeCodeDetail" />
+                <SERVER_ASSIGN_DATE constraint="?" length="F14" mappedName="serverAssignDate" />
+                <SERVER_ASSIGN_STAFF_ID constraint="?" length="V20" mappedName="serverAddignStaffId" />
+                <TURN_INNET_DATE constraint="?" length="F14" mappedName="turnInnetDate" />
+                <TURN_INNET_STAFF_ID constraint="?" length="V20" mappedName="turnInnetStaffId" />
+                <TAKE_PICTURE_TAG constraint="?" length="V1" mappedName="takepictureTag" />
+                <CUST_MANAGER_ID_B constraint="?" length="V20" mappedName="custManagerIdB" />
+                <CLASS_ID2_START_DATE constraint="?" length="F14" mappedName="classId2StartDate" />
+                <CLASS_ID2_END_DATE constraint="?" length="F14" mappedName="classId2EndDate" />
+                <IF_RELATION_CUST constraint="?" length="V11" mappedName="ifRelationCust" />
+                <AREA_OFFICE constraint="?" length="V1" mappedName="areaOffice" />
+                <MANAGE_CODE constraint="?" length="V40" mappedName="manageCode" />
+                <INTERNATIONAL constraint="?" length="V1" mappedName="international" />
+                <FILE_CODE constraint="?" length="V40" mappedName="fileCode" />
+                <FINANCE_INSTANCE constraint="?" length="V2" mappedName="financeInstance" />
+                <GROW_POTENTIAL constraint="?" length="V2" mappedName="growPotential" />
+                <CREDIT_DEGREE constraint="?" length="V6" mappedName="creditdegree" />
+                <LAST_CLASS_ID2 constraint="?" length="V5" mappedName="lastClassId2" />
+                <CLASS2_CHANGE_DATE constraint="?" length="F14" mappedName="classChangeDate" />
+                <LICENCE_AUDIT_PERSON constraint="?" length="V30" mappedName="licenceAuditPerson" />
+                <LICENCE_AUDIT_FILE_ID constraint="?" length="V500" mappedName="licenceAuditFileId" />
+                <JURISTIC_PSPT_ID constraint="?" length="V100" mappedName="juristicPsptId" />
+                <JURISTIC_PSPT_TYPE constraint="?" length="V1" mappedName="juristicPsptType" />
+                <TEL_DECISION_TYPE constraint="?" length="V1" mappedName="telDecisionType" />
+                <BUSI_TAX_ID constraint="?" length="V50" mappedName="busiTaxId" />
+                <BELONG_TEAM_ID_B constraint="?" length="V10" mappedName="belongTeamIdB" />
+                <BELONG_TEAM_ID constraint="?" length="V10" mappedName="belongTeamId" />
+            </GROUP_CUST_INFO>
+        </CUST_INFO>
+        <USER_INFO constraint="*" mappedName="userInfo">
+            <!--用户信息 -->
+            <USER_ID length="V16" mappedName="userId">
+                <!--用户编码 -->
+            </USER_ID>
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode">
+                <!--电信类型编码，编码见附录 -->
+            </SERVICE_CLASS_CODE>
+            <USER_STATE length="F2" mappedName="userState">
+                <!--用户状态，后付费用户见统一数据模型编码PRD_000032，预付费用户见统一数据模型编码PRD_000070 -->
+            </USER_STATE>
+            <BRAND_CODE length="F4" mappedName="brandCode">
+                <!--品牌取值见附录，省分品牌由省分配置。 -->
+            </BRAND_CODE>
+            <BRAND length="V20" mappedName="brand" />
+            <PROVINCE_CODE length="F2" mappedName="provinceCode">
+                <!--省分编码，统一数据模型编码SHS_000001 -->
+            </PROVINCE_CODE>
+            <EPARCHY_CODE length="V6" mappedName="eparchyCode">
+                <!--城市代码 -->
+            </EPARCHY_CODE>
+            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                <!--营业区编码 -->
+            </CITY_CODE>
+            <OPEN_DATE length="F14" mappedName="openDate">
+                <!--入网时间yyyymmddhh24miss -->
+            </OPEN_DATE>
+            <LAND_LEVLE constraint="?" length="V1" mappedName="landLevle">
+                <!--通话级别 -->
+            </LAND_LEVLE>
+            <ROAM_STAT constraint="?" length="V1" mappedName="roamStat">
+                <!--漫游状态 -->
+            </ROAM_STAT>
+            <PRODUCT_ID length="V8" mappedName="productId">
+                <!--当前使用产品标识 -->
+            </PRODUCT_ID>
+            <PRODUCT_NAME length="V100" mappedName="productName">
+                <!--当前使用产品名称 -->
+            </PRODUCT_NAME>
+            <NEXT_PRODUCT_ID length="V8" mappedName="nextProductId">
+                <!--下月使用产品标识 -->
+            </NEXT_PRODUCT_ID>
+            <NEXT_PRODUCT_NAME length="V100" mappedName="nextProductName">
+                <!--下月使用产品名称 -->
+            </NEXT_PRODUCT_NAME>
+            <SUBSCRB_TYPE constraint="?" length="V1" mappedName="subscType">
+                <!--0 后付费 1 准预付费 2 OCS 3 PPS -->
+            </SUBSCRB_TYPE>
+            <INTENET_TYPE constraint="?" length="V1" mappedName="intenetType">
+                <!--智能网标识, 0 智能网用户, 1 非智能网用户 -->
+            </INTENET_TYPE>
+            <USER_SCORE_AMOUNT constraint="?" length="V11" mappedName="userScoreAmount">
+                <!--用户当前可用积分 -->
+            </USER_SCORE_AMOUNT>
+            <LEAD_CODE constraint="?" length="V40" mappedName="leadCode">
+                <!--引示号 -->
+            </LEAD_CODE>
+            <CUST_ID constraint="?" length="V20" mappedName="custId" />
+            <USECUST_ID constraint="?" length="V20" mappedName="usecustId" />
+            <USECUST_NAME constraint="?" length="V100" mappedName="useCustName" />
+            <USECUST_PSPT_TYPE_CODE constraint="?" length="V20" mappedName="useCustPsptTypeCode" />
+            <USECUST_PSPT_ID constraint="?" length="V100" mappedName="useCustPsptId" />
+            <X_EPARCHY_NAME constraint="?" length="V20" mappedName="xEparchyCode" />
+            <CITY_NAME constraint="?" length="V100" mappedName="cityName" />
+            <USER_PASSWD constraint="?" length="V20" mappedName="userPasswd" />
+            <USER_DIFF_CODE constraint="?" length="V4" mappedName="userDiffCode" />
+            <USER_TYPE_CODE constraint="?" length="V20" mappedName="userTypeCode" />
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber" />
+            <SCORE_VALUE constraint="?" length="V20" mappedName="scoreValue" />
+            <CREDIT_CLASS constraint="?" length="V20" mappedName="creditClass" />
+            <ACCT_TAG constraint="?" length="V20" mappedName="acctTag" />
+            <X_ACCT_TAG_NAME constraint="?" length="V20" mappedName="xAcctTagName" />
+            <PREPAY_TAG constraint="?" length="V20" mappedName="prepayTag" />
+            <X_PREPAY_TAG_NAME constraint="?" length="V20" mappedName="xPrepayTagName" />
+            <IN_DATE constraint="?" length="V20" mappedName="inDate" />
+            <OPEN_MODE constraint="?" length="V20" mappedName="openMode" />
+            <X_OPEN_MODE_NAME constraint="?" length="V20" mappedName="xOpenModeName" />
+            <OPEN_DEPART_ID constraint="?" length="V20" mappedName="openDepartId" />
+            <OPEN_STAFF_ID constraint="?" length="V20" mappedName="openStaffId" />
+            <IN_DEPART_ID constraint="?" length="V20" mappedName="inDepartId" />
+            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId" />
+            <REMOVE_TAG constraint="?" length="V20" mappedName="removeTag" />
+            <X_REMOVE_TAG_NAME constraint="?" length="V20" mappedName="xRemoveTagName" />
+            <DESTROY_TIME constraint="?" length="V20" mappedName="destoryTime" />
+            <REMOVE_EPARCHY_CODE constraint="?" length="V20" mappedName="removeEparchyCode" />
+            <REMOVE_CITY_CODE constraint="?" length="V6" mappedName="removeCityCode" />
+            <REMOVE_DEPART_ID constraint="?" length="V20" mappedName="removeDepartId" />
+            <REMOVE_REASON_CODE constraint="?" length="V20" mappedName="removeReasonCode" />
+            <PRE_DESTROY_TIME constraint="?" length="V20" mappedName="preDestoryTime" />
+            <FIRST_CALL_TIME constraint="?" length="V20" mappedName="firstCallTime" />
+            <LAST_STOP_TIME constraint="?" length="V20" mappedName="lastStopTime" />
+            <USER_STATE_CODESET constraint="?" length="V20" mappedName="userStateCodeset" />
+            <X_SVCSTATE_EXPLAIN constraint="?" length="V20" mappedName="xSvcstateExplain" />
+            <MPUTE_MONTH_FEE constraint="?" length="V20" mappedName="mputeMonthFee" />
+            <MPUTE_DATE constraint="?" length="V20" mappedName="mputeDate" />
+            <ASSURE_CUST_ID constraint="?" length="V20" mappedName="assureCustId" />
+            <ASSURE_TYPE_CODE constraint="?" length="V20" mappedName="assureTypeCode" />
+            <ASSURE_DATE constraint="?" length="F14" mappedName="assureDate" />
+            <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId" />
+            <DEVELOP_DATE constraint="?" length="V20" mappedName="developDate" />
+            <DEVELOP_EPARCHY_CODE constraint="?" length="V6" mappedName="developEparchyCode" />
+            <DEVELOP_CITY_CODE constraint="?" length="V20" mappedName="developCityCode" />
+            <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId" />
+            <DEVELOP_NO constraint="?" length="V20" mappedName="developNo" />
+            <CONTRACT_ID constraint="?" length="V20" mappedName="contractId" />
+            <CHANGEUSER_DATE constraint="?" length="V20" mappedName="changeuserDate" />
+            <IN_NET_MODE constraint="?" length="V20" mappedName="inNetMode" />
+            <PRODUCT_TYPE_CODE constraint="?" length="V20" mappedName="productTypeCode" />
+            <MAIN_DISCNT_CODE constraint="?" length="V8" mappedName="mainDiscntCode" />
+            <PRODUCT_SPEC constraint="?" length="V200" mappedName="productDesc" />
+            <REMARK constraint="?" length="V500" mappedName="remark" />
+            <SAME_LINE_INFO constraint="*" mappedName="sameLineInfo">
+                <!--共线号码信息 -->
+                <SAME_LINE_TYPE_CODE length="V4" mappedName="sameLineTypeCode">
+                    <!--共线号码电信类型编码，编码见附录 -->
+                </SAME_LINE_TYPE_CODE>
+                <SAME_LINE_AREA_CODE constraint="?" length="V6" mappedName="sameLineAreaCode">
+                    <!--共线号码区号 -->
+                </SAME_LINE_AREA_CODE>
+                <SAME_LINE_NUMBER length="V40" mappedName="sameLineNumber">
+                    <!--共线号码 -->
+                </SAME_LINE_NUMBER>
+            </SAME_LINE_INFO>
+            <SIM_CARD_NO constraint="?" length="V20" mappedName="sinCardNo">
+                <!--SIM/USIM卡号 -->
+            </SIM_CARD_NO>
+            <IMSI constraint="?" length="V20" mappedName="imsi">
+                <!--IMSI号 -->
+            </IMSI>
+            <FLAG_3G constraint="?" length="V1" mappedName="flag3G">
+                <!--是否3G, 1是；2 否 -->
+            </FLAG_3G>
+            <PRODUCT_INFO constraint="*" mappedName="productInfo">
+                <!--子产品信息 -->
+                <PRODUCT_ID length="V8" mappedName="productId">
+                    <!--产品编码 -->
+                </PRODUCT_ID>
+                <PRODUCT_NAME length="V100" mappedName="productName">
+                    <!--产品名称 -->
+                </PRODUCT_NAME>
+                <PRODUCT_MODE length="F2" mappedName="productMode" />
+                <PRODUCT_ACTIVE_TIME length="F14" mappedName="productActiveTime">
+                    <!--生效时间YYYYMMDDHHMMSS -->
+                </PRODUCT_ACTIVE_TIME>
+                <PRODUCT_INACTIVE_TIME length="F14" mappedName="productInactiveTime">
+                    <!--失效时间YYYYMMDDHHMMSS -->
+                </PRODUCT_INACTIVE_TIME>
+            </PRODUCT_INFO>
+            <ACTIVITY_INFO constraint="*" mappedName="activityInfo">
+                <!--活动信息 -->
+                <ACTIVITY_ID length="V28" mappedName="activityId">
+                    <!--活动ID -->
+                </ACTIVITY_ID>
+                <ACTIVITY_NAME length="V128" mappedName="activityName">
+                    <!--活动名称 -->
+                </ACTIVITY_NAME>
+                <ACTIVITY_ACTIVE_TIME length="F14" mappedName="activityActiveTime">
+                    <!--生效时间YYYYMMDDHHMMSS -->
+                </ACTIVITY_ACTIVE_TIME>
+                <ACTIVITY_INACTIVE_TIME length="F14" mappedName="activityInactiveTime">
+                    <!--失效时间,格式：YYYYMMDDHHMMSS -->
+                </ACTIVITY_INACTIVE_TIME>
+            </ACTIVITY_INFO>
+            <DISCNT_INFO constraint="*" mappedName="discntInfo">
+                <USER_ID_A length="V16" mappedName="userIdA" />
+                <PRODUCT_ID length="V8" mappedName="productId" />
+                <PACKAGE_ID length="V8" mappedName="packageId" />
+                <DISCNT_CODE length="V8" mappedName="discntCode" />
+                <SPEC_TAG length="V1" mappedName="specTag" />
+                <RELATION_TYPE_CODE length="V4" constraint="?" mappedName="relationTypeCode" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <ITEM_ID length="V16" constraint="?" mappedName="itemId" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </DISCNT_INFO>
+            <SVC_INFO constraint="*" mappedName="svcInfo">
+                <SERVICE_ID length="V8" mappedName="serviceId" />
+                <MAIN_TAG length="V1" mappedName="mainTag" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <ITEM_ID length="V16" mappedName="itemId" />
+                <PACKAGE_ID length="V8" constraint="?" mappedName="packageId" />
+                <USER_ID_A length="V16" mappedName="userIdA" />
+                <PRODUCT_ID length="V8" constraint="?" mappedName="productId" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </SVC_INFO>
+            <SP_INFO constraint="*" mappedName="spInfo">
+                <PARTY_ID length="V10" constraint="?" mappedName="partyId" />
+                <SP_ID length="V10" constraint="?" mappedName="spId" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <SP_NAME length="V100" constraint="?" mappedName="spName" />
+                <PACKAGE_ID length="V8" constraint="?" mappedName="packageId" />
+                <SP_PRODUCT_ID length="V40" constraint="?" mappedName="spProductId" />
+                <SP_PRODUCT_NAME length="V200" constraint="?" mappedName="spProductName" />
+                <FIRST_BUY_TIME length="F14" constraint="?" mappedName="firstBuyTime" />
+                <PAY_SERIAL_NUMBER length="V40" constraint="?" mappedName="paySerialNumber" />
+                <PRODUCT_ID length="V8" constraint="?" mappedName="productId" />
+                <UPDATE_TIME length="F14" constraint="?" mappedName="updateTime" />
+                <PAY_USER_ID length="V16" constraint="?" mappedName="payServiceId" />
+                <SP_SERVICE_ID length="V8" constraint="?" mappedName="spServiceId" />
+                <ITEM_ID length="V16" constraint="?" mappedName="itemId" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </SP_INFO>
+            <UU_INFO constraint="*" mappedName="uuInfo">
+                <USER_ID_A length="V16" mappedName="userIdA" />
+                <PRODUCT_ID_A length="V8" mappedName="productIdA" />
+                <SERIAL_NUMBER_A constraint="?" length="V40" mappedName="serialNumberA" />
+                <USER_ID_B length="V16" mappedName="userIdB" />
+                <SERIAL_NUMBER_B constraint="?" length="V40" mappedName="serialNumberB" />
+                <RELATION_TYPE_CODE length="V4" mappedName="relationTypeCode" />
+                <ROLE_CODE_A constraint="?" length="V1" mappedName="roleCodeA" />
+                <ROLE_NAME_A constraint="?" length="V20" mappedName="roleNameA" />
+                <ROLE_CODE_B constraint="?" length="V1" mappedName="roleCodeB" />
+                <ROLE_NAME_B constraint="?" length="V20" mappedName="roleNameB" />
+                <ORDERNO constraint="?" length="V4" mappedName="orderno" />
+                <SHORT_CODE constraint="?" length="V20" mappedName="shortCode" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <ITEM_ID constraint="?" length="V16" mappedName="itemId" />
+                <RELATION_ATTR constraint="?" length="V1" mappedName="relationAttr" />
+                <BRAND_CODE constraint="?" length="V4" mappedName="brandCode" />
+                <SERVICE_CLASS_CODE constraint="?" length="V4" mappedName="serviceClassCode" />
+                <ATTR_INFO constraint="*" mappedName="attrInfo">
+                    <ATTR_CODE length="V100" mappedName="attrCode" />
+                    <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </ATTR_INFO>
+            </UU_INFO>
+                <PLUS_PRODUCTS constraint="*" mappedName="plusProducts">
+                <PRODUCT_ID length="V8" mappedName="productCode" />
+            </PLUS_PRODUCTS>
+            <OTHER_INFO constraint="*" mappedName="otherInfo">
+                <RSRV_VALUE_CODE length="V4" mappedName="rsrvValueCode" />
+                <RSRV_VALUE length="V500" constraint="?" mappedName="rsrvValue" />
+                <RSRV_STR1 length="V500" constraint="?" mappedName="rsrvStr1" />
+                <RSRV_STR2 length="V500" constraint="?" mappedName="rsrvStr2" />
+                <RSRV_STR3 length="V500" constraint="?" mappedName="rsrvStr3" />
+                <RSRV_STR4 length="V500" constraint="?" mappedName="rsrvStr4" />
+                <RSRV_STR5 length="V500" constraint="?" mappedName="rsrvStr5" />
+                <RSRV_STR6 length="V500" constraint="?" mappedName="rsrvStr6" />
+                <RSRV_STR7 length="V500" constraint="?" mappedName="rsrvStr7" />
+                <RSRV_STR8 length="V500" constraint="?" mappedName="rsrvStr8" />
+                <RSRV_STR9 length="V500" constraint="?" mappedName="rsrvStr9" />
+                <RSRV_STR10 length="V500" constraint="?" mappedName="rsrvStr10" />
+                <RSRV_STR11 length="V500" constraint="?" mappedName="rsrvStr11" />
+                <RSRV_STR12 length="V500" constraint="?" mappedName="rsrvStr12" />
+                <RSRV_STR13 length="V500" constraint="?" mappedName="rsrvStr13" />
+                <RSRV_STR14 length="V500" constraint="?" mappedName="rsrvStr14" />
+                <RSRV_STR15 length="V500" constraint="?" mappedName="rsrvStr15" />
+                <RSRV_STR16 length="V500" constraint="?" mappedName="rsrvStr16" />
+                <RSRV_STR17 length="V500" constraint="?" mappedName="rsrvStr17" />
+                <RSRV_STR18 length="V500" constraint="?" mappedName="rsrvStr18" />
+                <RSRV_STR19 length="V500" constraint="?" mappedName="rsrvStr19" />
+                <RSRV_STR20 length="V500" constraint="?" mappedName="rsrvStr20" />
+                <RSRV_STR21 length="V500" constraint="?" mappedName="rsrvStr21" />
+                <RSRV_STR22 length="V500" constraint="?" mappedName="rsrvStr22" />
+                <RSRV_STR23 length="V500" constraint="?" mappedName="rsrvStr23" />
+                <RSRV_STR24 length="V500" constraint="?" mappedName="rsrvStr24" />
+                <RSRV_STR25 length="V500" constraint="?" mappedName="rsrvStr25" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </OTHER_INFO>
+            <VPN_NAME constraint="?" length="V128" mappedName="vpnName">
+                <!--所属虚拟网名称 -->
+            </VPN_NAME>
+            <BASIC_CREDIT_VALUE length="V11" mappedName="basicCreditValue">
+                <!--信用度单位：分 -->
+            </BASIC_CREDIT_VALUE>
+            <CREDIT_VALUE length="V11" mappedName="creditValue">
+                <!--信用度：分 -->
+            </CREDIT_VALUE>
+            <CREDIT_RULE_ID constraint="?" length="V8" mappedName="creditRuleId">
+                <!--信控规则标识 -->
+            </CREDIT_RULE_ID>
+            <ARREARAGE_FEE_INFO constraint="?" mappedName="arrearageFeeInfo">
+                <!--欠费信息 -->
+                <DEPOSIT_MONEY length="V11" mappedName="depositMoney">
+                    <!--实时余额 -->
+                </DEPOSIT_MONEY>
+                <BALANCE_BEFORE_LAST length="V11" mappedName="balanceBeforeLast">
+                    <!--上上月欠费金额 -->
+                </BALANCE_BEFORE_LAST>
+                <LAST_BALANCE length="V11" mappedName="lastBalance">
+                    <!--上月欠费金额 -->
+                </LAST_BALANCE>
+                <FEE length="V11" mappedName="fee">
+                    <!--本月实时话费 -->
+                </FEE>
+            </ARREARAGE_FEE_INFO>
+            <RESOUREC_INFO constraint="?" mappedName="resourceInfo">
+                <!--装机资源信息 -->
+                <INSTALL_ADDRESS length="V256" mappedName="installAddress">
+                    <!--装机地址（安装地址） -->
+                </INSTALL_ADDRESS>
+                <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                    <!--营业区编码 -->
+                </CITY_CODE>
+                <EXCH_CODE constraint="?" length="V64" mappedName="exchCode">
+                    <!--局向编码 -->
+                </EXCH_CODE>
+                <ADDRESS_CODE constraint="?" length="V20" mappedName="addressCode">
+                    <!--标准地址编码 -->
+                </ADDRESS_CODE>
+                <ADDRESS_NAME constraint="?" length="V256" mappedName="addressName">
+                    <!--标准地址名称 -->
+                </ADDRESS_NAME>
+                <APPOINTMENT constraint="?" length="F14" mappedName="appointment">
+                    <!--预约时间 -->
+                </APPOINTMENT>
+            </RESOUREC_INFO>
+            <RES_INFO constraint="*" mappedName="resInfo">
+                <RES_TYPE_CODE constraint="?" length="V1" mappedName="resTypeCode" />
+                <RES_CODE constraint="?" length="V30" mappedName="resCode" />
+                <RES_INFO1 constraint="?" length="V30" mappedName="resInfo1" />
+                <RES_INFO2 constraint="?" length="V30" mappedName="resInfo2" />
+                <RES_INFO3 constraint="?" length="V30" mappedName="resInfo3" />
+                <RES_INFO4 constraint="?" length="V30" mappedName="resInfo4" />
+                <RES_INFO5 constraint="?" length="V30" mappedName="resInfo5" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </RES_INFO>
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </ATTR_INFO>
+            <PAY_GROUP_CUST_ID constraint="?" length="V20" mappedName="payGroupCustId" />
+            <PAY_GROUP_CUST_NAME constraint="?" length="V200" mappedName="payGroupCustName" />
+            <OWE_FEE_MONTH_INFO constraint="*" mappedName="ownFeeMonthInfo">
+                <X_CYCLE_ID length="V20" mappedName="xCycleId" />
+                <X_ADEB_FEE length="V20" mappedName="xAdebFee" />
+            </OWE_FEE_MONTH_INFO>
+        </USER_INFO>
+        <ACCT_INFO constraint="*" mappedName="acctInfo">
+            <!--账号资料 -->
+            <ACCT_ID length="V16" mappedName="acctId">
+                <!--账户标识 -->
+            </ACCT_ID>
+            <CUST_ID constraint="?" length="V20" mappedName="custId">
+                <!--客户标识 -->
+            </CUST_ID>
+            <DEBUTY_USER_ID constraint="?" length="V16" mappedName="debutyUserId">
+                <!--代表用户标识 -->
+            </DEBUTY_USER_ID>
+            <DEBUTY_CODE constraint="?" length="V40" mappedName="debutyCode">
+                <!--代表号码 -->
+            </DEBUTY_CODE>
+            <PAY_NAME length="V100" mappedName="payName">
+                <!--账户名称 -->
+            </PAY_NAME>
+            <PAY_MODE_CODE length="F1" mappedName="payModeCode">
+                <!--付费方式编码，数据模型编码CUI_000084 -->
+            </PAY_MODE_CODE>
+            <ConsolidatedAccounts length="F1" constraint="?" mappedName="consolidatedAccounts" >
+                <!--是/否为合账用户  0非合账，1合账 -->
+            </ConsolidatedAccounts>
+            <PAY_MODE length="V50" constraint="?" mappedName="payMode" />
+            <PREPAY_TAG length="F1" constraint="?" mappedName="prepayTag">
+                <!--预付费标识：, 0 后付费, 1 准预付费, 2 OCS, 3 PPS, -->
+            </PREPAY_TAG>
+            <ACCT_PASSWD constraint="?" length="V30" mappedName="accountPasswd" />
+            <ACCOUNT_CYCLE constraint="?" length="V2" mappedName="accountCycle">
+                <!--账务周期 -->
+            </ACCOUNT_CYCLE>
+            <IS_GROUP_ACCT constraint="?" length="F1" mappedName="isGroupAcct">
+                <!--是否集团账户, 0否, 1是 -->
+            </IS_GROUP_ACCT>
+            <PAYITEM_CODE length="V5" mappedName="payitemCode" />
+            <ACCT_PRIORITY length="V4" mappedName="acctPriority" />
+            <USER_PRIORITY length="V4" mappedName="userPriority" />
+            <BIND_TYPE length="F1" mappedName="bindCode" />
+            <START_ACYC_ID length="V6" mappedName="startAcycId" />
+            <END_ACYC_ID length="V6" mappedName="endAcycId" />
+            <DEFAULT_TAG length="F1" mappedName="defaultTag" />
+            <ACT_TAG length="F1" mappedName="actTag" />
+            <LIMIT_TYPE length="F1" mappedName="limitType" />
+            <LIMIT length="V11" mappedName="limit" />
+            <ACCT_ONLY length="V1" constraint="?" mappedName="acctOnly" />
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </ATTR_INFO>
+            <CONSIGN constraint="*" mappedName="consign">
+                <!--托收信息 -->
+                <CONSIGN_MODE length="F1" mappedName="consignMode">
+                    <!--托收方式，统一数据模型编码PRD_000048 -->
+                </CONSIGN_MODE>
+                <SUPER_BANK_CODE length="V20" mappedName="superBankCode">
+                    <!--上级银行编码，省分去ESS配置 -->
+                </SUPER_BANK_CODE>
+                <BANK_CODE length="V10" mappedName="bankCode">
+                    <!--开户银行编码，省分去ESS配置 -->
+                </BANK_CODE>
+                <BANK length="V100" constraint="?" mappedName="bank" />
+                <BANK_ACCT_NO length="V30" mappedName="bankAcctNo">
+                    <!--银行付费账号 -->
+                </BANK_ACCT_NO>
+                <AGREEMENT_NO constraint="?" length="V44" mappedName="agreementNo">
+                    <!--托收协议号 -->
+                </AGREEMENT_NO>
+                <ACCT_BALANCE_ID constraint="?" length="V16" mappedName="acctBalanceId">
+                    <!--账本标识 -->
+                </ACCT_BALANCE_ID>
+                <BANK_ACCT_NAME constraint="?" length="V100" mappedName="bankAcctName">
+                    <!--托收名称 -->
+                </BANK_ACCT_NAME>
+                <BANK_BUSI_KIND length="V20" constraint="?" mappedName="bankBusiKind" />
+            </CONSIGN>
+            <SCORE_VALUE constraint="?" length="V12" mappedName="scoreValue">
+                <!--账户积分 -->
+            </SCORE_VALUE>
+            <CONTRACT_NO length="V40" mappedName="contractNo">
+                <!--账户合同号 -->
+            </CONTRACT_NO>
+            <OPEN_DATE length="F14" mappedName="openDate">
+                <!--开户时间。格式：YYYYMMDDHH24MISS -->
+            </OPEN_DATE>
+        </ACCT_INFO>
+        <SCORE_THRESHOLD_FLAG constraint="?" length="V10" mappedName="scoreThresholdFlag">
+            <!--是否达到积分阀值标记, 1是；2 否 -->
+        </SCORE_THRESHOLD_FLAG>
+        <FOREGIFT_FEE_INFO constraint="*" mappedName="foregiftFeeInfo">
+            <!--押金信息 -->
+            <FOREGIFT_FEE_ID length="V10" mappedName="foregiftFeeId">
+                <!--押金科目编码，以省分为准 -->
+            </FOREGIFT_FEE_ID>
+            <FOREGIFT_FEE_NAME length="V128" mappedName="foregiftFeeName">
+                <!--押金名称 -->
+            </FOREGIFT_FEE_NAME>
+            <FOREGIFT_FEE_VALUE length="V11" mappedName="foregiftFeeValue">
+                <!--押金值 -->
+            </FOREGIFT_FEE_VALUE>
+            <CAN_CANCEL_TIME constraint="?" length="F14" mappedName="canCancelTime">
+                <!--押可退时间yyyyMMdd -->
+            </CAN_CANCEL_TIME>
+        </FOREGIFT_FEE_INFO>
+        <POST constraint="*" mappedName="post">
+            <!--邮寄信息，最多三个 -->
+            <ID_TYPE length="F1" mappedName="idType">
+                <!--标识类型：, 0-客户,, 1-用户,, 2-账户 -->
+            </ID_TYPE>
+            <POST_NAME constraint="?" length="V50" mappedName="postName">
+                <!--邮寄名称 -->
+            </POST_NAME>
+            <POST_TAG constraint="?" length="V1" mappedName="postTag">
+                <!--邮寄标志：, 0-不邮寄,, 1-邮寄 -->
+            </POST_TAG>
+            <POST_CONTENT length="V10" mappedName="postContent">
+                <!--邮寄内容：, 0-账单,, 1-清单,, 2-发票,, 3-广告,, 该字段以拼串形式来填写，如03，表示邮寄账单和广告。 -->
+            </POST_CONTENT>
+            <POST_TYPESET constraint="?" length="V10" mappedName="postTypeset">
+                <!--邮寄方式：, 0-邮政、, 1-传真、, 2-Email, -->
+            </POST_TYPESET>
+            <POST_CYC length="F1" mappedName="postCyc">
+                <!--邮寄周期：, 0-按月,, 1-按季,, 2-按年 -->
+            </POST_CYC>
+            <POST_ADDRESS constraint="?" length="V256" mappedName="postAddress">
+                <!--邮寄地址 -->
+            </POST_ADDRESS>
+            <POST_CODE constraint="?" length="F6" mappedName="postCode">
+                <!--邮寄邮编 -->
+            </POST_CODE>
+            <EMAIL constraint="?" length="V50" mappedName="email">
+                <!--EMAIL地址 -->
+            </EMAIL>
+            <FAX_NBR constraint="?" length="V40" mappedName="faxNbr">
+                <!--传真号码 -->
+            </FAX_NBR>
+        </POST>
+        <PURCHASE constraint="*" mappedName="purchase">
+            <BINDSALE_ATTR constraint="?" length="V8" mappedName="bindsaleAttr" />
+            <EXTRA_DEV_FEE constraint="?" length="V16" mappedName="extraDevFee" />
+            <MPFEE constraint="?" length="V11" mappedName="mpfee" />
+            <FEEITEM_CODE constraint="?" length="V4" mappedName="feeitemCode" />
+            <FOREGIFT constraint="?" length="V11" mappedName="foregift" />
+            <FOREGIFT_CODE constraint="?" length="V4" mappedName="foregiftCode" />
+            <FOREGIFT_BACKMODE constraint="?" length="V1" mappedName="fordgiftBackmode" />
+            <AGREEMENT_MONTHS constraint="?" length="V4" mappedName="agreementMonths" />
+            <END_MODE constraint="?" length="V1" mappedName="endMode" />
+            <DEVICE_TYPE constraint="?" length="V30" mappedName="deviceType" />
+            <MOBILE_COST constraint="?" length="V16" mappedName="mobileCost" />
+            <DEVICE_NAME constraint="?" length="V100" mappedName="deviceName" />
+            <DEVICE_BRAND constraint="?" length="V30" mappedName="deviceBrand" />
+            <IMEI constraint="?" length="V30" mappedName="imei" />
+            <AGREEMENT constraint="?" length="V50" mappedName="agreement" />
+            <PRODUCT_ID constraint="?" length="V50" mappedName="productId" />
+            <PACKAGE_ID constraint="?" length="V50" mappedName="packageId" />
+            <START_DATE constraint="?" length="F14" mappedName="startDate" />
+            <END_DATE constraint="?" length="F14" mappedName="endDate" />
+            <ITEM_ID constraint="?" length="V100" mappedName="itemId" />
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </ATTR_INFO>
+        </PURCHASE>
+        <ASSURE constraint="*" mappedName="assure">
+            <ASSURE_ID_TYPE constraint="?" length="V1" mappedName="assureIdType" />
+            <ASSURE_ID constraint="?" length="V16" mappedName="assureId" />
+            <ASSURE_TYPE_CODE constraint="?" length="V1" mappedName="assureTypeCode" />
+            <ASSURE_DATE constraint="?" length="F14" mappedName="assureDate" />
+            <ASSURE_CUST_ID constraint="?" length="V16" mappedName="assureCustId" />
+            <ASSURE_NO constraint="?" length="V50" mappedName="assureNo" />
+            <ASSURE_PSPT_TYPE_CODE constraint="?" length="V1" mappedName="assurePsptTypeCode" />
+            <ASSURE_PSPT_ID constraint="?" length="V100" mappedName="assurePsptId" />
+            <ASSURE_NAME constraint="?" length="V100" mappedName="assureName" />
+            <ASSURE_FOREGIFT constraint="?" length="V11" mappedName="assureForegift" />
+            <ASSURE_FOREGIFT_CODE constraint="?" length="V4" mappedName="assureForegiftCode" />
+            <ASSURE_SERIAL_NUMBER constraint="?" length="V40" mappedName="assureSerialNumber" />
+            <ASSURE_USER_ID constraint="?" length="V16" mappedName="assureUserId" />
+            <ASSURE_BANK_CODE constraint="?" length="V6" mappedName="assureBrankCode" />
+            <ASSURE_BANK_ACCT_NO constraint="?" length="V30" mappedName="assureBrankAcctNo" />
+            <ASSURE_BANK_ACCT_NAME constraint="?" length="V30" mappedName="assureBrankAcctName" />
+            <ASSURE_BANK_MONEY constraint="?" length="V11" mappedName="assureBrankMoney" />
+            <REMARK constraint="?" length="V500" mappedName="remark" />
+        </ASSURE>
+        <INFOCHANGE constraint="*" mappedName="infochange">
+            <PRODUCT_ID constraint="?" length="V8" mappedName="productId" />
+            <BRAND_CODE constraint="?" length="V4" mappedName="brandCode" />
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber" />
+            <IMSI constraint="?" length="V100" mappedName="imsi1" />
+            <IMSI2 constraint="?" length="V100" mappedName="imsi2" />
+            <START_DATE length="F14" mappedName="startDate" />
+            <END_DATE length="F14" mappedName="endDate" />
+        </INFOCHANGE>
+        <USER_SCORE constraint="*" mappedName="userScore">
+            <YEAR length="V4" mappedName="year" />
+            <CYCLE_ID length="V6" mappedName="cycleId" />
+            <SCORE_TYPE_CODE length="V2" mappedName="scoreTypeCode" />
+            <SCORE_VALUE length="V11" mappedName="scoreValue" />
+            <SCORE_SUM length="V11" mappedName="scoreSum" />
+            <END_DATE constraint="?" length="F14" mappedName="endDate" />
+            <RSRV_STR1 constraint="?" length="V100" mappedName="rsrvStr1" />
+            <RSRV_STR2 constraint="?" length="V100" mappedName="rsrvStr2" />
+            <RSRV_STR3 constraint="?" length="V100" mappedName="rsrvStr3" />
+        </USER_SCORE>
+        <CUST_SCORE constraint="*" mappedName="custScore">
+            <YEAR length="V4" mappedName="year" />
+            <CYCLE_ID length="V6" mappedName="cycleId" />
+            <SCORE_TYPE_CODE length="V1" mappedName="scoreTypeCode" />
+            <SCORE_VALUE length="V11" mappedName="scoreValue" />
+            <STATE length="V1" mappedName="state" />
+            <STATE_DATE constraint="?" length="F14" mappedName="startDate" />
+            <END_DATE constraint="?" length="F14" mappedName="endDate" />
+        </CUST_SCORE>
+        <USER_RAFFLE constraint="*" mappedName="userRaffle">
+            <USER_ID length="V16" mappedName="userId" />
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <SCORE_PROJECT_ID length="V20" mappedName="scoreProjectId" />
+            <RAFFLE_NUMBER length="V20" mappedName="raffleNumber" />
+            <LOT_GROUP_ID length="V1" mappedName="lotGroupId" />
+            <LOT_KIND constraint="?" length="V1" mappedName="lotKind" />
+            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode" />
+            <CITY_CODE constraint="?" length="V20" mappedName="cityCode" />
+            <TRADE_ID length="V20" mappedName="tradeId" />
+            <JOIN_DATE length="F14" mappedName="joinDate" />
+            <STATE length="V1" mappedName="state" />
+            <RSRV_STR1 constraint="?" length="V100" mappedName="rsrvStr1" />
+            <RSRV_STR2 constraint="?" length="V100" mappedName="rsrvStr2" />
+            <RSRV_STR3 constraint="?" length="V100" mappedName="rsrvStr3" />
+            <RSRV_STR4 constraint="?" length="V100" mappedName="rsrvStr4" />
+            <RSRV_STR5 constraint="?" length="V100" mappedName="rsrvStr5" />
+        </USER_RAFFLE>
+        <ACCT_DISCNT constraint="*" mappedName="acctDiscnt">
+            <ACCT_ID length="V16" mappedName="acctId" />
+            <DISCNT_CODE length="V8" mappedName="discntCode" />
+            <START_DATE length="F14" mappedName="startDate" />
+            <END_DATE length="F14" mappedName="endDate" />
+            <ITEM_ID length="V16" mappedName="itemId" />
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </ATTR_INFO>
+        </ACCT_DISCNT>
+        <USER_PPS constraint="*" mappedName="userPps">
+            <USER_ID length="V16" mappedName="userId" />
+            <START_DATE length="F14" mappedName="startDate" />
+            <END_DATE length="F14" mappedName="endDate" />
+            <STATE_CODE constraint="?" length="V1" mappedName="stateCode" />
+            <SPECIAL_FLAG constraint="?" length="V1" mappedName="specialFlag" />
+        </USER_PPS>
+        <USER_EXCHANGE constraint="*" mappedName="userExchange">
+            <SCORE_PROJECT_ID constraint="?" length="V20" mappedName="scoreProjectId" />
+            <RAFFLE_NUMBER constraint="?" length="V20" mappedName="raffleNumber" />
+            <RAFFLE_TIME constraint="?" length="F14" mappedName="raffleTime" />
+            <EXCHANGE_STATE constraint="?" length="V1" mappedName="exchangeState" />
+            <EXCHANGE_TIME constraint="?" length="F14" mappedName="exchangeTime" />
+            <EXCHANGE_ID constraint="?" length="V20" mappedName="exchangeId" />
+            <RSRV_STR1 constraint="?" length="V100" mappedName="rsrvStr1" />
+            <RSRV_STR2 constraint="?" length="V100" mappedName="rsrvStr2" />
+            <RSRV_STR3 constraint="?" length="V100" mappedName="rsrvStr3" />
+            <RSRV_STR4 constraint="?" length="V100" mappedName="rsrvStr4" />
+            <RSRV_STR5 constraint="?" length="V100" mappedName="rsrvStr5" />
+            <PRIZE_LEVEL constraint="?" length="V2" mappedName="prizeLevel" />
+            <LOT_CYCLE_ID constraint="?" length="V20" mappedName="lotCycleId" />
+            <LOT_GROUP_ID constraint="?" length="V1" mappedName="lotGroupId" />
+            <CITY_CODE constraint="?" length="V20" mappedName="cityCode" />
+            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode" />
+            <ACTION_CODE constraint="?" length="V8" mappedName="actionCode" />
+            <USER_ID constraint="?" length="V16" mappedName="userId" />
+            <TRADE_STAFF_ID constraint="?" length="V20" mappedName="tradeStaffId" />
+            <TRADE_DEPART_ID constraint="?" length="V20" mappedName="tradeDepartId" />
+        </USER_EXCHANGE>
+        <RELATION_NUM_INFO constraint="*" mappedName="relationNumInfo">
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <RELATION_TYPE_NAME length="V40" mappedName="relationTypeName" />
+            <COMM_SHARE_MESSAGE constraint="?" length="V500" mappedName="commShareMessage" />
+        </RELATION_NUM_INFO>
+        <GROUP_PAYRULE_INFO constraint="*" mappedName="groupPayruleInfo">
+            <ACCT_ID length="V16" mappedName="acctId" />
+            <TRANS_RULE_ID length="V8" mappedName="transRuleId" />
+            <START_DATE length="F14" mappedName="startDate" />
+            <END_DATE length="F14" mappedName="endDate" />
+            <RSRV_INFO1 constraint="?" length="V50" mappedName="rsrvInfo1" />
+            <RSRV_INFO2 constraint="?" length="V50" mappedName="rsrvInfo2" />
+            <RSRV_FEE1 constraint="?" length="V11" mappedName="rsrvFee1" />
+            <RSRV_FEE2 constraint="?" length="V11" mappedName="rsrvFee2" />
+            <UPDATE_TIME length="F14" mappedName="updateTime" />
+            <UPDATE_DEPART_ID length="V20" mappedName="updateDepartId" />
+            <UPDATE_CITY_CODE length="V20" mappedName="updateCityCode" />
+            <UPDATE_EPARCHY_CODE length="V6" mappedName="updateEparchyCode" />
+            <UPDATE_STAFF_ID length="V20" mappedName="updateStaffId" />
+            <PAY_MONEY constraint="?" length="V11" mappedName="payMoney" />
+            <USER_ID length="V16" mappedName="userId" />
+            <LIMIT_MODE constraint="?" length="V1" mappedName="limitMode" />
+            <TRANS_RULE constraint="?" length="V1" mappedName="transRule" />
+        </GROUP_PAYRULE_INFO>
+        <MORE_ACCT_INFO constraint="*" mappedName="moreAcctInfo">
+            <ACCT_ID length="V16" mappedName="acctId" />
+            <CUST_ID constraint="?" length="V20" mappedName="custId" />
+            <DEBUTY_USER_ID constraint="?" length="V16" mappedName="debutyUserId" />
+            <DEBUTY_CODE constraint="?" length="V40" mappedName="debutyCode" />
+            <PAY_NAME length="V100" mappedName="payName" />
+            <PAY_MODE_CODE length="F1" mappedName="payModeCode" />
+            <PAY_MODE constraint="?" length="V50" mappedName="payMode" />
+            <PREPAY_TAG constraint="?" length="F1" mappedName="prepayTag" />
+            <ACCT_PASSWD constraint="?" length="V30" mappedName="acctPasswd" />
+            <ACCOUNT_CYCLE constraint="?" length="V2" mappedName="accountCycle" />
+            <PAYITEM_CODE length="V5" mappedName="payitemCode" />
+            <ACCT_PRIORITY length="V4" mappedName="acctPriority" />
+            <USER_PRIORITY length="V4" mappedName="userPriority" />
+            <BIND_TYPE length="F1" mappedName="bindType" />
+            <START_ACYC_ID length="V6" mappedName="startAcycId" />
+            <END_ACYC_ID length="V6" mappedName="endAcycId" />
+            <DEFAULT_TAG length="F1" mappedName="defaultTag" />
+            <ACT_TAG length="F1" mappedName="actTag" />
+            <LIMIT_TYPE length="F1" mappedName="limitType" />
+            <LIMIT length="V11" mappedName="limit" />
+            <SCORE_VALUE constraint="?" length="V12" mappedName="scoreValue" />
+            <CONTRACT_NO length="V40" mappedName="contractNo" />
+            <OPEN_DATE length="F14" mappedName="openDate" />
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V20000" mappedName="attrValue" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </ATTR_INFO>
+        </MORE_ACCT_INFO>
+        <CONSIGN constraint="*" mappedName="consign">
+            <CONSIGN_MODE length="F1" mappedName="consignMode" />
+            <SUPER_BANK_CODE length="V20" mappedName="superBankCode" />
+            <BANK_CODE length="V10" mappedName="bankCode" />
+            <BANK length="V100" constraint="?" mappedName="bank" />
+            <BANK_ACCT_NO length="V30" mappedName="bankAcctNo" />
+            <AGREEMENT_NO length="V44" constraint="?" mappedName="agreementNo" />
+            <ACCT_BALANCE_ID length="V16" constraint="?" mappedName="acctBalanceId" />
+            <BANK_ACCT_NAME length="V100" constraint="?" mappedName="bankAcctName" />
+            <BANK_BUSI_KIND length="V20" constraint="?" mappedName="bankBusiKind" />
+        </CONSIGN>
+        <ELEMENT_INFO constraint="*" mappedName="elementInfo">
+            <PRODUCT_ID length="V8" constraint="?" mappedName="productId" />
+            <PACKAGE_ID length="V8" constraint="?" mappedName="packageId" />
+            <ID_TYPE length="F1" constraint="?" mappedName="idType" />
+            <ID length="V20" constraint="?" mappedName="id" />
+            <START_DATE length="F14" constraint="?" mappedName="startDate" />
+            <END_DATE length="F14" constraint="?" mappedName="endDate" />
+            <ITEM_ID length="V16" constraint="?" mappedName="itemId" />
+            <USER_ID_A length="V16" constraint="?" mappedName="userIdA" />
+            <ATTR_INFO constraint="*" mappedName="attrInfo">
+                <ATTR_CODE length="V100" mappedName="attrCode" />
+                <ATTR_VALUE length="V2000" mappedName="attrValue" />
+            </ATTR_INFO>
+        </ELEMENT_INFO>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE length="V4000" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </CHECK_USER_INFO_RSP>
+</UNI_BSS_BODY>

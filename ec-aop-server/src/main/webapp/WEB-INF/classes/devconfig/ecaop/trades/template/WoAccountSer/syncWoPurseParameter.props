@@ -1,0 +1,2 @@
+#沃账户创建接口
+ecaop.trade.template.woAccountSer.syncWoPurseParameter={"serviceName":"WoAccountSer","operateName":"syncWoPurseParameter","content":"SYNC_WO_PURSE_PARAMETER_REQ"}

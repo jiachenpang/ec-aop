@@ -1,0 +1,5 @@
+#沃小号
+ecaop.core.app.map.wxh.sub=wxsb
+ecaop.core.app.wxsb.def={"code":"wxsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.wxsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.wxsb.allow={appkey:"wxsb",allow:"cuck,qctc,opap,opsb,qcsp,qcsc,msoa,nboc,qreq,smca,ucck,sjgs",deny:null}

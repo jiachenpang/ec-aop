@@ -1,0 +1,56 @@
+#融合变更提交接口 by wangmc
+ecaop.core.method.map.ecaop.trades.sell.mix.member.chg.sub=smcs
+ecaop.core.method.smcs.def={"mothod":"smcs","remark":"融合变更提交"}
+#请求数据校验
+ecaop.core.method.smcs.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smcs.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#请求msg数据
+ecaop.trades.smcs.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    bssOrderId:{type:"String(30)",required:false,validators:null},\
+    ordersId:{type:"String(30)",required:false,validators:null},\
+    subOrderInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smcs.subOrderInfo)"},\
+    origTotalFee:{type:"String(10)",required:true,validators:null},\
+    invoiceNo:{type:"String(30)",required:false,validators:null},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smcs.payInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#成员订单信息
+ecaop.trades.smcs.subOrderInfo={\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smcs.feeInfo)"}\
+}
+
+#费用信息
+ecaop.trades.smcs.feeInfo={\
+    feeId:{type:"String(20)",required:true,validators:null},\
+    feeCategory:{type:"String(1)",required:true,validators:null},\
+    feeDes:{type:"String(120)",required:true,validators:null},\
+    origFee:{type:"String(10)",required:true,validators:null},\
+    reliefFee:{type:"String(10)",required:true,validators:null},\
+    reliefResult:{type:"String(60)",required:true,validators:null},\
+    realFee:{type:"String(10)",required:true,validators:null},\
+}
+
+#支付信息
+ecaop.trades.smcs.payInfo={\
+    payType:{type:"String(2)",required:true,validators:null},\
+    payOrg:{type:"String(30)",required:false,validators:null},\
+    payNum:{type:"String(20)",required:false,validators:null},\
+}
+
+
+#配置流程跳转
+ecaop.core.method.smcs.processors=@ChangeFeeType\
+                                  @mixMemberChgSubProcessor

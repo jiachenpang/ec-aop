@@ -1,0 +1,2 @@
+#免填单查询
+ecaop.trade.template.CommInfoForNorthSer.qryCommInfo={"serviceName":"CommInfoForNorthSer","operateName":"qryCommInfo","content":"QRY_COMM_INFO_REQ"}

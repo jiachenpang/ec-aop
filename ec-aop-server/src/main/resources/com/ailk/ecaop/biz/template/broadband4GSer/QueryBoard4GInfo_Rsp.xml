@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QUERY_BOARD_4GINFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <BOARD_USER_INFO constraint="?" mappedName="boardUserInfo">
+            <CUST_ID length="V100" mappedName="custId" />
+            <CUST_NAME length="V100" mappedName="custName" />
+            <PSPT_TYPE_CODE constraint="?" length="F2" mappedName="psptTypeCode" />
+            <PSPT_ID length="V100" mappedName="psptId" />
+            <AREA_CODE length="V100" mappedName="areaCode" />
+            <PRODUCT_ID length="V100" mappedName="productId" />
+            <PRODUCT_NAME length="V100" mappedName="productName" />
+            <PREPAY_TAG constraint="?" length="F1" mappedName="prepayTag" />
+            <STATE_CODE length="V1" mappedName="stateCode" />
+            <NET_TYPE_CODE length="F4" mappedName="netTypeCode" />
+            <USER_TYPE_CODE length="V2" mappedName="userTypeCode" />
+            <IS_OWE_FEE length="F1" mappedName="isOweFee" />
+            <BALANCE length="V11" mappedName="balance" />
+            <BALANCE_BEFORE length="V11" mappedName="balanceBefore" />
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <ACCOUNT_NET length="V60" mappedName="accountNet" />
+            <SERIAL_NBR constraint="?" length="V40" mappedName="serialNbr" />
+            <INSTALL_ADDRESS constraint="?" length="V100" mappedName="installAddress" />
+            <ACCESS_TYPE constraint="?" length="V4" mappedName="accessYype" />
+            <IN_DATE constraint="?" length="V19" mappedName="inDate" />
+            <IPTV_INFO constraint="?" mappedName="iptvInfo">
+                <IPTVNBR constraint="?" length="V40" mappedName="iptvnbr" />
+                <START_DATE constraint="?" length="V19" mappedName="startDate" />
+                <END_DATE constraint="?" length="V19" mappedName="endDate" />
+                <OPER_DATE constraint="?" length="V19" mappedName="operDate" />
+                <LINK_PHONE constraint="?" length="V40" mappedName="linkPhone" />
+                <BRAND_SPEED length="V4" constraint="?" mappedName="brandSpeed" />
+            </IPTV_INFO>
+        </BOARD_USER_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </QUERY_BOARD_4GINFO_RSP>
+</UNI_BSS_BODY>

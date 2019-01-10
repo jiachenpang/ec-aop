@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckNumRsp mappedOut="true">
+    <!-- 应答编码0000 成功0001 单个资源处理失败9999 其他错误 -->
+    <RespCode length="F4" range="0000,0001,9999" mappedName="code"/>
+    <ResourcesRsp constraint="+" mappedName="resourcesRsp">
+        <!-- 资源类型 03 移动电话04 上网卡05 上网本 -->
+        <ResourcesType length="F2" mappedName="resourcesType"/>
+        <!-- 资源唯一标识 -->
+        <ResourcesCode length="V30" mappedName="resourcesCode"/>
+        <!-- 资源状态编码：0000 资源可用0001 资源已被占0002 无此资源信息0003 资源不可售0004 资源状态是非可用 0005 0006 资源空闲，不能释放0007 资源已售，不能释放 资源归属渠道错误9999 
+            其它失败原因 -->
+        <RscStateCode range="0000,0001,0002,0003,0004,0005,0006,0007,9999" mappedName="rscStateCode"/>
+        <!-- 资源校验结果描述 -->
+        <RscStateDesc length="V100" mappedName="rscStateDesc"/>
+        <!-- 号码 -->
+        <NumID length="V20" constraint="?" mappedName="numId"/>
+        <!-- 号码说明 -->
+        <NumMemo length="V200" constraint="?" mappedName="numMemo"/>
+        <!-- 靓号预存单位分 -->
+        <NumPreFee length="V20" constraint="?" mappedName="numPreFee"/>
+        <!-- 靓号级别 -->
+        <NumLevel length="V10" constraint="?" mappedName="numLevel"/>
+        <!-- 号码约束产品 -->
+        <NumProduct length="V20" constraint="?" mappedName="numProduct"/>
+        <!-- 卡号 -->
+        <SimID length="V20" constraint="?" mappedName="simId"/>
+        <!-- 关联号码 -->
+        <NumRelNum length="V20" constraint="?" mappedName="numRelNum"/>
+        <Para constraint="*" mappedName="para">
+            <ParaID length="V20" mappedName="paraId" />
+            <ParaValue length="V60" mappedName="paraValue" />
+        </Para>
+    </ResourcesRsp>
+</CheckNumRsp>

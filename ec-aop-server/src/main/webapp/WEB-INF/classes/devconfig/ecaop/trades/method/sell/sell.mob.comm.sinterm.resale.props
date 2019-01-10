@@ -1,0 +1,49 @@
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.sinterm.resale=scsr
+ecaop.core.method.scsr.def={"mothod":"scsr","remark":"无串码终端返销"}
+ecaop.core.method.scsr.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.masb.scsr.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg 校验器 
+ecaop.masb.scsr.msg.schema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    otoOrderId:{type:"String(20)",required:true,validators:null},\
+    subLogId:{type:"String(20)",required:true,validators:null},\
+    subsysCode:{type:"String(4)",required:false,validators:null},\
+    machineTypeCode:{type:"String(20)",required:true,validators:null},\
+    feeId:{type:"String(20)",required:true,validators:null},\
+    feeCategory:{type:"String(1)",required:true,validators:null},\
+    feeDes:{type:"String(120)",required:true,validators:null},\
+    saleNum:{type:"String(20)",required:true,validators:null},\
+    origFee:{type:"String(10)",required:true,validators:null},\
+    reliefFee:{type:"String(10)",required:false,validators:null},\
+    reliefResult:{type:"String(60)",required:false,validators:null},\
+    realFee:{type:"String(10)",required:true,validators:null},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.masb.scsr.payInfo.schema)"},\
+    recomPersonId:{type:"String(30)",required:false,validators:null},\
+    recomPersonName:{type:"String(128)",required:false,validators:null},\
+    recomDepartId:{type:"String(128)",required:false,validators:null},\
+    recomCity:{type:"String(3)",required:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+
+ecaop.masb.scsr.payInfo.schema={\
+    payType:{type:"String(4)",required:true,validators:null},\
+    barCode:{type:"String(20)",required:false,validators:null},\
+    mblNo:{type:"String(11)",required:false,validators:null},\
+    bonPwd:{type:"String(6)",required:false,validators:null},\
+    payOrg:{type:"String(30)",required:false,validators:null},\
+    payNum:{type:"String(20)",required:false,validators:null},\
+    payFee:{type:"String(11)",required:true,validators:null}\
+}
+
+#定义processor
+ecaop.core.method.scsr.processors=sinTermSaleAndResale();

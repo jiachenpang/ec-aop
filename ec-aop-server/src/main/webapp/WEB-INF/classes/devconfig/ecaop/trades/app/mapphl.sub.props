@@ -1,0 +1,5 @@
+#走动式营销系统-黑龙江
+ecaop.core.app.map.mapphl.sub=mphl
+ecaop.core.app.mphl.def={"code":"mphl", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.mphl.timeslimit=max 100 per 1 minute
+ecaop.core.app.mphl.allow={appkey:"mphl",allow:"nboc,snqy,opsb,cdsn,cdqy,cdnt,qoqy,qcsc,dvqy,opap", deny:null}

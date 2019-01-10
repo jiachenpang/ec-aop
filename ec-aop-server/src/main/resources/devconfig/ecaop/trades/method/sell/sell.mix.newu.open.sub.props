@@ -1,0 +1,74 @@
+ecaop.core.method.map.ecaop.trades.sell.mix.newu.open.sub=mpsb
+ecaop.core.method.mpsb.def={"mothod":"mpsb","remark":"订单预提交、收款结束后提交订单，正式做开户操作"}
+ecaop.core.method.mpsb.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.mpsb.param.schemaMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.mpsb.param.schemaMsg={\
+    operatorId:{type:"String(20)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    ordersId:{type:"String(30)",required:false},\
+    opeSysType:{type:"String(1)",required:false},\
+    simCardNo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpsb.simCardNo)"},\
+    subOrderInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpsb.subOrderInfo)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    invoiceNo:{type:"String(30)",required:false},\
+    payInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpsb.payInfo)"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+ecaop.trades.mpsb.simCardNo={\
+    cardFee:{type:"String(10)",required:false,validators:null}\
+}
+ecaop.trades.mpsb.subOrderInfo={\
+    subOrderId:{type:"String(30)",required:true,validators:null},\
+    feeInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpsb.feeInfo)"}\
+}
+ecaop.trades.mpsb.feeInfo={\
+    feeId:{type:"String(20)",required:true,validators:null},\
+    feeCategory:{type:"String(1)",required:true,validators:null},\
+    feeDes:{type:"String(120)",required:true,validators:null},\
+    origFee:{type:"String(10)",required:true,validators:null},\
+    reliefFee:{type:"String(10)",required:true,validators:null},\
+    reliefResult:{type:"String(60)",required:true,validators:null},\
+    realFee:{type:"String(10)",required:true,validators:null}\
+}
+ecaop.trades.mpsb.payInfo={\
+    payType:{type:"String(2)",required:true,validators:null},\
+    payOrg:{type:"String(30)",required:true,validators:null},\
+    payOrg:{type:"String(20)",required:true,validators:null}\
+}
+#1/18增加checkAndSentMISPOSInfoToCB，为MISPOS支付时，AOP通过支付信息同步接口将MISPOS支付信息同步给cBSS后，再调用正式提交接口。17-2-27 by Zeng
+ecaop.core.method.mpsb.processors=@checkAndSentMISPOSInfoToCB
+                                  
+#checkAndSentMISPOSInfoToCB类中调用固定格式"ecaop.trades.mispos." + exchange.getMethodCode() + ".processors"
+ecaop.trades.mispos.mpsb.processors=@ChangeFeeType\
+                                    @discountSaleCheckProcessor()\
+                                    @mixOrderSub()
+                                  
+ecaop.trades.mpsb.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mpsb.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.mpsb.template=com/ailk/ecaop/biz/template/nfour/OrderSub

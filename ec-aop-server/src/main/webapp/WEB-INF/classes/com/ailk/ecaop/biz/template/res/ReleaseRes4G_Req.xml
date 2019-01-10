@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RELEASE_RSC4G_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+    <UNI_BSS_BODY mappedOut="true">
+        <RELEASE_RSC4G_REQ>
+            <LOCAL_NET_ID length="V6" mappedName="localNetId">
+                <!--本地网标识-区号-->
+            </LOCAL_NET_ID>
+            <SERV_INST_ID length="V20" mappedName="servInstId">
+                <!--服务实例编码-->
+            </SERV_INST_ID>
+            <BRAND_CODE constraint="?" length="V6" mappedName="brandCode">
+                <!--产品类型编码-->
+            </BRAND_CODE>
+            <PROD_ID constraint="?" lenght="V20" mappedName="prodId">
+                <!-- 主产品标识-->
+            </PROD_ID>
+            <MAIN_SERV_ID constraint="?" lenght="V20" mappedName="mainServId">
+                <!-- 主服务标识-->
+            </MAIN_SERV_ID>
+            <ACCESS_TYPE constraint="?" lenght="F3" mappedName="accessType">
+                <!-- 接入方式-->
+            </ACCESS_TYPE>
+            <RSC_INST_ID constraint="?" lenght="V20" mappedName="resInstId">
+                <!-- 资源实例标识-->
+            </RSC_INST_ID>
+            <DEPART_ID constraint="?" lenght="V20" mappedName="departId">
+                <!-- 部门-->
+            </DEPART_ID>
+            <STAFF_ID constraint="?" lenght="V20" mappedName="operatorId">
+                <!-- 员工-->
+            </STAFF_ID>
+            <PARA constraint="*" mappedName="para">
+                <!--保留字段-->
+                <PARA_ID length="V20" mappedName="paraId">
+                    <!--保留字段ID-->
+                </PARA_ID>
+                <PARA_VALUE  length="V60" mappedName="paraValue">
+                    <!--保留字段值-->
+                </PARA_VALUE>
+            </PARA>
+        </RELEASE_RSC4G_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+    </UNI_BSS_ATTACHED>
+</RELEASE_RSC4G_INPUT>

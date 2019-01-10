@@ -1,0 +1,10 @@
+#海南预受理
+
+ecaop.core.app.map.hipre.sub=hipre
+ecaop.core.app.hipre.def={"code":"hipre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hipre.timeslimit=max 100 per 1 minute
+ecaop.core.app.hipre.allow={appkey:"hipre",allow:"cmuq,cmck,snqy,nboc,qrtc,opap,opsb,cdsn,cdqy,cdnt,sccc,\
+ucca,cumd,chph,qctc,trao,oupc,2324,234o,sc4s,codc,cuck,oata,mold,dvqy,qrta,ccic,syps,sack,cack,qrsq,qrsc,\
+qcsq,qcsc,csaq,smnp,mpsb,ppoq,adnu,bsop,odsb,qmoq,smct,qcacq,qcar,qcpq,qcpa,spfs,qrtb,baoa,sbaos,sfso,sfss,\
+kdwy,bypc,byps,smno,mpdsb,scmc,prqy,qcaq,quuq,qctq,qcfq,23t4,23l4,tzcx,cccc,qcrq,qcbl,smcc,smosa,smoss,smoca,\
+occs,crck,mcoa,sgfs,msoa,sbaq,qcop,qcsp,qoqy,qcfc,ofpc,ofps,scccs,234s,234t,qcfd,mpdsb,mofc", deny:null}

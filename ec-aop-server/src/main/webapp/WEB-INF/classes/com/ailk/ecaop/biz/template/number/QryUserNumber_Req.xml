@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 全业务用户数量查询,用于查询一证五户 -->
+<QRY_USER_NUMBER_INPUT>
+    <_include
+        src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_USER_NUMBER_REQ>
+            <CHECK_TYPE length="F1" mappedName="checkType" />
+            <CERT_TYPE length="F2" mappedName="certType" />
+            <CERT_NAME length="V40" mappedName="customerName" />
+            <CERT_NUM length="V40" mappedName="certNum" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_USER_NUMBER_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_USER_NUMBER_INPUT>

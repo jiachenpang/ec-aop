@@ -1,0 +1,4 @@
+#广西bss
+ecaop.core.app.map.gxbss.pre=gxbpr
+ecaop.core.app.gxbpr.def={"code":"gxbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.gxbpr.allow={appkey:"gxbpr",allow:"qrtb,sccc,oolq,tsos,qcfd,qcfc", deny:null}

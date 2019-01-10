@@ -1,0 +1,96 @@
+#定义method
+ecaop.core.method.map.ecaop.trades.sell.phone.same.open.sub=psos
+ecaop.core.method.psos.def={"mothod":"psos","remark":"宽带同装处理提交-固话"}
+
+ecaop.core.method.psos.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":"@JSONSchema(ecaop.masb.psos.SubCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#参数校验
+ecaop.masb.psos.SubCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    orderNo:{type:"String(20)",required:false},\
+    provOrderId:{type:"String(20)",required:true},\
+    feeInfo:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.masb.psos.feeInfo.Crcksmsg)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    payInfo:{type:"JSON",required:true,"validators":"@JSONSchema(ecaop.masb.psos.payInfo.Crcksmsg)"},\
+    para:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.masb.psos.feeInfo.Crcksmsg={\
+    feeId:{type:"String(20)",required:true},\
+    feeCategory:{type:"String(1)",required:true},\
+    feeDes:{type:"String(120)",required:true},\
+    origFee:{type:"String(10)",required:true},\
+    calculateTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    reliefFee:{type:"String(10)",required:true},\
+    reliefResult:{type:"String(60)",required:false},\
+    realFee:{type:"String(10)",required:true}\
+}
+ecaop.masb.psos.payInfo.Crcksmsg={\
+    payType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    payOrg:{type:"String(200)",required:false},\
+    payMode:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    payNum:{type:"String(20)",required:false}\
+}
+
+
+#CB请求参数
+ecaop.masb.psos.phoneSameOpenSubCommitMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.masb.psos.phoneSameOpenSubTemplate@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+#n6请求参数
+ecaop.masb.psos.N6.phoneSameOpenSubCommitMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOrdForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.masb.psos.phoneSameOpenSubTemplate@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+
+#报文模版路径
+ecaop.masb.psos.phoneSameOpenSubTemplate=com/ailk/ecaop/biz/template/nfour/OrderSub
+ecaop.soap.bodyns.odsb.psos=psos
+
+#定义processors
+ecaop.core.method.psos.processors=@ChangeFeeType()\
+                                  @phoneSameOpenSubCommit()

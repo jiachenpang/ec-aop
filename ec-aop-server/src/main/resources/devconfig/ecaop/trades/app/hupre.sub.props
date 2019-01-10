@@ -1,0 +1,8 @@
+#湖北预受理
+ecaop.core.app.map.hupre.sub=hupr
+ecaop.core.app.hupr.def={"code":"hupr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hupr.timeslimit=max 100 per 1 minute
+ecaop.core.app.hupr.allow={appkey:"hupr",allow:"snqy,qrtc,cmck,cdqy,cdnt,opap,opsb,cdsn,\
+nboc,ucca,234o,oata,trao,codc,2324,mold,oupc,sc4s,sccc,chph,cumd,qctc,smosa,smoss,prqy,dvqy,\
+spfs,qcar,qcpq,qcpa,qcacq,crck,cack,csaq,qrsc,qrsq,sack,smnp,mpsb,23l4,sfso,sfss,23t4,234s,234t,\
+kdwy,baoa,sbso,tzcx,ipry,ccic,cuck,smct,sgfs,qcbl,qofq,qcsp,msoa,qcfc,qcfd,qcop,qopq", deny:null}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ActivityQueryRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+    <ActivityInfo constraint="*" mappedName="activityInfo">
+        <ActivityId length="V20" mappedName="activityId" />
+        <ActivityCont length="F2" mappedName="activityCont" />
+        <ActivityName length="V200" mappedName="activityName" />
+        <ActivityDetail length="V1000" mappedName="activityDetail" />
+    </ActivityInfo>
+    <Para constraint="*" mappedName="para">
+        <ParaID mappedName="paraId" />
+        <ParaValue mappedName="paraValue" />
+    </Para>
+</ActivityQueryRsp>

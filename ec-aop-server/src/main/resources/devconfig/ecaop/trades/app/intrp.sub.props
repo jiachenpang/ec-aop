@@ -1,0 +1,5 @@
+#物联网实名认证平台
+ecaop.core.app.map.intrp.sub=itsb
+ecaop.core.app.itsb.def={"code":"itsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.itsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.itsb.allow={appkey:"itsb",allow:"qctc,smoca,occs,qcfc,crck", deny:null}

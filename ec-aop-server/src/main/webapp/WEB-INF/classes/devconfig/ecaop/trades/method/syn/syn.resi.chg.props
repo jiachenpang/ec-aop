@@ -1,0 +1,25 @@
+#资源锁定释放
+ecaop.core.method.map.ecaop.trades.syn.resi.chg=tsrc
+ecaop.core.method.tsrc.def={"mothod":"tsrc","remark":"资源锁定释放"}
+ecaop.core.method.tsrc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.tsrc.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.trades.tsrc.msg.schema={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    machineTypeCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    opeType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    proKey:{type:"String(20)",required:true,encrypted:false,validators:null},\
+}
+
+#定义processors,未做优化原因,不通过省份和APP可以进行区分
+ecaop.core.method.tsrc.processors= @TermResiChg()
+                                  #@CheckStaffInfo()\

@@ -1,0 +1,4 @@
+#湖南bss
+ecaop.core.app.map.hnbss.pre=hnbpr
+ecaop.core.app.hnbpr.def={"code":"hnbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.hnbpr.allow={appkey:"hnbpr",allow:"qrtb", deny:null}

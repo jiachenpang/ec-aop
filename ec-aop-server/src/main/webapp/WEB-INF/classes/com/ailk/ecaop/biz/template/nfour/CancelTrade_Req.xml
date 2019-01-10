@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CANCEL_TRADE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CANCEL_TRADE_REQ>
+            <ORDER_ID length="V30" mappedName="orderId"/>
+            <PROVINCE_ORDER_ID length="V30" mappedName="provinceOrderId"/>
+            <ORG_ORDER_ID length="V30" mappedName="orgOrderId"/>
+            <OPER_TYPE length="F1" mappedName="operType" range="0,1"/>
+            <CANCEL_TYPE length="F1" mappedName="cancelType" range="1,2"/>
+            <CANCEL_REASON length="V500" mappedName="cancelReason"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CANCEL_TRADE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CANCEL_TRADE_INPUT>

@@ -1,0 +1,4 @@
+#在此进行配置的系统,下发CBSS时,IM_MODE都是X
+ecaop.common.trades.appcode.route.inmode={"nmpr", "bjsb", "tjpr", "sdpr", "hpsb", "sxpr","ahpre", "shpre", "jspr",\
+             "zjpre", "fjpre", "hipre", "gdps", "ussb", "qhpr", "hupr", "hnpr", "jxpre", "hapr", "xzpre", "scpr",\
+              "cqps", "snpre", "gzpre", "ynpre", "gspr", "nxpr", "xjpr", "jlpr", "mppln", "hlpr","mpln"}

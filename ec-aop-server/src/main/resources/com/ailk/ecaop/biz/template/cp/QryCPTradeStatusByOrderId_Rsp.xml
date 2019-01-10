@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+    <QRY_CP_TRADE_STATUS_BY_ORDERID_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+            <!-- 0000:成功 8888 其它错误 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+            <!-- 错误描述 -->
+        </RESP_DESC>
+        <ORDER_ID constraint="?" length="F16" mappedName="orderId">
+            <!-- 订单编号 -->
+        </ORDER_ID>
+        <SUBSCIBE_STATE constraint="?" length="V1" mappedName="subscibeState">
+            <!-- 订单状态 -->
+        </SUBSCIBE_STATE>
+        <FINISH_DATE constraint="?" length="F14" mappedName="finishDate">
+            <!-- 完工时间 YYYYMMDDHHMISS-->
+        </FINISH_DATE>
+        <NEXT_DEAL_TAG constraint="?" length="V1" mappedName="nextDealTag">
+            <!-- 后续状态可处理标志 -->
+        </NEXT_DEAL_TAG>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                <!-- 保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+                <!-- 保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </QRY_CP_TRADE_STATUS_BY_ORDERID_RSP>
+</UNI_BSS_BODY>

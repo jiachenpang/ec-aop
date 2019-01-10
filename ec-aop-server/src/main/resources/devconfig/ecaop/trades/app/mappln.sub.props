@@ -1,0 +1,9 @@
+#走动式营销系统-辽宁
+ecaop.core.app.map.mappln.sub=mpln
+ecaop.core.app.mpln.def={"code":"mpln", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.mpln.timeslimit=max 100 per 1 minute
+ecaop.core.app.mpln.allow={appkey:"mpln",allow:"nboc,snqy,opsb,cdsn,cdqy,cdnt,qoqy,qcsc,cmck,cuck,opap,qrtc,snqy,crck,dvqy,dvck,\
+codc,syps,ccic,cack,qctc,qmoq,ppoq,smnp,mpsb,oupc,sc4s,sccc,chph,cumd,qrta,codc,ucca,2324,trao,234o,oata,mold,spfs,23t4,kdwy,\
+ipry,tzcx,baoa,sbaos,bsoa,sbso,bsop,faoa,fasb,sfso,sfss,smno,234s,234t,scaf,scac,23l4,adnu,qcacq,qcar,qcpq,qcpa,byps,scmc,qcsp,odsb,\
+bypc,ofpc,ofps,psoa,psos,smcc,csaq,smosa,smoss,orta,modr,mofc,ofcs,smct,msoa,qofq,spff,cuss,scob,mcoa,scccs,qupq,qcrq,quuq,oupc,smosa,smoss,\
+qcdq,sjxs,qrtac,qcbl,cbpq,spec,spes,mofc,ofcs,mxcg,qrtb,sgfs", deny:null}

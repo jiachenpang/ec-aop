@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--写卡结果通知接口 请求报文模板 -->
+    <_const name="activityCode" value="T3M00031" />
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <WriteCardReq>
+            <CardUseType length="F1" mappedName="cardUseType" />
+            <!-- 坏卡卡号(重复写卡必传) -->
+            <ErrorICCID constraint="?" length="V22" mappedName="errorIccid" />
+            <!-- 大卡卡号 -->
+            <ICCID length="V22" mappedName="iccid" />
+            <IMSI length="V20" mappedName="imsi" />
+
+            <!-- 读卡序列 -->
+            <ProcId constraint="?" length="V30" mappedName="procId" />
+            <!-- 交易流水（ESS生成返回） -->
+            <ActiveId length="V30" mappedName="activeId" />
+            <ReasonID length="V10" mappedName="reasonId" />
+            <ErrorComments constraint="?" length="V256" mappedName="errorComments" />
+            <ReservPara constraint="?" length="V60" />
+        </WriteCardReq>
+    </SvcCont>
+</UniBSS>

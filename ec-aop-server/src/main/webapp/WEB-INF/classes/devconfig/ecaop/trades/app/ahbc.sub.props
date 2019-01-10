@@ -1,0 +1,5 @@
+#安徽BSS国政通测试
+ecaop.core.app.map.ahbc.sub=ahbc
+ecaop.core.app.ahbc.def={"code":"ahbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.ahbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.ahbc.allow={appkey:"ahbc",allow:"crck", deny:null}

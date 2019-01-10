@@ -1,0 +1,2 @@
+#行销系统信息同步与订单状态查询服务
+ecaop.trades.spps.messageSync={"serviceName":"MessageSyncSer","operateName":"messageSync","content":"MESSAGE_SYNC_REQ"}

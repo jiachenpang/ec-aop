@@ -1,0 +1,121 @@
+#用于宽带产品变更
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.fix.product.chg=ofpc
+ecaop.core.method.ofpc.def={"mothod":"ofpc","remark":"用于宽带产品变更"}
+ecaop.core.method.ofpc.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.ofpc.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg校验
+ecaop.trades.ofpc.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:null},\
+    orderNo:{type:"String(20)",required:true,validators:null},\
+    userName:{type:"String(12)",required:false,validators:null},\
+    areaCode:{type:"String(6)",required:true,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    markingTag:{type:"String(1)",required:false,validators:null},\
+    newUserInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.newUserInfo)"},\
+    contactPerson:{type:"String(20)",required:true,validators:null},\
+    contactPhone:{type:"String(20)",required:true,validators:null},\
+    contactAddress:{type:"String(200)",required:false,validators:null},\
+    recomPersonId:{type:"String(30)",required:false,validators:null},\
+    recomPersonName:{type:"String(30)",required:false,validators:null},\
+    recomPersonCityCode:{type:"String(6)",required:false,validators:null},\
+    recomPersonDistrict:{type:"String(20)",required:false,validators:null},\
+    recomPersonChannelId:{type:"String(20)",required:false,validators:null},\
+    orderRemarks:{type:"String(1000)",required:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+ecaop.trades.ofpc.newUserInfo={\
+     certName:{type:"String(100)",required:true,validators:null},\
+     certType:{type:"String(2)",required:true,validators:null},\
+     certNum:{type:"String(20)",required:true,validators:null},\
+     speedLevel:{type:"String(10)",required:false,validators:null},\
+     accessMode:{type:"String(10)",required:false,validators:null},\
+     productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.productInfo)"},\
+     boradDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.boradDiscntInfo)"},\
+     activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.activityInfo)"},\
+     exchCode:{type:"String(20)",required:false,validators:null},\
+     exchInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.exchInfo)"},\
+     addressCode:{type:"String(300)",required:false,validators:null},\
+     addressName:{type:"String(1000)",required:false,validators:null},\
+     installAddress:{type:"String(200)",required:false,validators:null},\
+     iptvProductId:{type:"String(8)",required:false,validators:null},\
+     iptvInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.iptvInfo)"}\
+}
+
+ecaop.trades.ofpc.boradDiscntInfo={\
+     boradDiscntId:{type:"String(20)",required:true,validators:null},\
+     boradDiscntAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.boradDiscntAttr)"}\
+     }
+
+ecaop.trades.ofpc.boradDiscntAttr={\
+     delayType:{type:"String(20)",required:false,validators:null},\
+     delayDiscntId:{type:"String(20)",required:false,validators:null},\
+     delayDiscntType:{type:"String(20)",required:false,validators:null}\
+     }
+
+ecaop.trades.ofpc.productInfo={\
+     oldProductId:{type:"String(20)",required:true,validators:null},\
+     productMode:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+     optType:{type:"String(2)",required:false,validators:null}\
+     }
+
+ecaop.trades.ofpc.activityInfo={\
+     actPlanId:{type:"String(20)",required:true,validators:null},\
+     resourcesType:{type:"String(2)",required:false,validators:null},\
+     resourcesFee:{type:"String(20)",required:false,validators:null},\
+     actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.actPara)"}\
+     }
+
+ecaop.trades.ofpc.actPara={\
+    actParaId:{type:"String(20)",required:true,validators:null},\
+    actParaValue:{type:"String(60)",required:true,validators:null}\
+    }
+    
+ecaop.trades.ofpc.exchInfo={\
+    key:{type:"String(30)",required:true,validators:null},\
+    value:{type:"String(30)",required:true,validators:null}\
+    }
+
+ecaop.trades.ofpc.iptvInfo={\
+    IptvService:{type:"String(20)",required:true,validators:null},\
+    IptvServiceAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.IptvServiceAttr)"},\
+    IptvDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.IptvDiscntInfo)"}\
+    }
+    
+ecaop.trades.ofpc.IptvServiceAttr={\
+    code:{type:"String(20)",required:true,validators:null},\
+    value:{type:"String(20)",required:true,validators:null}\
+    }
+    
+ecaop.trades.ofpc.IptvDiscntInfo={\
+    IptvDiscntId:{type:"String(20)",required:true,validators:null},\
+    iptvDiscntAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.ofpc.iptvDiscntAttr)"}\
+    }
+    
+ecaop.trades.ofpc.iptvDiscntAttr={\
+    iptvDelayType:{type:"String(20)",required:false,validators:null},\
+    iptvDelayDiscntId:{type:"String(20)",required:false,validators:null},\
+    iptvDelayDiscntType:{type:"String(20)",required:false,validators:null},\
+    iptvDiscntCycle:{type:"String(2)",required:false,validators:null},\
+    iptvDelayYearDiscntId:{type:"String(20)",required:false,validators:null},\
+}
+#定义processor
+ecaop.core.method.ofpc.processors=@route\
+                                  @FlowProcessor(ecaop.trades.method.ofpc.flowConfig)
+ecaop.trades.method.ofpc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.cb.ofpc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.n6.ofpc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.cb.ofpc.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.cb.ofpc.processors=@CBFixProductChg()
+ecaop.n6.ofpc.processors=@N6FixProductChg();

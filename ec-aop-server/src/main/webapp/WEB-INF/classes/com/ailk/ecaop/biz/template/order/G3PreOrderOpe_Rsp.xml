@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 预受理订单处理 返回报文模板 -->
+    <PreOrderOpeRsp mappedOut="true">
+        <RespCode length="F4" mappedName="code" />
+        <RespDesc length="V200" mappedName="detail" />
+       <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+    </PreOrderOpeRsp>

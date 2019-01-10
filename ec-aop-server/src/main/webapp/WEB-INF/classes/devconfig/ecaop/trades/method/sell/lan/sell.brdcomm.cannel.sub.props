@@ -1,0 +1,119 @@
+#宽带撤单提交
+#定义method
+ecaop.core.method.map.ecaop.trades.sell.brdcomm.cannel.sub=sbcs
+ecaop.core.method.sbcs.def={"mothod":"sbcs","remark":"宽带撤单提交"}
+ecaop.core.method.sbcs.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":"@JSONSchema(ecaop.masb.sbcs.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.masb.sbcs.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    provOrderId:{type:"String(30)",required:true},\
+    oldProvOrderId:{type:"String(30)",required:true},\
+    oldBssOrderId:{type:"String(30)",required:true},\
+    cancelType:{type:"Number(1)",required:true},\
+    payMode:{type:"String(1)",required:true},\
+    refundTag:{type:"String(1)",required:true},\
+    cancelReason:{type:"String(500)",required:true},\
+    feeInfo:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.masb.sbcs.feeInfo.msg)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    para:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.masb.sbcs.feeInfo.msg={\
+    feeId:{type:"String(20)",required:true},\
+    feeCategory:{type:"String(1)",required:true},\
+    feeDes:{type:"String(120)",required:true},\
+    origFee:{type:"String(10)",required:true},\
+    realFee:{type:"String(10)",required:true}\
+}
+
+#定义processor
+ecaop.core.method.sbcs.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.sbcs.flowConfig)
+#配置跳转
+ecaop.core.method.sbcs.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.cbss.sub.sbcs.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->04 N6->05"},\
+{id:"04", processor:"AopHandler(ecaop.mall.sub.sbcs.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.mall.sub.sbcs.processors=@cancelLan()
+#cbss宽带开户流程
+ecaop.cbss.sub.sbcs.processors=@cbsscancelLan()
+
+#CB撤单许可预判接口
+ecaop.masb.occk.isAllowCancelSoParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrderChgandCleSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"isAllowCancelSo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"9900",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"IS_ALLOW_CANCEL_SO_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.masb.occk.isAllowCancelSoTemplate@FBS@IS_ALLOW_CANCEL_SO_INPUT@n-728620674@IS_ALLOW_CANCEL_SO_REQ"}\
+]
+#CB撤单许可预判接口配置模板路径
+ecaop.masb.occk.isAllowCancelSoTemplate=com/ailk/ecaop/biz/template/order/IsAllowCancel
+#改撤单校验接口
+ecaop.masb.occk.orderCHGCHKParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"orderCHGCHK",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ORDERCHG_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.occk.orderCHGCHKTemplate@FBS@ORDERCHG_INPUT"}\
+]
+#配置模板路径
+ecaop.masb.occk.orderCHGCHKTemplate=com/ailk/ecaop/biz/template/order/OrderchgCheck
+ecaop.soap.bodyns.occk=ord
+#撤单预提交接口
+ecaop.masb.ococ.ordCleParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdCleSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"ordCle",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CANCEL_TRADE_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.ococ.ordCleTemplate@FBS@CANCEL_TRADE_INPUT"}\
+]
+#配置模板路径
+ecaop.masb.ococ.ordCleTemplate=com/ailk/ecaop/biz/template/nfour/CancelTrade
+ecaop.soap.bodyns.ococ=ord

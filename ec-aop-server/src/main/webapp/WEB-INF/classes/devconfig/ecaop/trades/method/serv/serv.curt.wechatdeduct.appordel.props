@@ -1,0 +1,28 @@
+# 微信托收签约解约  create by zhaok Date 7/20
+ecaop.core.method.map.ecaop.trades.serv.curt.wechatdeduct.appordel=cwal
+ecaop.core.method.cwal.def={"mothod":"cwal","remark":"微信托收签约解约"}
+ecaop.core.method.cwal.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.param.msg.schema.cwal)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+    
+#msg 校验器 
+ecaop.param.msg.schema.cwal={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:null },\
+    orderId:{type:"String(20)",required:true,encrypted:false,validators:null },\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    operType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    agreementNo:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+
+#定义processors
+ecaop.core.method.cwal.processors=@curtWechatdeductApp()                                    

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<include>
+    <OrigDomain ignoredMapping="true" defaultValue="UESS" />
+    <!-- 参见应用域编码表 本次工程填写UESS -->
+    <HomeDomain ignoredMapping="true" defaultValue="UCRM" />
+    <!-- 参见应用域编码表，发起方填写 本次工程填写UCRM -->
+    <BIPCode ignoredMapping="true" length="F8" />
+    <!-- 参见业务交易代码表 -->
+    <BIPVer ignoredMapping="true" defaultValue="0100" />
+    <!-- 0100;对于同一交易应答与请求版本号始终一致 -->
+    <ActivityCode length="F8" />
+    <!-- 参见业务交易代码编码表 -->
+    <ActionCode ignoredMapping="true" defaultValue="0" range="0,1" />
+    <!-- 0：请求，1：应答 -->
+    <!-- 与其他交易关联；0：无关联；1：有关联。 例如：在一卡充系统中对于异地卡充异地用户且卡和账号归属不同省时 接入省分缴费卡系统发送的扣款请求和缴费请求交易需要设置此标记为1 本次工程全部填写0 -->
+    <ActionRelation ignoredMapping="true" defaultValue="0" range="0,1" />
+    <Routing>
+        <!-- 参见路由类型编码，如按手机号码路由等 本次工程全部填写00 -->
+        <RouteType ignoredMapping="true" length="F2" defaultValue="00" />
+        <!-- 路由类型对应的关键值，参见路由类型说明。如路由类型为手机号码则此字段应填写手机号码； 若路由类型为充值卡号码则此字段应填写充值卡号码 本次工程全部填写省分代码 -->
+        <RouteValue ignoredMapping="true" length="V60" />
+    </Routing>
+    <!-- 发起方填写的包含此交易业务的流水号 一个完整业务场景的多次接口调用使用同一业务流水号 -->
+    <ProcID ignoredMapping="true" length="V30" required="true" />
+    <!-- 在发起方唯一标识一个交易的流水号，系统内唯一 -->
+    <TransIDO ignoredMapping="true" length="V30" />
+    <!-- 请求中不填，由落地方在应答中填，系统内唯一 -->
+    <TransIDH ignoredMapping="true" length="V30" constraint="?" />
+    <!-- YYYYMMDDHHMISS 请求中此字段由发起方填写，内容为发起方处理时间 应答中此字段由落地方填写，内容为落地方处理时间 作为日对账区间划分标志，省分必须入库 -->
+    <ProcessTime ignoredMapping="true" />
+    <!-- 发起方填写，0：非测试交易，1：测试交易； 需要注意的是测试必须是业务级别，即在同一个业务流水中所有交易必须具有相同的测试标记 如果是1测试交易，省分需与正式交易区分开，此交易不参与日对账 -->
+    <TestFlag ignoredMapping="true" range="0,1" defaultValue="1" />
+    <MsgSender ignoredMapping="true" length="F4" defaultValue="9801" />
+    <!-- 发起消息的应用系统代码，参见系统代码表 省分无需处理，原值返回 -->
+    <MsgReceiver ignoredMapping="true" length="F4" defaultValue="9800" />
+    <!-- 该消息送往的下一方代码，一般是交换节点代码 省分无需处理，原值返回 -->
+    <SvcContVer ignoredMapping="true" defaultValue="0100" />
+    <!-- 0100，对于同一交易应答与请求版本号始终一致 -->
+</include>

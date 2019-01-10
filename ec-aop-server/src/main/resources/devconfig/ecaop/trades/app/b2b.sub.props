@@ -1,0 +1,11 @@
+#B2B
+ecaop.core.app.map.b2b.sub=2bsb
+ecaop.core.app.2bsb.def={"code":"2bsb", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.2bsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.2bsb.allow={appkey:"2bsb",allow:"dvck,sfck,cuck,qcsc,opap,opsb,cdsn,cdnt,cdqy,qrtc,qctc,crck", deny:null}
+#接入方对应的业务的基本信息，目前bizs字段尚不用于校验
+ecaop.core.app.2bsb.biz={"bizs":"CS-001,CS-005,QS-009,QS-010,QS-011,QS-013,QS-015,QS-016,TS-3G-005"}
+
+#接入方允许的业务定义
+ecaop.core.app.2bsb.bizAllow={allow:"CS-001,CS-005,TS-3G-005",deny:null}
+

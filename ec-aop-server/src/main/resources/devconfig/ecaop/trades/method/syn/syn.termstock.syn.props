@@ -1,0 +1,36 @@
+#订单中心终端库存调出通知ESS
+ecaop.core.method.map.ecaop.trades.syn.termstock.syn=stss
+ecaop.core.method.stss.def={"mothod":"stss","remark":"订单中心终端库存调出通知ESS"}
+ecaop.core.method.stss.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.stss.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.stss.param.msg={\
+     operatorId:{type:"String(20)",required:false},\
+     province:{type:"String(2)",required:true},\
+     city:{type:"String(3)",required:false},\
+     snId:{type:"String(20)",required:false},\
+     resourcesInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.syts.resourcesInfo)"},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+ecaop.trades.stss.resourcesInfo={\
+    resourcesType:{type:"String(2)",required:false},\
+    resCodeType:{type:"String(2)",required:true},\
+    resourcesCode:{type:"String(30)",required:true}\
+}
+#定义processors
+ecaop.core.method.stss.processors=@ParametersMapper(ecaop.trades.stss.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonMapper(ecaop.trades.stss.template)
+ecaop.trades.stss.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00041",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"TerminalDistributeReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.stss.template@3GE"}\
+]
+ecaop.trades.stss.template=com/ailk/ecaop/biz/template/res/TmlDistribute

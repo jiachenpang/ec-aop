@@ -1,0 +1,25 @@
+#用户全渠道受理记录查询
+ecaop.core.method.map.ecaop.trades.query.ordi.user.qry=qouq
+ecaop.core.method.qouq.def={"mothod":"qouq","remark":"用户全渠道受理记录查询"}
+ecaop.core.method.qouq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qouq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.qouq.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    start_date:{type:"String(14)",required:false,encrypted:false,validators:null},\
+    end_date:{type:"String(14)",required:false,encrypted:false,validators:null}\
+}
+
+#定义processors
+ecaop.core.method.qouq.processors=@FlowProcessor(ecaop.core.method.comm.appkey.flowConfig)

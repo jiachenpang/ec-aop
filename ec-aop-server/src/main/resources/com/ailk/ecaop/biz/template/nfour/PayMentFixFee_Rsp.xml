@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SvcCont>
+    <PaymentRsp mappedOut="true">
+        <!-- 应答码 00成功  01缴费失败  99其他原因，见结果描述
+                        当应答码为00，Head中的应答码填0000，表示交易完成，业务成功。
+                        当应答码非00，Head中应答码填2990，表示交易完成但是业务失败 -->
+        <RespCode length="F2" mappedName="respCode"/>
+        <cust_id length="V30" mappedName="custId"/>
+        <!-- 当前余额，单位厘，如果为负数，表示用户还欠费（展示或短信通知用） -->
+        <NewFee length="V15" constraint="*" mappedName="newFee"/>
+        <EndTime length="F8" constraint="*" mappedName="endTime"/>
+        <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+        </Para>
+    </PaymentRsp>
+</SvcCont>

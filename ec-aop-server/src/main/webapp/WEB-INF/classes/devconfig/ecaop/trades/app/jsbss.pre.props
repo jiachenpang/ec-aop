@@ -1,0 +1,4 @@
+#江苏bss
+ecaop.core.app.map.jsbss.pre=jsbss
+ecaop.core.app.jsbss.def={"code":"jsbss", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.jsbss.allow={appkey:"jsbss",allow:"qrtb,tsos,qcfc,qcfd,seft", deny:null}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_ALL_FEE_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_ALL_FEE_INFO_REQ>
+            <!--1：按服务号码+电信业务网别+长途区号查询欠费。2：按账户ID查询欠费。3:按账户ID查询分用户欠费，最多返回100个 -->
+            <QUERY_TYPE length="F1" mappedName="queryType" />
+            <!-- 查询模式1.查询用户默认账户的欠费信息2.查询用户默认账户下本用户欠费信息3.查询指定账户的欠费信息4.查询指定账户下指定用户的欠费信息 -->
+            <QUERY_MODE length="F1" mappedName="queryMode" />
+            <ACCT_ID length="V16" constraint="?" mappedName="acctId" />
+            <!-- 电信业务网别，取值参见附录； -->
+            <SERVICE_CLASS_CODE length="F4" constraint="?" mappedName="serviceClassCode" />
+            <AREA_CODE length="V6" constraint="?" mappedName="areaCode" />
+            <SERIAL_NUMBER length="V40" constraint="?" mappedName="serialNumber" />
+            <!-- 呆坏账标识：0：非呆坏账1：呆账2: 坏账3：立即结账 -->
+            <BAD_DEBT_TAG length="F1" constraint="?" mappedName="badDebtTag" />
+            <!-- 查询类别1:账户下指定用户欠费查询（账户ID+用户ID）0:账户欠费查询（账户ID） -->
+            <IS_WRTOFF length="F1" constraint="?" mappedName="chargeType" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_ALL_FEE_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_ALL_FEE_INFO_INPUT>

@@ -1,0 +1,67 @@
+#缴费接口
+ecaop.core.method.map.ecaop.trades.serv.payment.fixfee.sub=spff
+ecaop.core.method.spff.def={"mothod":"spff","remark":"固网缴费"}
+
+ecaop.core.method.spff.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.masb.spff.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg校验
+ecaop.masb.spff.param.msg={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    operateType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    code:{type:"String(4)",required:false},\
+    serialNumber:{type:"String(15)",required:true},\
+    markingTag:{type:"String(1)",required:false,validators:null},\
+    fee:{type:"String(15)",required:true},\
+    procTime:{type:"String(14)",required:true},\
+    payTime:{type:"String(17)",required:true},\
+    netType:{type:"String(2)",required:true},\
+    chargeParty:{type:"String(3)",required:true},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义缴费接口processor
+ecaop.core.method.spff.processors=PayMentFixFeeProcessor()
+
+#IPTV与宽带关系转换
+ecaop.gxzh.spff.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.iptvToNet.iptvtonet,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.gxzh.spff.template@FBS@IPTV_TO_NET_INPUT@n1529397156@IPTV_TO_NET_REQ"}\
+]
+
+ecaop.gxzh.spff.template=com/ailk/ecaop/biz/template/cbss/IptvToNet
+#缴费接口请求参数
+ecaop.cbpm.spff.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:false},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ECIP",temp:true},\
+    {paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP2H001",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T2031702",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"routeType",extractor:"addParamExtractor",extractorConfig:"msg.routeType",temp:true},\
+    {paramterName:"route",extractor:"addParamExtractor",extractorConfig:"msg.routeNumber",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"PaymentReq",temp:true},\
+    {paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.cbpm.spff.template@ONS"}\
+]
+#模板路径
+ecaop.cbpm.spff.template=com/ailk/ecaop/biz/template/nfour/PayMentFixFee
+
+

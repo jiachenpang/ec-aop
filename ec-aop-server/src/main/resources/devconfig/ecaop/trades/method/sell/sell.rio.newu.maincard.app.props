@@ -1,0 +1,65 @@
+ecaop.core.method.map.ecaop.trades.sell.rio.newu.maincard.app=rnma
+ecaop.core.method.rnma.def={"mothod":"rnma","remark":"一号多卡主附关系开通"}
+ecaop.core.method.rnma.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.rnma.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器
+
+ecaop.ecsb.rnma.MsgSchema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    ordersId:{type:"String(30)",required:true},\
+    serialNumber:{type:"String(20)",required:true},\
+    provinceCode:{type:"String(20)",required:true},\
+    eparchyCode:{type:"String(20)",required:true},\
+    opeSysType:{type:"String(1)",required:true},\
+    recomInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.rnma.recomInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trade.rnma.recomInfo={\
+      recomPersonId:{type:"String(30)",required:true},\
+      recomPersonName:{type:"String(128)",required:true},\
+      recomDepartId:{type:"String(128)",required:false},\
+      recomCity:{type:"String(3)",required:false}\
+}
+#定义processor
+ecaop.core.method.rnma.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.rnma.route.flowConfig)
+
+ecaop.core.method.rnma.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 2->03"},\
+{id:"02", processor:"AopHandler(ecaop.n6.rnma.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.cbss.rnma.processors)", selector:"Noop", transitions:"*->STOP"}\]
+
+ecaop.n6.rnma.processors=olderUserMainCardN6Sub()
+ecaop.cbss.rnma.processors=olderUserMainCardCbssSub()
+
+
+#CB统一预提交
+ecaop.rnma.preSub.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.rnma.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.rnma.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+#CBSS提交
+ecaop.trades.rnma.sub.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordSer.orderSub,50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.rnma.sub.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.rnma.sub.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+#N6预提交
+ecaop.trades.rnma.N6.sUniTradeParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.aopOrdForNorthSer.sUniTrade,50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.rnma.sUniTrade.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+ecaop.trades.rnma.sUniTrade.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G

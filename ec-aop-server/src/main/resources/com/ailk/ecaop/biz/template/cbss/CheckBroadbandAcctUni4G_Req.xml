@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECK_BROADBAND_ACCT_UNI4G_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECK_BROADBAND_ACCT_UNI4G_REQ>
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" defaultValue="0040"/>
+            <AUTH_ACCT_ID length="V60" mappedName="authAcctId" />
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <AUTH_ACCT_ALIAS_ID length="V60" constraint="?" mappedName="authAcctAliasId" />
+            <PARA_LIST constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA_LIST>
+        </CHECK_BROADBAND_ACCT_UNI4G_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECK_BROADBAND_ACCT_UNI4G_INPUT>

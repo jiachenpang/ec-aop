@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!-- 请求报文模板 -->
+    <_const name="activityCode" value="T3M00033" />
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <GetDataReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <CardType length="V30" constraint="?" mappedName="cardType" />
+            <UserType length="F2" constraint="?" mappedName="userType" />
+            <BusiType  length="F2" mappedName="busiType" />
+            <OpeSysType  length="F1" defaultValue="1" constraint="?" mappedName="opeSysType" />
+            <ReDoTag  length="F1" mappedName="reDoTag" />
+            <CardUseType  length="F1" mappedName="cardUseType" />
+            <ICCID length="V22" mappedName="iccid" />
+            <OldICCID length="V22" constraint="?" mappedName="oldIccid" />
+            <ProcId constraint="?" length="V30" mappedName="procId" />
+            <ActiveId constraint="?" length="V20" mappedName="activeId" />
+            <HomeProvince length="F2" mappedName="province" />
+            <HomeCity length="F3" mappedName="city" />
+            <NumID length="V20" mappedName="numId" />
+            <Transfer length="F1" mappedName="allocationFlag" />
+            <ErrorCode constraint="?" length="V10" defaultValue="9804"/>
+            <ErrorComments constraint="?" length="V256" defaultValue="0"/>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </GetDataReq>
+    </SvcCont>
+</UniBSS>

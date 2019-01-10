@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SIMPLE_CHECK_USER_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <SIMPLE_CHECK_USER_INFO_REQ >
+            <SERIAL_NUMBER length="F11" mappedName="ResourcesCode"/>
+            <PARA constraint="*" mappedName="Para" >
+                <PARA_ID length="V20" mappedName="ParaID"/>
+                <PARA_VALUE length="V60" mappedName="ParaValue"/>
+            </PARA>
+        </SIMPLE_CHECK_USER_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</SIMPLE_CHECK_USER_INFO_INPUT>

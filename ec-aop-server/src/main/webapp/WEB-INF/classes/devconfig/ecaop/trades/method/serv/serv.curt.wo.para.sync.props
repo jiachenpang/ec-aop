@@ -1,0 +1,71 @@
+#沃钱包服务参数同步
+ecaop.core.method.map.ecaop.serv.curt.wo.para.sync=cwps
+ecaop.core.method.cwps.def={"mothod":"cwps","remark":"沃钱包服务参数同步"}
+ecaop.core.method.cwps.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.cwps.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器
+ecaop.trades.cwps.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+     ordersId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     userId:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     woAccountId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certCode:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     certName:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     isBind:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     businessInfo:{type:"JSON",required:true,encrypted:false,validators:"@JSONSchema(ecaop.trades.cwps.businessInfo.schema)"},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trades.cwps.businessInfo.schema={\
+   businessType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+   operType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+   busParameterInfo:{type:"JSON",required:true,encrypted:false,validators:@JSONSchema(ecaop.trades.cwps.busParameterInfo.schema)"},\
+}
+
+ecaop.trades.cwps.busParameterInfo.schema={\
+   data:{type:"String(1)",required:false,encrypted:false,validators:null},\
+   threshold:{type:"String(1)",required:false,encrypted:false,validators:null},\
+   amount:{type:"String(1)",required:false,encrypted:false,validators:null},\
+   endTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+}
+
+
+
+#定义流程跳转
+ecaop.core.method.cwps.processors=@route\
+                           @FlowProcessor(ecaop.core.method.cwps.flowConfig)
+
+#配置跳转
+ecaop.core.method.cwps.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.core.N25method.cwps.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#定义processors
+ecaop.core.N25method.cwps.processors=@CertTypeChg()\
+                                @ParametersMapper(ecaop.trades.cwps.ParametersMapping)\
+                                @WsCall(ecaop.comm.conf.url.cbss.services.WoAccountSer)\
+                                @Xml2JsonMapper4Fbs(ecaop.trades.cwps.syncWoPurseParameter.template)
+
+#请求参数
+ecaop.trades.cwps.ParametersMapping=[\
+    {paramterName:"route",extractor:"fix",extractorConfig:"48",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.woAccountSer.syncWoPurseParameter,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cwps.syncWoPurseParameter.template@FBS@SYNC_WO_PURSE_PARAMETER_INPUT@n720382109@SYNC_WO_PURSE_PARAMETER_REQ"}\
+]
+
+
+ecaop.trades.cwps.syncWoPurseParameter.template=com/ailk/ecaop/biz/template/curt/SyncWoPurseParameter

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_MULT_USER_INFO_INPUT>
+	<_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+	<UNI_BSS_BODY mappedOut="true">
+		<QRY_MULT_USER_INFO_REQ>
+			<GROUP_USER_INFO constraint="1" mappedName="groupUserInfo" >
+				<!--组合产品信息 -->
+				<QUERY_TYPE constraint="1" length="F1" mappedName="qryType">
+					<!--查询类型 0：根据组合产品主用户号码查询； 1：根据组合编号查询 2：通过虚拟用户ID查询 -->
+				</QUERY_TYPE>
+				<SERVICE_CLASS_CODE constraint="?" length="F4"
+					mappedName="serviceClassCode">
+					<!--电信类型编码，编码见附录 -->
+				</SERVICE_CLASS_CODE>
+				<AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+					<!--区号 -->
+				</AREA_CODE>
+				<SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+					<!--组合产品主用户号码 -->
+				</SERIAL_NUMBER>
+				<COMBINATION_NO constraint="?" length="V20"
+					mappedName="combinationNo">
+					<!--组合编号 -->
+				</COMBINATION_NO>
+				<USER_ID constraint="?" length="V16" mappedName="userId">
+					<!--虚拟用户ID -->
+				</USER_ID>
+			</GROUP_USER_INFO>
+			<PARA constraint="*" mappedName="para">
+				<!--保留字段 -->
+				<PARA_ID constraint="1" length="V20" mappedName="paraId">
+					<!--保留字段ID -->
+				</PARA_ID>
+				<PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+					<!--保留字段值 -->
+				</PARA_VALUE>
+			</PARA>
+		</QRY_MULT_USER_INFO_REQ>
+		  </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_MULT_USER_INFO_INPUT>

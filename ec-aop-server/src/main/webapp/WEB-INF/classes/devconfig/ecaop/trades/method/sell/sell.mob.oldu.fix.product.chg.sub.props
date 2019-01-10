@@ -1,0 +1,47 @@
+#省分正式做固网产品变更操作
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.fix.product.chg.sub=ofps
+ecaop.core.method.ofps.def={"mothod":"ofps","remark":"固网产品变更提交"}
+ecaop.core.method.ofps.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.oldu.ofps.OfpsMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+ecaop.oldu.ofps.OfpsMsg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    ordersId:{type:"String(30)", required:true,validators:null},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.oldu.ofps.ChkfeeInfoSchema)"},\
+    origTotalFee:{type:"String(10)",required:true,validators:null},\
+    invoiceNo:{type:"String(30)", required:false,validators:null},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.oldu.ofps.ChkpayInfoSchema)"},\
+    acceptanceReqTag:{type:"String(1)", required:true,validators:"@Enum(0,1)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+    
+ecaop.oldu.ofps.ChkfeeInfoSchema={\
+    feeId:{type:"String(20)", required:true,validators:null},\
+    feeCategory:{type:"String(1)", required:true, validators:null},\
+    feeDes:{type:"String(120)", required:true,validators:null},\
+    origFee:{type:"String(10)", required:true,validators:null},\
+    reliefFee:{type:"String(10)", required:true,validators:null},\
+    reliefResult:{type:"String(60)", required:true,validators:null},\
+    realFee:{type:"String(10)", required:true,validators:null}}
+    
+ecaop.oldu.ofps.ChkpayInfoSchema={\
+    payType:{type:"String(2)", required:true,validators:null},\
+    payOrg:{type:"String(30)", required:false,validators:null},\
+    payNum:{type:"String(20)", required:false,validators:null}}    
+
+#定义processor
+#17/18增加checkAndSentMISPOSInfoToCB，为MISPOS支付时，AOP通过支付信息同步接口将MISPOS支付信息同步给cBSS后，再调用正式提交接口。17-2-27 by Zeng
+ecaop.core.method.ofps.processors=@checkAndSentMISPOSInfoToCB
+
+#checkAndSentMISPOSInfoToCB类中调用固定格式"ecaop.trades.mispos." + exchange.getMethodCode() + ".processors"
+ecaop.trades.mispos.ofps.processors=@olduOpenSubProcessor()

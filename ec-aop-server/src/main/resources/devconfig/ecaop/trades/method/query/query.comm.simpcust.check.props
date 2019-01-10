@@ -1,0 +1,80 @@
+#客户资料校验-返档.2017.01.17 By:Cuij
+ecaop.core.method.map.ecaop.trades.query.comm.simpcust.check=cuss
+ecaop.core.method.cuss.def={"mothod":"cuss","remark":"客户资料校验-返档"}
+ecaop.core.method.cuss.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.cuss.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.trades.cuss.msgSchema={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    tradeTypeCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    opeSysType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    operateType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    custType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    custName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+    tradeId:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    groupId:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    custCheckType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    certType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    certNum:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    userPasswd:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    vipCardType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    vipCardNo:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    simCardNo:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    contractNo:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    bankAcctNo:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    custId:{type:"String(16)",required:false,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.cuss.processors=@ParametersMapper(ecaop.trades.cuss.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.cbss.services.CustForNorthSer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.cuss.template)
+#流程控制,根据胥总最新要求,实施透传操作
+#ecaop.core.method.cuss.processors=@route\
+#                                  @FlowProcessor(ecaop.core.method.cuss.flowConfig)
+#配置跳转
+#ecaop.core.method.cuss.flowConfig=[\
+#{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->03 N6->02"},\
+#{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+#{id:"03", processor:"AopHandler(ecaop.core.3g.cuss.processors)", selector:"Noop", transitions:"*->STOP"}\
+#]
+#ecaop.core.3g.cuss.processors=@simpleCustCheck()
+#给freeMarker中变量复制，一遍生成报文
+ecaop.trades.cuss.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"CustForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qrySimpleCustInfo",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"routeType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"route",extractor:"addParamExtractor",extractorConfig:"msg.serialNumber",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_SIMPLE_CUST_INFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.cuss.template@FBS@QRY_SIMPLE_CUST_INFO_INPUT"}\
+] 
+
+#请求和返回报文模版路径
+ecaop.trades.cuss.template=com/ailk/ecaop/biz/template/custCheck/SimpleCustCheck
+
+#key命名规则：ecaop.soap.bodyns.appCode  value:wsdl约定的值
+ecaop.soap.bodyns.cuss=qry

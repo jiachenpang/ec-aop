@@ -1,0 +1,90 @@
+#银行卡代扣状态查询
+ecaop.core.method.map.ecaop.trades.query.ordi.bankdeduct.qry=qobq
+ecaop.core.method.qobq.def={"mothod":"qobq","remark":"银行卡代扣状态查询"}
+ecaop.core.method.qobq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qobq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg校验器
+ecaop.ecsb.qobq.MsgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:"@FixedLen(1)"},\
+    serviceClassCode:{type:"String(4)",required:true,validators:null},\
+    areaCode:{type:"String(6)",required:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null}}
+
+ecaop.core.method.qobq.processors=@route\
+                           @FlowProcessor(ecaop.core.method.qobq.flowConfig)
+#配置跳转
+ecaop.core.method.qobq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->05 *->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->03 N6->04"},\
+{id:"03", processor:"AopHandler(ecaop.ecsb.qobq4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+{id:"05", processor:"AopHandler(ecaop.ecsb.g4qobq.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.ecsb.qobq4N25.processors=\
+                @ParametersMapper(ecaop.ecsb.qobq.ParametersMapping)\
+                @WsCall(ecaop.comm.conf.url.osn.services.bankPaymentSer)\
+                @Xml2JsonMapper4Fbs(ecaop.ecsb.qobq.template)\
+                @bankDeductQryprocessor()
+#请求参数
+ecaop.ecsb.qobq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"BankPaymentSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qrySignInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.tradeTypeCode,0129"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.qryType,03"},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_SIGN_INFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.qobq.template@FBS@QRY_SIGN_INFO_INPUT"}\
+]
+ecaop.ecsb.qobq.template=com/ailk/ecaop/biz/template/bank/BankDeductQry
+
+ecaop.ecsb.g4qobq.processors=@ParametersMapper(ecaop.ecsb.g4qobq.ParametersMapping)\
+                             @WsCall(ecaop.comm.conf.url.cbss.services.BankCardSer)\
+                             @Xml2JsonMapper4Fbs(ecaop.ecsb.g4qobq.template)
+
+#请求参数
+ecaop.ecsb.g4qobq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"BankCardSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qrySigningState",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_SIGNING_STATE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.g4qobq.template@FBS@QRY_SIGNING_STATE_INPUT@qry@QRY_SIGNING_STATE_REQ"}\
+]
+ecaop.ecsb.g4qobq.template=com/ailk/ecaop/biz/template/bank/cbss/BankDeductQry4G
+

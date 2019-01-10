@@ -1,0 +1,5 @@
+#湖南BSS国政通测试
+ecaop.core.app.map.hnbc.sub=hnbc
+ecaop.core.app.hnbc.def={"code":"hnbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hnbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.hnbc.allow={appkey:"hnbc",allow:"crck", deny:null}

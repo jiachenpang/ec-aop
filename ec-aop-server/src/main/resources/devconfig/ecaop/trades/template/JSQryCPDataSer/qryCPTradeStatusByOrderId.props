@@ -1,0 +1,2 @@
+#通过CBSS订单编码查询融合业务状态
+ecaop.trade.template.JSQryCPDataSer.qryCPTradeStatusByOrderId={"serviceName":"JSQryCPDataSer","operateName":"qryCPTradeStatusByOrderId","content":"QRY_CP_TRADE_STATUS_BY_ORDERID_REQ"}

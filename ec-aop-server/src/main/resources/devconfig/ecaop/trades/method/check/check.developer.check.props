@@ -1,0 +1,45 @@
+#发展人信息校验
+ecaop.core.method.map.ecaop.trades.check.developer.check=dvck
+
+ecaop.core.method.dvck.def={"mothod":"dvck","remark":"发展人信息校验"}
+
+ecaop.core.method.dvck.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.param.msg.schema.dvck)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+ecaop.param.msg.schema.dvck={\
+    operatorId:{type:"String(20)",required:true},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:false},\
+    checkMode:{type:"String(22)",required:false,validators:"@Enum(0,1,2)"}\
+}
+#定义processors
+ecaop.core.method.dvck.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.dvck.flowConfig)
+#配置跳转
+ecaop.core.method.dvck.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.mall.sub.dvck.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.mall.sub.dvck.processors=@ParametersMapper(ecaop.param.mapping.dvck)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.param.template.dvck)
+
+ecaop.param.mapping.dvck=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00013",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"RecommendCheckReq",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.param.template.dvck@3GE"}\
+]
+
+ecaop.param.template.dvck=com/ailk/ecaop/biz/template/developer/DeveloperCheck

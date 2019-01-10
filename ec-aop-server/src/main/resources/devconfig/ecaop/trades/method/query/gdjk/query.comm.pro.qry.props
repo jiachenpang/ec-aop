@@ -1,0 +1,45 @@
+#产品查询
+ecaop.core.method.map.ecaop.trades.query.comm.pro.qry=prqy
+ecaop.core.method.prqy.def={"mothod":"prqy","remark":"产品查询"}
+ecaop.core.method.prqy.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.prqy.prqyMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.prqy.prqyMsg={\
+    province:{type:"Number(2)",required:true,validators:null},\
+    serType:{type:"String(1)",required:true,validators:null},\
+    productType:{type:"String(1)",required:false,validators:null},\
+    productCont:{type:"String(1)",required:true,validators:null},\
+    productMold:{type:"String(1)",required:false,validators:null},\
+    busiTye:{type:"String(1)",required:true,validators:null},\
+    groupId:{type:"String(20)",required:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#流程控制
+ecaop.core.method.prqy.processors=@route\
+                           @FlowProcessor(ecaop.core.method.prqy.flowConfig)
+#北六和南25的不同处理
+ecaop.core.method.prqy.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.trades.prqy4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#南25省的流程
+ecaop.trades.prqy4N25.processors=\
+                @ParametersMapper(ecaop.trades.prqy.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonMapper(ecaop.trades.prqy.template)
+
+ecaop.trades.prqy.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00020",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ProductQueryReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.prqy.template@3GE"}]
+
+#产品查询接口
+ecaop.trades.prqy.template=com/ailk/ecaop/biz/template/product/ProductQuery

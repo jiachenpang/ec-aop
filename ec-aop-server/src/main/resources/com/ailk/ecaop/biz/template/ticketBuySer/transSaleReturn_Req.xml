@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TRANS_SALE_RETURN_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <TRANS_SALE_RETURN_REQ>
+            <ORDER_NO length="V30" mappedName="orderNo"/>
+            <OLD_ORDER_NO length="V30" mappedName="oldOrderNo"/>
+            <TICKET_TYPE constraint="?" length="V20" mappedName="ticketType" />
+            <MERCHANT_ID length="V20" mappedName="merchantId" />
+            <ORDER_BALANCE length="V12" constraint="?" mappedName="orderBalance"/>
+            <OLD_ORDER_TIME length="F14" constraint="?" mappedName="oldOrderTime"/>
+            <BUSINESS_CODE length="V6" mappedName="businessCode"/>
+            <ORDER_TIME length="F14" mappedName="orderTime"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId">
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue">
+                </PARA_VALUE>
+            </PARA>
+        </TRANS_SALE_RETURN_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</TRANS_SALE_RETURN_INPUT>

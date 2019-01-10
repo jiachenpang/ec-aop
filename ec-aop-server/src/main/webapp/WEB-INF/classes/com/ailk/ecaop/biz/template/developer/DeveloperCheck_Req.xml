@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <RecommendCheckReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId" />
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province" />
+             <!-- 地市 -->
+            <City constraint="?" length="F3" mappedName="city"/>
+            <!-- 校验标记： 0：仅校验；1：校验并查询个人信息；2：校验并查询个人和归属信息  -->
+            <CheckMode length="F1" range="0,1,2" mappedName="checkMode" />
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </RecommendCheckReq>
+    </SvcCont>
+</UniBSS>

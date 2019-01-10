@@ -1,0 +1,4 @@
+#安徽bss
+ecaop.core.app.map.ahbss.pre=ahbpr
+ecaop.core.app.ahbpr.def={"code":"ahbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.ahbpr.allow={appkey:"ahbpr",allow:"qrtb,tsos", deny:null}

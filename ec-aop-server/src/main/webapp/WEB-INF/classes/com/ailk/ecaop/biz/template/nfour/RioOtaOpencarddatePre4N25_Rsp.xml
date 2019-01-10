@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+  <WRITE_CARD_PRE_RSP  mappedOut="true">
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!-- 应答描述 -->
+    </RESP_DESC>
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!-- 应答码0000：成功8888：其他错误，具体描述见应答描述 -->
+    </RESP_CODE>
+    <RESULT_INFO constraint="?" mappedName="resultInfo">
+      <PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="provinceOrderId">
+        <!-- 省分订单ID -->
+      </PROVINCE_ORDER_ID>
+      <SUB_ORDERSUB_INFO constraint="*" mappedName="subOrdersubInfo">
+        <SUB_ORDER_ID constraint="?" length="V30" mappedName="subOrderId">
+          <!-- 总部子订单ID，与总部预提交接口交易流水必须一致。存在子订单时填写此字段。 -->
+        </SUB_ORDER_ID>
+        <SUB_PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="subProvinceOrderId">
+          <!-- 省分子订单ID   该订单ID为预提交接口返回的ID，存在子订单时填写此字段。 -->
+        </SUB_PROVINCE_ORDER_ID>
+        <TOTAL_FEE constraint="1" length="V11" mappedName="totalFee">
+          <!-- 总费用（为正整数，单位：分） -->
+        </TOTAL_FEE>
+        <PRE_FEE_INFO constraint="*" mappedName="preFeeInfo">
+          <OPERATE_TYPE constraint="1" length="F1" mappedName="operateType">
+            <!-- 操作类型 1：收费；2：退费，默认为1 -->
+          </OPERATE_TYPE>
+          <FEE_TYPE_CODE constraint="1" length="V8" mappedName="feeTypeCode">
+            <!-- 费用科目编码按省分编码为准 -->
+          </FEE_TYPE_CODE>
+          <FEE_TYPE_NAME constraint="1" length="V50" mappedName="feeTypeName">
+            <!-- 费用科目名称 -->
+          </FEE_TYPE_NAME>
+          <MAX_DERATE_FEE constraint="1" length="V11" mappedName="maxDerateFee">
+            <!-- 最大减免金额（为正整数，单位：分） -->
+          </MAX_DERATE_FEE>
+          <FEE_MODE constraint="1" length="F1" mappedName="feeMode">
+            <!-- 费用种类ESS提供，参见附录 -->
+          </FEE_MODE>
+          <OLDFEE constraint="1" length="V11" mappedName="oldfee">
+            <!-- 应收/退总金额（为正整数，单位：分） -->
+          </OLDFEE>
+        </PRE_FEE_INFO>
+      </SUB_ORDERSUB_INFO>
+    </RESULT_INFO>
+    <SUB_RSP_INFO constraint="*"  mappedName="subRspInfo">
+      <RESP_DESC constraint="1" length="V500" mappedName="detail">
+        <!-- 子订单错误描述 -->
+      </RESP_DESC>
+      <SUB_ORDER_ID constraint="1" length="V30" mappedName="subOrderId">
+        <!-- 总部子订单ID -->
+      </SUB_ORDER_ID>
+      <RESP_CODE constraint="1" length="F4" mappedName="code">
+        <!-- 子订单应答编码0000：成功8888：其他错误，具体描述见应答描述 -->
+      </RESP_CODE>
+    </SUB_RSP_INFO>
+    <PARA constraint="*" mappedName="para">
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!-- 保留字段ID -->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!-- 保留字段值 -->
+      </PARA_VALUE>
+    </PARA>
+  </WRITE_CARD_PRE_RSP>
+</UNI_BSS_BODY>

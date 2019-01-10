@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReturnSaleRsp mappedOut="true">
+    <ReservStatus range="0,1" mappedName="code" />
+    <Comments length="V100" constraint="?" mappedName="detail"/>
+    <ReservPara length="V60" constraint="?" mappedName="reservPara"/>
+</ReturnSaleRsp>

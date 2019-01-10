@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PAY_KC_CANINFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <PAY_KC_CANINFO_REQ>
+            <KC_CANCLE_PAY_ID constraint="1" length="V30" mappedName="ordersId" />
+            <CANCLE_TYPE constraint="1" length="F1" defaultValue="0" />
+            <ORG_BANK_PAY_ID constraint="1" length="V30" mappedName="cbCanclePayId" />
+            <AGENT_NUMBER constraint="?" length="V20"  mappedName="agentNumber" />
+            <TRADE_FEE constraint="?" length="V10" mappedName="tradeFee" />
+            <OUTER_TRADE_TIME constraint="?" length="F14" mappedName="outerTradeTime" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </PAY_KC_CANINFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</PAY_KC_CANINFO_INPUT>

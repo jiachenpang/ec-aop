@@ -1,0 +1,2 @@
+#电子券返销
+ecaop.trade.template.ticketBuySer.transSaleReturn={"serviceName":"TicketBuySer","operateName":"transSaleReturn","content":"TRANS_SALE_RETURN_REQ"}

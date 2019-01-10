@@ -1,0 +1,2 @@
+#调用cbss校验工号信息 by wangmc 20170629
+ecaop.trade.template.qryStaffInfo.qryStaffInfoByCB={"serviceName":"StaffQrySer","operateName":"qryStaffInfo","content":"QRY_STAFF_INFO_REQ"}

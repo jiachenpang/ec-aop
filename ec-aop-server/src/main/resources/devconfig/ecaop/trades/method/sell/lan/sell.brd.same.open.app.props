@@ -1,0 +1,218 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.brd.same.open.app=bsoa
+ecaop.core.method.bsoa.def={"mothod":"bsoa","remark":"宽带同装预提交"}
+ecaop.core.method.bsoa.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.masb.bsoa.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#参数校验
+ecaop.masb.bsoa.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"Number(1)",required:false},\
+    orderNo:{type:"String(20)",required:true},\
+    authAcctId:{type:"String(60)",required:true},\
+    serialNumber:{type:"String(40)",required:true},\
+    userName:{type:"String(12)",required:true},\
+    userPasswd:{type:"String(20)",required:false},\
+    shareAreaCode:{type:"String(6)",required:true},\
+    shareSerialNumber:{type:"String(40)",required:true},\
+    isSerial:{type:"String(2)",required:true},\
+    serialMode:{type:"String(2)",required:false},\
+    custType:{type:"String(1)",required:true},\
+    custId:{type:"String(20)",required:false},\
+    newUserInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.newUserInfoSchema)"},\
+    machineInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.machineInfoSchema)"},\
+    contactPerson:{type:"String(20)",required:true},\
+    contactPhone:{type:"String(20)",required:true},\
+    contactAddress:{type:"String(200)",required:false},\
+    recomPersonId:{type:"String(30)",required:false},\
+    recomPersonName:{type:"String(30)",required:false},\
+    recomPersonCityCode:{type:"String(6)",required:false},\
+    recomPersonDistrict:{type:"String(20)",required:false},\
+    recomPersonChannelId:{type:"String(20)",required:false},\
+    orderRemarks:{type:"String(1000)",required:false},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#客户资料
+ecaop.masb.bsoa.newUserInfoSchema={\
+    certName:{type:"String(100)",required:true},\
+    certType:{type:"String(2)",required:true},\
+    certNum:{type:"String(20)",required:true},\
+    certAddress:{type:"String(200)",required:true},\
+    certExpireDate:{type:"String(8)",required:true},\
+    speedLevel:{type:"String(10)",required:true},\
+    accessMode:{type:"String(10)",required:true},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.productInfoSchema)"},\
+    iptvInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.iptvInfoSchema)"},\
+    interTvInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.interTvInfoSchema)"},\
+    boradDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.boradDiscntInfoSchema)"},\
+    userType:{type:"String(2)",required:false},\
+    acceptMode:{type:"String(2)",required:false},\
+    userProperty:{type:"String(2)",required:false},\
+    cityMark:{type:"String(2)",required:false},\
+    payMode:{type:"String(2)",required:false},\
+    netMode:{type:"String(2)",required:false},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.activityInfoSchema)"},\
+    accountPayType:{type:"String(2)",required:true},\
+    serviceClassCode:{type:"String(4)",required:true,validators:"@Enum(0000,0100)"},\
+    debutyAreaCode:{type:"String(6)",required:true},\
+    debutySerialNumber:{type:"String(20)",required:true},\
+    exchCode:{type:"String(64)",required:false},\
+    areaExchId:{type:"String(200)",required:false},\
+    pointExchId:{type:"String(200)",required:false},\
+    moduleExchId:{type:"String(200)",required:false},\
+    serviceArea:{type:"String(200)",required:false},\
+    cityArea:{type:"String(200)",required:false},\
+    exchInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.exchInfoSchema)"},\
+    addressCode:{type:"String(300)",required:false},\
+    addressName:{type:"String(1000)",required:false},\
+    installAddress:{type:"String(200)",required:true},\
+    constructionTime:{type:"Number(1)",required:true},\
+    hopeDate:{type:"String(10)",required:false}\
+}
+#终端信息
+ecaop.masb.bsoa.machineInfoSchema={\
+    machineBrandCode:{type:"String(20)",required:false},\
+    machineModelCode:{type:"String(20)",required:false},\
+    machineTypeCode:{type:"String(30)",required:false},\
+    machineType:{type:"String(2)",required:false},\
+    machineProvide:{type:"String(2)",required:false},\
+    machineMac:{type:"String(30)",required:false}\
+}
+#开户时选择的产品信息
+ecaop.masb.bsoa.productInfoSchema={\
+    productId:{type:"String(20)",required:true},\
+    productMode:{type:"String(1)",required:true,validators:"@Enum(0,1)"}\
+}
+#开户时选择的iptv的信息
+ecaop.masb.bsoa.iptvInfoSchema={\
+    IptvService:{type:"String(20)",required:true},\
+    IptvServiceAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.IptvServiceAttrSchema)"},\
+    IptvDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.IptvDiscntInfoSchema)"}\
+}
+ecaop.masb.bsoa.IptvServiceAttrSchema={\
+    code:{type:"String(20)",required:true},\
+    value:{type:"String(20)",required:false}\
+}
+ecaop.masb.bsoa.IptvDiscntInfoSchema={\
+    IptvDiscntId:{type:"String(20)",required:true}\
+}
+#开户时选择的interTv信息
+ecaop.masb.bsoa.interTvInfoSchema={\
+    interTvInfoService:{type:"String(20)",required:true},\
+    interTvServiceAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.interTvServiceAttrSchema)"},\
+    interTvDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.interTvDiscntInfoSchema)"}\
+}
+ecaop.masb.bsoa.interTvServiceAttrSchema={\
+    code:{type:"String(20)",required:true},\
+    value:{type:"String(20)",required:false}\
+}
+ecaop.masb.bsoa.interTvDiscntInfoSchema={\
+    interTvDiscntId:{type:"String(20)",required:true}\
+}
+#开户选择的资费信息
+ecaop.masb.bsoa.boradDiscntInfoSchema={\
+    boradDiscntId:{type:"String(20)",required:true},\
+    boradDiscntAttr:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.boradDiscntAttrSchema)"}\   
+}
+#到期资费信息
+ecaop.masb.bsoa.boradDiscntAttrSchema={\
+    delayType:{type:"String(20)",required:false},\
+    delayDiscntId:{type:"String(20)",required:false},\
+    delayDiscntType:{type:"String(20)",required:false}\
+}
+#开户时选择的活动信息
+ecaop.masb.bsoa.activityInfoSchema={\
+    actPlanId:{type:"String(20)",required:true},\
+    resourcesType:{type:"String(2)",required:false},\
+    resProcId:{type:"String(20)",required:false},\
+    resourcesCode:{type:"String(30)",required:false},\
+    resourcesFee:{type:"String(20)",required:false},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.bsoa.actParaSchema)"}\
+}
+#活动扩展字段
+ecaop.masb.bsoa.actParaSchema={\
+    actParaId:{type:"String(20)",required:true},\
+    actParaValue:{type:"String(60)",required:true}\
+}
+#选址信息（要求包含EXCH_CODE）
+ecaop.masb.bsoa.exchInfoSchema={\
+    key:{type:"String(30)",required:true},\
+    value:{type:"String(30)",required:true}\
+}
+
+#定义宽带新装预提交Processor
+ecaop.core.method.bsoa.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.bsoa.flowConfig)
+
+#配置跳转
+ecaop.core.method.bsoa.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.mall.sub.CBbsoa.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.mall.sub.N6bsoa.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.mall.sub.CBbsoa.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.mall.sub.CBbsoa.processors=@CBbrdSameOpenPreCommit()
+ecaop.mall.sub.N6bsoa.processors=@N6brdSameOpenPreCommit()
+
+#CB预提交
+ecaop.masb.bsoa.sUniTradeParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.bsoa.sUniTrade.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+
+#N6预提交
+ecaop.masb.bsoa.N6.sUniTradeParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.bsoa.sUniTrade.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+
+ecaop.trades.bsoa.sUniTrade.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G

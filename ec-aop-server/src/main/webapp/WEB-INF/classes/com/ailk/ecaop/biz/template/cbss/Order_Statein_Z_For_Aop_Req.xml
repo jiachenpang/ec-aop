@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ORDER_STATEIN_Z_FOR_AOP_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY mappedOut="true">
+    <ORDER_STATEIN_Z_FOR_AOP_REQ>
+      <PROVINCE_CODE constraint="1" length="F2" mappedName="provinceCode">
+        <!-- 省分编码  统一数据模型编码SHS_000001（如：广东51） -->
+      </PROVINCE_CODE>
+      <QUERY_TYPE constraint="1" length="F1" mappedName="queryType">
+      </QUERY_TYPE>
+      <QUERY_VALUE constraint="1" length="V50" mappedName="queryValue">
+      </QUERY_VALUE>
+      <TRADE_TYPE_CODE constraint="?" length="V4" mappedName="tradeTypeCode">
+      </TRADE_TYPE_CODE>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </ORDER_STATEIN_Z_FOR_AOP_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+  </UNI_BSS_ATTACHED>
+</ORDER_STATEIN_Z_FOR_AOP_INPUT>

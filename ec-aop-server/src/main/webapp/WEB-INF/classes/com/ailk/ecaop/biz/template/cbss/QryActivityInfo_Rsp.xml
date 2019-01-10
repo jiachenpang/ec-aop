@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+  <QRY_ACTIVITY_INFO_RSP mappedOut="true">
+    <RESP_CODE length="F4" mappedName="code">
+      <!--应答编码, 0000成功,1111：账户ID不存在,1204：该号码不存在,8888 其他错误 -->
+    </RESP_CODE>
+    <RESP_DESC length="V500" mappedName="detail">
+      <!--应答描述 -->
+    </RESP_DESC>
+    <ACTIVITY_INFO constraint="*" mappedName="respInfo">
+      <!-- 应答返回信息 -->
+      <USER_ID length="V16" mappedName="userId"></USER_ID>
+      <CUST_ID length="V16" mappedName="custId"></CUST_ID>
+      <USECUST_ID length="V16" mappedName="usecustId"></USECUST_ID>
+      <ACCT_ID length="V16" mappedName="acctId"></ACCT_ID>
+      <PROVINCE_CODE length="F2" mappedName="provinceCode"></PROVINCE_CODE>
+      <EPARCHY_CODE length="V6" mappedName="eparchyCode"></EPARCHY_CODE>
+      <CITY_CODE length="V20" mappedName="cityCode"></CITY_CODE>
+      <PRODUCT_ID length="V8" mappedName="productId"></PRODUCT_ID>
+      <BRAND_CODE length="V4" mappedName="brandCode"></BRAND_CODE>
+
+      <GEAR_INFO constraint="*" mappedName="gearInfo">
+        <!-- 名单表基础低消档位值信息 -->
+        <GEAR_VALUE length="V11" mappedName="gearValue"></GEAR_VALUE>
+      </GEAR_INFO>
+
+      <TARIFF_INFO constraint="*" mappedName="tariffInfo">
+        <!-- 低消资费信息 -->
+        <ITEM_ID length="V40" mappedName="itemId"></ITEM_ID>
+        <TARIFF_ID length="V20" mappedName="tariffId"></TARIFF_ID>
+        <BASED_CONSUME length="V11" mappedName="basedConsume"></BASED_CONSUME>
+        <START_TIME length="F14" mappedName="startTime"></START_TIME>
+        <END_TIME length="F14" mappedName="endTime"></END_TIME>
+      </TARIFF_INFO>
+
+      <PARA constraint="*" mappedName="para">
+        <!--保留字段 -->
+        <PARA_ID length="V20" mappedName="paraId">
+          <!--保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE length="V60" mappedName="paraValue">
+          <!--保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </ACTIVITY_INFO>
+
+  </QRY_ACTIVITY_INFO_RSP>
+</UNI_BSS_BODY>

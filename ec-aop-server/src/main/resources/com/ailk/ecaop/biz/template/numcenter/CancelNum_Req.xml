@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CANCEL_LOGIN_NUM_INPUT>
+<!--调用号卡中心-返销模板 -->
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+    <UNI_BSS_BODY mappedOut="true">
+        <CANCEL_LOGIN_NUM_REQ>
+        <PROVINCE_CODE length="F2" mappedName="province"/>
+        <CITY_CODE length="V4" mappedName="city"/>
+        <STAFF_ID length="V20" mappedName="operatorId"/>
+        <SYS_CODE length="F4" mappedName="sysCode"/>
+        <SERIAL_NUMBER constraint="?" length="V20" mappedName="serialNumber"/>
+        <PARA constraint="*" mappedName="para">
+             <PARA_ID length="V20" mappedName="paraId"/>
+             <PARA_VALUE length="V60" mappedName="paraValue"/>
+         </PARA>
+        </CANCEL_LOGIN_NUM_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+    </UNI_BSS_ATTACHED>
+</CANCEL_LOGIN_NUM_INPUT>

@@ -1,0 +1,11 @@
+
+#广东集客开户
+ecaop.core.app.map.gdjk.sub=gdsb
+ecaop.core.app.gdsb.def={"code":"gdsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gdsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.gdsb.allow={appkey:"gdsb",allow:"snqy,opsb,cdqy,cdnt,cdsn,qcaq,dvqy,prqy,opnc,mnsa,nboc,oupc,qcgc,qcgq,cucc", deny:null}
+
+#新增mock增加数组元素
+ecaop.core.app.gdsb.mock=[\
+{method:"opap",mocked:true,mockid:"mockqcsq",idscript:null,callback:null}\
+]

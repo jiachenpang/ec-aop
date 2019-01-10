@@ -1,0 +1,64 @@
+#合约信息查询
+ecaop.core.method.map.ecaop.trades.query.user.activity.qry=quaq
+ecaop.core.method.quaq.def={"mothod":"quaq","remark":"合约信息变更或查询"}
+ecaop.core.method.quaq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.quaq.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(50)","required":true, "encrypted":false, "validators":null}\
+]
+#入参校验
+ecaop.ecsb.quaq.Msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    serviceClassCode:{type:"String(4)",required:true,validators:null},\
+    areaCode:{type:"String(6)",required:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null}\
+}
+
+
+
+#定义分支
+ecaop.core.method.quaq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.quaq.flowConfig)
+
+
+#配置跳转
+ecaop.core.method.quaq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.masb.quaq.processors)", selector:"Noop", transitions:"*->STOP"},\
+]
+
+ecaop.masb.quaq.processors=\
+                           @ParametersMapper(ecaop.masb.quaq.checkUserParametersMapping)\
+                           @WsCall(ecaop.comm.conf.url.osn.services.usrser)\
+                           @Xml2JsonMapper4Fbs(ecaop.masb.quaq.template)\
+                           @ContractInfoProcessor
+
+ecaop.masb.quaq.template=com/ailk/ecaop/biz/template/nfour/CheckUserInfo
+ecaop.soap.bodyns.quaq=chec
+
+ecaop.masb.quaq.checkUserParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"UsrSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"checkUserInfo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECK_USER_INFO_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.tradeTypeCode,0093"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.getMode,001001000000"},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.quaq.template@FBS@CHECK_USER_INFO_INPUT"}\
+]

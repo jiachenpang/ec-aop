@@ -1,0 +1,93 @@
+#23转4校验接口
+ecaop.core.method.map.ecaop.trades.query.comm.23to4.check=2324
+ecaop.core.method.2324.def={"mothod":"2324","remark":"23转4G校验"}
+ecaop.core.method.2324.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.2324.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.2324.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    numId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    userPasswd:{type:"String(30)",required:false,encrypted:false,validators:null}\
+}
+#流程控制,根据胥总最新要求,实施透传操作
+ecaop.core.method.2324.processors=@TransReqParamsMapper()\
+                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)
+
+#23转4校验（自处理）
+ecaop.23To4.check.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"UserTransferSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"checkUserTransfer",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"hsnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0003",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECK_USER_TRANSFER_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.23To4.check.template@FBS@CHECK_USER_TRANSFER_INPUT@n-234794184@CHECK_USER_TRANSFER_REQ"}\
+]
+
+ecaop.23To4.check.template=com/ailk/ecaop/biz/template/qywpt/CheckUserTransfer
+
+#23转4集团客户校验（自处理）
+ecaop.23To4.grpcheck.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"UserChgCheck4GSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"CheckUser4GChg",temp:true},\
+    {paramterName:"routeValue",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECKUERCHG_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.23To4.grpcheck.template@FBS@CHECKUERCHG_INPUT@ter@CHECKUERCHG_REQ"}\
+]
+
+ecaop.23To4.grpcheck.template=com/ailk/ecaop/biz/template/cbss/CheckUser4GChg
+
+#请求参数（根据证件去CBSS查客户资料信息）
+ecaop.cust.cbss.check.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"CustSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryCustInfo",temp:true},\
+    {paramterName:"routeValue",extractor:"fix",extractorConfig:"99",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_CUST_INFO_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.cust.cbss.check.template@FBS@QRY_CUST_INFO_INPUT@ter@QRY_CUST_INFO_REQ"}\
+]
+
+ecaop.cust.cbss.check.template=com/ailk/ecaop/biz/template/cbss/QryCustInfo
+

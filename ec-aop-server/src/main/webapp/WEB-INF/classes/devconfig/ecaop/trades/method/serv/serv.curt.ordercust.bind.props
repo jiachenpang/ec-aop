@@ -1,0 +1,78 @@
+#商城开户客户资料与商城订单号绑定
+ecaop.core.method.map.ecaop.serv.curt.ordercust.bind=scob
+ecaop.core.method.scob.def={"mothod":"scob"}
+ecaop.core.method.scob.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.scob.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.ecsb.scob.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     orderId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+     custId:{type:"String(16)",required:false,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     chkBlcTag:{type:"String(1)",required:false,encrypted:false,validators:"@FixedLen(1)"},\
+     custCreateFlag:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     custInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scob.custinfo)"},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#客户信息
+ecaop.ecsb.scob.custinfo={\
+     customerName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     customerType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     isAssure:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     certExpireDate:{type:"String(8)",required:true,encrypted:false,validators:"@FixedLen(8)"},\
+     certAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certNum:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     postAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     phone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     contactPerson:{type:"String(60)",required:true,encrypted:false,validators:null},\
+     contactPhone:{type:"String(40)",required:true,encrypted:false,validators:null}\
+}
+
+ecaop.core.method.scob.processors=@route()\
+                                  @FlowProcessor(ecaop.core.method.scob.flowConfig)
+#配置跳转 办理业务系统：1：ESS(2/3G) 2：CBSS(4G) 该字段没传的时候默认CBSS
+ecaop.core.method.scob.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.scob.ess.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.scob.cbss.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#客户资料校验23G ess
+ecaop.scob.ess.processors=@custInfoBindOrderForEss()
+#客户资料校验北六、CBSS
+ecaop.scob.cbss.processors=@TransReqParamsMapper()\
+                           @AopCall(ecaop.comm.conf.url.ec-aop.rest)
+
+#全业务 客户资料与订单绑定
+ecaop.trades.scob.CustInfoBindOrder.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"RealNameCardSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"bindCustAndTrade",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:false},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"hsnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0003",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"BIND_CUST_AND_TRADE_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.scob.ess.template@FBS@BIND_CUST_AND_TRADE_INPUT@n123@BIND_CUST_AND_TRADE_REQ"}\
+]
+
+#报文模版路径
+ecaop.scob.ess.template=com/ailk/ecaop/biz/template/order/CustInfoBindOrder

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ADD_WO_ACCOUNT_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <ADD_WO_ACCOUNT_REQ>
+      <ORDER_ID constraint="1" length="V40" mappedName="orderId">
+        <!--总部订单ID-->
+      </ORDER_ID>
+      <OPER_TYPE constraint="1" length="F1" mappedName="operType">
+        <!--操作类型：0：沃账户创建 1：沃账户升级-->
+      </OPER_TYPE>
+      <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber">
+        <!--服务号码-->
+      </SERIAL_NUMBER>
+      <WO_ACCOUNT_ID constraint="?" length="V40" mappedName="woAccountId">
+        <!--沃账户ID （OPER_TYPE=1时必填）-->
+      </WO_ACCOUNT_ID>
+      <CERT_TYPE constraint="1" length="F2" mappedName="type">
+        <!--证件类型  01:18位身份证 -->
+      </CERT_TYPE>
+      <CERT_CODE constraint="1" length="V40" mappedName="certCode">
+        <!--证件号码-->
+      </CERT_CODE>
+      <CERT_NAME constraint="1" length="V40" mappedName="certName">
+        <!--证件姓名-->
+      </CERT_NAME>
+      <DEVELOP_DEPART constraint="1" length="F1" mappedName="developDapart">
+        <!--发起渠道 1：实体厅 2：ECS手厅 3：ECS网厅 4：ECS商城 5：ECS积分商城 -->
+      </DEVELOP_DEPART>
+      <BUSINESS_HALL_CODE constraint="?" length="V40" mappedName="businessHallCode">
+        <!--受理营业厅编码 （DEVELOP_DEPART=1时必传） -->
+      </BUSINESS_HALL_CODE>
+      <BUSINESS_HALL_NAME constraint="?" length="V80" mappedName="businessHallName">
+        <!--受理营业厅名称 （DEVELOP_DEPART=1时必传）-->
+      </BUSINESS_HALL_NAME>
+    <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </ADD_WO_ACCOUNT_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+  </UNI_BSS_ATTACHED>
+</ADD_WO_ACCOUNT_INPUT>

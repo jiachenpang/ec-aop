@@ -1,0 +1,5 @@
+#可变更产品查询
+ecaop.trade.template.broadbandUsrSer.qryChangeProduct={"serviceName":"BroadbandUsrSer","operateName":"qryChangeProduct",\
+                        "origDomain":"ECIP","osnDuns":"0002","msgSender":"0002","content":"QRY_CHANGE_PRODUCT_REQ"}
+#报文模版路径
+ecaop.trade.cbpq.template=com/ailk/ecaop/biz/template/broadband/BrdProductQry

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <GetCardOperationReq>
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <ICCID length="V22" mappedName="iccid" />
+            <IMSI length="V20" mappedName="imsi" constraint="?" />
+            <OperatorID length="V20" mappedName="operatorId" />
+            <ReservPara length="V60" mappedName="reservPara" defaultValue="无"/>
+        </GetCardOperationReq>
+    </SvcCont>
+</UniBSS>

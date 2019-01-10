@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_SIGNING_STATE_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--应答编码, 0000成功, 8888 其它 -->
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <!--签约状态：00 已经签约 01 未签约 02 其他 -->
+        <signState constraint="?" length="F2" mappedName="signState" />
+        <!--协议生效时间 -->
+        <startTime constraint="?" length="V14" mappedName="startTime" />
+        <!-- 帐户信息节点（如果尚未签约为空、已经签约则非空） -->
+        <accountInfo constraint="?" mappedName="accountInfo">
+            <!--银行名称 -->
+            <bankName constraint="1" length="V30" mappedName="bankName" />
+            <!--银行帐号类型, 信用卡:0, 借记卡:1 -->
+            <bankCardType constraint="1" length="F1" mappedName="bankCardType" />
+            <!--银行卡账号后4位 -->
+            <accountLastFour constraint="?" length="F4" mappedName="accountLastFour" />
+            <!--签约协议号, 签约时候不需填, 解约时候需填写 -->
+            <contractNumber constraint="?" length="V20" mappedName="contractNumber" />
+            <!--代扣阀值（小于等于此阀值时，发起实时代扣请求）, 单位:分 -->
+            <levelValue constraint="?" length="V10" mappedName="levelValue" />
+            <!--代扣次金额（每次发起代扣请求时的金额）, 单位：分 -->
+            <everyValue constraint="?" length="V20" mappedName="everyValue" />
+        </accountInfo>
+    </QRY_SIGNING_STATE_RSP>
+</UNI_BSS_BODY>

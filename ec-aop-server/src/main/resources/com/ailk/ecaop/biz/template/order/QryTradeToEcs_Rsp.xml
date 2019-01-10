@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_TRADE_TO_ECS_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC constraint="?" length="V500" mappedName="detail" />
+        <TRADE_INFO constraint="*" mappedName="ordiInfo">
+            <TRADE_ID length="V20" mappedName="ordersId" />
+            <ORDER_CODE length="V11" mappedName="orderCode" />
+            <SERIAL_NUMBER length="V20" mappedName="serialNumber" />
+            <SIM_CARD length="V20" mappedName="simId" />
+            <CUSTOMERINFO constraint="*" mappedName="customerInfo">
+                <CER_TYPE length="V2" mappedName="certType"/>
+                <CERT_NUM length="V20" mappedName="certNum"/>
+                <CUST_NAME length="V128" mappedName="custName"/>
+            </CUSTOMERINFO>
+            <PRODUCTINFO constraint="*" mappedName="product">
+                <PRODUCT_ID constraint="?" length="V8" mappedName="productId"/>
+                <PRODUCT_MODE constraint="?" length="V2" mappedName="productMode"/>
+            </PRODUCTINFO>
+            <ACTIVITYINFO constraint="*" mappedName="activityInfo">
+                <PRODUCT_ID constraint="?" length="V20" mappedName="actPlanId"/>
+                <DEVICE_IMEI constraint="?" length="V30" mappedName="resourcesCode"/>
+            </ACTIVITYINFO>
+            <FEEINFO constraint="*" mappedName="feeInfo">
+                <FEE_TYPE_CODE length="V20" mappedName="feeId"/>
+                <FEE_MODE  length="V1" mappedName="feeCategory"/>
+                <FEE_DEC constraint="?" length="V120" mappedName="feeDes"/>
+                <OLD_FEE constraint="?" length="V10" mappedName="origFee"/>
+                <FEE constraint="?" length="V10" mappedName="fee"/>
+            </FEEINFO>
+            <TOTALFEE length="V10" constraint="?" mappedName="totalFee"/>
+        </TRADE_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </QRY_TRADE_TO_ECS_RSP>
+</UNI_BSS_BODY>

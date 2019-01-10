@@ -1,0 +1,2 @@
+#调用cb获取写卡数据查询接口入库的信息
+ecaop.trade.template.SimForNorthSer.qryRemoteCardInfo={"serviceName":"SimForNorthSer","operateName":"qryRemoteCardInfo","content":"QRY_REMOTECARDINFO_REQ"}

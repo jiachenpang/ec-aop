@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GET_PAYMENT_ID_INPUT>
+    <_include
+        src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <GET_PAYMENT_ID_REQ>
+            <TRADE_TYPE length="F2" mappedName="tradeType"><!--业务类型：01 营业支付流水号；02 
+                    资源支付流水号 （标识卖场系统要获取cBSS营业还是资源流水号，其中裸机销售需要获取资源流水号，开户、合约销售要获取营业支付流水号） -->
+            </TRADE_TYPE>
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID length="V20" mappedName="paraId"><!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue"><!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </GET_PAYMENT_ID_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="?"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</GET_PAYMENT_ID_INPUT>

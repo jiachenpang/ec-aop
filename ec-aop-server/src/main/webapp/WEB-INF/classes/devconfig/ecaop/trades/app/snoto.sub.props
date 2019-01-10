@@ -1,0 +1,8 @@
+#陕西线上线下一体化平台
+ecaop.core.app.map.snoto.sub=snsu
+ecaop.core.app.snsu.def={"code":"snsu","signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jlpr.timeslimit=max 100 per 1 minute
+
+ecaop.core.app.snsu.allow={appkey:"snsu",allow:"cmck,ccic,snqy,nboc,qrtc,opap,opsb,cdqy,cdnt,cdsn,qcsq,qcsc,prqy,qcaq,\
+dvqy,dvck,csaq,crck,mcoa,scccs,qrsq,cuck,sack,kdwy,bsop,isoa,odsb,sbcs,cfsb,sfso,sfss,hdjf,spfs,bypc,byps,sgfs,jffx,\
+spff,cuss,cumd,qcfc,qcfd,qcbl,qcdq,qcsp,oupc,qcrq", deny:null}

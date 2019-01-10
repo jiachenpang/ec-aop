@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <AGENCY_ACCT_PAY_NOTIFY_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!-- 应答编码 0000成功 1544 账户余额不足 -->
+        </RESP_CODE>
+        <RESP_DESC length="V5000" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+                <!-- 总部订单ID -->
+            </ORDER_ID>
+            <PROVINCE_ORDER_ID constraint="?" length="V20" mappedName="provinceOrderId">
+                <!-- 省份订单ID -->
+            </PROVINCE_ORDER_ID>
+            <CONTRACT_FLAG constraint="?" length="V1" mappedName="contractFlag">
+                <!-- 是否扣款标示:空或0 扣款 ,1无扣款 -->
+            </CONTRACT_FLAG>
+        </RESP_INFO>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE length="V4000" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </AGENCY_ACCT_PAY_NOTIFY_RSP>
+</UNI_BSS_BODY>
+

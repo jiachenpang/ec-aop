@@ -1,0 +1,5 @@
+#总部能力共享平台
+ecaop.core.app.map.cbsp.sub=cpsb
+ecaop.core.app.cpsb.def={"code":"cpsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.cpsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.cpsb.allow={appkey:"cpsb",allow:"qcfc,crck,smct,oupc,opsb,qcop,qctc,mofc,ofcs,qcua,mnca,scccs,qcsp,cmck,opap,cdsn,cdqy,cdnt,spes,ccpq,cbpq,mcps,spec", deny:null}

@@ -1,0 +1,2110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<SGL_UNI_TRADE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <SGL_UNI_TRADE_REQ>
+            <ORDER_ID constraint="1" length="V30" mappedName="ordersId">
+                <!--总部订单ID -->
+            </ORDER_ID>
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+                <!--区号 -->
+            </AREA_CODE>
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serinalNamber">
+                <!--服务号码 -->
+            </SERIAL_NUMBER>
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode">
+                <!--电信类型编码，编码见附录 -->
+            </SERVICE_CLASS_CODE>
+            <OPER_TYPE_CODE constraint="1" length="F1" mappedName="operTypeCode">
+                <!--操作类型：, 0-订单受理, 1-业务返销, 2-撤单, 3-改单 -->
+            </OPER_TYPE_CODE>
+            <CANCEL_TYPE constraint="?" length="V1" mappedName="cancelType">
+                <!--撤单类型, 1：局方撤单（资源不足）, 2：用户撤单 -->
+            </CANCEL_TYPE>
+            <TRADE constraint="+" mappedName="trade" mappedOut="true">
+                <BASE constraint="1" mappedName="base">
+                    <SUBSCRIBE_ID constraint="1" length="V20" mappedName="subscribeId">
+                        <!--订单号 -->
+                    </SUBSCRIBE_ID>
+                    <TRADE_INFO_TAG_SET constraint="?" length="F26" mappedName="infoTag">
+                    </TRADE_INFO_TAG_SET>
+                    <TRADE_EPARCHY_CODE constraint="?" length="V10" mappedName="areaCode">
+                    </TRADE_EPARCHY_CODE>
+                    <TRADE_CITY_CODE constraint="?" length="V10" mappedName="tradeCityCode">
+                    </TRADE_CITY_CODE>
+                    <TRADE_STAFF_ID constraint="?" length="V20" mappedName="tradeStaffId">
+                       <!--操作员工 -->
+                     </TRADE_STAFF_ID>
+                     <ROUTE_EPARCHY_CODE constraint="?" length="V20" mappedName="areaCode">
+                     </ROUTE_EPARCHY_CODE>
+                     <ROUTE_EPARCHY constraint="?" length="V20" mappedName="routeEparchy">
+                     </ROUTE_EPARCHY>
+                     <START_ACYC_ID constraint="?" length="V6" mappedName="startAcycId">
+                          <!--开始帐期 -->
+                     </START_ACYC_ID>
+                     <END_ACYC_ID constraint="?" length="V6" mappedName="endAcycId">
+                        <!--结束帐期 -->
+                     </END_ACYC_ID>
+                     <ACCEPT_MONTH constraint="?" length="V6" mappedName="acceptMonth">
+                     </ACCEPT_MONTH>
+                    <TRADE_ID constraint="1" length="F16" mappedName="tradeId">
+                        <!--业务流水 -->
+                    </TRADE_ID>
+                    <START_DATE constraint="?" length="V30" mappedName="startDate">
+                        <!--开始时间 -->
+                    </START_DATE>
+                    <END_DATE constraint="?" length="V30" mappedName="endDate">
+                        <!--结束时间 -->
+                    </END_DATE>
+                    <ACCEPT_DATE constraint="?" length="V30" mappedName="acceptDate">
+                        <!--受理时间 -->
+                    </ACCEPT_DATE>
+                    <NEXT_DEAL_TAG constraint="?" length="V2" mappedName="nextDealTag">
+                        <!--后续处理状态 -->
+                    </NEXT_DEAL_TAG>
+                    <OLCOM_TAG constraint="?" length="V2" mappedName="olcomTag">
+                        <!--指令标志 -->
+                    </OLCOM_TAG>
+                    <IN_MODE_CODE constraint="?" length="V2" mappedName="inModeCode">
+                        <!--接入方式 -->
+                    </IN_MODE_CODE>
+                    <TRADE_TYPE_CODE constraint="1" length="F4" mappedName="tradeTypeCode">
+                        <!--业务类型编码 -->
+                    </TRADE_TYPE_CODE>
+                    <PRODUCT_ID constraint="?" length="V8" mappedName="productId">
+                        <!--产品标识 -->
+                    </PRODUCT_ID>
+                    <BRAND_CODE constraint="?" length="V4" mappedName="brandCode">
+                        <!--品牌编码 -->
+                    </BRAND_CODE>
+                    <USER_ID constraint="?" length="V16" mappedName="userId">
+                        <!--用户标识 -->
+                    </USER_ID>
+                    <RIGHT_CODE constraint="?" length="V19" mappedName="rightCode">
+                    </RIGHT_CODE>
+                    <TRADE_TAG_SET constraint="?" length="V20" mappedName="tradeTagSet">
+                    </TRADE_TAG_SET>
+                    <CUST_ID constraint="?" length="V16" mappedName="custId">
+                        <!--客户标识 -->
+                    </CUST_ID>
+                    <USECUST_ID constraint="?" length="V16" mappedName="usecustId">
+                        <!--使用客户标识 -->
+                    </USECUST_ID>
+                    <ACCT_ID constraint="?" length="V16" mappedName="acctId">
+                        <!--帐户标识 -->
+                    </ACCT_ID>
+                    <USER_DIFF_CODE constraint="?" length="V4" mappedName="userDiffCode">
+                        <!--用户类型00:普通用户01:亲友电话虚用户02:对讲机虚用户03:两地同虚用户04:两地通虚用户05:组合产品用户 -->
+                    </USER_DIFF_CODE>
+                    <NET_TYPE_CODE constraint="?" length="V4" mappedName="netTypeCode">
+                        <!--网别 -->
+                    </NET_TYPE_CODE>
+                    <SERIAL_NUMBER constraint="?" length="V40" mappedName="serinalNamber">
+                        <!--服务号码 -->
+                    </SERIAL_NUMBER>
+                    <CUST_NAME constraint="?" length="V100" mappedName="custName">
+                        <!--客户名称 -->
+                    </CUST_NAME>
+                    <TERM_IP constraint="?" length="V15" mappedName="termIp">
+                        <!--受理终端IP地址 -->
+                    </TERM_IP>
+                    <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                        <!--归属地州 -->
+                    </EPARCHY_CODE>
+                    <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                        <!--客户归属业务区 -->
+                    </CITY_CODE>
+                    <EXEC_TIME constraint="?" length="V30" mappedName="execTime">
+                        <!--执行时间：如果大于当前时间则不予处理 -->
+                    </EXEC_TIME>
+                    <FINISH_DATE constraint="?" length="V30" mappedName="finishdate">
+                        <!--完成时间 -->
+                    </FINISH_DATE>
+                    <OPER_FEE constraint="?" length="V11" mappedName="operFee">
+                        <!--营业费用 -->
+                    </OPER_FEE>
+                    <FOREGIFT constraint="?" length="V11" mappedName="foregift">
+                        <!--押金金额 -->
+                    </FOREGIFT>
+                    <ADVANCE_PAY constraint="?" length="V11" mappedName="advancePay">
+                        <!--预付话费 -->
+                    </ADVANCE_PAY>
+                    <FEE_STATE constraint="?" length="V1" mappedName="feeState">
+                        <!--收费标志：0-未收费，1-已收费 -->
+                    </FEE_STATE>
+                    <FEE_TIME constraint="?" length="V30" mappedName="feeTime">
+                        <!--收费时间 -->
+                    </FEE_TIME>
+                    <FEE_STAFF_ID constraint="?" length="V20" mappedName="feeStaffId">
+                        <!--收费员工 -->
+                    </FEE_STAFF_ID>
+                    <CANCEL_TAG constraint="?" length="F1" mappedName="cancelTag">
+                        <!--返销标志：0-未返销，1-被返销，2-返销。返销时新插一条标志为2的记录，同时修改原记录的返销标志为1。 -->
+                    </CANCEL_TAG>
+                    <CANCEL_DATE constraint="?" length="V30" mappedName="cancelDate">
+                        <!--返销时间：对于返销记录(CANCEL_TAG=2)填业务受理时间；对于被返销记录（CANCEL_TAG=1）填业务返销时间 -->
+                    </CANCEL_DATE>
+                    <CANCEL_STAFF_ID constraint="?" length="V20" mappedName="cancelStaffId">
+                        <!--返销员工：对于返销记录(CANCEL_TAG=2)填业务受理员工；对于被返销记录（CANCEL_TAG=1）填业务返销员工 -->
+                    </CANCEL_STAFF_ID>
+                    <CANCEL_DEPART_ID constraint="?" length="V20" mappedName="cancelDepartId">
+                        <!--返销渠道：对于返销记录(CANCEL_TAG=2)填业务受理渠道；对于被返销记录（CANCEL_TAG=1）填业务返销渠道 -->
+                    </CANCEL_DEPART_ID>
+                    <CANCEL_CITY_CODE constraint="?" length="V20" mappedName="cancelCityCode">
+                        <!--返销业务区：对于返销记录(CANCEL_TAG=2)填业务受理业务区；对于被返销记录（CANCEL_TAG=1）填业务返销业务区 -->
+                    </CANCEL_CITY_CODE>
+                    <CANCEL_EPARCHY_CODE constraint="?" length="V6" mappedName="cancelEparchyCode">
+                        <!--返销地州：对于返销记录(CANCEL_TAG=2)填业务受理地州；对于被返销记录（CANCEL_TAG=1）填业务返销地州 -->
+                    </CANCEL_EPARCHY_CODE>
+                    <CHECK_TYPE_CODE constraint="?" length="V1" mappedName="checktypeCode">
+                        <!--身份验证方式 -->
+                    </CHECK_TYPE_CODE>
+                    <CHK_TAG constraint="?" length="V1" mappedName="chkTag">
+                        <!--审核标志：0-未审核，1-审核通过，2-审核未通过。 -->
+                    </CHK_TAG>
+                    <BLACK_USER_TAG constraint="?" length="V1" mappedName="blackUserTag">
+                    </BLACK_USER_TAG>
+                    <AUDIT_TAG constraint="?" length="V1" mappedName="auditTag">
+                        <!--稽核标志：0-未稽核，1-已稽核 -->
+                    </AUDIT_TAG>
+                    <AUDIT_BATCH_NO constraint="?" length="V16" mappedName="auditBatchNo">
+                        <!--稽核批次号 -->
+                    </AUDIT_BATCH_NO>
+                    <ACTOR_NAME constraint="?" length="V50" mappedName="actorName">
+                        <!--担保人名称 -->
+                    </ACTOR_NAME>
+                    <ACTOR_CERTTYPEID constraint="?" length="V1" mappedName="actorCertTypeId">
+                        <!--经办人证件类型 -->
+                    </ACTOR_CERTTYPEID>
+                    <ACTOR_PHONE constraint="?" length="V40" mappedName="actorPhone">
+                        <!--担保人证件号码 -->
+                    </ACTOR_PHONE>
+                    <ACTOR_CERTNUM constraint="?" length="V50" mappedName="actorCertNum">
+                        <!--担保人证件号码 -->
+                    </ACTOR_CERTNUM>
+                    <CONTACT constraint="?" length="V50" mappedName="contact">
+                        <!--联系人 -->
+                    </CONTACT>
+                    <CONTACT_PHONE constraint="?" length="V40" mappedName="contactPhone">
+                        <!--联系人电话 -->
+                    </CONTACT_PHONE>
+                    <CONTACT_ADDRESS constraint="?" length="V500" mappedName="contactAddress">
+                        <!--联系人地址 -->
+                    </CONTACT_ADDRESS>
+                    <REMARK constraint="?" length="V500" mappedName="remark">
+                        <!--备注 -->
+                    </REMARK>
+                    <MAIN_DISCNT_CODE constraint="?" length="V8" mappedName="mainDiscntCode">
+                        <!--主资费标识 -->
+                    </MAIN_DISCNT_CODE>
+                    <PRODUCT_SPEC constraint="?" length="V200" mappedName="productSpec">
+                        <!--产品规格 -->
+                    </PRODUCT_SPEC>
+                    <TRADE_DEPART_ID constraint="?" length="V20" mappedName="tradeDepartId">
+                                <!--操作部门 -->
+                            </TRADE_DEPART_ID>
+                    <TRADE_JUDGE_OWE_TAG constraint="?" length="V20" mappedName="tradeJudgeOweTag">
+                            </TRADE_JUDGE_OWE_TAG>
+                    <TRADE_STATUS constraint="?" length="V20" mappedName="tradeStatus">
+                            </TRADE_STATUS>
+                    <ATTR_TYPE_CODE constraint="?" length="V20" mappedName="attrTypeCode">
+                    </ATTR_TYPE_CODE>
+                    <TRADE_ATTR constraint="?" length="V20" mappedName="tradeAttr">
+                    </TRADE_ATTR>
+                    <TRADE_LCU_NAME constraint="?" length="V30" mappedName="tradeLcuName">
+                    </TRADE_LCU_NAME>
+                    <STANDARD_KIND_CODE constraint="?" length="V7" mappedName="standardKindCode">
+                    </STANDARD_KIND_CODE>
+                </BASE>
+                <EXT constraint="?" mappedName="ext">
+                    <TRADEFEE_DEVICE constraint="?" mappedName="tradeFeeDevice">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <FEE_TYPE_CODE constraint="1" length="V8" mappedName="feeTypeCode">
+                                <!--费用类型编码：为营业费用项编码 -->
+                            </FEE_TYPE_CODE>
+                            <DEVICE_TYPE_CODE constraint="1" length="V10" mappedName="deviceTypeCode">
+                                <!--设备类型编码 -->
+                            </DEVICE_TYPE_CODE>
+                            <DEVICE_NO_S constraint="1" length="V30" mappedName="deviceNoS">
+                                <!--起始设备编码 -->
+                            </DEVICE_NO_S>
+                            <DEVICE_NO_E constraint="?" length="V30" mappedName="deviceNoE">
+                                <!--结束设备编码 -->
+                            </DEVICE_NO_E>
+                            <DEVICE_PRICE constraint="1" length="V11" mappedName="devicePrice">
+                                <!--设备单价 -->
+                            </DEVICE_PRICE>
+                            <SALE_PRICE constraint="1" length="V11" mappedName="salePrice">
+                                <!--实售价格 -->
+                            </SALE_PRICE>
+                            <DEVICE_NUM constraint="1" length="V11" mappedName="deviceNum">
+                                <!--销售数量 -->
+                            </DEVICE_NUM>
+                        </ITEM>
+                    </TRADEFEE_DEVICE>
+                    <TRADEFEE_SUB constraint="?" mappedName="tradefeeSub">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <FEE_MODE constraint="1" length="F1" mappedName="feeMode">
+                                <!--费用类型：0-营业费用项，1-押金，2-预存 -->
+                            </FEE_MODE>
+                            <FEE_TYPE_CODE constraint="1" length="V8" mappedName="feeTypeCode">
+                                <!--费用类型编码：可以为营业费用项、押金或存折类型的编码 -->
+                            </FEE_TYPE_CODE>
+                            <OLDFEE constraint="1" length="V11" mappedName="oldFee">
+                                <!--应缴金额 -->
+                            </OLDFEE>
+                            <FEE constraint="1" length="V11" mappedName="fee">
+                                <!--实缴金额 -->
+                            </FEE>
+                            <CHARGE_ID constraint="?" length="V16" mappedName="chargeId">
+                                <!--缴费流水号：仅针对预存类型，调用缴费接口后回填此字段，返销时根据此流水调用返销接口 -->
+                            </CHARGE_ID>
+                            <DERATE_ID constraint="?" length="V16" mappedName="derateId">
+                                <!--减免流水号 -->
+                            </DERATE_ID>
+                            <DERATE_REMARK constraint="?" length="V100" mappedName="derateRemark">
+                                <!--减免原因 -->
+                            </DERATE_REMARK>
+                            <START_DATE constraint="?" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <MONTHS constraint="?" length="V6" mappedName="months">
+                                <!--月份数 -->
+                            </MONTHS>
+                            <CHARGE_SOURCE_CODE constraint="?" length="V4" mappedName="chargeSourceCode">
+                                <!--1-开户，2-购机，3-积分转 -->
+                            </CHARGE_SOURCE_CODE>
+                            <DPST_RTN_DATE constraint="?" length="V19" mappedName="dpstRtnDate">
+                                <!--押金/预存可退日期 -->
+                            </DPST_RTN_DATE>
+                            <LIMIT_FEE constraint="?" length="V11" mappedName="limitFee">
+                                <!--这里的限额是指使用限额 -->
+                            </LIMIT_FEE>
+                            <DEPOSIT_PRIOR_RULE_ID constraint="?" length="V8" mappedName="depositPriorRuleId">
+                                <!--预存优先规则标识 -->
+                            </DEPOSIT_PRIOR_RULE_ID>
+                            <RULE_ID constraint="?" length="V8" mappedName="ruleId">
+                                <!--储值方式和账本对应规则标识 -->
+                            </RULE_ID>
+                            <APPR_STAFF_ID constraint="?" length="V20" mappedName="apprStaffId">
+                                <!--审核员工号 -->
+                            </APPR_STAFF_ID>
+                            <CALCULATE_ID constraint="1" length="V16" mappedName="calculateId">
+                                <!--算费流水号 -->
+                            </CALCULATE_ID>
+                            <CALCULATE_DATE constraint="?" length="V30" mappedName="calculateDate">
+                                <!--算费时间 -->
+                            </CALCULATE_DATE>
+                            <STAFF_ID constraint="1" length="V20" mappedName="staffId">
+                                <!--算费员工 -->
+                            </STAFF_ID>
+                            <CALCULATE_TAG constraint="?" length="F1" mappedName="calculateTag">
+                                <!--手工算费标记：自动算费－N，手工算费－Y -->
+                            </CALCULATE_TAG>
+                            <PAY_TAG constraint="1" length="F1" mappedName="payTag">
+                                <!--收费标志：0－未收费，1－已收费 -->
+                            </PAY_TAG>
+                            <PAY_ID constraint="?" length="V16" mappedName="payId">
+                                <!--收费流水号 -->
+                            </PAY_ID>
+                            <PAY_DATE constraint="?" length="V30" mappedName="payDate">
+                                <!--收费时间 -->
+                            </PAY_DATE>
+                            <FEE_STAFF_ID constraint="?" length="V20" mappedName="feeStaffId">
+                                <!--收费员工 -->
+                            </FEE_STAFF_ID>
+                            <FEE_DEPART_ID constraint="?" length="V20" mappedName="feeDepartId">
+                                <!--收费部门 -->
+                            </FEE_DEPART_ID>
+                        </ITEM>
+                    </TRADEFEE_SUB>
+                    <TRADE_ACCT constraint="?" mappedName="tradeAcct">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <ACCT_ID constraint="?" length="V16" mappedName="acctId">
+                                <!--帐户标识 -->
+                            </ACCT_ID>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--地市编码 -->
+                            </EPARCHY_CODE>
+                            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                                <!--市县编码 -->
+                            </CITY_CODE>
+                            <CUST_ID constraint="?" length="V16" mappedName="custId">
+                                <!--客户标识 -->
+                            </CUST_ID>
+                            <PAY_NAME constraint="?" length="V120" mappedName="payName">
+                                <!--帐户名称 -->
+                            </PAY_NAME>
+                            <PAY_MODE_CODE constraint="?" length="V1" mappedName="payModeCode">
+                                <!--现金、托收，代扣（见参数表） -->
+                            </PAY_MODE_CODE>
+                            <SCORE_VALUE constraint="?" length="V12" mappedName="scoreValue">
+                                <!--帐户积分 -->
+                            </SCORE_VALUE>
+                            <CREDIT_CLASS_ID constraint="?" length="V4" mappedName="creditClassId">
+                                <!--信用等级 -->
+                            </CREDIT_CLASS_ID>
+                            <BASIC_CREDIT_VALUE constraint="?" length="V12" mappedName="basicCreditValue">
+                                <!--基本信用度 -->
+                            </BASIC_CREDIT_VALUE>
+                            <CREDIT_VALUE constraint="?" length="V12" mappedName="creditValue">
+                                <!--信用度 -->
+                            </CREDIT_VALUE>
+                            <CREDIT_CONTROL_ID constraint="?" length="V8" mappedName="creditControlId">
+                                <!--信用控制规则ID -->
+                            </CREDIT_CONTROL_ID>
+                            <DEBUTY_USER_ID constraint="?" length="V16" mappedName="debutyUserId">
+                                <!--代表用户标识 -->
+                            </DEBUTY_USER_ID>
+                            <DEBUTY_CODE constraint="?" length="V40" mappedName="debutyCode">
+                                <!--代表号码 -->
+                            </DEBUTY_CODE>
+                            <CONTRACT_NO constraint="?" length="V20" mappedName="contractNo">
+                                <!--合同号 -->
+                            </CONTRACT_NO>
+                            <REMOVE_TAG constraint="?" length="V1" mappedName="removeTag">
+                                <!--注销标志：0-在用，1-已销 -->
+                            </REMOVE_TAG>
+                            <OPEN_DATE constraint="?" length="V30" mappedName="openDate">
+                                <!--开户时间 -->
+                            </OPEN_DATE>
+                            <REMOVE_DATE constraint="?" length="V30" mappedName="removeDate">
+                                <!--销户时间 -->
+                            </REMOVE_DATE>
+                            <NET_TYPE_CODE constraint="?" length="V4" mappedName="netTypeCode">
+                                <!--网别 -->
+                            </NET_TYPE_CODE>
+                            <ACCT_PASSWD constraint="?" length="V30" mappedName="acctPasswd">
+                                <!--帐户密码 -->
+                            </ACCT_PASSWD>
+                            <OLD_ACCT_ID constraint="?" length="V16" mappedName="oldAcctId">
+                                <!--老帐户村 -->
+                            </OLD_ACCT_ID>
+                        </ITEM>
+                    </TRADE_ACCT>
+                    <TRADE_ACCT_CONSIGN constraint="?" mappedName="tradeAcctConsign">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--地州编码 -->
+                            </EPARCHY_CODE>
+                            <ACCT_ID constraint="?" length="V16" mappedName="acctId">
+                                <!--帐户标识 -->
+                            </ACCT_ID>
+                            <PAY_MODE_CODE constraint="?" length="V1" mappedName="payModeCode">
+                                <!--0-现金 1-托收 2-代扣 -->
+                            </PAY_MODE_CODE>
+                            <CONSIGN_MODE constraint="?" length="V1" mappedName="consignMode">
+                                <!--托收方式标志 0-按帐户托 1-按用户托 -->
+                            </CONSIGN_MODE>
+                            <ASSISTANT_TAG constraint="?" length="V4" mappedName="assistantTag">
+                                <!--0-普通银行帐户 1-信用卡帐户" -->
+                            </ASSISTANT_TAG>
+                            <SUPER_BANK_CODE constraint="?" length="V10" mappedName="superBankCode">
+                                <!--上级银行编号 -->
+                            </SUPER_BANK_CODE>
+                            <BANK_CODE constraint="?" length="V10" mappedName="bankCode">
+                                <!--银行编码 -->
+                            </BANK_CODE>
+                            <BANK_ACCT_NO constraint="?" length="V30" mappedName="bankAcctNo">
+                                <!--付费帐号 -->
+                            </BANK_ACCT_NO>
+                            <AGREEMENT_NO constraint="?" length="V40" mappedName="agreementNo">
+                                <!--托收协议号 -->
+                            </AGREEMENT_NO>
+                            <PAYMENT_ID constraint="?" length="V8" mappedName="paymentId">
+                                <!--默认进现金账本 -->
+                            </PAYMENT_ID>
+                            <PAY_FEE_MODE_CODE constraint="?" length="V4" mappedName="payFeeModeCode">
+                                <!--4-银行托收 -->
+                            </PAY_FEE_MODE_CODE>
+                            <ACCT_BALANCE_ID constraint="?" length="V16" mappedName="acctBalanceID">
+                                <!--指定账本托收 -->
+                            </ACCT_BALANCE_ID>
+                            <ACT_TAG constraint="?" length="V1" mappedName="actTag">
+                                <!--0-无效 1-有效" -->
+                            </ACT_TAG>
+                            <START_CYCLE_ID constraint="?" length="V6" mappedName="startCycleId">
+                                <!--开始时间 -->
+                            </START_CYCLE_ID>
+                            <END_CYCLE_ID constraint="?" length="V6" mappedName="endCycleId">
+                                <!--结束时间 -->
+                            </END_CYCLE_ID>
+                            <UPDATE_TIME constraint="?" length="V30" mappedName="updateTime">
+                                <!--更新时间 -->
+                            </UPDATE_TIME>
+                            <BANK_ACCT_NAME constraint="?" length="V100" mappedName="bankAcctName">
+                                <!--托收名称 -->
+                            </BANK_ACCT_NAME>
+                            <LIMIT_MODE constraint="?" length="V1" mappedName="limitMode">
+                                <!--限额方式 -->
+                            </LIMIT_MODE>
+                            <LIMIT_MONEY constraint="?" length="V11" mappedName="limitMoney">
+                                <!--限额 -->
+                            </LIMIT_MONEY>
+                            <BANK_BUSI_KIND constraint="?" length="V20" mappedName="bankBusiKind">
+                                <!--银行业务类型 -->
+                            </BANK_BUSI_KIND>
+                        </ITEM>
+                    </TRADE_ACCT_CONSIGN>
+                    <TRADE_ASSURE constraint="?" mappedName="tradeAssure">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <ASSURE_ID_TYPE constraint="1" length="F1" mappedName="assureIdType">
+                                <!--担保类型 -->
+                            </ASSURE_ID_TYPE>
+                            <ASSURE_ID constraint="1" length="V16" mappedName="assureId">
+                                <!--担保项目 -->
+                            </ASSURE_ID>
+                            <ASSURE_TYPE_CODE constraint="?" length="V1" mappedName="assureTypeCode">
+                                <!--记录是客户担保/押金担保/用户担保等等方式 -->
+                            </ASSURE_TYPE_CODE>
+                            <ASSURE_DATE constraint="?" length="V19" mappedName="assureDate">
+                                <!--担保期限 -->
+                            </ASSURE_DATE>
+                            <ASSURE_CUST_ID constraint="?" length="V16" mappedName="assureCustId">
+                                <!--针对单位担保 -->
+                            </ASSURE_CUST_ID>
+                            <ASSURE_NO constraint="?" length="V50" mappedName="assureNo">
+                                <!--担保号 -->
+                            </ASSURE_NO>
+                            <ASSURE_PSPT_TYPE_CODE constraint="?" length="V1" mappedName="assurePsptTypeCode">
+                                <!--担保人证件类型 -->
+                            </ASSURE_PSPT_TYPE_CODE>
+                            <ASSURE_PSPT_ID constraint="?" length="V100" mappedName="assurePsptId">
+                                <!--担保人证件号码 -->
+                            </ASSURE_PSPT_ID>
+                            <ASSURE_NAME constraint="?" length="V100" mappedName="assureName">
+                                <!--担保人姓名 -->
+                            </ASSURE_NAME>
+                            <ASSURE_FOREGIFT constraint="?" length="V11" mappedName="assureForegift">
+                                <!--担保押金 -->
+                            </ASSURE_FOREGIFT>
+                            <ASSURE_FOREGIFT_CODE constraint="?" length="V4" mappedName="assureForegiftCode">
+                                <!--担保押金类型 -->
+                            </ASSURE_FOREGIFT_CODE>
+                            <ASSURE_SERIAL_NUMBER constraint="?" length="V20" mappedName="assureSerialNumber">
+                                <!--担保手机号码 -->
+                            </ASSURE_SERIAL_NUMBER>
+                            <ASSURE_USER_ID constraint="?" length="V16" mappedName="assureUserId">
+                                <!--担保用户标识 -->
+                            </ASSURE_USER_ID>
+                            <ASSURE_BANK_CODE constraint="?" length="V6" mappedName="assureBankCode">
+                                <!--担保银行编码 -->
+                            </ASSURE_BANK_CODE>
+                            <ASSURE_BANK_ACCT_NO constraint="?" length="V30" mappedName="assureBankAcctNo">
+                                <!--存单或抵压编号 -->
+                            </ASSURE_BANK_ACCT_NO>
+                            <ASSURE_BANK_ACCT_NAME constraint="?" length="V30" mappedName="assureBankAcctName">
+                                <!--存单或抵压户名 -->
+                            </ASSURE_BANK_ACCT_NAME>
+                            <ASSURE_BANK_MONEY constraint="?" length="V11" mappedName="assureBankMoney">
+                                <!--质押金额 -->
+                            </ASSURE_BANK_MONEY>
+                            <REMARK constraint="?" length="V500" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                        </ITEM>
+                    </TRADE_ASSURE>
+                    <TRADE_CONTRACT constraint="?" mappedName="tradeContract">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <CUST_ID constraint="?" length="V16" mappedName="custId">
+                                <!--客户标识 -->
+                            </CUST_ID>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <CONTRACT_ID constraint="1" length="V50" mappedName="contractId">
+                                <!--合同标识 -->
+                            </CONTRACT_ID>
+                            <RELA_CONTRACT_ID constraint="?" length="V50" mappedName="relaContractId">
+                                <!--原合同编号 -->
+                            </RELA_CONTRACT_ID>
+                            <CONTRACT_NAME constraint="?" length="V50" mappedName="contractName">
+                                <!--合同名称 -->
+                            </CONTRACT_NAME>
+                            <CONTRACT_LEVEL constraint="?" length="V1" mappedName="contractLevel">
+                                <!--0－本地市合同，1－全省合同，见参数表TD_S_STATIC/CUSTCONTRACT_LEVEL -->
+                            </CONTRACT_LEVEL>
+                            <CONTRACT_TYPE_CODE constraint="?" length="V1" mappedName="contractTypeCode">
+                                <!--见参数表TD_S_CONTACTTYPE -->
+                            </CONTRACT_TYPE_CODE>
+                            <CONTRACT_CONTENT constraint="?" length="V200" mappedName="contractContent">
+                                <!--合同内容 -->
+                            </CONTRACT_CONTENT>
+                            <CONTRACT_MANAGER constraint="?" length="V30" mappedName="contractManager">
+                                <!--合同项目经理 -->
+                            </CONTRACT_MANAGER>
+                            <CONTRACT_WRITE_DATE constraint="?" length="V30" mappedName="contractWriteDate">
+                                <!--合同签订时间 -->
+                            </CONTRACT_WRITE_DATE>
+                            <CONTRACT_WRITER constraint="?" length="V30" mappedName="contractWriter">
+                                <!--合同签订人 -->
+                            </CONTRACT_WRITER>
+                            <CONTRACT_WRITE_TYPE constraint="?" length="V1" mappedName="contractWriteType">
+                                <!--0－新签，1－续签 -->
+                            </CONTRACT_WRITE_TYPE>
+                            <CONTRACT_WRITE_CITY constraint="?" length="V20" mappedName="contractWriteCity">
+                                <!--合同签署地市 -->
+                            </CONTRACT_WRITE_CITY>
+                            <CONTRACT_START_DATE constraint="?" length="V30" mappedName="contractStartDate">
+                                <!--合同有效起始时间 -->
+                            </CONTRACT_START_DATE>
+                            <CONTRACT_END_DATE constraint="?" length="V30" mappedName="contractEndDate">
+                                <!--合同有效终止时间 -->
+                            </CONTRACT_END_DATE>
+                            <CONTRACT_CONMAN constraint="?" length="V30" mappedName="contractConman">
+                                <!--合同决策人 -->
+                            </CONTRACT_CONMAN>
+                            <CONTRACT_IN_DATE constraint="?" length="V30" mappedName="contractInDate">
+                                <!--合同录入日期 -->
+                            </CONTRACT_IN_DATE>
+                            <CONTRACT_COMPLETE_DATE constraint="?" length="V30" mappedName="contractCompleteDate">
+                                <!--竣工日期 -->
+                            </CONTRACT_COMPLETE_DATE>
+                            <CONTRACT_STATE_CODE constraint="?" length="V1" mappedName="contractStateCode">
+                                <!--描述合同受理、施工、挂起、注销等处理过程 -->
+                            </CONTRACT_STATE_CODE>
+                            <CONTRACT_STATE_NOTE constraint="?" length="V100" mappedName="contractStateNote">
+                                <!--合同状态说明 -->
+                            </CONTRACT_STATE_NOTE>
+                            <CONTRACT_FLAG constraint="?" length="V1" mappedName="contractFlag">
+                                <!--0－无效，1－有效 -->
+                            </CONTRACT_FLAG>
+                            <CONTRACT_RECV_SITE constraint="?" length="V100" mappedName="contractRecvSite">
+                                <!--合同受理点 -->
+                            </CONTRACT_RECV_SITE>
+                            <CONTRACT_FILE_ID constraint="?" length="V500" mappedName="contractFikeId">
+                                <!--合同文件标识 -->
+                            </CONTRACT_FILE_ID>
+                            <NET_TYPE_CODE constraint="?" length="V4" mappedName="netTypeCode">
+                                <!--网别 -->
+                            </NET_TYPE_CODE>
+                            <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId">
+                                <!--发展渠道 -->
+                            </DEVELOP_DEPART_ID>
+                            <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId">
+                                <!--发展员工 -->
+                            </DEVELOP_STAFF_ID>
+                            <CLERK_STAFF_ID constraint="?" length="V20" mappedName="vlerkStaffId">
+                                <!--经办人 -->
+                            </CLERK_STAFF_ID>
+                            <CLERK_CONTACT_MODE constraint="?" length="V1" mappedName="clerkContactMode">
+                                <!--经办人联系方式 -->
+                            </CLERK_CONTACT_MODE>
+                            <CLERK_CONTACT_INFO constraint="?" length="V100" mappedName="clerkContactInfo">
+                                <!--经办人联系信息 -->
+                            </CLERK_CONTACT_INFO>
+                            <TECHN_STAFF_ID constraint="?" length="V20" mappedName="technStaffId">
+                                <!--技术人员 -->
+                            </TECHN_STAFF_ID>
+                            <TECHN_CONTACT_MODE constraint="?" length="V1" mappedName="technContactMode">
+                                <!--技术人员联系方式 -->
+                            </TECHN_CONTACT_MODE>
+                            <TECHN_CONTACT_INFO constraint="?" length="V100" mappedName="technContactInfo">
+                                <!--技术人员联系信息 -->
+                            </TECHN_CONTACT_INFO>
+                            <UPDATE_TIME constraint="?" length="V30" mappedName="updateTime">
+                                <!--更新时间 -->
+                            </UPDATE_TIME>
+                            <UPDATE_STAFF_ID constraint="?" length="V20" mappedName="updateStaffId">
+                                <!--更新员工 -->
+                            </UPDATE_STAFF_ID>
+                            <UPDATE_DEPART_ID constraint="?" length="V20" mappedName="updateDepartId">
+                                <!--更新部门 -->
+                            </UPDATE_DEPART_ID>
+                            <UPDATE_CITY_CODE constraint="?" length="V20" mappedName="updateCityCode">
+                                <!--更新地市 -->
+                            </UPDATE_CITY_CODE>
+                            <REMARK constraint="?" length="V100" mappedName="remark">
+                                <!--备注信息 -->
+                            </REMARK>
+                            <RSRV_NUM1 constraint="?" length="V5" mappedName="rsrvNum1">
+                                <!--预留数值1 -->
+                            </RSRV_NUM1>
+                            <RSRV_NUM2 constraint="?" length="V8" mappedName="rsrvNum2">
+                                <!--预留数值2 -->
+                            </RSRV_NUM2>
+                            <RSRV_NUM3 constraint="?" length="V9" mappedName="rsrvNum3">
+                                <!--预留数值3 -->
+                            </RSRV_NUM3>
+                            <RSRV_STR1 constraint="?" length="V20" mappedName="rsrvStr1">
+                                <!--预留字段1 -->
+                            </RSRV_STR1>
+                            <RSRV_STR2 constraint="?" length="V20" mappedName="rsrvStr2">
+                                <!--预留字段2 -->
+                            </RSRV_STR2>
+                            <RSRV_STR3 constraint="?" length="V20" mappedName="rsrvStr3">
+                                <!--预留字段3 -->
+                            </RSRV_STR3>
+                            <RSRV_STR4 constraint="?" length="V100" mappedName="rsrvStr4">
+                                <!--预留字段4 -->
+                            </RSRV_STR4>
+                            <RSRV_STR5 constraint="?" length="V300" mappedName="rsrvStr5">
+                                <!--预留字段5 -->
+                            </RSRV_STR5>
+                            <RSRV_STR6 constraint="?" length="V500" mappedName="rsrvStr6">
+                                <!--预留字段6 -->
+                            </RSRV_STR6>
+                            <RSRV_DATE1 constraint="?" length="V19" mappedName="rsrvDate1">
+                                <!--预留日期1 -->
+                            </RSRV_DATE1>
+                            <RSRV_DATE2 constraint="?" length="V19" mappedName="rsrvDate2">
+                                <!--预留日期2 -->
+                            </RSRV_DATE2>
+                            <RSRV_TAG1 constraint="?" length="V1" mappedName="rsrvTag1">
+                                <!--预留标志1 -->
+                            </RSRV_TAG1>
+                            <RSRV_TAG2 constraint="?" length="V1" mappedName="rsrvTag2">
+                                <!--预留标志2 -->
+                            </RSRV_TAG2>
+                        </ITEM>
+                    </TRADE_CONTRACT>
+                    <TRADE_CUSTOMER constraint="?" mappedName="tradeCustomer">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <CUST_ID constraint="?" length="V16" mappedName="sustId">
+                                <!--客户标识 -->
+                            </CUST_ID>
+                            <CUST_NAME constraint="?" length="V100" mappedName="custName">
+                                <!--客户名称 -->
+                            </CUST_NAME>
+                            <CUST_TYPE constraint="?" length="V1" mappedName="custType">
+                                <!--客户类型：0-个人客户，1-集团客户 -->
+                            </CUST_TYPE>
+                            <CUST_STATE constraint="?" length="V1" mappedName="custState">
+                                <!--客户状态：0-在网、1-潜在 -->
+                            </CUST_STATE>
+                            <PSPT_TYPE_CODE constraint="?" length="V1" mappedName="psptTypeCode">
+                                <!--证件类别：见参数表TD_S_PASSPORTTYPE -->
+                            </PSPT_TYPE_CODE>
+                            <PSPT_ID constraint="?" length="V100" mappedName="psptId">
+                                <!--证件号码 -->
+                            </PSPT_ID>
+                            <OPEN_LIMIT constraint="?" length="V2" mappedName="openLimit">
+                                <!--限制开户数：限制客户的身份证可以开用户的数量，为0表示不限制。 -->
+                            </OPEN_LIMIT>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--归属地市 -->
+                            </EPARCHY_CODE>
+                            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                                <!--归属业务区 -->
+                            </CITY_CODE>
+                            <CUST_PASSWD constraint="?" length="V10" mappedName="custPasswd">
+                                <!--客户密码 -->
+                            </CUST_PASSWD>
+                            <SCORE_VALUE constraint="?" length="V11" mappedName="scoreValue">
+                                <!--客户积分 -->
+                            </SCORE_VALUE>
+                            <CREDIT_CLASS constraint="?" length="V8" mappedName="creditClass">
+                                <!--信用等级 -->
+                            </CREDIT_CLASS>
+                            <BASIC_CREDIT_VALUE constraint="?" length="V11" mappedName="basicCreditValue">
+                                <!--基本信用度 -->
+                            </BASIC_CREDIT_VALUE>
+                            <CREDIT_VALUE constraint="?" length="V11" mappedName="creditValue">
+                                <!--信用度 -->
+                            </CREDIT_VALUE>
+                            <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId">
+                                <!--发展渠道 -->
+                            </DEVELOP_DEPART_ID>
+                            <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId">
+                                <!--发展员工 -->
+                            </DEVELOP_STAFF_ID>
+                            <IN_DEPART_ID constraint="?" length="V20" mappedName="inDepartId">
+                                <!--建档渠道 -->
+                            </IN_DEPART_ID>
+                            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId">
+                                <!--建档员工 -->
+                            </IN_STAFF_ID>
+                            <IN_DATE constraint="?" length="V30" mappedName="inDate">
+                                <!--建档时间 -->
+                            </IN_DATE>
+                            <REMOVE_TAG constraint="?" length="V1" mappedName="removeTag">
+                                <!--销档标志：0-正常、1-销档 -->
+                            </REMOVE_TAG>
+                            <REMOVE_DATE constraint="?" length="V30" mappedName="removeDate">
+                                <!--销档时间 -->
+                            </REMOVE_DATE>
+                            <REMOVE_STAFF_ID constraint="?" length="V20" mappedName="removeStaffId">
+                                <!--销档员工 -->
+                            </REMOVE_STAFF_ID>
+                            <REMOVE_CHANGE constraint="?" length="V100" mappedName="removeChange">
+                                <!--销档原因 -->
+                            </REMOVE_CHANGE>
+                            <UPDATE_TIME constraint="?" length="V30" mappedName="updateTime">
+                                <!--更新时间 -->
+                            </UPDATE_TIME>
+                            <UPDATE_STAFF_ID constraint="?" length="V20" mappedName="updateStaffId">
+                                <!--更新员工 -->
+                            </UPDATE_STAFF_ID>
+                            <UPDATE_DEPART_ID constraint="?" length="V20" mappedName="updateDepartId">
+                                <!--更新部门 -->
+                            </UPDATE_DEPART_ID>
+                            <REMARK constraint="?" length="V500" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                            <RSRV_NUM1 constraint="?" length="V5" mappedName="rsrvNum1">
+                                <!--预留数值1 -->
+                            </RSRV_NUM1>
+                            <RSRV_NUM2 constraint="?" length="V8" mappedName="rsrvNum2">
+                                <!--预留数值2 -->
+                            </RSRV_NUM2>
+                            <RSRV_NUM3 constraint="?" length="V9" mappedName="rsrvNum3">
+                                <!--预留数值3 -->
+                            </RSRV_NUM3>
+                            <RSRV_NUM4 constraint="?" length="V12" mappedName="rsrvNum4">
+                                <!--预留数值4 -->
+                            </RSRV_NUM4>
+                            <RSRV_NUM5 constraint="?" length="V12" mappedName="rsrvNum5">
+                                <!--预留数值5 -->
+                            </RSRV_NUM5>
+                            <RSRV_STR1 constraint="?" length="V100" mappedName="rsrvStr1">
+                                <!--预留字段1 -->
+                            </RSRV_STR1>
+                            <RSRV_STR2 constraint="?" length="V200" mappedName="rsrvStr2">
+                                <!--预留字段2 -->
+                            </RSRV_STR2>
+                            <RSRV_STR3 constraint="?" length="V300" mappedName="rsrvStr3">
+                                <!--预留字段3 -->
+                            </RSRV_STR3>
+                            <RSRV_STR4 constraint="?" length="V300" mappedName="rsrvStr4">
+                                <!--预留字段4 -->
+                            </RSRV_STR4>
+                            <RSRV_STR5 constraint="?" length="V500" mappedName="rsrvStr5">
+                                <!--预留字段5 -->
+                            </RSRV_STR5>
+                            <RSRV_STR6 constraint="?" length="V500" mappedName="rsrvStr6">
+                                <!--预留字段6 -->
+                            </RSRV_STR6>
+                            <RSRV_STR7 constraint="?" length="V500" mappedName="rsrvStr7">
+                                <!--预留字段7 -->
+                            </RSRV_STR7>
+                            <RSRV_STR8 constraint="?" length="V500" mappedName="rsrvStr8">
+                                <!--预留字段8 -->
+                            </RSRV_STR8>
+                            <RSRV_STR9 constraint="?" length="V500" mappedName="rsrvStr9">
+                                <!--预留字段9 -->
+                            </RSRV_STR9>
+                            <RSRV_STR10 constraint="?" length="V500" mappedName="rsrvStr10">
+                                <!--预留字段10 -->
+                            </RSRV_STR10>
+                            <RSRV_DATE1 constraint="?" length="V19" mappedName="rsrvDate1">
+                                <!--预留日期1 -->
+                            </RSRV_DATE1>
+                            <RSRV_DATE2 constraint="?" length="V19" mappedName="rsrvDate2">
+                                <!--预留日期2 -->
+                            </RSRV_DATE2>
+                            <RSRV_DATE3 constraint="?" length="V19" mappedName="rsrvDate3">
+                                <!--预留日期3 -->
+                            </RSRV_DATE3>
+                            <RSRV_DATE4 constraint="?" length="V19" mappedName="rsrvDate4">
+                                <!--预留日期4 -->
+                            </RSRV_DATE4>
+                            <RSRV_DATE5 constraint="?" length="V19" mappedName="rsrvDate5">
+                                <!--预留日期5 -->
+                            </RSRV_DATE5>
+                            <RSRV_TAG1 constraint="?" length="V1" mappedName="rsrvTag1">
+                                <!--预留标志1 -->
+                            </RSRV_TAG1>
+                            <RSRV_TAG2 constraint="?" length="V1" mappedName="rsrvTag2">
+                                <!--预留标志2 -->
+                            </RSRV_TAG2>
+                            <RSRV_TAG3 constraint="?" length="V1" mappedName="rsrvTag3">
+                                <!--预留标志3 -->
+                            </RSRV_TAG3>
+                            <RSRV_TAG4 constraint="?" length="V1" mappedName="rsrvTag4">
+                                <!--预留标志4 -->
+                            </RSRV_TAG4>
+                            <RSRV_TAG5 constraint="?" length="V1" mappedName="rsrvTag5">
+                                <!--预留标志5 -->
+                            </RSRV_TAG5>
+                            <SIMPLE_SPELL constraint="?" length="V100" mappedName="simpleSpell">
+                                <!--客户简拼 -->
+                            </SIMPLE_SPELL>
+                        </ITEM>
+                    </TRADE_CUSTOMER>
+                    <TRADE_CUST_PERSON constraint="?" mappedName="tradeCustPerson">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <CUST_ID constraint="?" length="V16" mappedName="custId">
+                                <!--客户标识 -->
+                            </CUST_ID>
+                            <PSPT_TYPE_CODE constraint="?" length="V1" mappedName="psptTypeCode">
+                                <!--证件类别：见参数表TD_S_PASSPORTTYPE -->
+                            </PSPT_TYPE_CODE>
+                            <PSPT_ID constraint="?" length="V100" mappedName="psptId">
+                                <!--证件号码 -->
+                            </PSPT_ID>
+                            <PSPT_END_DATE constraint="?" length="V19" mappedName="psptEndDate">
+                                <!--证件有效期 -->
+                            </PSPT_END_DATE>
+                            <PSPT_ADDR constraint="?" length="V200" mappedName="psptAddr">
+                                <!--证件地址 -->
+                            </PSPT_ADDR>
+                            <CUST_NAME constraint="?" length="V100" mappedName="custName">
+                                <!--客户名称 -->
+                            </CUST_NAME>
+                            <SEX constraint="?" length="V1" mappedName="sex">
+                                <!--客户性别：M-男，F-女 -->
+                            </SEX>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--归属地市 -->
+                            </EPARCHY_CODE>
+                            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                                <!--归属业务区 -->
+                            </CITY_CODE>
+                            <BIRTHDAY constraint="?" length="V19" mappedName="birthday">
+                                <!--阳历生日 -->
+                            </BIRTHDAY>
+                            <BIRTHDAY_LUNAR constraint="?" length="V50" mappedName="birthdayLunar">
+                                <!--阴历生日 -->
+                            </BIRTHDAY_LUNAR>
+                            <BIRTHDAY_FLAG constraint="?" length="V1" mappedName="birthdayFlag">
+                                <!--阴阳历生日标记：见参数表TD_S_STATIC/CUSTPERSON_BIRTHDAYFLAG -->
+                            </BIRTHDAY_FLAG>
+                            <POST_ADDRESS constraint="?" length="V250" mappedName="postAddress">
+                                <!--通信地址 -->
+                            </POST_ADDRESS>
+                            <POST_CODE constraint="?" length="V6" mappedName="postCode">
+                                <!--邮编 -->
+                            </POST_CODE>
+                            <POST_PERSON constraint="?" length="V50" mappedName="birthdayPerson">
+                                <!--收件人 -->
+                            </POST_PERSON>
+                            <PHONE constraint="?" length="V40" mappedName="phone">
+                                <!--联系电话 -->
+                            </PHONE>
+                            <FAX_NBR constraint="?" length="V40" mappedName="faxNbr">
+                                <!--传真号码 -->
+                            </FAX_NBR>
+                            <EMAIL constraint="?" length="V50" mappedName="email">
+                                <!--电子邮件 -->
+                            </EMAIL>
+                            <HOME_ADDRESS constraint="?" length="V200" mappedName="homeAddress">
+                                <!--家庭地址 -->
+                            </HOME_ADDRESS>
+                            <HOME_PHONE constraint="?" length="V40" mappedName="homePhone">
+                                <!--家庭电话 -->
+                            </HOME_PHONE>
+                            <WORK_NAME constraint="?" length="V80" mappedName="workName">
+                                <!--工作单位 -->
+                            </WORK_NAME>
+                            <WORK_KIND constraint="?" length="F2" mappedName="workKind">
+                                <!--单位性质：党政军机关/国有企、事业/集体企业/私有企业/有限责任公司/股份有限公司/中外合资公司/外商独资企业/民间团体，见参数表：TD_S_STATIC/CUSTPERSON_WORKKIND -->
+                            </WORK_KIND>
+                            <WORK_ADDRESS constraint="?" length="V100" mappedName="workAddress">
+                                <!--单位地址 -->
+                            </WORK_ADDRESS>
+                            <WORK_PHONE constraint="?" length="V40" mappedName="workPhone">
+                                <!--单位电话 -->
+                            </WORK_PHONE>
+                            <WORK_POST_CODE constraint="?" length="F6" mappedName="workPostCode">
+                                <!--单位邮编 -->
+                            </WORK_POST_CODE>
+                            <CALLING_TYPE_CODE constraint="?" length="V3" mappedName="callingTypeCode">
+                                <!--单位行业类别编码：见参数表TD_S_CALLINGTYPE -->
+                            </CALLING_TYPE_CODE>
+                            <SUB_CALLING_TYPE_CODE constraint="?" length="V6" mappedName="subCallingTypeCode">
+                                <!--单位行业子类别编码：见参数表TD_S_CALLINGTYPE -->
+                            </SUB_CALLING_TYPE_CODE>
+                            <WORK_DEPART constraint="?" length="V50" mappedName="workDepart">
+                                <!--工作部门 -->
+                            </WORK_DEPART>
+                            <JOB constraint="?" length="V20" mappedName="job">
+                                <!--职位 -->
+                            </JOB>
+                            <CONTACT constraint="?" length="V60" mappedName="contact">
+                                <!--联系人姓名 -->
+                            </CONTACT>
+                            <CONTACT_PHONE constraint="?" length="V40" mappedName="contactPhone">
+                                <!--联系人电话 -->
+                            </CONTACT_PHONE>
+                            <CONTACT_TYPE_CODE constraint="?" length="V1" mappedName="contactTypeCode">
+                                <!--优先联系方式：0-电话,1-短信,2-电子邮件,3-邮件,4-传真 -->
+                            </CONTACT_TYPE_CODE>
+                            <CONTACT_FREQ constraint="?" length="V1" mappedName="contactFreq">
+                                <!--联系频率：见参数表TD_S_STATIC/CUSTPERSON_CONTACTFREQ -->
+                            </CONTACT_FREQ>
+                            <NATIONALITY_CODE constraint="?" length="V2" mappedName="nationlityCode">
+                                <!--国籍：见参数表TD_S_NATIONALITY -->
+                            </NATIONALITY_CODE>
+                            <LOCAL_NATIVE_CODE constraint="?" length="V4" mappedName="localNativeCode">
+                                <!--籍贯：见参数表TD_S_LOCAL_NATIVE -->
+                            </LOCAL_NATIVE_CODE>
+                            <POPULATION constraint="?" length="V4" mappedName="population">
+                                <!--家庭人口 -->
+                            </POPULATION>
+                            <LANGUAGE_CODE constraint="?" length="V2" mappedName="languageCode">
+                                <!--语言：见参数表TD_S_LANGUAGE_CODE -->
+                            </LANGUAGE_CODE>
+                            <FOLK_CODE constraint="?" length="V2" mappedName="folkCode">
+                                <!--民族：见参数表TD_S_FOLK -->
+                            </FOLK_CODE>
+                            <RELIGION_CODE constraint="?" length="V1" mappedName="religionCode">
+                                <!--信仰：见参数表TD_S_RELIGION -->
+                            </RELIGION_CODE>
+                            <JOB_TYPE_CODE constraint="?" length="V1" mappedName="jobTypeCode">
+                                <!--职业类型：见参数表TD_S_JOBTYPE -->
+                            </JOB_TYPE_CODE>
+                            <REVENUE_LEVEL_CODE constraint="?" length="V1" mappedName="revenumLevelCode">
+                                <!--收入等级：见参数表TD_S_REVENUE_LEVEL -->
+                            </REVENUE_LEVEL_CODE>
+                            <EDUCATE_DEGREE_CODE constraint="?" length="V1" mappedName="educateDegreeCode">
+                                <!--教育程度：见参数表TD_S_EDUCATEDEGREE -->
+                            </EDUCATE_DEGREE_CODE>
+                            <EDUCATE_GRADE_CODE constraint="?" length="V1" mappedName="educateGradeCode">
+                                <!--学历：见参数表TD_S_EDUCATEGRADE -->
+                            </EDUCATE_GRADE_CODE>
+                            <GRADUATE_SCHOOL constraint="?" length="V100" mappedName="graduateSchool">
+                                <!--毕业院校 -->
+                            </GRADUATE_SCHOOL>
+                            <SPECIALITY constraint="?" length="V50" mappedName="speciality">
+                                <!--专业 -->
+                            </SPECIALITY>
+                            <CHARACTER_TYPE_CODE constraint="?" length="V1" mappedName="characterTypeCode">
+                                <!--性格类型：见参数表TD_S_CHARACTERTYPE -->
+                            </CHARACTER_TYPE_CODE>
+                            <HEALTH_STATE_CODE constraint="?" length="V1" mappedName="healthStateCode">
+                                <!--健康状况：见参数表TD_S_STATIC/CUSTPERSON_HEALTHSTATE -->
+                            </HEALTH_STATE_CODE>
+                            <MARRIAGE constraint="?" length="V1" mappedName="marriage">
+                                <!--婚姻状况：0-未婚，1-已婚，见参数表TD_S_STATIC/CUSTPERSON_MARRIAGESTATE -->
+                            </MARRIAGE>
+                            <WEBUSER_ID constraint="?" length="V20" mappedName="webuserId">
+                                <!--网站注册名 -->
+                            </WEBUSER_ID>
+                            <WEB_PASSWD constraint="?" length="V10" mappedName="webPasswd">
+                                <!--认证密码 -->
+                            </WEB_PASSWD>
+                            <COMMUNITY_ID constraint="?" length="V30" mappedName="communityId">
+                                <!--社会保障号 -->
+                            </COMMUNITY_ID>
+                            <REMOVE_TAG constraint="?" length="V1" mappedName="removeTag">
+                                <!--销档标志：0-正常、1-销档 -->
+                            </REMOVE_TAG>
+                            <REMOVE_DATE constraint="?" length="V30" mappedName="removeDate">
+                                <!--销档时间 -->
+                            </REMOVE_DATE>
+                            <REMOVE_STAFF_ID constraint="?" length="V20" mappedName="removeStaffId">
+                                <!--销档员工 -->
+                            </REMOVE_STAFF_ID>
+                            <REMOVE_CHANGE constraint="?" length="V100" mappedName="removeChange">
+                                <!--销档原因 -->
+                            </REMOVE_CHANGE>
+                            <UPDATE_TIME constraint="?" length="V30" mappedName="updateTime">
+                                <!--更新时间 -->
+                            </UPDATE_TIME>
+                            <UPDATE_STAFF_ID constraint="?" length="V20" mappedName="updateStaffId">
+                                <!--更新员工 -->
+                            </UPDATE_STAFF_ID>
+                            <UPDATE_DEPART_ID constraint="?" length="V20" mappedName="updateDepartId">
+                                <!--更新部门 -->
+                            </UPDATE_DEPART_ID>
+                            <REMARK constraint="?" length="V500" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                            <RSRV_NUM1 constraint="?" length="V5" mappedName="rsrvNum1">
+                                <!--预留数值1 -->
+                            </RSRV_NUM1>
+                            <RSRV_NUM2 constraint="?" length="V8" mappedName="rsrvNum2">
+                                <!--预留数值2 -->
+                            </RSRV_NUM2>
+                            <RSRV_NUM3 constraint="?" length="V9" mappedName="rsrvNum3">
+                                <!--预留数值3 -->
+                            </RSRV_NUM3>
+                            <RSRV_STR1 constraint="?" length="V20" mappedName="rsrvStr1">
+                                <!--预留字段1 -->
+                            </RSRV_STR1>
+                            <RSRV_STR2 constraint="?" length="V20" mappedName="rsrvStr2">
+                                <!--预留字段2 -->
+                            </RSRV_STR2>
+                            <RSRV_STR3 constraint="?" length="V20" mappedName="rsrvStr3">
+                                <!--预留字段3 -->
+                            </RSRV_STR3>
+                            <RSRV_STR4 constraint="?" length="V20" mappedName="rsrvStr4">
+                                <!--预留字段4 -->
+                            </RSRV_STR4>
+                            <RSRV_STR5 constraint="?" length="V100" mappedName="rsrvStr5">
+                                <!--预留字段5 -->
+                            </RSRV_STR5>
+                            <RSRV_STR6 constraint="?" length="V200" mappedName="rsrvStr6">
+                                <!--预留字段6 -->
+                            </RSRV_STR6>
+                            <RSRV_STR7 constraint="?" length="V300" mappedName="rsrvStr7">
+                                <!--预留字段7 -->
+                            </RSRV_STR7>
+                            <RSRV_STR8 constraint="?" length="V500" mappedName="rsrvStr8">
+                                <!--预留字段8 -->
+                            </RSRV_STR8>
+                            <RSRV_DATE1 constraint="?" length="V19" mappedName="rsrvDate1">
+                                <!--预留日期1 -->
+                            </RSRV_DATE1>
+                            <RSRV_DATE2 constraint="?" length="V19" mappedName="rsrvDate2">
+                                <!--预留日期2 -->
+                            </RSRV_DATE2>
+                            <RSRV_DATE3 constraint="?" length="V19" mappedName="rsrvDate3">
+                                <!--预留日期3 -->
+                            </RSRV_DATE3>
+                            <RSRV_TAG1 constraint="?" length="V1" mappedName="rsrvTag1">
+                                <!--预留标志1 -->
+                            </RSRV_TAG1>
+                            <RSRV_TAG2 constraint="?" length="V1" mappedName="rsrvTag2">
+                                <!--预留标志2 -->
+                            </RSRV_TAG2>
+                            <RSRV_TAG3 constraint="?" length="V1" mappedName="rsrvTag3">
+                                <!--预留标志3 -->
+                            </RSRV_TAG3>
+                        </ITEM>
+                    </TRADE_CUST_PERSON>
+                    <TRADE_USER constraint="?" mappedName="tradeUser">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <CUST_ID constraint="?" length="V16" mappedName="custId">
+                                <!--归属客户标识 -->
+                            </CUST_ID>
+                            <USECUST_ID constraint="?" length="V16" mappedName="usecustId">
+                                <!--使用客户标识 -->
+                            </USECUST_ID>
+                            <BRAND_CODE constraint="?" length="V4" mappedName="brandCode">
+                                <!--当前品牌编码 -->
+                            </BRAND_CODE>
+                            <PRODUCT_ID constraint="?" length="V8" mappedName="productId">
+                                <!--当前产品标识 -->
+                            </PRODUCT_ID>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--地市编码 -->
+                            </EPARCHY_CODE>
+                            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                                <!--业务区编码 -->
+                            </CITY_CODE>
+                            <USER_PASSWD constraint="?" length="V30" mappedName="userPasswd">
+                                <!--用户密码 -->
+                            </USER_PASSWD>
+                            <USER_TYPE_CODE constraint="?" length="V1" mappedName="userTypeCode">
+                                <!--用户类型 -->
+                            </USER_TYPE_CODE>
+                            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+                                <!--服务号码 -->
+                            </SERIAL_NUMBER>
+                            <NET_TYPE_CODE constraint="?" length="V4" mappedName="netTypeCode">
+                                <!--网别 -->
+                            </NET_TYPE_CODE>
+                            <SCORE_VALUE constraint="?" length="V11" mappedName="scoreValue">
+                                <!--积分值 -->
+                            </SCORE_VALUE>
+                            <CREDIT_CLASS constraint="?" length="V8" mappedName="creditClass">
+                                <!--信用等级 -->
+                            </CREDIT_CLASS>
+                            <BASIC_CREDIT_VALUE constraint="?" length="V11" mappedName="basicCreditValue">
+                                <!--基本信用度 -->
+                            </BASIC_CREDIT_VALUE>
+                            <CREDIT_VALUE constraint="?" length="V11" mappedName="creditValue">
+                                <!--信用度 -->
+                            </CREDIT_VALUE>
+                            <ACCT_TAG constraint="?" length="V1" mappedName="acctTag">
+                                <!--出帐标志：0-正常处理，1-定时激活，2-待激活用户，Z-不出帐 -->
+                            </ACCT_TAG>
+                            <PREPAY_TAG constraint="?" length="V1" mappedName="prepayTag">
+                                <!--预付费标志：0-后付费，1-预付费。（省内标准） -->
+                            </PREPAY_TAG>
+                            <IN_DATE constraint="?" length="V30" mappedName="inDate">
+                                <!--建档时间 -->
+                            </IN_DATE>
+                            <OPEN_DATE constraint="?" length="V30" mappedName="openDate">
+                                <!--开户时间 -->
+                            </OPEN_DATE>
+                            <OPEN_MODE constraint="?" length="V1" mappedName="openMode">
+                                <!--开户方式：0-正常，1-预开未返单，2-预开已返单，3-过户新增，4-当日返单并过户 -->
+                            </OPEN_MODE>
+                            <OPEN_DEPART_ID constraint="?" length="V10" mappedName="openDepartId">
+                                <!--开户渠道 -->
+                            </OPEN_DEPART_ID>
+                            <OPEN_STAFF_ID constraint="?" length="V20" mappedName="openStaffId">
+                                <!--开户员工 -->
+                            </OPEN_STAFF_ID>
+                            <IN_DEPART_ID constraint="?" length="V20" mappedName="inDepartId">
+                                <!--建档渠道 -->
+                            </IN_DEPART_ID>
+                            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId">
+                                <!--建档员工 -->
+                            </IN_STAFF_ID>
+                            <REMOVE_TAG constraint="?" length="V1" mappedName="removeTag">
+                                <!--注销标志：0-正常、1-主动预销号、2-主动销号、3-欠费预销号、4-欠费销号、5-开户返销、6-过户注销 -->
+                            </REMOVE_TAG>
+                            <DESTROY_TIME constraint="?" length="V30" mappedName="destoryTime">
+                                <!--注销时间 -->
+                            </DESTROY_TIME>
+                            <REMOVE_EPARCHY_CODE constraint="?" length="V6" mappedName="removeEparchyCode">
+                                <!--注销地市 -->
+                            </REMOVE_EPARCHY_CODE>
+                            <REMOVE_CITY_CODE constraint="?" length="V20" mappedName="removeCityCode">
+                                <!--注销市县 -->
+                            </REMOVE_CITY_CODE>
+                            <REMOVE_DEPART_ID constraint="?" length="V20" mappedName="removeDepartId">
+                                <!--注销渠道 -->
+                            </REMOVE_DEPART_ID>
+                            <REMOVE_REASON_CODE constraint="?" length="V2" mappedName="removeReasonCode">
+                                <!--离网原因编码：见参数表TD_B_REMOVE_REASON -->
+                            </REMOVE_REASON_CODE>
+                            <PRE_DESTROY_TIME constraint="?" length="V30" mappedName="preDestoryTime">
+                                <!--预销号时间 -->
+                            </PRE_DESTROY_TIME>
+                            <FIRST_CALL_TIME constraint="?" length="V30" mappedName="firstCallTime">
+                                <!--首次通话时间 -->
+                            </FIRST_CALL_TIME>
+                            <LAST_STOP_TIME constraint="?" length="V30" mappedName="lastStopTime">
+                                <!--最后停机时间 -->
+                            </LAST_STOP_TIME>
+                            <USER_STATE_CODESET constraint="?" length="V10" mappedName="userStateCodeset">
+                                <!--主体服务状态集：见服务状态参数表 -->
+                            </USER_STATE_CODESET>
+                            <MPUTE_MONTH_FEE constraint="?" length="V1" mappedName="mputeMonthFee">
+                                <!--固定费用重算标志：0-不重算，1-重算，2-从月初开始重算 -->
+                            </MPUTE_MONTH_FEE>
+                            <MPUTE_DATE constraint="?" length="V30" mappedName="mputeDate">
+                                <!--月租重算时间 -->
+                            </MPUTE_DATE>
+                            <UPDATE_TIME constraint="?" length="V30" mappedName="updateTime">
+                                <!--修改时间 -->
+                            </UPDATE_TIME>
+                            <ASSURE_CUST_ID constraint="?" length="V16" mappedName="assureCustId">
+                                <!--担保客户标识 -->
+                            </ASSURE_CUST_ID>
+                            <ASSURE_TYPE_CODE constraint="?" length="V1" mappedName="assureTypeCode">
+                                <!--担保类型（见参数表） -->
+                            </ASSURE_TYPE_CODE>
+                            <ASSURE_DATE constraint="?" length="V19" mappedName="assureDate">
+                                <!--担保期限 -->
+                            </ASSURE_DATE>
+                            <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId">
+                                <!--发展员工 -->
+                            </DEVELOP_STAFF_ID>
+                            <DEVELOP_DATE constraint="?" length="V30" mappedName="developDate">
+                                <!--发展时间 -->
+                            </DEVELOP_DATE>
+                            <DEVELOP_EPARCHY_CODE constraint="?" length="V6" mappedName="developEparchyCode">
+                                <!--发展地市 -->
+                            </DEVELOP_EPARCHY_CODE>
+                            <DEVELOP_CITY_CODE constraint="?" length="V20" mappedName="developCityCode">
+                                <!--发展市县 -->
+                            </DEVELOP_CITY_CODE>
+                            <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId">
+                                <!--发展渠道 -->
+                            </DEVELOP_DEPART_ID>
+                            <DEVELOP_NO constraint="?" length="V30" mappedName="developNo">
+                                <!--文号 -->
+                            </DEVELOP_NO>
+                            <REMARK constraint="?" length="V500" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                            <CREDIT_RULE_ID constraint="?" length="V8" mappedName="creditRuleId">
+                                <!--信控规则标识 -->
+                            </CREDIT_RULE_ID>
+                            <CONTRACT_ID constraint="?" length="V50" mappedName="contractId">
+                                <!--合同号 -->
+                            </CONTRACT_ID>
+                            <CHANGEUSER_DATE constraint="?" length="V30" mappedName="changeuserDate">
+                                <!--过户时间 -->
+                            </CHANGEUSER_DATE>
+                            <IN_NET_MODE constraint="?" length="V3" mappedName="inNetMode">
+                                <!--入网方式 -->
+                            </IN_NET_MODE>
+                            <PRODUCT_TYPE_CODE constraint="?" length="V16" mappedName="productTypeCode">
+                                <!--当前活动 -->
+                            </PRODUCT_TYPE_CODE>
+                        </ITEM>
+                    </TRADE_USER>
+                    <TRADE_PRODUCT_TYPE constraint="?" mappedName="tradeProductType">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <PRODUCT_MODE constraint="1" length="F2" mappedName="productMode">
+                                <!--产品模式 -->
+                            </PRODUCT_MODE>
+                            <PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+                                <!--产品标识 -->
+                            </PRODUCT_ID>
+                            <PRODUCT_TYPE_CODE constraint="?" length="V16" mappedName="productTypeCode">
+                                <!--活动 -->
+                            </PRODUCT_TYPE_CODE>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--状态属性：0-增加，1-删除，2-变更 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="1" length="V30" mappedName="endDate" defaultValue="20501231235959">
+                                <!--结束时间 -->
+                            </END_DATE>
+                        </ITEM>
+                    </TRADE_PRODUCT_TYPE>
+                    <TRADE_PRODUCT constraint="?" mappedName="tradeProduct">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <PRODUCT_MODE constraint="1" length="F2" mappedName="productMode">
+                                <!--产品模式 -->
+                            </PRODUCT_MODE>
+                            <PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+                                <!--产品标识 -->
+                            </PRODUCT_ID>
+                            <BRAND_CODE constraint="?" length="V4" mappedName="brandCode">
+                                <!--品牌 -->
+                            </BRAND_CODE>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--当存在属性时记录属性标识，否则为空 -->
+                            </ITEM_ID>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--状态属性：0-增加，1-删除，2-变更 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="1" length="V30" mappedName="endDate" defaultValue="20501231235959">
+                                <!--结束时间 -->
+                            </END_DATE>
+                            <USER_ID_A constraint="?" length="V16" mappedName="userIdA">
+                                <!--A用户标识 -->
+                            </USER_ID_A>
+                        </ITEM>
+                    </TRADE_PRODUCT>
+                    <TRADE_DISCNT constraint="?" mappedName="tradeDiscnt">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <ID constraint="1" length="V16" mappedName="id">
+                                <!--标识：客户、用户或帐户标识 -->
+                            </ID>
+                            <ID_TYPE constraint="1" length="F1" mappedName="idType">
+                                <!--标识类型：0-客户，1-用户，2-帐户 -->
+                            </ID_TYPE>
+                            <USER_ID_A constraint="?" length="V16" mappedName="userIdA">
+                                <!--A用户标识：关联优惠中的A用户标识，通常为一集团用户或虚拟用户。对于非关联优惠填-1。 -->
+                            </USER_ID_A>
+                            <PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+                                <!--产品标识：系统中唯一的编码 -->
+                            </PRODUCT_ID>
+                            <PACKAGE_ID constraint="1" length="V20" mappedName="packageId">
+                                <!--包标识 -->
+                            </PACKAGE_ID>
+                            <DISCNT_CODE constraint="1" length="V8" mappedName="discntCode">
+                                <!--优惠编码 -->
+                            </DISCNT_CODE>
+                            <SPEC_TAG constraint="1" length="F1" mappedName="specTag">
+                                <!--特殊优惠标记：0-正常产品优惠，1-特殊优惠，2-关联优惠。 -->
+                            </SPEC_TAG>
+                            <RELATION_TYPE_CODE constraint="?" length="V4" mappedName="relationTypeCode">
+                                <!--关系类型编码 -->
+                            </RELATION_TYPE_CODE>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="1" length="V30" mappedName="endDate" defaultValue="20501231235959">
+                                <!--结束时间 -->
+                            </END_DATE>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--修改标志 -->
+                            </MODIFY_TAG>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--实例标识 -->
+                            </ITEM_ID>
+                        </ITEM>
+                    </TRADE_DISCNT>
+                    <TRADE_SVC constraint="?" mappedName="tradeSvc">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <SERVICE_ID constraint="1" length="V8" mappedName="serviceId">
+                                <!--服务标识 -->
+                            </SERVICE_ID>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--状态属性：0－增加 1－删除 2－修改 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                            <PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+                                <!--产品编码 -->
+                            </PRODUCT_ID>
+                            <PACKAGE_ID constraint="1" length="V20" mappedName="packageId">
+                                <!--产品构成编码 -->
+                            </PACKAGE_ID>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--实例标识 -->
+                            </ITEM_ID>
+                            <USER_ID_A constraint="?" length="V16" mappedName="userIdA">
+                                <!--A用户标识 -->
+                            </USER_ID_A>
+                        </ITEM>
+                    </TRADE_SVC>
+                    <TRADE_SP constraint="?" mappedName="tradeSp">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <SERIAL_NUMBER constraint="?" length="V20" mappedName="serialNumber">
+                                <!--服务号码 -->
+                            </SERIAL_NUMBER>
+                            <PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+                                <!--产品标识 -->
+                            </PRODUCT_ID>
+                            <PACKAGE_ID constraint="1" length="V20" mappedName="packageId">
+                                <!--包标识 -->
+                            </PACKAGE_ID>
+                            <PARTY_ID constraint="1" length="V10" mappedName="partyId">
+                                <!--合作伙伴标识 -->
+                            </PARTY_ID>
+                            <SP_ID constraint="1" length="V10" mappedName="spId">
+                                <!--业务标识 -->
+                            </SP_ID>
+                            <SP_PRODUCT_ID constraint="1" length="V40" mappedName="spProductId">
+                                <!--SP产品标识 -->
+                            </SP_PRODUCT_ID>
+                            <FIRST_BUY_TIME constraint="1" length="V30" mappedName="firstBuyTime">
+                                <!--首次订购时间 -->
+                            </FIRST_BUY_TIME>
+                            <PAY_SERIAL_NUMBER constraint="?" length="V20" mappedName="paySerialNumber">
+                                <!--付费号码 -->
+                            </PAY_SERIAL_NUMBER>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--生效时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="1" length="V30" mappedName="endDate" defaultValue="20501231235959">
+                                <!--失效时间 -->
+                            </END_DATE>
+                            <UPDATE_TIME constraint="?" length="V30" mappedName="updateTime">
+                                <!--更新时间 -->
+                            </UPDATE_TIME>
+                            <REMARK constraint="?" length="V200" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--修改标志 -->
+                            </MODIFY_TAG>
+                            <PAY_USER_ID constraint="?" length="V16" mappedName="payUserId">
+                                <!--付费用户标识 -->
+                            </PAY_USER_ID>
+                            <SP_SERVICE_ID constraint="1" length="V8" mappedName="spServiceId">
+                                <!--SP唯一标识 -->
+                            </SP_SERVICE_ID>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--属性ID -->
+                            </ITEM_ID>
+                        </ITEM>
+                    </TRADE_SP>
+                    <TRADE_ELEMENT constraint="?" mappedName="tradeElement">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+                                <!--产品标识 -->
+                            </PRODUCT_ID>
+                            <PACKAGE_ID constraint="1" length="V20" mappedName="packageId">
+                                <!--包标识 -->
+                            </PACKAGE_ID>
+                            <ID_TYPE constraint="1" length="F1" mappedName="idType">
+                                <!--标识类型0：服务 1：资费 -->
+                            </ID_TYPE>
+                            <ID constraint="1" length="V20" mappedName="id">
+                                <!--标识 -->
+                            </ID>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--状态属性：0－增加 1－删除 2－修改 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="1" length="V30" mappedName="endDate" defaultValue="20501231235959">
+                                <!--结束时间 -->
+                            </END_DATE>
+                            <USER_ID_A constraint="?" length="V16" mappedName="userIdA">
+                                <!--A用户标识 -->
+                            </USER_ID_A>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--属性ID -->
+                            </ITEM_ID>
+                        </ITEM>
+                    </TRADE_ELEMENT>
+                    <TRADE_RES constraint="?" mappedName="tradeRes">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <RES_TYPE_CODE constraint="1" length="F1" mappedName="reTypeCode">
+                                <!--资源类型 -->
+                            </RES_TYPE_CODE>
+                            <RES_CODE constraint="1" length="V40" mappedName="resCode">
+                                <!--资源类型编码 -->
+                            </RES_CODE>
+                            <RES_INFO1 constraint="?" length="V50" mappedName="resInfo1">
+                                <!--预留字段1 -->
+                            </RES_INFO1>
+                            <RES_INFO2 constraint="?" length="V50" mappedName="resInfo2">
+                                <!--预留字段2 -->
+                            </RES_INFO2>
+                            <RES_INFO3 constraint="?" length="V50" mappedName="resInfo3">
+                                <!--预留字段3 -->
+                            </RES_INFO3>
+                            <RES_INFO4 constraint="?" length="V50" mappedName="resInfo4">
+                                <!--预留字段4 -->
+                            </RES_INFO4>
+                            <RES_INFO5 constraint="?" length="V50" mappedName="resInfo5">
+                                <!--预留字段5 -->
+                            </RES_INFO5>
+                            <RES_INFO6 constraint="?" length="V50" mappedName="resInfo6">
+                                <!--预留字段6 -->
+                            </RES_INFO6>
+                            <RES_INFO7 constraint="?" length="V100" mappedName="resInfo7">
+                                <!--预留字段7 -->
+                            </RES_INFO7>
+                            <RES_INFO8 constraint="?" length="V100" mappedName="resInfo8">
+                                <!--预留字段8 -->
+                            </RES_INFO8>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--修改标识：0增加，1删除，2修改 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="?" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                        </ITEM>
+                    </TRADE_RES>
+                    <TRADE_SCORE constraint="?" mappedName="tradeScore">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+                                <!--用户号码 -->
+                            </SERIAL_NUMBER>
+                            <SCORE constraint="1" length="V11" mappedName="score">
+                                <!--积分 -->
+                            </SCORE>
+                            <SCORE_CHANGED constraint="1" length="V11" mappedName="scoreChanged">
+                                <!--积分异动 -->
+                            </SCORE_CHANGED>
+                            <VALUE_CHANGED constraint="?" length="V11" mappedName="valueChanged">
+                                <!--钱异动 -->
+                            </VALUE_CHANGED>
+                            <REMARK constraint="?" length="V100" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                        </ITEM>
+                    </TRADE_SCORE>
+                    <TRADE_SCORESUB constraint="?" mappedName="tradeScoreSub">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <ACTION_CODE constraint="1" length="V8" mappedName="actionCode">
+                                <!--动作编码 -->
+                            </ACTION_CODE>
+                            <SCORE_TYPE_CODE constraint="1" length="V2" mappedName="scoreTypeCode">
+                                <!--积分类型编码 -->
+                            </SCORE_TYPE_CODE>
+                            <SCORE_CHANGED_SUB constraint="1" length="V11" mappedName="scoreChangeSub">
+                                <!--单积分异动 -->
+                            </SCORE_CHANGED_SUB>
+                            <VALUE_CHANGED_SUB constraint="?" length="V11" mappedName="valueChangedSub">
+                                <!--单钱异动 -->
+                            </VALUE_CHANGED_SUB>
+                            <ACTION_COUNT constraint="?" length="V4" mappedName="actionCount">
+                                <!--兑换数 -->
+                            </ACTION_COUNT>
+                            <REMARK constraint="?" length="V100" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                            <CONSUME_PLACE constraint="?" length="V100" mappedName="consumePlace" />
+                            <CONSUME_GOODS constraint="?" length="V100" mappedName="consumeGoods" />
+                            <CHANGE_GOODS constraint="?" length="V100" mappedName="changeGoods" />
+                            <PARTNER_CODE constraint="?" length="V100" mappedName="partnerCode" />
+                            <RSRV_STR1 constraint="?" length="V50" mappedName="rsrvStr1" />
+                            <RSRV_STR2 constraint="?" length="V50" mappedName="rsrvStr2" />
+                            <RSRV_STR3 constraint="?" length="V50" mappedName="rsrvStr3" />
+                            <RSRV_STR4 constraint="?" length="V50" mappedName="rsrvStr4" />
+                            <RSRV_STR5 constraint="?" length="V50" mappedName="rsrvStr5" />
+                        </ITEM>
+                    </TRADE_SCORESUB>
+                    <TRADE_PURCHASE constraint="?" mappedName="tradePurchase">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <BINDSALE_ATTR constraint="1" length="V8" mappedName="bindsaleAttr">
+                                <!--销售方案编码 -->
+                            </BINDSALE_ATTR>
+                            <EXTRA_DEV_FEE constraint="?" length="V16" mappedName="extraDevFee">
+                                <!--补差款 -->
+                            </EXTRA_DEV_FEE>
+                            <MPFEE constraint="?" length="V11" mappedName="mpfee">
+                                <!--实交购机款 -->
+                            </MPFEE>
+                            <FEEITEM_CODE constraint="?" length="V4" mappedName="feeitemCode">
+                                <!--实交营业费用编码 -->
+                            </FEEITEM_CODE>
+                            <FOREGIFT constraint="?" length="V11" mappedName="foregift">
+                                <!--实交押金 -->
+                            </FOREGIFT>
+                            <FOREGIFT_CODE constraint="?" length="V4" mappedName="foregiftCode">
+                                <!--实交押金类型编码 -->
+                            </FOREGIFT_CODE>
+                            <FOREGIFT_BACKMODE constraint="?" length="V1" mappedName="foregiftBankmod">
+                                <!--0-协议到期,1-消费金额满,2-协议到期或消费金额满 -->
+                            </FOREGIFT_BACKMODE>
+                            <AGREEMENT_MONTHS constraint="?" length="V4" mappedName="agreementMonths">
+                                <!--捆绑协议月份数 -->
+                            </AGREEMENT_MONTHS>
+                            <END_MODE constraint="?" length="V1" mappedName="endMode">
+                                <!--0-协议到期,1-消费金额满,2-协议到期或消费金额满 -->
+                            </END_MODE>
+                            <DEVICE_TYPE constraint="?" length="V30" mappedName="deviceType">
+                                <!--手机型号ID -->
+                            </DEVICE_TYPE>
+                            <MOBILE_COST constraint="?" length="V16" mappedName="moblieCost">
+                                <!--手机成本价 -->
+                            </MOBILE_COST>
+                            <DEVICE_NAME constraint="?" length="V100" mappedName="deviceName">
+                                <!--手机型号名称 -->
+                            </DEVICE_NAME>
+                            <DEVICE_BRAND constraint="?" length="V30" mappedName="deviceBrand">
+                                <!--手机品牌 -->
+                            </DEVICE_BRAND>
+                            <IMEI constraint="?" length="V30" mappedName="imei">
+                                <!--IMEI -->
+                            </IMEI>
+                            <LIST_BANK constraint="?" length="V50" mappedName="listBank">
+                                <!--存单开户银行 -->
+                            </LIST_BANK>
+                            <LIST_FEE constraint="?" length="V10" mappedName="listFee">
+                                <!--存单金额 -->
+                            </LIST_FEE>
+                            <LIST_CODE constraint="?" length="V50" mappedName="listCode">
+                                <!--存单编码 -->
+                            </LIST_CODE>
+                            <CREDIT_ORG constraint="?" length="V50" mappedName="creditOrg">
+                                <!--信贷机构 -->
+                            </CREDIT_ORG>
+                            <CREDIT_TYPE constraint="?" length="V50" mappedName="creditType">
+                                <!--信用卡类别 -->
+                            </CREDIT_TYPE>
+                            <CREDIT_CARD_NUM constraint="?" length="V50" mappedName="creditCardNum">
+                                <!--信用卡卡号 -->
+                            </CREDIT_CARD_NUM>
+                            <AGREEMENT constraint="?" length="V50" mappedName="agreement">
+                                <!--协议号 -->
+                            </AGREEMENT>
+                            <PRODUCT_ID constraint="?" length="V8" mappedName="productId">
+                                <!--附加产品标识 -->
+                            </PRODUCT_ID>
+                            <PACKAGE_ID constraint="?" length="V20" mappedName="packgaeId">
+                                <!--包标识 -->
+                            </PACKAGE_ID>
+                            <STAFF_ID constraint="?" length="V20" mappedName="staffId">
+                                <!--受理员工 -->
+                            </STAFF_ID>
+                            <DEPART_ID constraint="?" length="V20" mappedName="departId">
+                                <!--受理部门 -->
+                            </DEPART_ID>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="1" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                            <REMARK constraint="?" length="V100" mappedName="remark">
+                                <!--备注 -->
+                            </REMARK>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--属性标识 -->
+                            </ITEM_ID>
+                        </ITEM>
+                    </TRADE_PURCHASE>
+                    <TRADE_POST constraint="?" mappedName="tradePost">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <ID constraint="1" length="V16" mappedName="id">
+                                <!--标识：客户、用户或帐户标识 -->
+                            </ID>
+                            <ID_TYPE constraint="?" length="F1" mappedName="idType">
+                                <!--标识类型：0-客户,1-用户,2-帐户 -->
+                            </ID_TYPE>
+                            <POST_NAME constraint="?" length="V120" mappedName="postName">
+                                <!--邮寄名称 -->
+                            </POST_NAME>
+                            <POST_TAG constraint="?" length="V1" mappedName="postTag">
+                                <!--邮寄标志：0-不邮寄,1-邮寄 -->
+                            </POST_TAG>
+                            <POST_CONTENT constraint="?" length="V10" mappedName="postContent">
+                                <!--邮寄内容：0-账单,1-清单,2-发票,3-广告,可以为以上的集合。 -->
+                            </POST_CONTENT>
+                            <POST_TYPESET constraint="?" length="V10" mappedName="postTypeset">
+                                <!--邮寄方式：0-邮政、1-传真、2-Email,可以为以上方式的集合 -->
+                            </POST_TYPESET>
+                            <POST_CYC constraint="?" length="F1" mappedName="postCyc">
+                                <!--邮寄周期：0-按月,1-按季,2-按年 -->
+                            </POST_CYC>
+                            <POST_ADDRESS constraint="?" length="V250" mappedName="postAddress">
+                                <!--邮寄地址 -->
+                            </POST_ADDRESS>
+                            <POST_CODE constraint="?" length="F6" mappedName="postCode">
+                                <!--邮寄邮编 -->
+                            </POST_CODE>
+                            <EMAIL constraint="?" length="V50" mappedName="email">
+                                <!--EMAIL地址 -->
+                            </EMAIL>
+                            <FAX_NBR constraint="?" length="V40" mappedName="faxNbr">
+                                <!--传真号码 -->
+                            </FAX_NBR>
+                            <START_DATE constraint="?" length="V30" mappedName="startDate">
+                                <!--起始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--终止时间 -->
+                            </END_DATE>
+                        </ITEM>
+                    </TRADE_POST>
+                    <TRADE_PAYRELATION constraint="?" mappedName="tradePayrelation">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <ACCT_ID constraint="?" length="V16" mappedName="acctId">
+                                <!--帐户标识 -->
+                            </ACCT_ID>
+                            <PAYITEM_CODE constraint="1" length="V5" mappedName="payitemCode">
+                                <!--付费项编码 -->
+                            </PAYITEM_CODE>
+                            <ACCT_PRIORITY constraint="1" length="V4" mappedName="acctPriority">
+                                <!--帐户优先级 -->
+                            </ACCT_PRIORITY>
+                            <USER_PRIORITY constraint="1" length="V4" mappedName="userPriority">
+                                <!--用户优先级 -->
+                            </USER_PRIORITY>
+                            <BIND_TYPE constraint="1" length="F1" mappedName="bindType" />
+                            <START_ACYC_ID constraint="?" length="V6" mappedName="startAcycId">
+                                <!--开始帐期 -->
+                            </START_ACYC_ID>
+                            <END_ACYC_ID constraint="?" length="V6" mappedName="endAcycId">
+                                <!--结束帐期 -->
+                            </END_ACYC_ID>
+                            <DEFAULT_TAG constraint="1" length="F1" mappedName="defaultTag">
+                                <!--缺省标志 -->
+                            </DEFAULT_TAG>
+                            <LIMIT_TYPE constraint="1" length="F1" mappedName="limitType" />
+                            <LIMIT constraint="1" length="V11" mappedName="limit" />
+                            <COMPLEMENT_TAG constraint="1" length="F1" mappedName="complementTag" />
+                            <ADDUP_MONTHS constraint="?" length="V12" mappedName="addupMonths" />
+                            <ADDUP_METHOD constraint="?" length="V1" mappedName="addupMethod" />
+                            <PAYRELATION_ID constraint="?" length="V16" mappedName="payrelationId" />
+                            <ACT_TAG constraint="?" length="V1" mappedName="actTag" />
+                        </ITEM>
+                    </TRADE_PAYRELATION>
+                    <TRADE_RELATION constraint="?" mappedName="tradeRelation">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <RELATION_ATTR constraint="?" length="V1" mappedName="relationAttr" />
+                            <RELATION_TYPE_CODE constraint="1" length="V4" mappedName="relationTypeCode" />
+                            <ID_A constraint="1" length="V16" mappedName="idA" />
+                            <ID_B constraint="1" length="V16" mappedName="idB" />
+                            <ROLE_CODE_A constraint="?" length="V1" mappedName="roleCodeA" />
+                            <ROLE_CODE_B constraint="?" length="V1" mappedName="roleCodeB" />
+                            <ORDERNO constraint="?" length="V4" mappedName="orderno" />
+                            <SHORT_CODE constraint="?" length="V20" mappedName="shortCode" />
+                            <START_DATE constraint="1" length="V19" mappedName="startDate" />
+                            <END_DATE constraint="1" length="V19" mappedName="endDate" />
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag" />
+                            <REMARK constraint="?" length="V500" mappedName="remark" />
+                            <SERIAL_NUMBER_A constraint="?" length="V40" mappedName="serialNumberA" />
+                            <SERIAL_NUMBER_B constraint="?" length="V40" mappedName="serialNumberB" />
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId" />
+                        </ITEM>
+                    </TRADE_RELATION>
+                    <TRADE_RAFFLE constraint="?" mappedName="tradeRaffle">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <SERIAL_NUMBER constraint="1" length="V20" mappedName="serialNumber">
+                                <!--用户号码 -->
+                            </SERIAL_NUMBER>
+                            <SCORE_PROJECT_ID constraint="1" length="V20" mappedName="scoreProjectId">
+                                <!--积分方案ID -->
+                            </SCORE_PROJECT_ID>
+                            <RAFFLE_NUMBER constraint="1" length="V20" mappedName="raffleNumber">
+                                <!--抽奖号码 -->
+                            </RAFFLE_NUMBER>
+                            <LOT_CYCLE_ID constraint="1" length="V20" mappedName="lotCycleId">
+                                <!--奖期 -->
+                            </LOT_CYCLE_ID>
+                            <LOT_GROUP_ID constraint="1" length="F2" mappedName="logGroupId">
+                                <!--组别 -->
+                            </LOT_GROUP_ID>
+                            <JOIN_DATE constraint="1" length="V30" mappedName="joinDate">
+                                <!--参与时间 -->
+                            </JOIN_DATE>
+                            <STATE constraint="1" length="V2" mappedName="state">
+                                <!--状态 0－失效；1－生效 -->
+                            </STATE>
+                            <PRIZE_LEVEL constraint="1" length="V2" mappedName="prizeLevel">
+                                <!--中奖级别 -->
+                            </PRIZE_LEVEL>
+                            <RAFFLE_TIME constraint="1" length="V30" mappedName="raffleTime">
+                                <!--抽奖时间 -->
+                            </RAFFLE_TIME>
+                            <EXCHANGE_STATE constraint="1" length="F1" mappedName="exchangeState">
+                                <!--兑奖状态 -->
+                            </EXCHANGE_STATE>
+                            <EXCHANGE_TIME constraint="?" length="V30" mappedName="exchangeTime">
+                                <!--兑奖时间 -->
+                            </EXCHANGE_TIME>
+                            <EXCHANGE_ID constraint="?" length="V20" mappedName="exchangeId">
+                                <!--兑奖流水号 -->
+                            </EXCHANGE_ID>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--地州编码 -->
+                            </EPARCHY_CODE>
+                            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                                <!--区县编码 -->
+                            </CITY_CODE>
+                            <RSRV_STR1 constraint="?" length="V100" mappedName="rsrvStr1">
+                                <!--预留字段1 -->
+                            </RSRV_STR1>
+                            <RSRV_STR2 constraint="?" length="V100" mappedName="rsrvStr2">
+                                <!--预留字段2 -->
+                            </RSRV_STR2>
+                            <RSRV_STR3 constraint="?" length="V100" mappedName="rsrvStr3">
+                                <!--预留字段3 -->
+                            </RSRV_STR3>
+                            <RSRV_STR4 constraint="?" length="V100" mappedName="rsrvStr4">
+                                <!--预留字段4 -->
+                            </RSRV_STR4>
+                            <RSRV_STR5 constraint="?" length="V100" mappedName="rsrvStr5">
+                                <!--预留字段5 -->
+                            </RSRV_STR5>
+                            <TRADE_STAFF_ID constraint="?" length="V20" mappedName="tradeStaffId">
+                                <!--操作员工 -->
+                            </TRADE_STAFF_ID>
+                            <TRADE_DEPART_ID constraint="?" length="V20" mappedName="tradeDepartId">
+                                <!--操作部门 -->
+                            </TRADE_DEPART_ID>
+                            <ACTION_CODE constraint="?" length="V8" mappedName="actionCode">
+                                <!--动作编码 -->
+                            </ACTION_CODE>
+                        </ITEM>
+                    </TRADE_RAFFLE>
+                    <TRADE_SVCSTATE constraint="?" mappedName="tradeSvcstate">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <USER_ID constraint="?" length="V16" mappedName="userId">
+                                <!--用户标识 -->
+                            </USER_ID>
+                            <SERVICE_ID constraint="1" length="V8" mappedName="serviceId">
+                                <!--主体服务ID -->
+                            </SERVICE_ID>
+                            <STATE_CODE constraint="1" length="F1" mappedName="stateCode">
+                                <!--状态编码 -->
+                            </STATE_CODE>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--修改标识 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="1" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                        </ITEM>
+                    </TRADE_SVCSTATE>
+                    <TRADE_OTHER constraint="?" mappedName="tradeOther">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <RSRV_VALUE_CODE constraint="1" length="V4" mappedName="rsrvValueCode">
+                                <!--预留资料编码 -->
+                            </RSRV_VALUE_CODE>
+                            <RSRV_VALUE constraint="?" length="V50" mappedName="rsrvValue">
+                                <!--预留资料 -->
+                            </RSRV_VALUE>
+                            <RSRV_STR1 constraint="?" length="V500" mappedName="rsrvStr1">
+                                <!--预留字段1 -->
+                            </RSRV_STR1>
+                            <RSRV_STR2 constraint="?" length="V500" mappedName="rsrvStr2">
+                                <!--预留字段2 -->
+                            </RSRV_STR2>
+                            <RSRV_STR3 constraint="?" length="V500" mappedName="rsrvStr3">
+                                <!--预留字段3 -->
+                            </RSRV_STR3>
+                            <RSRV_STR4 constraint="?" length="V500" mappedName="rsrvStr4">
+                                <!--预留字段4 -->
+                            </RSRV_STR4>
+                            <RSRV_STR5 constraint="?" length="V500" mappedName="rsrvStr5">
+                                <!--预留字段5 -->
+                            </RSRV_STR5>
+                            <RSRV_STR6 constraint="?" length="V500" mappedName="rsrvStr6">
+                                <!--预留字段6 -->
+                            </RSRV_STR6>
+                            <RSRV_STR7 constraint="?" length="V500" mappedName="rsrvStr7">
+                                <!--预留字段7 -->
+                            </RSRV_STR7>
+                            <RSRV_STR8 constraint="?" length="V500" mappedName="rsrvStr8">
+                                <!--预留字段8 -->
+                            </RSRV_STR8>
+                            <RSRV_STR9 constraint="?" length="V500" mappedName="rsrvStr9">
+                                <!--预留字段9 -->
+                            </RSRV_STR9>
+                            <RSRV_STR10 constraint="?" length="V500" mappedName="rsrvStr10">
+                                <!--预留字段10 -->
+                            </RSRV_STR10>
+                            <MODIFY_TAG constraint="1" length="F1" mappedName="modifyTag">
+                                <!--状态属性：0－增加 1－删除 2－修改 -->
+                            </MODIFY_TAG>
+                            <START_DATE constraint="?" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                            <RSRV_STR11 constraint="?" length="V500" mappedName="rsrvStr11">
+                                <!--预留字段11 -->
+                            </RSRV_STR11>
+                            <RSRV_STR12 constraint="?" length="V500" mappedName="rsrvStr12">
+                                <!--预留字段12 -->
+                            </RSRV_STR12>
+                            <RSRV_STR13 constraint="?" length="V500" mappedName="rsrvStr13">
+                                <!--预留字段13 -->
+                            </RSRV_STR13>
+                            <RSRV_STR14 constraint="?" length="V500" mappedName="rsrvStr14">
+                                <!--预留字段14 -->
+                            </RSRV_STR14>
+                            <RSRV_STR15 constraint="?" length="V500" mappedName="rsrvStr15">
+                                <!--预留字段15 -->
+                            </RSRV_STR15>
+                            <RSRV_STR16 constraint="?" length="V500" mappedName="rsrvStr16">
+                                <!--预留字段16 -->
+                            </RSRV_STR16>
+                            <RSRV_STR17 constraint="?" length="V500" mappedName="rsrvStr17">
+                                <!--预留字段17 -->
+                            </RSRV_STR17>
+                            <RSRV_STR18 constraint="?" length="V500" mappedName="rsrvStr18">
+                                <!--预留字段18 -->
+                            </RSRV_STR18>
+                            <RSRV_STR19 constraint="?" length="V500" mappedName="rsrvStr19">
+                                <!--预留字段19 -->
+                            </RSRV_STR19>
+                            <RSRV_STR20 constraint="?" length="V500" mappedName="rsrvStr20">
+                                <!--预留字段20 -->
+                            </RSRV_STR20>
+                            <RSRV_STR21 constraint="?" length="V500" mappedName="rsrvStr21">
+                                <!--预留字段21 -->
+                            </RSRV_STR21>
+                            <RSRV_STR22 constraint="?" length="V500" mappedName="rsrvStr22">
+                                <!--预留字段22 -->
+                            </RSRV_STR22>
+                            <RSRV_STR23 constraint="?" length="V500" mappedName="rsrvStr23">
+                                <!--预留字段23 -->
+                            </RSRV_STR23>
+                            <RSRV_STR24 constraint="?" length="V500" mappedName="rsrvStr24">
+                                <!--预留字段24 -->
+                            </RSRV_STR24>
+                            <RSRV_STR25 constraint="?" length="V500" mappedName="rsrvStr25">
+                                <!--预留字段25 -->
+                            </RSRV_STR25>
+                        </ITEM>
+                    </TRADE_OTHER>
+                    <TRADE_ITEM constraint="?" mappedName="tradeItem">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <ATTR_CODE constraint="1" length="V30" mappedName="attrCode">
+                                <!--属性编码 -->
+                            </ATTR_CODE>
+                            <ATTR_VALUE constraint="?" length="V2000" mappedName="attrValue">
+                                <!--属性值 -->
+                            </ATTR_VALUE>
+                            <START_DATE constraint="?" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                        </ITEM>
+                    </TRADE_ITEM>
+                    <TRADE_SUB_ITEM constraint="?" mappedName="tradeSubItem">
+                        <ITEM constraint="*" mappedName="item">
+                            <X_DATATYPE constraint="?" length="V4" mappedName="xDatatype">
+                                <!--设置默认值：NULL-为可空字段设置默认值 -->
+                            </X_DATATYPE>
+                            <ATTR_TYPE_CODE constraint="1" length="F1" mappedName="attrTypeCode">
+                                <!--属性类型0：台帐用户子表1：台帐产品子表2：台帐服务子表3：台帐资费子表等等 -->
+                            </ATTR_TYPE_CODE>
+                            <ITEM_ID constraint="?" length="V16" mappedName="itemId">
+                                <!--属性ID -->
+                            </ITEM_ID>
+                            <ATTR_CODE constraint="1" length="V30" mappedName="attrCode">
+                                <!--属性编码 -->
+                            </ATTR_CODE>
+                            <ATTR_VALUE constraint="?" length="V2000" mappedName="attrValue">
+                                <!--属性值 -->
+                            </ATTR_VALUE>
+                            <START_DATE constraint="?" length="V30" mappedName="startDate">
+                                <!--开始时间 -->
+                            </START_DATE>
+                            <END_DATE constraint="?" length="V30" mappedName="endDate">
+                                <!--结束时间 -->
+                            </END_DATE>
+                        </ITEM>
+                    </TRADE_SUB_ITEM>
+                    <TRADEFEE_PAYMONEY constraint="?" mappedName="tradefeePaymoney">
+                        <ITEM constraint="*" mappedName="item">
+                            <PAY_MONEY_CODE constraint="?" length="V2" mappedName="payMoneyCode">
+                                <!--付款方式编码 -->
+                            </PAY_MONEY_CODE>
+                            <MONEY constraint="?" length="V11" mappedName="money">
+                                <!--付款金额 -->
+                            </MONEY>
+                            <PAY_ID constraint="?" length="V16" mappedName="payId">
+                                <!--收费流水 -->
+                            </PAY_ID>
+                            <PAY_DATE constraint="?" length="V19" mappedName="payDate">
+                                <!--收费日期 -->
+                            </PAY_DATE>
+                            <FEE_STAFF_ID constraint="?" length="V20" mappedName="feeStaffId">
+                                <!--收费员工编码 -->
+                            </FEE_STAFF_ID>
+                            <FEE_DEPART_ID constraint="?" length="V20" mappedName="feeDepartId">
+                                <!--收费部门编码 -->
+                            </FEE_DEPART_ID>
+                        </ITEM>
+                    </TRADEFEE_PAYMONEY>
+                    <BOOK_DEAL constraint="?" mappedName="bookDeal">
+                        <ITEM constraint="*" mappedName="item">
+                            <PSPT_TYPE_CODE constraint="?" length="V1" mappedName="psptTypeCode">
+                                <!--证件类型 -->
+                            </PSPT_TYPE_CODE>
+                            <PSPT_ID constraint="?" length="V100" mappedName="psptId">
+                                <!--证件号码 -->
+                            </PSPT_ID>
+                            <INSTALL_DETAIL constraint="?" length="V200" mappedName="installDetail">
+                                <!--装机详细地址 -->
+                            </INSTALL_DETAIL>
+                            <PREASSIGN_ID constraint="?" length="V16" mappedName="preassignId">
+                                <!--预订单ID -->
+                            </PREASSIGN_ID>
+                            <EPARCHY_CODE constraint="?" length="V6" mappedName="eparchyCode">
+                                <!--地州 -->
+                            </EPARCHY_CODE>
+                            <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+                                <!--业务区 -->
+                            </CITY_CODE>
+                            <MOFFICE_ID constraint="?" length="V8" mappedName="mofficeId">
+                                <!--局向 -->
+                            </MOFFICE_ID>
+                            <ADDRESS_ID constraint="?" length="V20" mappedName="addressId">
+                                <!--标准地址 -->
+                            </ADDRESS_ID>
+                            <BRAND_CODE constraint="?" length="V4" mappedName="brandCode">
+                                <!--品牌编码 -->
+                            </BRAND_CODE>
+                            <CUST_NAME constraint="?" length="V100" mappedName="custName">
+                                <!--客户名称 -->
+                            </CUST_NAME>
+                            <STATE constraint="?" length="V1" mappedName="state">
+                                <!--状态 -->
+                            </STATE>
+                        </ITEM>
+                    </BOOK_DEAL>
+                </EXT>
+                <PARA constraint="*"> <!-- cbss反馈预提交不支持para节点，去掉mappedName  16-04-25  lixl -->
+                    <!--保留字段 -->
+                    <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                        <!--保留字段ID -->
+                    </PARA_ID>
+                    <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+                        <!--保留字段值 -->
+                    </PARA_VALUE>
+                </PARA>
+            </TRADE>
+        </SGL_UNI_TRADE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</SGL_UNI_TRADE_INPUT>

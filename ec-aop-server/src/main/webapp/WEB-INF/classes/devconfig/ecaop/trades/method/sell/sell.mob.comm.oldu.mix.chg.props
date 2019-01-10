@@ -1,0 +1,44 @@
+#融合用户业务变更
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.oldu.mix.chg=mxcg
+ecaop.core.method.mxcg.def={"mothod":"mxcg","remark":"融合用户业务变更"}
+
+ecaop.core.method.mxcg.params=[\
+     {"param":"msg",type:"JSON",required:false, validators:"@JSONSchema(ecaop.trade.mxcg.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trade.mxcg.param.productInfo={\
+productId:{type:"String(20)",required:true},\
+productMode:{type:"String(1)",required:true},\
+optType:{type:"String(2)",required:false},\
+enableTag:{type:"String(1)",required:true},\
+packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mxcg.packageElement)"}}
+
+#产品下附加包及包元素（资费，服务）
+ecaop.trades.mxcg.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}}
+ecaop.trade.mxcg.param.msg={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+serialNumber:{type:"String(20)",required:true},\
+opeSysType:{type:"String(1)",required:false},\
+productInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trade.mxcg.param.productInfo)"},\
+recomPersonId:{type:"String(30)",required:false},\
+recomPersonName:{type:"String(30)",required:false},\
+para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.mxcg.processors=mixNewProductChg()
+#CB统一预提交
+ecaop.mxcg.preSub.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mxcg.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.mxcg.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G

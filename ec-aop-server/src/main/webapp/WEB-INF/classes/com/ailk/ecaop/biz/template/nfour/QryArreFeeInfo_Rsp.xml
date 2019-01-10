@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+    <cust_id length="V15" mappedName="number" />
+    <fee length="V15" mappedName="fee" />
+    <must_pay length="F1" mappedName="mustPay" />
+    <province_code length="F2" constraint="?" mappedName="province" />
+    <eparchy_code length="V6" constraint="?" mappedName="city" />
+    <city_code length="V60" constraint="?" mappedName="district" />
+    <Para mappedOut="true" constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</record>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_ORDSTATE_RSP mappedOut="true">
+        <!-- 应答编码 00：成功、01：设备数超过限制、02：用户不存在、03：用户状态不正常、99：其他错误 -->
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V256" constraint="?" mappedName="detail" />
+        <ORDER_INFO constraint="*" mappedName="orderInfo">
+            <TRADE_ID length="V16" mappedName="tradeId" />
+            <ORDER_TYPE length="V2" mappedName="orderType" />
+            <TRADE_TYPE_NAME length="V100" mappedName="tradeTypeName" />
+            <STATUS_CODE constraint="?" length="V2" mappedName="statusCode" />
+            <FEE_INFO constraint="*" mappedName="feeInfo">
+                <FEE_ID length="V20" mappedName="feeId" />
+                <FEE_CATEGORY length="V1" mappedName="feeCategory" />
+                <FEE_DESC length="V120" mappedName="feeDes" />
+                <ORIG_FEE length="V10" mappedName="origFee" />
+                <REAL_FEE length="V10" mappedName="realFee" />
+                <PAY_TYPE length="V1" mappedName="payType" />
+                <OPER_TIME constraint="?" length="F14" mappedName="operTime" />
+                <OPER_CHL_ID constraint="?" length="V7" mappedName="operChanId" />
+                <OPER_CHL_NAME constraint="?" length="V200" mappedName="operChanName" />
+                <OPER_ID constraint="?" length="V40" mappedName="operId" />
+                <OPER_NAME constraint="?" length="V100" mappedName="operName" />
+            </FEE_INFO>
+            <TOTAL_FEE constraint="?" length="V11" mappedName="totalFee" defaultValue="0" />
+            <CANCLE_TOTAL_FEE constraint="?" length="V11" mappedName="cancelTotalFee" defaultValue="0" />
+            <ORDER_STATUS_TIME constraint="?" length="F14" mappedName="orderStatusTime" />
+            <BACK_ORDER_REASON constraint="?" length="V256" mappedName="backOrderReason" />
+            <CANCEL_ORDER_REASON constraint="?" length="V256" mappedName="cancelOrderReason" />
+        </ORDER_INFO>
+        <Para constraint="*" mappedName="para">
+            <ParaID length="V128" mappedName="paraId" />
+            <ParaValue length="V256" mappedName="paraValue" />
+        </Para>
+    </QRY_ORDSTATE_RSP>
+</UNI_BSS_BODY> 

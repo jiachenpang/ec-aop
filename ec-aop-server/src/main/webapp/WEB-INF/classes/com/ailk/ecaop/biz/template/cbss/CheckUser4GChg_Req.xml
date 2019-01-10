@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECKUERCHG_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECKUERCHG_REQ>
+            <PROVINCE_CODE constraint="1" length="V4" mappedName="provinceCode"><!--省分编码 -->
+            </PROVINCE_CODE>
+            <EPARCHY_CODE constraint="1" length="V6" mappedName="eparchyCode"><!--地市编码 -->
+            </EPARCHY_CODE>
+            <SERIAL_NUMBER constraint="1" length="V30" mappedName="serialNumber"><!--服务号码 -->
+            </SERIAL_NUMBER>
+            <PROVINCE_USER_ID constraint="1" length="V30" mappedName="provinceUserId"><!--服务号码 -->
+            </PROVINCE_USER_ID>
+            <OPT_TYPE constraint="1" length="V2" mappedName="optType"><!--服务号码 -->
+            </OPT_TYPE>
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </CHECKUERCHG_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECKUERCHG_INPUT>

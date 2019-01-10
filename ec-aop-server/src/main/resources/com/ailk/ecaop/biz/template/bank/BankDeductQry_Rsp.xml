@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+  <QRY_SIGN_INFO_RSP mappedOut="true"> 
+    <RESP_CODE length="F4" mappedName="code"> 
+      <!--应答编码, 0000成功, 8888 其它--> 
+    </RESP_CODE>  
+    <RESP_DESC constraint="?" length="V500" mappedName="detail"> 
+      <!--应答描述--> 
+    </RESP_DESC>  
+    <SIGN_LIST constraint="*" mappedName="signList"> 
+      <!--签约列表-->  
+      <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode"> 
+        <!--电信业务网别，编码见附录--> 
+      </SERVICE_CLASS_CODE>  
+      <AREA_CODE constraint="?" length="V6" mappedName="areaCode"> 
+        <!--区号--> 
+      </AREA_CODE>  
+      <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber"> 
+        <!--服务号码--> 
+      </SERIAL_NUMBER>  
+      <CUST_NAME constraint="?" length="V100" mappedName="custName"> 
+        <!--客户名称--> 
+      </CUST_NAME>  
+      <IS_PAYMENT_BUSINESS constraint="1" length="V10" mappedName="isPaymentBusines"> 
+        <!--账户是否办理省分托收业务, 01 已办理省分托收业务, 02 未办理省分托收业务--> 
+      </IS_PAYMENT_BUSINESS>  
+      <IS_GROUP_CUST constraint="?" length="V10" mappedName="isGroupCust"> 
+        <!--是否集团客户, 01 集团客户, 02 非集团客户--> 
+      </IS_GROUP_CUST>  
+      <ACCOUNT_INFO constraint="?" mappedName="accountInfo"> 
+        <!--账户信息-->  
+        <ACCOUNT_ID constraint="1" length="V30" mappedName="accountId"> 
+          <!--账户编号--> 
+        </ACCOUNT_ID>  
+        <BANK_NAME constraint="?" length="V30" mappedName="bankName"> 
+          <!--银行名称--> 
+        </BANK_NAME>  
+        <BANK_CARD_TYPE constraint="?" length="F1" mappedName="bankCardType"> 
+          <!--银行帐号类型, 信用卡:0, 借记卡:1--> 
+        </BANK_CARD_TYPE>  
+        <ACCOUNT_LAST_FOUR constraint="?" length="F4" mappedName="accountLastFour"> 
+          <!--银行卡账号后4位--> 
+        </ACCOUNT_LAST_FOUR>  
+        <BANK_ACCOUNT_NAME constraint="?" length="V256" mappedName="bankAccountName"> 
+          <!--银行账户户名--> 
+        </BANK_ACCOUNT_NAME>  
+        <CONTRACT_CERT_TYPE_CODE constraint="?" length="V2" mappedName="contractCertTypeCode"> 
+          <!--持卡人证件类别编码，见附录--> 
+        </CONTRACT_CERT_TYPE_CODE>  
+        <CONTRACT_CERT_CODE constraint="?" length="V50" mappedName="contractCertCode"> 
+          <!--持卡人证件号码--> 
+        </CONTRACT_CERT_CODE>  
+        <CONTRACT_NUMBER constraint="?" length="V40" mappedName="contractNumber"> 
+          <!--签约协议号, 签约时候不需填, 解约时候需填写--> 
+        </CONTRACT_NUMBER>  
+        <SIGN_STATE constraint="1" length="V2" mappedName="signState"> 
+          <!--签约状态：, 00 已经签约, 01 未签约, 02 其他--> 
+        </SIGN_STATE>  
+        <START_TIME constraint="?" length="V14" mappedName="startTime"> 
+          <!--协议生效时间--> 
+        </START_TIME>  
+        <END_TIME constraint="?" length="V14" mappedName="endTime"> 
+          <!--协议失效时间--> 
+        </END_TIME>  
+        <LEVEL_VALUE constraint="?" length="V11" mappedName="levelValue"> 
+          <!--代扣阀值（小于等于此阀值时，发起实时代扣请求）, 单位:分--> 
+        </LEVEL_VALUE>  
+        <EVERYTIME_VALUE constraint="?" length="V11" mappedName="everyValue"> 
+          <!--代扣次金额（每次发起代扣请求时的金额）, 单位：分--> 
+        </EVERYTIME_VALUE>  
+        <DEVELOPER_INFO constraint="?" mappedName="developerInfo"> 
+          <!--发展人信息-->  
+          <RECOM_DEPAR_ID constraint="?" length="V30" mappedName="pecomDeparId"> 
+            <!--推荐部门标识--> 
+          </RECOM_DEPAR_ID>  
+          <RECOM_DEPAR_NAME constraint="?" length="V256" mappedName="pecomDeparName"> 
+            <!--推荐部门名称--> 
+          </RECOM_DEPAR_NAME>  
+          <RECOM_PERSON_ID constraint="?" length="V30" mappedName="pecomperaonId"> 
+            <!--推荐人标识--> 
+          </RECOM_PERSON_ID>  
+          <RECOM_PERSON_NAME constraint="?" length="V128" mappedName="pecomPersonName"> 
+            <!--推荐人名称--> 
+          </RECOM_PERSON_NAME> 
+        </DEVELOPER_INFO>  
+        <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/> 
+      </ACCOUNT_INFO> 
+    </SIGN_LIST> 
+  </QRY_SIGN_INFO_RSP> 
+</UNI_BSS_BODY>

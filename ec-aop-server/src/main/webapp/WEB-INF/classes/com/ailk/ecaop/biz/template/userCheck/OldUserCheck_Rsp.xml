@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OldUserCheckRsp mappedOut="true">
+    <RespCode length="F4" range="0000,0001,0002,0003,0004,0005,9999" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />
+    <!-- 校验编码 -->
+    <CheckCode length="F4" mappedName = "checkCode" range="0000,0006,0007,0008,9999"/>
+    <!-- 证件类型，参考附录证件类型 -->
+    <CertType length="V2" mappedName="certType"/>
+    <!-- 证件号码 -->
+    <CertNum length="V20" mappedName="certNum"/>
+    <!-- 客户名称 -->
+    <CustomerName length="V128" mappedName="customerName"/>
+    <!-- 证件地址 -->
+    <CertAdress length="V200" constraint="?" mappedName="certAdress"/>
+    <!-- 套餐变更BIPCODE：0：BIP2F008 1：BIP2F005 2：BIP2F039 3：BIP2F022 4：BIP2F024 -->
+    <ChangeType length="F1" mappedName="changeType" />
+    <!-- 数据来源系统 -->
+    <SysType length="F1" range="1,2" mappedName="sysType" constraint="?"/>
+    <!-- 付费标识：0：后付费 1：准预付费 2：OCS 3：PPS -->
+    <SubscrbType constraint="?" length="F1" mappedName="subscrbType" />
+    <!-- 用户当前3G活动ID -->
+    <OldActivityID length="V28" mappedName="oldActivityId" constraint="?"/>
+    <!-- 用户当前合约类型：0：iPhone合约 1：非iPhone合约 -->
+    <ActivityType length="F1" constraint="?" mappedName="activityType" />
+    <!-- 活动失效时间YYYYMMDDHHMMSS -->
+    <ActivityEndTime length="F14" constraint="?" mappedName="activityEndTime" />
+    <!-- 用户当前套餐金额，单位：元 -->
+    <OldProductMoney length="V10" constraint="?" mappedName="oldProductMoney" />
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</OldUserCheckRsp>

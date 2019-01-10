@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PRE_ORDER_DEAL_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <PRE_ORDER_DEAL_REQ>
+            <PROVINCE_CODE length="F2" mappedName="province" />
+            <EPARCHY_CODE length="V6" mappedName="city" />
+            <CHANNEL_TYPE length="F7" mappedName="channelType" />
+            <CHANNEL_ID length="V20" mappedName="channelId" />
+            <DEPART_ID length="V20" mappedName="channelId" />
+            <STAFF_ID length="V20" mappedName="operatorId" />
+            <OPERATE_TYPE length="F1" mappedName="opeType" />
+            <ORDER_ID length="V20" mappedName="orderId" />
+            <CUST_ID length="V16" constraint="?" mappedName="custId" />
+            <GROUP_ID length="V40" constraint="?" mappedName="groupId" />
+            <CUST_NAME length="V200" constraint="?" mappedName="custName" />
+            <PSPT_TYPE length="V2" constraint="?" mappedName="certType" />
+            <PSPT_CODE length="V40" constraint="?" mappedName="certNum" />
+            <SERIAL_NUMBER length="V40" constraint="?" mappedName="phone" />
+            <SERIAL_NUMBER_STATE length="F1" constraint="?" mappedName="phoneSta" />
+            <SPARE_SERIAL_NUMBER length="V40" constraint="?" mappedName="sparePhone" />
+            <START_DATE length="F14" constraint="?" mappedName="startTime" />
+            <END_DATE length="F14" constraint="?" mappedName="endTime" />
+            <ORDER_REMARK length="V1000" constraint="?" mappedName="orderRemark" />
+            <USE_CUST_NAME length="V20" constraint="?" mappedName="useCustName" />
+            <USE_PSPT_TYPE length="F1" constraint="?" mappedName="usePsptType" />
+            <USE_PSPT_CODE length="V40" constraint="?" mappedName="usePsptCode" />
+            <USE_PSPT_ADRESS length="V100" constraint="?" mappedName="usePsptAdr" />
+            <USE_RESPONSIBLE length="F1" constraint="?" mappedName="useResponsible" />
+            <USE_CUST_MARK length="F1" constraint="?" mappedName="useCustMark" />
+            <DEVELOP_CHANNEL_TYPE length="F7" constraint="?" mappedName="developChannelType" />
+            <DEVELOP_CHANNEL_ID length="V20" constraint="?" mappedName="developChannelId" />
+            <DEVELOP_DEPART_ID length="V20" constraint="?" mappedName="developdepartId" />
+            <DEVELOP_STAFF_ID length="V20" constraint="?" mappedName="developStaffId" />
+            <DEVELOP_STAFF_NAME length="V40" constraint="?" mappedName="developStaffName" />
+            <RSRV_STR1 length="V40" constraint="?" />
+            <RSRV_STR2 length="V40" constraint="?" mappedName="numberSrc" />
+            <RSRV_STR3 length="V40" constraint="?" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </PRE_ORDER_DEAL_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</PRE_ORDER_DEAL_INPUT>

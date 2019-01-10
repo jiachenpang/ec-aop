@@ -1,0 +1,5 @@
+#自助服务
+ecaop.core.app.map.tsst.sub=tsst
+ecaop.core.app.tsst.def={"code":"tsst", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.tsst.allow={appkey:"tsst",allow:"cmck,snqy,qcsc,cuck,nboc,qcsp,cumd,ccic,crck,cccc,qrtc,cdqy,cdnt,opap,\
+opsb,cdsn,sccc,chph,dvqy", deny:null}

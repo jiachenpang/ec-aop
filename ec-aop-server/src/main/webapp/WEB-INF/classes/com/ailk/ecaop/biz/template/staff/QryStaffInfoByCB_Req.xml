@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_STAFF_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_STAFF_INFO_REQ>
+            <STAFF_ID constraint="1" length="V20"  mappedName="operatorId" >
+                <!-- 员工工号 -->
+            </STAFF_ID>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_STAFF_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_STAFF_INFO_INPUT>

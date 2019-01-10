@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <TICKET_PAYMENT_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"></RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail"></RESP_DESC>
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <CURR_BALANCE length="V12" mappedName="currBalance"></CURR_BALANCE>
+        </RESP_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </TICKET_PAYMENT_RSP>
+</UNI_BSS_BODY>

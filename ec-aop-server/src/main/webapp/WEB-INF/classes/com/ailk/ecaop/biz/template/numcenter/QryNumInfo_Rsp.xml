@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_NUM_INFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail"/>
+        <RESOURCES_INFO constraint="*" mappedName="resourcesRsp">
+            <SERIAL_NUMBER length="V20" mappedName="resourcesCode"/>
+            <!-- 1:空闲 2:选占 3.预占 4:预留 5:占用 6:冷冻 7:上架 8：预配 9：预配套包 10：已售 11：携入 12：携出 13：待预配-->
+            <NUM_STATUS length="V2" mappedName="rscStateCode"/>
+            <!--靓号等级-->
+            <GOOD_LEVEL constraint="?" length="V1" mappedName="goodLevel"/>
+            <!--预存款（分）-->
+            <ADVANCE_PAY constraint="?" length="V10" mappedName="ReservaPrice"/>
+            <!--低销（分）-->
+            <LOW_COST constraint="?" length="V10" mappedName="lowCost"/>
+            <!--协议期 9999永久协议-->
+            <ONLINE_LENGTH constraint="?" length="V8" mappedName="lowCost"/>
+            <!--商城特色靓号：01：爱情号 02：事业号 03：吉祥号-->
+            <GOOD_SPECIAL constraint="?" length="F2" mappedName="goodSpecial"/>
+            <!--业务分类 01：公众 02：集团-->
+            <BUSINESS_TYPE constraint="?" length="F2" mappedName="businessType"/>
+            <PROVINCE_CODE constraint="?" length="F2" mappedName="province"/>
+            <CITY_CODE length="V4" mappedName="city"/>
+            <DISTRICT_CODE constraint="?" length="V10" mappedName="district"/>
+        </RESOURCES_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId"/>
+            <PARA_VALUE length="V60" mappedName="paraValue"/>
+        </PARA>
+    </QRY_NUM_INFO_RSP>
+</UNI_BSS_BODY>

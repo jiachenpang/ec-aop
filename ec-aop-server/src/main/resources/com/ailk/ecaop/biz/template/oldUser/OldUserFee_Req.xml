@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--老用户存费送费-费用计算接口及申请： 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <OldUserFeeReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId"></OperatorID>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province"></Province>
+            <!-- 地市 -->
+            <City length="F3" mappedName="city"></City>
+            <!-- 区县 -->
+            <District length="V10" mappedName="district"></District>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId"></ChannelID>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType"></ChannelType>
+            <!-- 渠道标示 --> 
+            <EModeCode length="V2" constraint="?" mappedName="eModeCode"></EModeCode>
+            <!-- 客户ID -->
+            <CustId length="V20" mappedName="custId"></CustId>
+            <!-- 手机号码 -->
+            <SerialNumber length="V20" mappedName="serialNumber"></SerialNumber>
+            <!-- 办理业务系统：1：ESS 2：CBSS -->
+            <OpeSysType length="F1" constraint="?" range="1,2" mappedName="opeSysType"></OpeSysType>
+            <!-- 产品 -->
+            <ProductInfo constraint="*" mappedName="productInfo">
+                <!-- 产品ID -->
+                <ProductCode length="V20" mappedName="productId"></ProductCode>
+                <!-- 0：可选产品；1：主产品 -->
+                <ProductMode length="F1" range="0,1" mappedName="productMode"></ProductMode>
+                <!-- 产品下附加包及包元素（资费，服务），附加包才需要传 -->
+                <PackageElement constraint="*" mappedName="packageElement">
+                    <!-- 包编号 -->
+                    <PackageId length="V20" mappedName="packageId"></PackageId>
+                    <!-- 元素编号 -->
+                    <ElementId length="V20" mappedName="elementId"></ElementId>
+                    <!-- 元素类型 -->
+                    <ElementType length="V2" mappedName="elementType"></ElementType>
+                </PackageElement>
+            </ProductInfo>
+            <!-- 参加的存费送费活动信息 -->
+            <ActivityInfo constraint="*" mappedName="activityInfo">
+                <!-- 活动ID（总部活动ID） -->
+                <ActPlanId length="V20" mappedName="actPlanId"></ActPlanId>
+                <!-- 活动下自选包 -->
+                <PackageElement constraint="*" mappedName="packageElement">
+                    <!-- 包编号 -->
+                    <PackageId length="V20" mappedName="packageId"></PackageId>
+                    <!-- 元素编号 -->
+                    <ElementId length="V20" mappedName="elementId"></ElementId>
+                    <!-- 元素类型 -->
+                    <ElementType length="V2" mappedName="elementType"></ElementType>
+                </PackageElement>
+            </ActivityInfo>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </OldUserFeeReq>
+    </SvcCont>
+</UniBSS>

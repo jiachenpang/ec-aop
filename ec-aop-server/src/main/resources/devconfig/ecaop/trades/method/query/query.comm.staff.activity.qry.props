@@ -1,0 +1,78 @@
+#员工权限合约查询
+ecaop.core.method.map.ecaop.trades.query.comm.staff.activity.qry=csaq
+ecaop.core.method.csaq.def={"mothod":"csaq","remark":"员工权限合约查询"}
+ecaop.core.method.csaq.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.csaq.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器
+ecaop.trades.csaq.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+     baseProductId:{type:"String(16)",required:true,encrypted:false,validators:null},\
+     productType:{type:"String(16)",required:true,encrypted:false,validators:null },\
+     deviceType:{type:"String(16)",required:false,encrypted:false,validators:null},\
+     deviceBrand:{type:"String(16)",required:false,encrypted:false,validators:null},\
+     machineTypeCode:{type:"String(16)",required:false,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义宽带新装预提交Processor
+ecaop.core.method.csaq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.csaq.flowConfig)
+
+#配置跳转
+ecaop.core.method.csaq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03 "},\
+{id:"02", processor:"AopHandler(ecaop.cbss.csaq.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.n6.csaq.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.cbss.csaq.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#定义processors
+
+ecaop.cbss.csaq.processors=@ParametersMapper(ecaop.trades.csaq.ParametersMapping)\
+                           @WsCall(ecaop.comm.conf.url.cbss.services.StaffActivitySer)\
+                           @Xml2JsonMapper4Fbs(ecaop.trades.csaq.qrtStaffActi.template)
+
+#url不确定
+ecaop.n6.csaq.processors=@ParametersMapper(ecaop.trades.csaq.ParametersMapping)\
+                         @WsCall(ecaop.comm.conf.url.cbss.services.StaffActivitySer)\
+                         @Xml2JsonMapper4Fbs(ecaop.trades.csaq.qrtStaffActi.template)
+
+
+
+#请求参数
+ecaop.trades.csaq.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"StaffActivitySer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryStaffActivity",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_STAFF_ACTI_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.csaq.qrtStaffActi.template@FBS@QRY_STAFF_ACTI_INPUT@n720382109@QRY_STAFF_ACTI_REQ"}\
+]
+
+ecaop.trades.csaq.qrtStaffActi.template=com/ailk/ecaop/biz/template/staff/QrtStaffActi

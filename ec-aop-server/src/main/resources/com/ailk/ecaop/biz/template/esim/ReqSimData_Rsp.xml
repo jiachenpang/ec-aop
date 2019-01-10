@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY mappedOut="true">
+  <REQ_SIM_DATA_RSP>
+    <RESP_CODE constraint="1" length="F4" mappedName="respCode">
+      <!-- 应答编码：0000 成功8888其他错误 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V500" mappedName="respDesc">
+      <!-- 应答描述 -->
+    </RESP_DESC>
+    <RESP_INFO constraint="*" mappedName="respInfo">
+      <EID constraint="?" length="V40" mappedName="eid">
+        <!-- 附卡eUICC标识 -->
+      </EID>
+      <MATCHINGID constraint="?" length="V40" mappedName="matchingid">
+        <!-- MATCHINGID -->
+      </MATCHINGID>
+      <SMDPADDRESS constraint="1" length="V500" mappedName="smdpaddress">
+        <!-- eSIM地址 -->
+      </SMDPADDRESS>
+      <CONFORM_CODE constraint="1" length="V40" mappedName="conformCode">
+        <!-- 确认码 -->
+      </CONFORM_CODE>
+      <ACTIVATIONCODE constraint="1" length="V400" mappedName="activationcode">
+        <!-- 激活码 -->
+      </ACTIVATIONCODE>
+    </RESP_INFO>
+    <PARA constraint="*" mappedName="para">
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!-- 保留字段ID -->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!-- 保留字段值 -->
+      </PARA_VALUE>
+    </PARA>
+  </REQ_SIM_DATA_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,104 @@
+#宽带加装处理提交
+ecaop.core.method.map.ecaop.trades.sell.brd.add.open.sub=sbaos
+ecaop.core.method.sbaos.def={"mothod":"sbaos","remark":"宽带加装处理提交"}
+
+ecaop.core.method.sbaos.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sbaos.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.sbaos.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true,validators:null},\
+     channelId:{type:"String(20)",required:true,validators:null},\
+     channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+     opeSysType:{type:"Number(1)",required:false,validators:null},\
+     orderNo:{type:"String(20)",required:false,validators:null},\
+     provOrderId:{type:"String(30)",required:true,validators:null},\
+     feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.sbaos.ChkfeeInfoSchema)"},\
+     origTotalFee:{type:"String(10)",required:true,validators:null},\
+     payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.sbaos.payInfo)"},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#feeinfo信息    
+ecaop.gdjk.sbaos.ChkfeeInfoSchema={\
+    feeId:{type:"String(20)", required:true,validators:null},\
+    feeCategory:{type:"String(1)", required:true, validators:null},\
+    calculateTag:{type:"String(1)", required:true, validators:null},\
+    feeDes:{type:"String(120)", required:true,validators:null},\
+    origFee:{type:"String(10)", required:true,validators:null},\
+    reliefFee:{type:"String(10)", required:true,validators:null},\
+    reliefResult:{type:"String(60)", required:false,validators:null},\
+    realFee:{type:"String(10)", required:true,validators:null}}
+#支付信息
+ecaop.trades.sbaos.payInfo={\
+    payMode:{type:"String(1)",required:true},\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+}     
+  
+     
+#定义processors
+ecaop.core.method.sbaos.processors=@ChangeFeeType()\
+                                   @brdAddOpenSubpro()
+
+#CBSS宽带加装处理提交
+ecaop.trades.sbaos.cancel.paramtersmapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sbaos.cancel.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+#N6宽带加装处理提交
+ecaop.trades.sbaos.cancel.N6.paramtersmapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOrdForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sbaos.cancel.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+
+ecaop.trades.sbaos.cancel.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+
+
+
+

@@ -1,0 +1,186 @@
+#客户资料校验
+ecaop.core.method.map.ecaop.trades.query.aop.zeng.test=mytest
+ecaop.core.method.mytest.def={"mothod":"mytest","remark":"客户资料校验"}
+ecaop.core.method.mytest.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.masb.mytest.MsgSchema={\
+    operatorId:{ type:"String(20)", required:true },\
+    province:{ type:"String(2)", required:true,validators:"@FixedLen(2)" },\
+    city:{ type:"String(3)", required:true },\
+    district:{ type:"String(10)", required:true },\
+    channelId:{ type:"String(20)", required:true },\
+    channelType:{ type:"String(7)", required:true,validators:"@FixedLen(7)" },\
+    checkType:{ type:"String(1)", required:true,validators:"@FixedLen(1)"},\
+    serviceClassCode:{ type:"String(4)", required:false,validators:"@FixedLen(4)"},\
+    areaCode:{ type:"String(6)", required:false,validators:null },\
+    opeSysType:{ type:"String(6)", required:false,validators:"@FixedLen(1)" },\
+    serialNumber:{ type:"String(40)", required:false,validators:null },\
+    certType:{ type:"String(2)", required:false,validators:"@FixedLen(2)" },\
+    certNum:{ type:"String(30)", required:false },\
+    serType:{ type:"String(1)", required:false,validators:"@FixedLen(1)" },\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+#定义processors 需要调两次CheckMaxFiveNumber，第一次存入certType(后面调各个系统可能会改这个值)，第二次是调一证五户
+ecaop.core.method.mytest.processors=@route\
+                                  @certTypeRoute\
+                                  @CheckMaxFiveNumberTest()
+#配置跳转
+ecaop.core.method.mytest4mall.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->04"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(certTypeCode)", transitions:"ONS->03 FBS->05 "},\
+{id:"03", processor:"AopHandler(ecaop.masb.mytest4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.trades.cbss.mytest.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.fbs.mytest.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#客户资料校验北六、CBSS
+ecaop.trades.cbss.mytest.processors=@TransReqParamsMapper()\
+                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)\
+                                  @checkOwe()\
+                                  @checkOweByUserId()
+#客户资料校验
+ecaop.masb.mytest4N25.processors=@getServiceType()\
+                           @ParametersMapper(ecaop.masb.mytest.ParametersMapping)\
+                           @AopCall(ecaop.comm.conf.url.osn.syncreceive.0002)\
+                           @urlDecode()\
+                           @Xml2Json4CustMapper(ecaop.masb.mytest.template)\
+                           @callCoreSys4CustInfo(ecaop.masb.mytest.ParametersMapping)\
+                           @getExtCustInfo()\
+                           @defaultValue(ecaop.masb.mytest.defaultValue)\
+                           @CheckOldCustInfo()
+
+#请求参数
+ecaop.masb.mytest.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T2000501",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.numId,msg.serialNumber"},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CheckCustReq",temp:true},\
+{paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.mytest.template@ONS"}\
+]
+#报文模版路径
+ecaop.masb.mytest.template=com/ailk/ecaop/biz/template/nfour/CustInfoCheck
+ecaop.masb.mytest.defaultValue={certAdress:"无",customerLevel:"无",certExpireDate:"无",contactPerson:"无",contactPhone:"无"}
+#客户资料校验（全业务版）
+ecaop.fbs.mytest.processors=\
+                @ParametersMapper(ecaop.fbs.mytest.ParametersMapping)\
+                @WsCall(ecaop.comm.conf.url.osn.services.grpCustAuthSer)\
+                @Xml2JsonMapper4Fbs(ecaop.fbs.mytest.template)\
+                @getExtCustInfo()\
+                @defaultValue(ecaop.masb.mytest.defaultValue)\
+                @CheckOldCustInfo()
+#请求参数
+ecaop.fbs.mytest.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"GrpCustAuthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"authGrpCust",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"AUTHGRPCUST_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.fbs.mytest.template@FBS@AUTHGRPCUST_INPUT"}\
+]
+#报文模版路径
+ecaop.fbs.mytest.template=com/ailk/ecaop/biz/template/custCheck/CustCheckForFbs
+ecaop.soap.bodyns.mytest=grp
+
+ecaop.trades.mytest.checkOwe.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"PaymentSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryAllFeeInfo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_ALL_FEE_INFO_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mytest.checkOwetemplate@FBS@QRY_ALL_FEE_INFO_INPUT@n-1852619497@QRY_ALL_FEE_INFO_REQ"}\
+    ]
+ecaop.trades.mytest.checkOwetemplate=com/ailk/ecaop/biz/template/cbss/QryAllFeeInfo
+#通过USERID查询欠费信息
+ecaop.trades.mytest.qryCommInfo.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"CommInfoForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryCommInfo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_COMM_INFO_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mytest.qryCommInfo.checkOwetemplate@FBS@QRY_COMM_INFO_INPUT@n1889327204@QRY_COMM_INFO_REQ"}\
+    ]
+ecaop.trades.mytest.qryCommInfo.checkOwetemplate=com/ailk/ecaop/biz/template/commInfoForNorthSer/QryCommInfo
+
+#一证五户客户资料校验appcode开关
+ecaop.mytest.params.config.appCode=llsb|sdpr|mpln|hpsb|tjpr|mnsb|scpr
+
+ecaop.trades.mytest.CheckMaxFiveNumber.template=com/ailk/ecaop/biz/template/number/QryUserNumber
+
+#一证五户校验 没用json2StringNew因为osnDuns，hsnDuns不是固定值
+ecaop.trades.mytest.CheckMaxFiveNumber.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OneCardFiveUserSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"QryUserNumber",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"fix",extractorConfig:"28",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"hsnDuns",extractor:"msgReceiver",extractorConfig:"",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"msgReceiver",extractorConfig:"",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_USER_NUMBER_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mytest.CheckMaxFiveNumber.template@FBS@QRY_USER_NUMBER_INPUT@n555555@QRY_USER_NUMBER_REQ"}\
+]

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORD_CLE_MOBILE_INPUT>
+ <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+ <UNI_BSS_BODY>
+  <CANCEL_TRADE_REQ>
+   <ORDER_ID constraint="1" length="V30" mappedName="provOrderId"><!--总部订单编号 -->
+   </ORDER_ID>
+   <ORG_ORDER_ID constraint="1" length="V30" mappedName="oldProvOrderId"><!--待撤总部订单（可为父订单，也可为子订单） -->
+   </ORG_ORDER_ID>
+   <OPER_TYPE constraint="1" length="F1" mappedName="operType" defaultValue="0"><!--待撤订单类型 0：总部父订单 1：总部子订单 -->
+   </OPER_TYPE>
+   <CANCEL_TYPE constraint="1" length="F1" mappedName="cancelType"><!--撤单类型 1：局方撤单（资源不足） 2：用户撤单 -->
+   </CANCEL_TYPE>
+   <CANCEL_REASON constraint="1" length="V500" mappedName="cancelReason"><!--撤单原因 -->
+   </CANCEL_REASON>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+  </CANCEL_TRADE_REQ>
+ </UNI_BSS_BODY>
+</ORD_CLE_MOBILE_INPUT>

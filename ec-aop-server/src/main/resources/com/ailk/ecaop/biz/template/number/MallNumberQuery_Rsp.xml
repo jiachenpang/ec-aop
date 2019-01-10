@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NumQueryRsp mappedOut="true">
+    <!-- 应答编码 0000 成功 0001 条件非法 9999 其他错误 -->
+    <RespCode length="F4" range="0000,0001,9999" mappedName="code"/>
+    <!-- 错误描述 ，返回详细的错误信息 -->
+    <RespDesc length="V100" mappedName="detail"/>
+    <!-- 号码列表（最多返回200条记录） -->
+    <NumInfo constraint="*" mappedName="numInfo">
+        <!-- 号码 -->
+        <NumID length="V20" mappedName="numID"/>
+        <!-- 号码说明 -->
+        <NumMemo constraint="?" length="V200" mappedName="numMemo" />
+        <!-- 预存话费金额 -->
+        <AdvancePay length="V11" mappedName="advancePay" />
+        <!-- 号码等级 -->
+        <ClassId length="F1" mappedName="classId" />
+        <!-- 协议期最低消费 -->
+        <LowCostPro constraint="?" length="V11" mappedName="lowCostPro" />
+        <!-- 协议时长 -->
+        <TimeDurPro constraint="?" length="V5" mappedName="timeDurPro" />
+        <!-- 号码约束产品 -->
+        <NumProduct constraint="?" length="V20" mappedName="numProduct"/>
+        <!-- 关联号码 -->
+        <NumRelNum constraint="?" length="V20" mappedName="numRelNum"/>
+        <!-- 分组信息 -->
+        <GroupInfo constraint="*" mappedName="groupInfo">
+            <!-- 组别编码 -->
+            <GroupKey length="V20" mappedName="groupKey"/>
+        </GroupInfo>
+    </NumInfo>
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</NumQueryRsp>

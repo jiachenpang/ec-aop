@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <CheckCustReq>
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <Province length="F2" mappedName="province"/>
+            <City length="F3" mappedName="city"/>
+            <District length="V10" defaultValue="0000000000" mappedName="district"/>
+            <ChannelID length="V20" mappedName="channelId"/>
+            <ChannelType length="V20" mappedName="channelType"/>
+            <AccessType length="F2" defaultValue="01"/>
+            <Name length="V200" constraint="?" mappedName="certName"/>
+            <CertType length="V2"  mappedName="certType" constraint="?"/> 
+            <CertNum length="V30"  mappedName="certNum" constraint="?"/> 
+            <ServiceType length="F2" constraint="?" range="01~05" mappedName="serviceType"/>
+            <AreaCode length="V4"  constraint="?" mappedName="areaCode"/>
+            <NumID length="V20" constraint="?" mappedName="numId"/>
+            <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </CheckCustReq>
+    </SvcCont>
+</UniBSS>

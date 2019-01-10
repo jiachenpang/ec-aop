@@ -1,0 +1,64 @@
+#号码状态变更
+ecaop.core.method.map.ecaop.trades.query.comm.snres.chg=qcsc
+ecaop.core.method.qcsc.def={"mothod":"qcsc"}
+
+ecaop.core.method.qcsc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#定义processors
+ecaop.core.method.qcsc.processors=@NumRoute\
+                                  @route\
+                                  @FlowProcessor(ecaop.core.method.qcsc.flowConfig)
+
+#配置跳转numSwitch 0 号卡中心流程 1原有流程
+ecaop.core.method.qcsc.flowConfig=[\
+    {id:"01", processor:"SimpleProcessor", selector:"GlobalParam(numSwitch)", transitions:"0->03 1->02 2->06 3->07"},\
+    {id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+    {id:"03", processor:"AopHandler(ecaop.masb.qcscNum.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"04", processor:"AopHandler(ecaop.trades.qcsc4N6.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"05", processor:"AopHandler(ecaop.masb.qcsc.processors)", selector:"Noop", transitions:"*->STOP"}\
+    {id:"06", processor:"AopHandler(ecaop.masb.qcscNumCen.processors)", selector:"Noop", transitions:"*->STOP"}\
+    {id:"07", processor:"AopHandler(ecaop.masb.qcscNumCenNew.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#北六省的处理
+ecaop.trades.qcsc4N6.processors=@simpleCheckUserInfo()\
+                                @TransReqParamsMapper()\
+                                @AopCall(ecaop.comm.conf.url.ec-aop.rest)
+#南25号码状态变更
+ecaop.masb.qcsc.processors=\
+                @ParametersMapper(ecaop.gdjk.numcheck.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2Json4Res(ecaop.gdjk.numcheck.template)
+#号卡中心号码状态变更
+ecaop.masb.qcscNum.processors=@changeNumberStatusForNumberCenter()
+
+#号卡中心号码状态变更（新号码在号卡，老号码在3ge）
+ecaop.masb.qcscNumCen.processors=@numberCenterToChangeNumber()
+
+#号卡中心号码状态变更（新号码在3ge或北六e，老号码在号卡）
+ecaop.masb.qcscNumCenNew.processors=@numberCenterToChangeNumberNew()
+
+#给freeMarker中变量复制，一遍生成报文
+ecaop.trades.simpleCheckUserInfo.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"UsrSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"simpleCheckUserInfo",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SIMPLE_CHECK_USER_INFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.simpleCheckUserInfo.template@FBS@SIMPLE_CHECK_USER_INFO_INPUT"}\
+] 
+
+#请求和返回报文模版路径
+ecaop.trades.simpleCheckUserInfo.template=com/ailk/ecaop/biz/template/usrSer/SimpleCheckUserInfo

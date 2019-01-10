@@ -1,0 +1,9 @@
+ecaop.core.app.map.uss.sub=ussb
+ecaop.core.app.ussb.def={"code":"ussb", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.ussb.timeslimit=max 100 per 1 minute
+ecaop.core.app.ussb.allow={appkey:"ussb",allow:"ppoq,cuck,opap,opsb,cdqy,cdnt,cdsn,qrtc,snqy,nboc,crck,dvqy,dvck,qcsp,\
+cdaq,qcaq,smnp,mpsb,qmoq,codc,ccic,oata,mold,cuck,cack,trao,2324,234o,opsb,sc4s,oupc,qctc,mvoa,smosa,smoss,orta,qcacq,\
+qcar,qcpq,qcpa,spfs,mofc,ofcs,modr,23l4,234s,234t,ipry,kdwy,bsoa,bsop,sbso,odsb,tzcx,adnu,baoa,sbaos,csaq,bypc,byps,\
+ofpc,ofps,scmc,scac,sfso,sfss,faoa,fasb,scaf,smno,smct,sjgs,cumd,qcrq,jffx,qcbl,qofq,msoa,sbaq,qcgc,snqz,qcgq,sccc,mxcg,\
+spff,qccq,mcoa,qcsc,scccs,sgfs,qrsr,tsrc,sjxs,sctr,qauq,quuq,qcfq,qrtb,qrtac,smcc,cumd,smoca,occs,sack,qrsq,qrsc,qcsq,\
+23t4,sbrc,mccr,mccn,scgq,seft,qcop,cwac,cwps,mofs,mofa", deny:null}

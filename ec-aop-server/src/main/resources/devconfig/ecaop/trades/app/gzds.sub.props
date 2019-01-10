@@ -1,0 +1,5 @@
+#贵州分销国政通测试
+ecaop.core.app.map.gzds.sub=gzds
+ecaop.core.app.gzds.def={"code":"gzds", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gzds.timeslimit=max 100 per 1 minute
+ecaop.core.app.gzds.allow={appkey:"gzds",allow:"crck", deny:null}

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--老用户存费送费订单预提交、收款结束后提交订单接口 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml"/>
+    <SvcCont cdata="true" mappedOut="true">
+        <OldUserFeeSubmitReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId"></OperatorID>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province"></Province>
+            <!-- 地市 -->
+            <City length="F3" mappedName="city"></City>
+            <!-- 区县 -->
+            <District length="V10" mappedName="district"></District>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId"></ChannelID>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType"></ChannelType>
+            <!-- 渠道类型 -->
+            <SysCode length="V6" mappedName="sysCode"></SysCode>
+            <!-- ESS订单交易流水 -->
+            <ProvOrderId length="V30" mappedName="provOrderId"></ProvOrderId>
+            <!-- 外围系统订单ID -->
+            <OrdersId length="V30" mappedName="ordersId"></OrdersId>
+            <!-- 办理业务系统：1：ESS 2：CBSS -->
+            <OpeSysType length="F1" constraint="?" range="1,2" mappedName="opeSysType"></OpeSysType>
+            <!-- 收费信息*（ESS从BSS获取到的） -->
+            <FeeInfo constraint="*" mappedName="feeInfo">
+                <!-- 收费项编码，以省分现有编码为准 -->
+                <FeeId length="V20" mappedName="feeId"></FeeId>
+                <!-- 收费项科目 -->
+                <FeeCategory length="V1" mappedName="feeCategory"></FeeCategory>
+                <!-- 收费项描述 -->
+                <FeeDes length="V120" mappedName="feeDes"></FeeDes>
+                <!-- 应收费用正整数单位：分 -->
+                <OrigFee length="V10" mappedName="origFee"></OrigFee>
+                <!-- 减免金额，单位：分 -->
+                <ReliefFee length="V10" mappedName="reliefFee"></ReliefFee>
+                <!-- 减免原因 -->
+                <ReliefResult length="V60" mappedName="reliefResult"></ReliefResult>
+                <!-- 实收金额，单位：分 -->
+                <RealFee length="V10" mappedName="realFee"></RealFee>
+            </FeeInfo>
+            <!-- 总费用正整数，单位：分 -->
+            <OrigTotalFee length="V10" mappedName="origTotalFee"></OrigTotalFee>
+            <!-- 发票号码 -->
+            <InvoiceNo length="V30" constraint="?" mappedName="invoiceNo"></InvoiceNo>
+            <!-- 客户支付信息 -->
+            <PayInfo constraint="*" mappedName="payInfo">
+                <!-- 支付方式 参考附录支付方式说明 现金，不填写支付机构和支付账号） -->
+                <PayType length="V2" mappedName="payType"></PayType>
+                <!-- 支付机构名称 -->
+                <PayOrg length="V30" constraint="?" mappedName="payOrg"></PayOrg>
+                <!-- 支付账号 -->
+                <PayNum length="V20" constraint="?" mappedName="payNum"></PayNum>
+            </PayInfo>
+            <!-- 受理单要求标记 0：不要求受理单 1：要求受理单 -->
+            <AcceptanceReqTag length="F1" mappedName="acceptanceReqTag"></AcceptanceReqTag>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml"/> <!-- 保留字段 -->
+        </OldUserFeeSubmitReq>
+    </SvcCont>
+</UniBSS>

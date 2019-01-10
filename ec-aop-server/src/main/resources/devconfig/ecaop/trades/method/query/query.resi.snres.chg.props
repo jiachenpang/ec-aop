@@ -1,0 +1,65 @@
+#对选择的号码进行预占或释放操作
+ecaop.core.method.map.ecaop.trades.query.resi.snres.chg=qrsc
+ecaop.core.method.qrsc.def={"mothod":"qrsc","remark":"固网号码预占释放"}
+ecaop.core.method.qrsc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.qrsc.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器
+ecaop.trades.qrsc.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    operType:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    resourcesInfo:{type:"JSON",required:true,encrypted:false,validators:"@JSONSchema(ecaop.trades.qrsc.msg.resourcesInfo)"},\
+    brandCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    provinceBrandCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    productId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    userId:{type:"String(16)",required:false,encrypted:false,validators:null},\
+    tradeId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#资源信息
+ecaop.trades.qrsc.msg.resourcesInfo={\
+   serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+   oldSerialNumber:{type:"String(40)",required:false,encrypted:false,validators:null}\
+}
+
+#定义流程跳转
+ecaop.core.method.qrsc.processors=\
+                                 @ParametersMapper(ecaop.masb.qrsc.chkLangLineNum4GParametersMapping)\
+                                 @WsCall(ecaop.comm.conf.url.osn.services.number4GSer)\
+                                 @Xml2JsonMapper4Fbs(ecaop.masb.qrsc.chkLineNum4GTemplate)
+
+ecaop.masb.qrsc.chkLangLineNum4GParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"Number4GSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"chkLineNum4G",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"9900",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHK_LINE_NUM4G_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.areaCode,msg.city"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.serviceClassCode,0200"},\
+    {paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.multiNumber.operType,msg.operType"},\
+    {paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.multiNumber.resourcesInfo,msg.resourcesInfo"},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.qrsc.chkLineNum4GTemplate@FBS@CHK_LINE_NUM4G_INPUT"}\
+]
+#指定模板路径
+ecaop.masb.qrsc.chkLineNum4GTemplate=com/ailk/ecaop/biz/template/nfour/ChkLineNum4G
+ecaop.soap.bodyns.qrsc=chk                                 

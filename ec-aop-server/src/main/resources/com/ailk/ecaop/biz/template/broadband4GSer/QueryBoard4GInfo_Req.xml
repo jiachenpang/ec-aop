@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_BOARD_4GINFO_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QUERY_BOARD_4GINFO_REQ>
+            <QUERY_TYPE length="F2" mappedName="queryType"/>
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber"/>
+        </QUERY_BOARD_4GINFO_REQ>
+    </UNI_BSS_BODY>
+     <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QUERY_BOARD_4GINFO_INPUT>

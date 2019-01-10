@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProductChgRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />
+    <BssOrderId length="V30" mappedName="bssOrderId"/>
+    <FeeInfo constraint="*" mappedName="feeInfo">
+        <FeeId length="V20" mappedName="feeId" />
+        <FeeCategory length="F1" mappedName="feeCategory" />
+        <FeeDes length="V120" mappedName="feeDes" />
+        <MaxRelief length="V10" mappedName="maxRelief" />
+        <OrigFee length="V10" mappedName="origFee" />
+     </FeeInfo>
+     <TotalFee length="V10" mappedName="totalFee"/>
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</ProductChgRsp>

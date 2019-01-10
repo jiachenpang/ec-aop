@@ -1,0 +1,44 @@
+# 终端销售信息校验  create by zhaok Date 17/05/27
+ecaop.core.method.map.ecaop.trades.check.sale.terminfo=seft
+
+ecaop.core.method.seft.def={"mothod":"seft","remark":"终端销售信息校验"}
+
+ecaop.core.method.seft.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.param.msg.schema.seft)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.param.msg.schema.seft={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:null },\
+    resourcesCode:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#请求参数
+ecaop.param.mapping.seft=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000016",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ChkSaleTermReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.template.sale.terminfo@ONS"}\
+]
+
+#定义模板
+ecaop.template.sale.terminfo=com/ailk/ecaop/biz/template/sale/ChkSaleTerm
+
+#定义processors
+ecaop.core.method.seft.processors=@ParametersMapper(ecaop.param.mapping.seft)\
+                                  @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                  @Xml2JsonMapper(ecaop.template.sale.terminfo)
+

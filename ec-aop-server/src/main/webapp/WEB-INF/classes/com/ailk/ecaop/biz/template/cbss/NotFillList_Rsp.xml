@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+  <QRY_COMM_INFO_RSP>
+    <RESP_CODE constraint="?" mappedName="respCode"></RESP_CODE>
+    <RESP_DESC constraint="?" mappedName="respDesc"></RESP_DESC>
+
+    <PARA constraint="1" mappedName="para">
+      <!--保留-->
+      <ITEM constraint="*" mappedName="item">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!--保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+          <!--保留字段值 -->
+        </PARA_VALUE>
+      </ITEM>
+
+    </PARA>
+  </QRY_COMM_INFO_RSP>
+</UNI_BSS_BODY>

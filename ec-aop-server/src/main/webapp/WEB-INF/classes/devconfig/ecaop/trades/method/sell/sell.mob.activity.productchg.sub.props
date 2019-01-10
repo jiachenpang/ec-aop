@@ -1,0 +1,64 @@
+#套餐变更及合约续约提交接口 by wangmc 20180529
+ecaop.core.method.map.ecaop.trades.sell.mob.activity.productchg.sub=maps
+ecaop.core.method.maps.def={"mothod":"maps","remark":"产品变更提交接口"}
+ecaop.core.method.maps.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.maps.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器,其中产品信息节点的校验使用的产品变更提交接口的产品校验器:ecaop.trades.mcps.userInfo.param 不用再重复写了
+ecaop.trades.maps.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    ordersId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    opeSysType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    serialNumber:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    userInfo:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mcps.userInfo.param)"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#活动信息节点
+ecaop.trades.maps.activityInfo.param{\
+    activityType:{type:"String(1)",required:true,encrypted:false,validators:"@Enum(0,1,2)"},\
+    activityId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    activityName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+}
+#定义流程跳转
+ecaop.core.method.maps.processors=@productChangeRoute\
+                                  @FlowProcessor(ecaop.core.method.maps.flowConfig)
+#跳转流程
+ecaop.core.method.maps.flowConfig=[\
+    {id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 *->03"},\
+    {id:"02", processor:"AopHandler(ecaop.maps.toBss.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"03", processor:"SimpleProcessor", selector:"GlobalParam(isTransystem)", transitions:"0->04 1->05"},\
+    {id:"04", processor:"AopHandler(ecaop.maps.23To4.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"05", processor:"AopHandler(ecaop.maps.chgProduct.processors)", selector:"Noop", transitions:"*->STOP"},\
+]
+
+#调用全业务到BSS，即2G转3G（后付费、预付费），3G互转。无特殊处理。直接调用省份
+ecaop.maps.toBss.processors=@changeProductToBssProcessor()
+
+#调用aop的23转4流程
+ecaop.maps.23To4.processors=@preDataFor23To4Processor()\
+                            @TransToCBSSProcessor()\
+                            @preOrderSubProcessor()
+
+#调用aop的套餐变更流程
+ecaop.maps.chgProduct.processors=@preDateToChgProductProcessor()\
+                                 @newChangeProduct4CBProcessor()\
+                                 @preOrderSubProcessor()
+
+#报文头参数
+ecaop.ecsb.maps.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.checkProduct.refProductChange",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.maps.template@FBS@REF_PRODUCT_CHANGE_INPUT@n1529397156@REF_PRODUCT_CHANGE_REQ"}\
+]
+
+ecaop.trades.maps.template=com/ailk/ecaop/biz/template/product/RefProductChange

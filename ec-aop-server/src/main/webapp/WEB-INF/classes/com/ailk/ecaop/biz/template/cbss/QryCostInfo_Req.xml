@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRYCOSTINFO_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_COST_INFO_REQ>
+             <SERVICE_CLASS_CODE length="F4"  constraint="?" mappedName="serviceClassCode"/>
+            <QRY_MODE length="F1" mappedName="qryMode"/>            
+            <SERIAL_NUMBER length="V20" mappedName="serialNumber"/>
+            <QRY_TYPE length="F1"   mappedName="qryType" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_COST_INFO_REQ>
+    </UNI_BSS_BODY>
+     <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRYCOSTINFO_INPUT>

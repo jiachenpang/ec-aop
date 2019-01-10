@@ -1,0 +1,54 @@
+#分步补换卡申请
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.stepchangecard.app=smosa
+ecaop.core.method.smosa.def={"mothod":"smosa","remark":"分步补换卡申请"}
+ecaop.core.method.smosa.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smosa.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg校验
+ecaop.trades.smosa.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true},\
+     channelId:{type:"String(20)",required:true},\
+     channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+     ordersID:{type:"String(20)",required:true},\
+     opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+     operFlag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+     serialNumber:{type:"String(20)",required:true},\
+     certType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     certNum:{type:"String(50)",required:true},\
+     iccid:{type:"String(20)",required:true},\
+     cardType:{type:"String(22)",required:true},\
+     busiType:{type:"String(22)",required:true},\
+     imsi:{type:"String(15)",required:false},\
+     cardData:{type:"String(1024)",required:false},\
+     procId:{type:"String(30)",required:true},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+     
+ecaop.masb.smosa.qryRemoteCardInfo.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.SimForNorthSer.qryRemoteCardInfo",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.smosa.qryRemoteCardInfo.template@FBS@QRY_REMOTECARDINFO_INPUT"}\
+] 
+
+#南25请求参数
+ecaop.param.mapping.smosa=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00051",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"OldChangeCardAopApp",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.smosa.changedcardPre.template@3GE"}\
+]
+
+#aop模板路径
+ecaop.trades.smosa.changedcardPre.template=com/ailk/ecaop/biz/template/simcard/OldChangeCardAopApp
+ecaop.trades.smosa.qryRemoteCardInfo.template=com/ailk/ecaop/biz/template/res/QryRemoteCardInfo
+
+#定义processors
+ecaop.core.method.smosa.processors=@oldCardChangePre()

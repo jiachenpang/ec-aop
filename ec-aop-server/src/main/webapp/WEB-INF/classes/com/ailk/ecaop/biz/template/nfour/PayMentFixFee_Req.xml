@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <PaymentReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省份地市区县 -->
+            <Province length="F2" mappedName="province"/>
+            <City length="F3" mappedName="city"/>
+            <District length="V10" mappedName="district"/>
+            <!-- 渠道编码及类型 -->
+            <ChannelID length="V20" mappedName="channelId"/>
+            <ChannelType length="F7" mappedName="channelType"/>
+            <!-- 接入类型:01 WEB； 02 短信； 03 WAP；04 IVR； 05 自助终端；06 MINI营业厅；07客户端；08 第三方平台；09 网上商城 99 其他 -->
+            <AccessType length="F2" mappedName="accessType"/>
+            <!-- 缴费时间YYYYMMDDHH24MISS （此时间作为划分账期的标准，对账中使用） -->
+            <ProcTime length="F14" mappedName="procTime"/>
+            <!-- 支付机构编码:
+                0xx 其它,099 天津滨河,1xx 银联,198 mini厅银联；199 自助终端银联,2xx 快钱,3xx 支付宝,4xx 易宝,
+                499自助终端易宝信用卡,5xx 网银在线,6xx 财付通,7xx 环迅,8xx 现金,800自助终端现金,9xx 沃支付,997 沃支付刷卡
+                998 MINI沃支付,999 自助终端沃支付,A00 拉卡拉,B00 福卡
+             -->
+            <PayAgency length="F3" mappedName="payAgency"/>
+            <!-- 支付时间YYYYMMDDHH24MISSsss -->
+            <PayTime length="F17" mappedName="payTime"/>
+            <!-- 缴费类型 0：账户级缴费 1：用户级缴费（用户级缴费，本期不支持） -->
+            <PayType length="F1" mappedName="payType"/>
+            <!-- 网别：01:2G（GSM） 02:3G（WCDMA） 03:固定电话  04:宽带（ADSL） 05:宽带（LAN） 06:小灵通 07:WLAN业务 -->
+            <NetType length="F2" mappedName="netType"/>
+            <AccProvince length="F2" constraint="*" mappedName="accProvince"/>
+            <AccCity length="F3" constraint="*" mappedName="accCity"/>
+            <Code length="V4" constraint="*" mappedName="code"/>
+            <!-- 缴费用户号码 -->
+            <UserNum length="V30" mappedName="userNumber"/>
+            <UserID length="V30" constraint="*" mappedName="userId"/>
+            <AccBookID length="V20" constraint="*" mappedName="accBookId"/>
+            <Fee length="V15" mappedName="fee"/>
+            <!-- 支付方式 01 现金 02 现金+积分  03 积分-->
+            <PaymentType length="F2" constraint="*" mappedName="payMentType"/>
+            <!-- 积分金额 单位：厘 例;10元 （10000） -->
+            <PointFee length="V15" constraint="*" mappedName="pointFee"/>
+            <!-- 积分扣减流水 -->
+            <PointDeductID length="V30" constraint="*" mappedName="pointDeductId"/>
+            <!-- 积分扣减号码（固网：区号-号码，如010-8232222   移网：186111111111） -->
+            <PointDeductNumber length="V30" constraint="*" mappedName="pointDeductNumber"/>
+            <!-- 积分扣减号码网别 -->
+            <DeductServiceClassCode length="V4" constraint="*" mappedName="deductServiceClassCode"/>
+            <deduct_service_class_code length="V4"  mappedName="deductServiceClassCode" constraint="?"/>
+            <!-- 代理商缴费标识:0 非代理商缴费；1 代理商缴费-->
+            <agenpay_flag length="V1"  mappedName="agenpayFlag" constraint="?"/>
+            <!-- 代理商扣款流水-->
+            <charge_id length="V30"  mappedName="chargeId" constraint="?"/>
+            <!-- 扣款标识:0 扣款 1无扣款-->
+            <contract_flag length="V1"  mappedName="contractFlag" constraint="?"/>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </PaymentReq>
+    </SvcCont>
+</UniBSS>

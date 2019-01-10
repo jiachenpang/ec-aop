@@ -1,0 +1,22 @@
+#照片上传申请
+ecaop.core.method.map.ecaop.trades.syn.pic.pre=sypp
+ecaop.core.method.sypp.def={"mothod":"sypp","remark":"照片上传申请"}
+ecaop.core.method.sypp.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sypp.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.sypp.param.msg={\
+     operatorId:{type:"String(20)",required:false},\
+     province:{type:"String(2)",required:true},\
+     city:{type:"String(3)",required:false},\
+     channelId:{type:"String(20)",required:false},\
+     district:{type:"String(10)",required:false},\
+     orderId:{type:"String(20)",required:true},\
+     endTime:{type:"String(14)",required:true},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+     
+#定义processors
+ecaop.core.method.sypp.processors=@TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ess.pictureServer)

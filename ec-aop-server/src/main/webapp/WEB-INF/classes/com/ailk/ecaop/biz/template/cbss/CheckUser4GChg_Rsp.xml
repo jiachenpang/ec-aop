@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <CHECKUERCHG_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+        <!--应答编码 0000 校验通过； 1111 用户有在途工单； 0001用户不属于集客范围 1112 用户有cBSS系统不支持的集团 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="1" length="V500" mappedName="detail"><!--应答描述 -->
+        </RESP_DESC>
+        <CHECKUERCHG_RSP_BODY mappedOut="true">
+            <GROUP_ID constraint="?" length="V40" mappedName="groupId" ></GROUP_ID><!--集团客户编号-->
+            <CBSS_CUST_ID constraint="?" length="V40" mappedName="cbssCustId" /><!--集中系统客户标识 -->
+            <GRPUSER_LIST constraint="*"  mappedName="groupUserList">
+                <GRPUSER_ID constraint="?" length="V16" mappedName="grpUserId" /><!--用户标识 -->
+                <PROVINCE_GRPUSER_ID constraint="?" length="V30" mappedName="provinceGrpUserId" /> <!--归属集团的cBSS系统用户标识 -->
+                <START_DATE constraint="?" length="F14" mappedName="startDate" />
+                <END_DATE constraint="?" length="F14" mappedName="endDate" />
+            </GRPUSER_LIST>
+        </CHECKUERCHG_RSP_BODY>
+         <USER_TAG constraint="*"  mappedName="userTag"><!--用户标签信息 -->
+            <INNETTAG constraint="?"  length="F1"  mappedName="innetTag"><!--统一入网标签 -->
+            </INNETTAG>
+            <START_DATE_INNETTAG constraint="?" length="F14" mappedName="startDateInnetTag"><!--统一入网标签开始时间 -->
+            </START_DATE_INNETTAG>
+            <END_DATE_INNETTAG constraint="?" length="F14" mappedName="endDateInnetTag"><!--统一入网标签結束时间 -->
+            </END_DATE_INNETTAG>
+            <REVTAG constraint="?" length="F1" mappedName="revTag"><!--归属标签 -->
+            </REVTAG>
+            <START_DATE_REVTAG constraint="?" length="F14" mappedName="startDateRevTag"><!--归属标签開始时间 -->
+            </START_DATE_REVTAG>
+            <END_DATE_REVTAG constraint="?" length="F14" mappedName="endDateRevTag"><!--归属标签結束时间 -->
+            </END_DATE_REVTAG>
+            <USERGRPTAG constraint="?" length="F1" mappedName="userGrpTag"><!--用户群标签 -->
+            </USERGRPTAG>
+            <START_DATE_USERGRPTAG constraint="?" length="F14" mappedName="startDateUserGrpTag"><!--用户群标签開始时间 -->
+            </START_DATE_USERGRPTAG>
+            <END_DATE_USERGRPTAG constraint="?" length="F14" mappedName="endDateUserGrpTag"><!--用户群标签結束时间 -->
+            </END_DATE_USERGRPTAG>
+            <SMLENTERTAG constraint="?" length="F1" mappedName="smlEnterTag"><!--中小企业标签 -->
+            </SMLENTERTAG>
+            <START_DATE_SMLENTERTAG constraint="?" length="F14" mappedName="startDateSmlEnterTag"><!--中小企业标签开始时间 -->
+            </START_DATE_SMLENTERTAG>
+            <END_DATE_SMLENTERTAG constraint="?" length="F14" mappedName="endDateSmlEnterTag"><!--中小企业标签結束时间 -->
+            </END_DATE_SMLENTERTAG>
+            </USER_TAG>
+        <PARA constraint="*" mappedName="para"><!--保留字段 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </CHECKUERCHG_RSP>
+</UNI_BSS_BODY>

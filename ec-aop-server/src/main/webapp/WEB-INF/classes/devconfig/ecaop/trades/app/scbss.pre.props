@@ -1,0 +1,4 @@
+#四川bss
+ecaop.core.app.map.scbss.pre=scbpr
+ecaop.core.app.scbpr.def={"code":"scbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.scbpr.allow={appkey:"scbpr",allow:"qcgc,qcgq,qrtb,qcaq,tsos,seft", deny:null}

@@ -1,0 +1,161 @@
+#换机提交
+#method定义
+ecaop.core.method.map.ecaop.trades.serv.curt.changeph.sub=chph
+ecaop.core.method.chph.def={"mothod":"chph","remark":"换机提交"}
+
+ecaop.core.method.chph.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.masb.chph.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+    ]
+ecaop.masb.chph.param.msg={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    ordersId:{type:"String(20)",required:true},\
+    number:{type:"String(12)",required:true},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    newResourcesCode:{type:"String(30)",required:true},\
+    oldResourcesCode:{type:"String(30)",required:true},\
+    checkId:{type:"String(30)",required:false},\
+    brokenRe:{type:"String(256)",required:false},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#定义processors
+ecaop.core.method.chph.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.chph.masb.flowConfig)
+
+ecaop.core.method.chph.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.masb.chph.n25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.masb.chph.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#定义处理器
+ecaop.masb.chph.n25.processors=@GetOldResOrderInfoProcessor()
+                               @ParametersMapper(ecaop.masb.chph.ParametersMapping)\
+                               @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                               @Xml2JsonMapper(ecaop.trades.chph.template)\
+                               @changePhSaleForResChenterProcessor()
+                               
+ecaop.masb.chph.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00036",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ChangePhoneSubReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.chph.template@3GE"}]
+ecaop.trades.chph.template=com/ailk/ecaop/biz/template/res/ChangePhoneSub
+#定义处理器
+ecaop.masb.chph.processors=@ChangePhProcessor()
+#调CB的生成id接口
+ecaop.masb.chph.gifa.ParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.getSeqIDForAOPSer.getSeqID,50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.masb.chph.gifa.template@FBS@SEQUQRY_INPUT@n-1562169335@SEQUQRY_REQ"}\
+]
+
+#请求和返回报文模版路径
+ecaop.masb.chph.gifa.template=com/ailk/ecaop/biz/template/cbss/getSeqIDForAOPSer
+
+#3GESS校验 
+ecaop.masb.chph.check.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000001",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.accessType,01"},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CheckResReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.chph.check.template@ONS@CheckResReq"}\
+]
+#请求和返回报文模版路径
+ecaop.masb.chph.check.template=com/ailk/ecaop/biz/template/res/QryChkTerm
+
+#调CB的预提交接口
+ecaop.masb.chph.preSub.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.chph.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+
+#请求和返回报文模版路径
+ecaop.trades.chph.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+#调3GE销售接口
+ecaop.masb.chph.sale.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000002",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"TerminalSaleReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.chph.sale.template@ONS@TerminalSaleReq"}\
+]
+
+#请求和返回报文模版路径
+ecaop.trades.chph.sale.template=com/ailk/ecaop/biz/template/terminal/G4TermSale
+
+#调CB的正式提交接口
+ecaop.masb.chph.sub.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.chph.sub.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+#请求和返回报文模版路径
+ecaop.trades.chph.sub.template=com/ailk/ecaop/biz/template/nfour/OrderSub

@@ -1,0 +1,5 @@
+#王茂聪个人测试使用
+ecaop.core.app.map.wmctest.sub=wmcts
+ecaop.core.app.wmcts.def={"code":"wmcts", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:null}
+#ecaop.core.app.wmcts.timeslimit=max 100 per 1 minute
+ecaop.core.app.wmcts.allow={appkey:"wmcts",allow:"qeeq,smmc", deny:null}

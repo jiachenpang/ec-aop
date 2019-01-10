@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderSubRsp mappedOut="true">
+    <!-- 0000 成功0007 ESS订单已自动作废0008卡数据同步异常0009 卡费校验错误0010业务正式提交异常
+            1100 发票校验错误1110 发票编码错误1120 发票与操作员归属不一致1130 发票已打印过1140 ：操作员有未稽核的发票
+            9999 其它错误-->
+    <RespCode length="F4" mappedName="code"/>
+    <!-- 错误描述  -->
+    <RespDesc length="V2000" mappedName="detail"/>
+    <!-- ESS订单ID  为正式提交时使用 -->
+    <TaxNo length="V30" constraint="?" mappedName="taxNo"/>
+    <!-- 卡费实收费用 -->
+    <CardRealFee length="V10" constraint="?" mappedName="cardRealFee"/>
+    <!-- 保留字段-->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</OrderSubRsp>

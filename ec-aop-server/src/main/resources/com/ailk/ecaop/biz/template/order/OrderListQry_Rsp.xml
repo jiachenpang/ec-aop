@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderListQryRsp>
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />
+    <OrdiInfo constraint="*" mappedName="ordiInfo">
+        <OrdersID length="V20" constraint="?" mappedName="ordersId" />
+        <OrderCode length="F1" mappedName="orderCode" />
+        <SerialNumber length="V20" mappedName="serialNumber" />
+        <SimID length="V20" constraint="?" mappedName="simId" />
+        <CustomerInfo mappedName="customerInfo">
+            <CertType length="F2" mappedName="certType" />
+            <CertNum length="V20" mappedName="certNum" />
+            <CustomerName length="V128" mappedName="customerName" />
+        </CustomerInfo>
+        <UserInfo constraint="+" mappedName="userInfo">
+            <Product constraint="*" mappedName="product">
+                <ProductID length="V8" mappedName="productId" />
+                <ProductMode length="F1" mappedName="productMode" />
+            </Product>
+            <ActivityInfo constraint="*" mappedName="activityInfo">
+                <ActPlanId length="V20" mappedName="actPlanId" />
+                <ResourcesCode length="V30" constraint="?" mappedName="resourcesCode" />
+            </ActivityInfo>
+        </UserInfo>
+        <FeeInfo constraint="*" mappedName="feeInfo">
+            <FeeID length="V20" mappedName="feeId" />
+            <FeeCategory length="F1" mappedName="feeCategory" />
+            <FeeDes length="V120" mappedName="feeDes" />
+            <OrigFee length="V10" mappedName="origFee" />
+            <Fee length="V10" mappedName="realFee"  constraint="?" />
+        </FeeInfo>
+        <TotalFee length="V10" mappedName="totalFee" />
+        <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+    </OrdiInfo>
+</OrderListQryRsp>

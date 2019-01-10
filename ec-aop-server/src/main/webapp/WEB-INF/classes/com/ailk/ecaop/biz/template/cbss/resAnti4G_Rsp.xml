@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+<RES_ANTI4G_RSP mappedOut="true">
+  <RESP_CODE constraint="1" length="F4" mappedName="code">
+    <!--资源预判结果编码, 0000：存在可用资源, 1761：无可用资源, 8888：其它错误-->
+  </RESP_CODE>
+  <RESP_DESC constraint="?" length="V500" mappedName="detail">
+    <!--资源预判描述信息或预判失败原因等-->
+  </RESP_DESC>
+  <BRAND_LIST constraint="*" mappedName="brandList">
+    <!--产品类列表接入方式列-->
+    <BRAND_CODE constraint="?" length="V4" mappedName="brandCode">
+      <!--产品类编码-->
+    </BRAND_CODE>
+    <ACCESS_LIST constraint="*" mappedName="accessList">
+      <!--接入方式列表, -->
+      <ACCESS_TYPE constraint="1" length="V20" mappedName="accessType">
+        <!--接入方式编码-->
+      </ACCESS_TYPE>
+      <ACCESS_TYPE_NAME constraint="1" length="V250" mappedName="accessTypeName">
+        <!--接入方式名称-->
+      </ACCESS_TYPE_NAME>
+      <MAX_RATE constraint="?" length="V250" mappedName="maxRate">
+        <!--最大可承载带宽-->
+      </MAX_RATE>
+      <IP_TYPE constraint="?" length="V250" mappedName="ipType">
+        <!--IP地址种类-->
+      </IP_TYPE>
+      <EXCH_LIST constraint="*" mappedName="exchList">
+        <!--局向列表-->
+        <EXCH_CODE constraint="1" length="V64" mappedName="exchCode">
+          <!--局向编码-->
+        </EXCH_CODE>
+        <EXCH_NAME constraint="1" length="V100" mappedName="exchName">
+          <!--局向名称-->
+        </EXCH_NAME>
+      </EXCH_LIST>
+    </ACCESS_LIST>
+  </BRAND_LIST>
+  <BUILD_RSC_INF constraint="*" mappedName="buildRscInf">
+    <!--在建工程信息-->
+    <FINISH_DATE constraint="?" length="V20" mappedName="finishDate">
+      <!--预计完成时间-->
+    </FINISH_DATE>
+    <ACCESS_DESCR constraint="?" length="V250" mappedName="accessDescr">
+      <!--工程新接入方式-->
+    </ACCESS_DESCR>
+    <PROCESS_DESCR constraint="?" length="V500" mappedName="processDescr">
+      <!--工程建设进度, -->
+    </PROCESS_DESCR>
+    <MAX_RATE constraint="?" length="V250" mappedName="maxRate">
+      <!--最大可承载带宽-->
+    </MAX_RATE>
+  </BUILD_RSC_INF>
+  <PARA constraint="*" mappedName="para">
+    <!--保留字段-->
+    <PARA_ID constraint="1" length="V20" mappedName="paraId">
+      <!--保留字段ID-->
+    </PARA_ID>
+    <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+      <!--保留字段值-->
+    </PARA_VALUE>
+  </PARA>
+</RES_ANTI4G_RSP>
+</UNI_BSS_BODY>

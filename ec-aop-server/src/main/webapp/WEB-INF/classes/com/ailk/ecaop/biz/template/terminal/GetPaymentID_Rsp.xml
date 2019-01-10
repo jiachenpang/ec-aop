@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <GET_PAYMENT_ID_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"><!--应答编码 0000 成功 8888 
+                其它 -->
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail"><!--错误描述 -->
+        </RESP_DESC>
+        <RESP_INFO constraint="?" mappedName="respInfo"><!--提交应答 -->
+            <PAYMENT_ID length="V50" mappedName="paymentId"><!--cBSS支付流水号 -->
+            </PAYMENT_ID>
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID length="V20" mappedName="paraId"><!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue"><!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </RESP_INFO>
+    </GET_PAYMENT_ID_RSP>
+</UNI_BSS_BODY>

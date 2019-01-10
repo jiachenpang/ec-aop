@@ -1,0 +1,9 @@
+#安徽预受理
+ecaop.core.app.map.ahpre.sub=ahpre
+ecaop.core.app.ahpre.def={"code":"ahpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jlpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.ahpre.allow={appkey:"ahpre",allow:"oata,mold,mofc,csaq,qrtc,sack,snqy,nboc,smnp,cack,qmoq,scmc,mpsb,cuck,\
+qrsq,qrsc,cdsn,cdqy,cdnt,opap,opsb,bypc,byps,2324,23t4,234o,234s,234t,23l4,bsop,tzcx,qrta,qrtac,fasb,scac,\
+pipu,smno,qctc,qcsp,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,qcacq,qcar,qcpq,smcc,kdwy,smosa,smoss,sfss,sbaos,sbso,qcpa,mcoa,oupc,orta,\
+modr,scaf,spfs,ofcs,cmck,ccic,trao,mvoa,qrtb,smct,msoa,mcoa,mxcg,rnoa,spff,qofq,quuq,cues,cuss,cumd,cucc,qrta,qcgq,qcgc,ucca,uccs,oolq,scgq,crck,\
+qcfd,qcfc,ppoq", deny:null}

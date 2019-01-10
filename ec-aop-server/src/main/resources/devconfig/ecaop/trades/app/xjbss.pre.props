@@ -1,0 +1,5 @@
+#新疆沃受理 
+ecaop.core.app.map.xjbss.pre=xjbs
+ecaop.core.app.xjbs.def={"code":"xjbs", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.xjbs.timeslimit=max 100 per 1 minute
+ecaop.core.app.xjbs.allow={appkey:"xjbs",allow:"qrtb", deny:null}

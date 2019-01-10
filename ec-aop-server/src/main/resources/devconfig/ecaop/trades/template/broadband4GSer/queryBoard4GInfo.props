@@ -1,0 +1,4 @@
+#宽带用户信息查询
+ecaop.trade.template.broadband4GSer.queryBoard4GInfo={"serviceName":"Broadband4GSer","operateName":"queryBoard4GInfo","content":"QUERY_BOARD_4GINFO_REQ"}
+#报文模版路径
+ecaop.trade.qubq.template=com/ailk/ecaop/biz/template/broadband4GSer/QueryBoard4GInfo

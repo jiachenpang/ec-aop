@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<REF_PRODUCT_CHANGE_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY mappedOut="true">
+    <REF_PRODUCT_CHANGE_REQ>
+      <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+        <!-- 订单号 -->
+      </ORDER_ID>
+      <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber">
+        <!-- 服务号码 -->
+      </SERIAL_NUMBER>
+      <ENDSYSTEM_ID constraint="1" length="F2" mappedName="endsystemId">
+        <!-- 落地系统:01、BSS02、CBSS -->
+      </ENDSYSTEM_ID>
+      <TRANSRESOURCES_TYPE constraint="1" length="F2" mappedName="transresourcesType">
+        <!-- 付费类型转换01：不转换02：预转后03：后转预 -->
+      </TRANSRESOURCES_TYPE>
+      <PRIPRODUCT_ID constraint="1" length="V40" mappedName="priproductId">
+        <!-- 用户原产品编码 -->
+      </PRIPRODUCT_ID>
+      <TARPRODUCT_ID constraint="1" length="V40" mappedName="tarproductId">
+        <!-- 目标产品编码 -->
+      </TARPRODUCT_ID>
+      <SUBPRODUCT_INFO constraint="*" mappedName="subproductInfo">
+        <START_DATE constraint="1" length="F14" mappedName="startDate">
+          <!-- 生效时间格式：YYYYMMDDhhmmss -->
+        </START_DATE>
+        <PACKAGE_TYPE constraint="1" length="F2" mappedName="packageType">
+          <!-- 包类型：01、语音；02、流量；03、短信；04、来电显示 -->
+        </PACKAGE_TYPE>
+        <END_DATE constraint="1" length="F14" mappedName="endDate">
+          <!-- 失效时间格式：YYYYMMDDhhmmss -->
+        </END_DATE>
+        <PACKAGE_ID constraint="1" length="V40" mappedName="packageId">
+          <!-- 包编码 -->
+        </PACKAGE_ID>
+        <PACKAGE_NAME constraint="1" length="V200" mappedName="packageName">
+          <!-- 包名称 -->
+        </PACKAGE_NAME>
+        <FEE_INFO constraint="*" mappedName="feeInfo">
+          <START_DATE constraint="1" length="F14" mappedName="startDate">
+            <!-- 生效时间格式：YYYYMMDDhhmmss -->
+          </START_DATE>
+          <FEE_CODE constraint="1" length="V40" mappedName="feeCode">
+            <!-- 资费编码 -->
+          </FEE_CODE>
+          <FEE_NAME constraint="1" length="V200" mappedName="feeName">
+            <!-- 资费名称 -->
+          </FEE_NAME>
+          <END_DATE constraint="1" length="F14" mappedName="endDate">
+            <!-- 失效时间格式：YYYYMMDDhhmmss -->
+          </END_DATE>
+        </FEE_INFO>
+      </SUBPRODUCT_INFO>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </REF_PRODUCT_CHANGE_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+  </UNI_BSS_ATTACHED>
+</REF_PRODUCT_CHANGE_INPUT>

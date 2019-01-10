@@ -1,0 +1,6 @@
+#西藏预受理
+ecaop.core.app.map.xzpre.sub=xzpre
+ecaop.core.app.xzpre.def={"code":"xzpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.ynpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.xzpre.allow={appkey:"xzpre",allow:"cack,ccic,cdnt,cdqy,cdsn,cmck,cuck,nboc,opap,opsb,ppoq,qmoq,qrtc,\
+snqy,spfs,syps,trao,smct,jffx,qctc,qofq,qcfc,cues,ucca,cucc,bsop,odsb,modr,orta,mofc,ofcs,qrtac", deny:null}

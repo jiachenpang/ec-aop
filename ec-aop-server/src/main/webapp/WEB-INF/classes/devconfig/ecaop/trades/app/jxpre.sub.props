@@ -1,0 +1,9 @@
+#江西预受理 
+ecaop.core.app.map.jxpre.sub=jxpre
+ecaop.core.app.jxpre.def={"code":"jxpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jlpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.jxpre.allow={appkey:"jxpre",allow:"oata,mold,mofc,csaq,qrtc,sack,snqy,nboc,smnp,cack,qmoq,scmc,mpsb,cuck,\
+qrsq,qrsc,cdsn,cdqy,cdnt,opap,opsb,bypc,byps,2324,23t4,234o,234s,234t,23l4,bsop,tzcx,qrtac,fasb,scac,\
+pipu,smno,qctc,qcsp,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,qcacq,qcar,qcpq,smcc,kdwy,smosa,smoss,sfss,sbaos,sbso,qcpa,mcoa,oupc,orta,\
+modr,scaf,spfs,ofcs,cmck,mvoa,crck,qrta,smosa,smoss,cuss,cumd,ucca,ccqy,qauq,cues,qcfd,qcfc,byps,bypc,spff,spec,spes,ccic,mccn,mccr,scgq", deny:null} 
+ecaop.core.app.jxpre.timestamp = 1

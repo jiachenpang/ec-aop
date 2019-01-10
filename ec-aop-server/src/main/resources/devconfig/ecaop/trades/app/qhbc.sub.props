@@ -1,0 +1,5 @@
+#青海BSS国政通测试
+ecaop.core.app.map.qhbc.sub=qhbc
+ecaop.core.app.qhbc.def={"code":"qhbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.qhbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.qhbc.allow={appkey:"qhbc",allow:"crck", deny:null}

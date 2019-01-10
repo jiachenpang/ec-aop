@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_RESOURCE_PURCHASE_RECORD_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC constraint="?" length="V500" mappedName="detail" />
+        <RESOURCE_PURCHASE_INFOS constraint="*" mappedName="resultInfo">
+            <RECEIVE_TIME length="F14" mappedName="receiveTime" />
+            <MONEY length="V11" mappedName="money" />
+            <RESOURCE_COUNT length="V11" mappedName="count" />
+            <UNIT length="F1" />
+            <RESOURCE_TYPE length="F1" mappedName="resouceType" />
+        </RESOURCE_PURCHASE_INFOS>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </QRY_RESOURCE_PURCHASE_RECORD_RSP>
+</UNI_BSS_BODY>

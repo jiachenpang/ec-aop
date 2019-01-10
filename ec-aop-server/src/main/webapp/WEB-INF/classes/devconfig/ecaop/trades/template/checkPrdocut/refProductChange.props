@@ -1,0 +1,2 @@
+#产品变更提交接口 by cuij
+ecaop.trade.template.checkProduct.refProductChange={"orderType":"00","serviceName":"ProductChgSer","operateName":"refProductChange","content":"REF_PRODUCT_CHANGE_REQ"}

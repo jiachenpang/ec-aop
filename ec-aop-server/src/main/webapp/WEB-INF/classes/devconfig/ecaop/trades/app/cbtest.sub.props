@@ -1,0 +1,5 @@
+#cbss接受测试接口自动化
+ecaop.core.app.map.cbtest.sub=cbtest
+ecaop.core.app.cbtest.def={"code":"cbtest", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.cbtest.timeslimit=max 100 per 1 minute
+ecaop.core.app.cbtest.allow={appkey:"cbtest",allow:"", deny:null}

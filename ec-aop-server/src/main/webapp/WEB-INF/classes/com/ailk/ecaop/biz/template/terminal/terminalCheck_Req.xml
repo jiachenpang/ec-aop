@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--顺价终端资料验证接口 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <TerminalCheckReq>
+            <!--  操作员ID-->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" constraint="?" mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3" constraint="?" mappedName="city"/>
+            <!-- 区县 -->
+            <District length="V10" constraint="?" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" constraint="?" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" constraint="?" mappedName="channelType"/>
+            <!-- 外围系统订单ID -->
+            <OrdersId length="V20" constraint="?" mappedName="ordersId"></OrdersId>
+            <!-- 终端资源编码，一般是IMEI码 -->
+            <ResourcesCode length="V30" constraint="?" mappedName="resourcesCode"></ResourcesCode>
+            
+            <FeeInfo constraint="*" mappedName="feeInfo">
+                   <!--  收费项编码，以省分现有编码为准 -->
+                   <FeeID length="V20"  mappedName="feeId"></FeeID>
+                   <!--  收费项科目-->
+                   <FeeCategory length="F1"  mappedName="feeCategory"></FeeCategory>
+                   <!--  收费项描述-->
+                   <FeeDes length="V120"  mappedName="feeDes"></FeeDes>
+                   <!--  应收费用正整数，单位：厘-->
+                   <OrigFee  length="V10"  mappedName="origFee"></OrigFee>
+                   <!-- 减免金额，单位：厘-->
+                   <ReliefFee length="V10"  mappedName="reliefFee"></ReliefFee>
+                   <!-- 减免原因-->
+                   <ReliefResult length="V60"  mappedName="reliefResult"></ReliefResult>
+                   <!--实收金额，单位：厘-->
+                   <RealFee length="V10"  mappedName="realFee"></RealFee>
+            </FeeInfo>
+            <!-- 支付信息-->
+            <PayInfo mappedName="payInfo">
+                   <!-- 支付方式-->
+                   <PayType length="F2"   mappedName="payType"></PayType>
+                   <!-- 支付机构名称-->
+                   <PayOrg  length="V30"  mappedName="payOrg"></PayOrg>
+                   <!-- 支付账号-->
+                   <PayNum  length="V30"  mappedName="payNum"></PayNum>
+            </PayInfo>
+       
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </TerminalCheckReq>
+    </SvcCont>
+</UniBSS>

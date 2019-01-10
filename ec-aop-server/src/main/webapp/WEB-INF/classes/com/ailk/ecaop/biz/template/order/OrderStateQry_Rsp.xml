@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <ORD_STAT_QRY_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <RESPONSE constraint="?">
+            <PROVINCE_ORDER_ID length="V30" />
+            <ORDER_ID length="V30" />
+            <ORDER_INFO constraint="*">
+                <SUB_PROVINCE_ORDER_ID constraint="?" length="V30" />
+                <SUB_ORDER_ID constraint="?" length="V30" />
+                <ORDER_STATUS length="F2" mappedName="statusCode" />
+                <FINSH_DATE constraint="?" length="F14" />
+                <ORDER_STATUS_TIME constraint="?" length="F14" mappedName="orderStatusTime" />
+                <BACK_ORDER_REASON constraint="?" length="V256" mappedName="backOrderReason" />
+                <CLE_ORDER_REASON constraint="?" length="V256" mappedName="cleOrderReason" />
+                <FEE_INFO constraint="*" mappedName="feeInfo">
+                    <FEE_MODE length="F1" mappedName="feeCategory" />
+                    <FEE_TYPE_MODE length="V10" mappedName="feeId" />
+                    <FEE_TYPE_NAME length="V50" mappedName="feeDes" />
+                    <OPERATE_TYPE length="F1" mappedName="operateType" />
+                    <OLDFEE length="V11" mappedName="origFee" />
+                    <FEE constraint="?" length="V11" mappedName="realFee" />
+                    <IS_PAY constraint="?" length="F1" mappedName="payType" />
+                    <OPER_TIME constraint="?" length="F14" mappedName="operTime" />
+                    <OPER_CHL_ID constraint="?" length="F7" mappedName="operChlId" />
+                    <OPER_CHL_NAME constraint="?" length="V200" mappedName="operChlName" />
+                    <OPER_ID constraint="?" length="V40" mappedName="operId" />
+                    <OPER_NAME constraint="?" length="V100" mappedName="operName" />
+                </FEE_INFO>
+            </ORDER_INFO>
+            <TOTAL_FEE constraint="?" length="V11" mappedName="totalFee" />
+            <CANCLE_TOTAL_FEE constraint="?" length="V11" mappedName="cancleTotalFee" />
+            <PARA constraint="*">
+                <PARA_ID length="V20" />
+                <PARA_VALUE length="V60" />
+            </PARA>
+        </RESPONSE>
+    </ORD_STAT_QRY_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,49 @@
+#用户产品查询
+ecaop.core.method.map.ecaop.trades.query.user.productinfo.qry=qupq
+ecaop.core.method.qupq.def={"mothod":"qupq","remark":"用户产品查询"}
+ecaop.core.method.qupq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qupq.msgschema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg校验
+ecaop.ecsb.qupq.msgschema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"Number(2)",required:true,validator:"@FixedLen(2)"},\
+    city:{type:"Number(3)",required:true,validator:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    userId:{type:"String(100)",required:true,encrypted:false,validators:null},\
+    serialNumber:{type:"String(15)",required:true,encrypted:false,validators:null},\
+    propertyType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    propertyId:{type:"String(15)",required:false,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.qupq.processors=@QryUserProduct()
+                                 
+#给freeMarker中变量复制，一遍生成报文
+ecaop.masb.qupq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"UserProductInfoAOPSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryUserProduct",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_USER_PRODUCT_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.qupq.template@FBS@QRY_USER_PRODUCT_INPUT"}\
+] 
+
+#请求和返回报文模版路径
+ecaop.masb.qupq.template=com/ailk/ecaop/biz/template/qup/UserProductQry
+

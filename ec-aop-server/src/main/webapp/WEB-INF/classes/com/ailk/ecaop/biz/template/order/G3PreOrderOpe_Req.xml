@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS><!-- 预受理订单处理 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <PreOrderOpeReq>
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city"/>
+            <ChannelID length="V20" mappedName="channelId"/>
+            <District length="V10"  constraint="?" mappedName="district" />
+            <ChannelType length="F7" defaultValue="0000000" mappedName="channelType"/>
+            <NetTypeCode length="V2" constraint="?" mappedName="netTypeCode"/>
+            <OrderID length="V20" mappedName="orderId"/>
+            <OpeType length="F1" mappedName="opeType" constraint="?" />
+            <CustId length="V16" constraint="?" mappedName="custId" />
+            <CheckType length="V2" constraint="?" mappedName="checkType" />
+            <GroupId length="V40" constraint="?" mappedName="groupId" />
+            <CustName length="V200" constraint="?" mappedName="custName" />
+            <CertAddress length="V256" constraint="?" mappedName="certAddress" />
+            <CertType length="F2" constraint="?" mappedName="certType" />
+            <CertNum length="V50" constraint="?" mappedName="certNum" />
+            <Sex length="F1" constraint="?" mappedName="sex" />
+            <CertExpireDate length="F8" constraint="?" mappedName="certExpireDate" />
+            <ContactPerson length="V60" constraint="?" mappedName="contactPerson" />
+            <ContactPhone length="V40" constraint="?" mappedName="contactPhone" />
+            <PostAddress length="V256" constraint="?" mappedName="postAddress" />
+            <Phone length="V40" constraint="?" mappedName="phone" />
+            <PhoneSta length="V40" constraint="?" mappedName="phoneSta" />
+            <SparePhone length="V40" constraint="?" mappedName="sparePhone" />
+            <StartTime length="F14" constraint="?" mappedName="startTime" />
+            <EndTime length="F14" constraint="?" mappedName="endTime" />
+            <OrderRemark length="V1000" constraint="?" mappedName="orderRemark" />
+            <UseCustName length="V20" constraint="?" mappedName="useCustName" />
+            <UsePsptType length="F2" constraint="?" mappedName="usePsptType" />
+            <UsePsptCode length="V40" constraint="?" mappedName="usePsptCode" />
+            <UsePsptAdr length="V100" constraint="?" mappedName="usePsptAdr" />
+            <UseResponsible length="F1" constraint="?" mappedName="useResponsible" />
+            <UseCustMark length="F1" constraint="?" mappedName="useCustMark" />
+            <DevelopChannelType length="F7" constraint="?" mappedName="developChannelType" />
+            <DevelopChannelId length="V20" constraint="?" mappedName="developChannelId" />
+            <DevelopdepartId length="V20" constraint="?" mappedName="developdepartId" />
+            <DevelopStaffId length="V20" constraint="?" mappedName="developStaffId" />
+            <DevelopStaffName length="V40" constraint="?" mappedName="developStaffName" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </PreOrderOpeReq>
+    </SvcCont>
+</UniBSS>

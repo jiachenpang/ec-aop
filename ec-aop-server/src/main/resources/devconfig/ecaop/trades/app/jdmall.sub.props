@@ -1,0 +1,5 @@
+#京东商城
+ecaop.core.app.map.jdmall.sub=jdsb
+ecaop.core.app.jdsb.def={"code":"jdsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jdsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.jdsb.allow={appkey:"jdsb",allow:"cuck", deny:null}

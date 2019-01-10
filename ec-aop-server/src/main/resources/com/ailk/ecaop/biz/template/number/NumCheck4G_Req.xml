@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont  mappedOut="true">
+        <CheckNumReq >
+            <!-- 操作员ID -->
+            <OperatorID length="V20"  mappedName="operatorId"/>
+            <!-- 省分 -->
+            <Province length="F2"  mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3"  mappedName="city"/>
+            <!-- 区县 -->
+            <District constraint="?" length="V10"  mappedName="district"/>
+            <!-- 渠道编码-->
+            <ChannelID length="V20"  mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7"  mappedName="channelType"/>
+            <!-- 接入类型01 WEB； 02短信； 03WAP； 99其他 -->
+            <AccessType length="F2" range="01,02,03,99" mappedName="accessType" defaultValue="01"/>
+            <!-- 操作系统编码 -->
+            <SysCode length="F4" mappedName="sysCode" defaultValue="EAOP"/>
+            <!-- 资源信息 -->
+            <ResourcesInfo constraint="+"  mappedName="resourcesInfo">
+                <!-- 号码 -->
+                <Number length="V20" mappedName="resourcesCode"/>
+                <!-- 资源预占关键字类型0：随机码1：客户标识（或登录名）2：订单标识-->
+                <ProKeyMode constraint="?" length="V20" range="0,1,2" mappedName="proKeyMode"/>
+                <!-- 资源预占关键字 -->
+                <ProKey constraint="?" length="V20" mappedName="proKey"/>
+                <!-- 资源类型 -->
+                <ResourcesType length="F2" range="01,02" mappedName="resourcesType"/>
+                <!-- 操作标识 -->
+                <OptFlag constraint="?" length="F1" range="0,1,2,3,4,5,6,7,8,E" mappedName="occupiedFlag"/>
+                <!-- 预占时间 -->
+                <OccupiedTime constraint="?" length="V20" mappedName="occupiedTime"/>
+                <!-- 证件类型 -->
+                <CertType constraint="?" length="F2" range="01,02,03,04,05,06,07,08,09,10,11,12,99" mappedName="certType"/>
+                 <!-- 预留标识：0：预留 -->
+                <NumberCode constraint="?" length="V8" mappedName="numberCode"/>
+                 <!-- 验证码 -->
+                <IdentifyingCode constraint="?" length="V10" mappedName="identifyingCode"/>
+                <!-- 证件号码 -->
+                <CertNum constraint="?" length="V30" mappedName="certNum"/>
+                
+            </ResourcesInfo>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </CheckNumReq>
+    </SvcCont>
+</UniBSS>

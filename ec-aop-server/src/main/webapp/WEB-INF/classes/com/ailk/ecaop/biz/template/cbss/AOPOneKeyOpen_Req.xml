@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SYN_RES_INPUT>
+    <UNI_BSS_HEAD mappedOut="true">
+        <ORIG_DOMAIN ignoredMapping="true" defaultValue="UESS" /> <!-- 参见应用域编码表 本次工程填写UESS -->
+        <SERVICE_NAME length="V60" /> <!-- 服务名称 -->
+        <OPERATE_NAME length="V60" /> <!-- 操作名称 -->
+        <ACTION_CODE ignoredMapping="true" defaultValue="0" range="0,1" /> <!-- 0：请求，1：应答 -->
+        <!-- 与其他交易关联；0：无关联；1：有关联。 例如：在一卡充系统中对于异地卡充异地用户且卡和账号归属不同省时 接入省分缴费卡系统发送的扣款请求和缴费请求交易需要设置此标记为1 本次工程全部填写0 -->
+        <ACTION_RELATION ignoredMapping="true" defaultValue="0" range="0,1" />
+        <ROUTING>
+            <!-- 参见路由类型编码，如按手机号码路由等 本次工程全部填写00 -->
+            <ROUTE_TYPE ignoredMapping="true" length="F2" defaultValue="00" />
+            <!-- 路由类型对应的关键值，参见路由类型说明。如路由类型为手机号码则此字段应填写手机号码； 若路由类型为充值卡号码则此字段应填写充值卡号码 本次工程全部填写省分代码 -->
+            <ROUTE_VALUE ignoredMapping="true" length="V60" />
+        </ROUTING>
+        <!-- 发起方填写的包含此交易业务的流水号 一个完整业务场景的多次接口调用使用同一业务流水号 -->
+        <PROC_ID ignoredMapping="true" length="V30" required="true" />
+        <!-- 在发起方唯一标识一个交易的流水号，系统内唯一 -->
+        <TRANS_IDO ignoredMapping="true" length="V30" />
+        <!-- 请求中不填，由落地方在应答中填，系统内唯一 -->
+        <TRANS_IDH ignoredMapping="true" length="V30" constraint="?" />
+        <!-- YYYYMMDDHHMISS 请求中此字段由发起方填写，内容为发起方处理时间 应答中此字段由落地方填写，内容为落地方处理时间 作为日对账区间划分标志，省分必须入库 -->
+        <PROCESS_TIME ignoredMapping="true" />
+        <COM_BUS_INFO> <!-- 公共信息 -->
+            <OPER_ID length="V20" constraint="?" /> <!-- 操作员ID -->
+            <PROVINCE_CODE length="V6" constraint="?" /> <!-- 省分代码 -->
+            <EPARCHY_CODE length="V6" constraint="?" /> <!-- 地市编码 -->
+            <CITY_CODE length="V60" constraint="?" /> <!-- 区县编码 -->
+            <CHANNEL_ID length="V20" constraint="?" /> <!-- 渠道编码 -->
+            <CHANNEL_TYPE length="F7" constraint="?" /> <!-- 渠道类型 -->
+            <ACCESS_TYPE range="00,01,02,03,04,05,06,07,08,09,99" /> <!-- 接入类型 -->
+            <ORDER_TYPE range="00,01" constraint="?" defaultValue="00" /> <!-- 订单提交类型00:直接提交01:预提交 -->
+        </COM_BUS_INFO>
+        <SP_RESERVE>
+            <TRANS_IDC length="V60" /> <!-- 总部流水号,由总部平台填写 -->
+            <CUTOFFDAY length="F8" /> <!-- 格式：yyyymmdd，清分对账用，由交换中心填写。 本期工程不使用 -->
+            <OSNDUNS length="F4" defaultValue="0400" /> <!-- 参见全国交换节点编码表，由交换中心填写 -->
+            <HSNDUNS length="F4" defaultValue="2400" /> <!-- 参见全国交换节点编码表，由交换中心填写 -->
+            <CONV_ID length="V60" /> <!-- 最后的17位为枢纽的处理时间，YYYYMMDDHHMISSsss精确到毫秒 枢纽填写 -->
+        </SP_RESERVE>
+        <!-- 发起方填写，0：非测试交易，1：测试交易； 需要注意的是测试必须是业务级别，即在同一个业务流水中所有交易必须具有相同的测试标记 如果是1测试交易，省分需与正式交易区分开，此交易不参与日对账 -->
+        <TEST_FLAG ignoredMapping="true" range="0,1" defaultValue="0" />
+        <MSG_SENDER ignoredMapping="true" length="F4" defaultValue="2400" /> <!-- 发起消息的应用系统代码，参见系统代码表 省分无需处理，原值返回 -->
+        <MSG_RECEIVER ignoredMapping="true" length="F4" defaultValue="2400" /> <!-- 该消息送往的下一方代码，一般是交换节点代码 省分无需处理，原值返回 -->
+    </UNI_BSS_HEAD>
+    <UNI_BSS_BODY mappedOut="true">
+        <SYN_RES_REQ>
+            <!-- 订单编码 -->
+            <TRADE_ID constraint="?" length="F16" mappedName="tradeId" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V4000" mappedName="paraValue" />
+            </PARA>
+        </SYN_RES_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</SYN_RES_INPUT>

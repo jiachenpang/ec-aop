@@ -1,0 +1,11 @@
+#jkzy
+ecaop.core.app.map.jkzy.sub=jkzy
+ecaop.core.app.jkzy.def={"code":"jkzy", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jkzy.timeslimit=max 100 per 1 minute
+ecaop.core.app.jkzy.allow={appkey:"jkzy",allow:"ucca,uccs,qcsp,oopq,cuck,qcsc,opap,opsb,cdsn,cdqy,cdnt,qcsq,crck,snqy,nboc,prqy,spoo,cmck,ccic,cumd,\
+cuss,cues,smcc,scgq,sjgs,smosa,smoss,qrtc,sbaq,sbrc,qcfc,mcoa,scccs,oolq,sccc", deny:null}
+#接入方对应的业务的基本信息，目前bizs字段尚不用于校验
+ecaop.core.app.jkzy.biz={"bizs":"TS-3G-002,DS-004,DS-009"}
+
+#接入方允许的业务定义
+ecaop.core.app.jkzy.bizAllow={allow:"TS-3G-002",deny:null}

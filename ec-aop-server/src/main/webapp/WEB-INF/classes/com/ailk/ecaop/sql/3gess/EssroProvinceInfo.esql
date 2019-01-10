@@ -1,0 +1,2 @@
+[selectSubscribeId]
+SELECT F_SYS_GETSEQID('SEQ_SUBSCRIBE_ID',#province#) FROM DUAL

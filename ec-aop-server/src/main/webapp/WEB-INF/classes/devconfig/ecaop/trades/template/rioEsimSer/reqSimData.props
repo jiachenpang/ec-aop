@@ -1,0 +1,2 @@
+#eSIM资源申请接口
+ecaop.trade.template.rioEsimSer.reqSimData={"serviceName":"RioEsimSer","operateName":"reqSimData","content":"REQ_SIM_DATA_REQ"}

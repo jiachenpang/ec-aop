@@ -1,0 +1,84 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.iptv.sinp.open.app=isoa
+ecaop.core.method.isoa.def={"mothod":"isoa","remark":"iptv单装预提交"}
+ecaop.core.method.isoa.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.isoa.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.isoa.msgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:null},\
+    orderNo:{type:"String(30)",required:true,validators:null},\
+    iptvid:{type:"String(40)",required:true,validators:null},\
+    iptvNumber:{type:"String(40)",required:false,validators:null},\
+    exclusiveId:{type:"String(60)",required:false,validators:null},\
+    authAcctId:{type:"String(60)",required:true,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    userName:{type:"String(12)",required:false,validators:null},\
+    userPasswd:{type:"String(20)",required:false,validators:null},\
+    shareAreaCode:{type:"String(20)",required:false,validators:null},\
+    shareSerialNumber:{type:"String(20)",required:false,validators:null},\
+    newUserInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.isoa.newUserInfo)"},\
+    contactPerson:{type:"String(20)",required:true,validators:null},\
+    contactPhone:{type:"String(20)",required:true,validators:null},\
+    contactAddress:{type:"String(200)",required:false,validators:null},\
+    recomPersonId:{type:"String(30)",required:false,validators:null},\
+    recomPersonName:{type:"String(30)",required:false,validators:null},\
+    recomPersonCityCode:{type:"String(6)",required:false,validators:null},\
+    recomPersonDistrict:{type:"String(20)",required:false,validators:null},\
+    recomPersonChannelId:{type:"String(20)",required:false,validators:null},\
+    orderRemarks:{type:"String(1000)",required:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.isoa.newUserInfo={\
+    certName:{type:"String(100)",required:true,validators:null},\
+    certType:{type:"String(2)",required:false,validators:null},\
+    certNum:{type:"String(20)",required:false,validators:null},\
+    certAddress:{type:"String(200)",required:false,validators:null},\
+    certExpireDate:{type:"String(8)",required:false,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.isoa.productInfo)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.isoa.activityInfo)"},\
+    accountPayType:{type:"String(2)",required:false,validators:null},\
+    debutyAreaCode:{type:"String(6)",required:false,validators:null},\
+    debutySerialNumber:{type:"String(20)",required:false,validators:null},\
+    exchCode:{type:"String(20)",required:false,validators:null},\
+    exchInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.isoa.exchInfo)"},\
+    addressCode:{type:"String(300)",required:false,validators:null},\
+    addressName:{type:"String(1000)",required:false,validators:null},\
+    installAddress:{type:"String(200)",required:false,validators:null},\
+    constructionTime:{type:"String(1)",required:true,validators:null},\
+    hopeDate:{type:"String(14)",required:true,validators:null}\
+}
+ecaop.trades.isoa.productInfo={\
+    productId:{type:"String(20)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null}\
+}
+ecaop.trades.isoa.activityInfo={\
+    actPlanId:{type:"String(20)",required:true,validators:null},\
+    resourcesType:{type:"String(2)",required:false,validators:null},\
+    resProcId:{type:"String(20)",required:false,validators:null},\
+    resourcesCode:{type:"String(30)",required:false,validators:null},\
+    resourcesFee:{type:"String(20)",required:false,validators:null},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.isoa.actPara)"}\
+}
+ecaop.trades.isoa.actPara={\
+    actParaId:{type:"String(20)",required:true,validators:null},\
+    actParaValue:{type:"String(60)",required:true,validators:null}\
+}
+ecaop.trades.isoa.exchInfo={\
+    key:{type:"String(30)",required:true,validators:null},\
+    value:{type:"String(30)",required:true,validators:null}\
+}
+#定义processors
+ecaop.core.method.isoa.processors=@PreSubmitN6Iptv()
+ecaop.masb.isoa.sProductChgParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.n6EOrdForNorthSer.sUniTrade",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.isoa.template@FBS@SGL_UNI_TRADE_INPUT@suni@SGL_UNI_TRADE_REQ"}]
+ecaop.trades.isoa.template=com/ailk/ecaop/biz/template/n6ess/SUniTradeN6

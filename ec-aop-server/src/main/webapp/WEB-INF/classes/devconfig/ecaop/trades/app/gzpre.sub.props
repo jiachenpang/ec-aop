@@ -1,0 +1,11 @@
+#贵州预受理
+ecaop.core.app.map.gzpre.sub=gzpre
+ecaop.core.app.gzpre.def={"code":"gzpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gzpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.gzpre.allow={appkey:"gzpre",allow:"snqy,opsb,cmck,opap,nboc,cack,\
+qrtc,ppoq,syps,smnp,mpsb,cdqy,cdnt,ccic,syps,cdsn,234o,oata,trao,codc,\
+qctc,2324,qmoq,mold,oupc,sc4s,sccc,chph,cumd,scmc,ucca,dvqy,bypc,qrsc,qrsq,byps,qcacq,qcpq,qcpa,qcar,spfs,smosa,smoss,23l4,csaq,\
+mofc,sack,cuck,23t4,234s,234t,bsop,tzcx,qrtac,fasb,scac,modr,scaf,ofcs,mixk,\
+pipu,smno,qcsp,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,smcc,kdwy,\
+sfss,sbaos,sbso,mcoa,orta,qcbl,qofq,qcpq,qcpa,spfs,spff,jffx,qctq,qcfq,qcop,\
+trao,smct,qoqy,qcgq,crck,quuq,qcdq,qcfq,msoa,seft", deny:null}

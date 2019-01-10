@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MOD_REAL_NAME_CUST_INFO_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <MOD_REAL_NAME_CUST_INFO_REQ>
+      <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+        <!--总部订单ID-->
+      </ORDER_ID>
+      <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber">
+        <!--服务号码-->
+      </SERIAL_NUMBER>
+      <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode">
+        <!--电信类型编码，编码见附录-->
+      </SERVICE_CLASS_CODE>
+      <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+        <!--区号-->
+      </AREA_CODE>
+      <OPER_TAG constraint="1" length="F2" mappedName="operTag">
+        <!--操作标识, 01客户资料修改（可修改除证件类型+证件号码之外的其它信息）, 02新用户的客户资料返档, 03证件类型、证件号码变更（包括非关键信息的修改）, 04客户资料修改（可修改除证件类型+证件号码+客户姓名之外的其它信息）, 05 老用户的客户资料返档, 07 集团用户未返档, 08 集团用户已返档, 09 集团用户返档为使用人（南25专用）, 10 集团用户返档为责任人（南25专用）-->
+      </OPER_TAG>
+      <CUST_INFO constraint="1" mappedName="custInfo">
+        <!--客户信息-->
+        <CUST_ID constraint="?" length="V16" mappedName="custId">
+          <!--客户标识-->
+        </CUST_ID>
+        <CUST_NAME constraint="1" length="V100" mappedName="custName">
+          <!--客户名称-->
+        </CUST_NAME>
+        <CERT_ADDR constraint="1" length="V256" mappedName="certAddr">
+          <!--证件地址-->
+        </CERT_ADDR>
+        <CERT_TYPE_CODE constraint="1" length="V2" mappedName="certType">
+          <!--证件类别编码，见附录-->
+        </CERT_TYPE_CODE>
+        <CERT_CODE constraint="1" length="V50" mappedName="certNum">
+          <!--证件号码-->
+        </CERT_CODE>
+        <POST_ADDRESS constraint="?" length="V256" mappedName="postAddress">
+          <!--通信地址-->
+        </POST_ADDRESS>
+        <CONTACT constraint="?" length="V60" mappedName="contactName">
+          <!--联系人姓名-->
+        </CONTACT>
+        <CONTACT_PHONE constraint="?" length="V40" mappedName="contactPhone">
+          <!--联系人电话-->
+        </CONTACT_PHONE>
+        <CUST_CERT_PICTURE_URL constraint="?" length="V512" mappedName="custCertPictureUrl">
+          <!--客户证件电子图片链接(绝对地址)-->
+        </CUST_CERT_PICTURE_URL>
+     <!--    <CUST_CERT_PICTURE_NAME constraint="?" length="V256" mappedName="custCertPictureName">
+          客户证件电子图片名称  :, 证件类型(证件类别编码，见附录)_证件号码_服务号码_YYYYMMDDHHMISS.XXX（后缀名）
+        </CUST_CERT_PICTURE_NAME> -->
+        <CERT_TAG constraint="?" length="F1" mappedName="checkType">
+          <!--客户认证标识：, 0：实名-二代, 1：实名-公安, 2：实名-系统-->
+        </CERT_TAG>
+      </CUST_INFO>
+      <DEVELOPER_INFO constraint="?" mappedName="developerInfo">
+        <!--返档人信息-->
+        <DEVELOPER_ID constraint="?" length="V20" mappedName="developerId">
+          <!--返档人编码-->
+        </DEVELOPER_ID>
+        <DEVELOPER_NAME constraint="?" length="V256" mappedName="developerName">
+          <!--返档人姓名-->
+        </DEVELOPER_NAME>
+        <DEVELOPER_PHONE constraint="?" length="V20" mappedName="developerPhone">
+          <!--返档人手机号码-->
+        </DEVELOPER_PHONE>
+        <AGENT_CHANNEL_ID constraint="?" length="V20" mappedName="agentChannelId">
+          <!--代理商渠道编码-->
+        </AGENT_CHANNEL_ID>
+      </DEVELOPER_INFO>
+    <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </MOD_REAL_NAME_CUST_INFO_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED> 
+    <MEDIA_INFO length="V20" defaultValue="1GB"/> 
+  </UNI_BSS_ATTACHED> 
+</MOD_REAL_NAME_CUST_INFO_INPUT>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <ProductQueryReq>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province" />
+            <!-- 受理类型 1: 后付费, 2 : 预付费 -->
+            <SerType length="F1" mappedName="serType" range="1,2" />
+            <!-- 受理类型 1: 主产品, 2 : 可选产品 -->
+            <ProductType length="F1" mappedName="productType" constraint="?" range="0,1" />
+            <!-- 受理类型 0:iPhone套餐, 1: 基本套餐, 2 : 集团套餐 -->
+            <ProductCont length="F1" mappedName="productCont" range="0,1,2" />
+            <!-- 套餐类型：A,B,C -->
+            <ProductMold length="F1" mappedName="productMold" constraint="?" range="A,B,C" />
+            <!-- 业务类型：0：手机类 1：上网卡 -->
+            <BusiTye length="F1" mappedName="busiTye"/>
+            <!-- 集团ID -->
+            <GroupId length="V20" mappedName="groupId" constraint="?" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </ProductQueryReq>
+    </SvcCont>
+</UniBSS>

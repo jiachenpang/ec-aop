@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORD_STAT_QRY_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <ORD_STAT_QRY_REQ>
+            <ORDER_ID length="V30" mappedName="orderId"/>
+            <PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="bssOrderId"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V60" mappedName="paraValue"/>
+            </PARA>
+        </ORD_STAT_QRY_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</ORD_STAT_QRY_INPUT>

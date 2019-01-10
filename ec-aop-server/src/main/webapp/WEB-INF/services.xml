@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+<service name="EcAopMainService">
+      <schema schemaNamespace="http://132.35.88.104/aop/services/EcAopMainService" />
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+                class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+        </messageReceivers>
+        <parameter name="ServiceClass">com.ailk.ecaop.base.EcAopService</parameter>
+    </service>
+</serviceGroup>

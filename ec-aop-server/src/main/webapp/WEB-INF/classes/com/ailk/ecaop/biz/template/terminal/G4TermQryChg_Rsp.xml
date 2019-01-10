@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TerminalQryChgRsp mappedOut="true">
+    <!-- 响应结果编码 -->
+    <RespCode length="F4" constraint="1" range="0000,9999" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc constraint="?" length="V256" mappedName="detail" />
+    <AgentChannelID length="V20" constraint="?" />
+    <!-- 资源信息 -->
+    <ResourcesInfo constraint="?" mappedName="resourcesInfo">
+        <!-- 资源校验结果编码 -->
+        <RscStateCode length="F4" mappedName="rscStateCode"/>
+        <!-- 资源校验结果描述 -->
+        <RscStateDesc length="V100" mappedName="rscStateDesc"/>
+        <!-- 资源数量 -->
+        <ResourcesCount length="V100" mappedName="resourcesCount"/>
+        <!-- 销售单价 -->
+        <SalePrice mappedName="salePrice"/>
+        <!-- 成本单价 -->
+        <Cost mappedName="cost"/>
+        <!-- 品牌 -->
+        <ResourcesBrandCode length="V20" mappedName="resourcesBrandCode"/>
+        <!-- 资源品牌名称 -->
+        <ResourcesBrandName length="V50" mappedName="resourcesBrandName"/>
+        <!-- 型号 -->
+        <ResourcesModelCode length="V20" mappedName="resourcesModelCode"/>
+        <!-- 资源型号名称 -->
+        <ResourcesModelName length="V100" mappedName="resourcesModelName"/>
+    </ResourcesInfo>
+    <Para mappedOut="true" constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</TerminalQryChgRsp>

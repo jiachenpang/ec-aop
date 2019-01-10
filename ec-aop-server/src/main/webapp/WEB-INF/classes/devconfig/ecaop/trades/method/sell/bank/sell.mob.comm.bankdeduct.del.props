@@ -1,0 +1,12 @@
+#银行卡代扣解约
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.bankdeduct.del=mcbd
+ecaop.core.method.mcbd.def={"mothod":"mcbd","remark":"银行卡代扣解约"}
+
+ecaop.core.method.mcbd.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.mcba.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.core.method.mcbd.processors=@route\
+                           @FlowProcessor(ecaop.core.method.mcba.flowConfig)

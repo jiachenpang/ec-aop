@@ -1,0 +1,5 @@
+#支付公司国政通测试
+ecaop.core.app.map.pay.sub=paysb
+ecaop.core.app.paysb.def={"code":"paysb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+
+ecaop.core.app.paysb.allow={appkey:"paysb",allow:"crck", deny:null}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PAY_EX_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <PAY_EX_INFO_REQ>
+            <TRADE_ID length="V30" mappedName="traId" />
+            <OUTER_TRADE_TIME length="F14" mappedName="feeTime" />
+            <!-- CHANNEL_ID length="V8" defaultValue="15399" /> -->
+            <CHANNEL_ID length="V8" mappedName="channelId" />
+            <PAYMENT_ID length="V8" constraint="?" mappedName="payMentId" />
+            <PAY_FEE_MODE_CODE length="F1" defaultValue="4" />
+            <SERVICE_CLASS_CODE length="F4" defaultValue="0050" mappedName="serviceClassCode" />
+            <SERIAL_NUMBER length="V20" mappedName="serialNumber" />
+            <PAY_TYPE length="V1" constraint="?" mappedName="payType" />
+            <TRADE_FEE length="V10" mappedName="fee" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </PAY_EX_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</PAY_EX_INFO_INPUT>

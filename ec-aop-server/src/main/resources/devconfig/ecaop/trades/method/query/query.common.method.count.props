@@ -1,0 +1,17 @@
+#查询接口调用量
+ecaop.core.method.map.ecaop.trades.query.common.method.count=qcmc
+ecaop.core.method.qcmc.def={"mothod":"qcmc","remark":"查询接口调用量"}
+ecaop.core.method.qcmc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qcmc.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.qcmc.MsgSchema={\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    markStr:{type:"String(3)",required:false,encrypted:false,validators:"null" },\
+}
+
+#定义processors
+ecaop.core.method.qcmc.processors=@queryAllMethodCount

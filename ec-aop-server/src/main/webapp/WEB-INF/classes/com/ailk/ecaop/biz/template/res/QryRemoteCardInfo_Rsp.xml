@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_REMOTECARDINFO_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code"></RESP_CODE>
+        <RESP_DESC constraint="1" length="V500" mappedName="detail"><!--资源预判描述信息或预判失败原因等 -->
+        </RESP_DESC>
+        <REMOTECARD_INFO constraint="1" mappedName="remoteCardInfo">
+            <IMSI constraint="?" length="V15" mappedName="imsi"/>
+            <EMPTY_CARD_ID constraint="?" length="V30" mappedName="emptyCardId"/>
+            <SERIAL_NUMBER constraint="?" length="V15" mappedName="serialNumber"/>
+            <TRADE_TYPE_CODE constraint="?" length="F4" mappedName="tradeTypeCode"/>
+            <SIM_STATE_CODE constraint="?" length="V2" mappedName="simStateCode"/>
+            <IN_DATE constraint="?" length="F14" mappedName="inDate"/>
+            <UPDATE_TIME constraint="?" length="F14" mappedName="updateTime"/>
+            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId"/>
+            <IN_DEPART_ID constraint="?" length="V20" mappedName="indepartId"/>
+            <UPDATE_STAFF_ID constraint="?" length="V20" mappedName="updateStaffId"/>
+            <UPDATE_DEPART_ID constraint="?" length="V20" mappedName="updateDepartId"/>
+            <RSRV_STR1 constraint="?" length="V60" mappedName="rsrvStr1"/>
+            <RSRV_STR2 constraint="?" length="V60" mappedName="rsrvStr2"/>
+            <!-- 卡数据字段,去掉长度限制 by wangmc 20171208 -->
+            <RSRV_STR3 constraint="?" mappedName="rsrvStr3"/>
+            <RSRV_NUM1 constraint="?" length="V8" mappedName="rsrvNum1"/>
+            <RSRV_NUM2 constraint="?" length="V11" mappedName="rsrvNum1"/>
+        </REMOTECARD_INFO>
+        <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </QRY_REMOTECARDINFO_RSP>
+</UNI_BSS_BODY>

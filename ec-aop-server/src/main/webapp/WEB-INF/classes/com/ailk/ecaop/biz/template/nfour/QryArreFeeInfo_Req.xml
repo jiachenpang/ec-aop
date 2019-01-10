@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <record>
+            <cust_id length="V15"  mappedName="number"/>
+            <oper_id length="V20" constraint="?" mappedName="operatorId"/>
+            <channel_id length="V20" constraint="?" mappedName="channelId"/>
+            <channel_type length="F7"  constraint="?"  mappedName="channelType"/>
+            <access_type length="F2" constraint="?" mappedName="accessType"/>         
+            <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </record>
+    </SvcCont>
+</UniBSS>

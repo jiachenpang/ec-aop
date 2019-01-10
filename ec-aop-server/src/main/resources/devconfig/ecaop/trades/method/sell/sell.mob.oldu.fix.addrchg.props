@@ -1,0 +1,51 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.fix.addrchg=mofa
+ecaop.core.method.mofa.def={"mothod":"mofa","remark":"固网移机"}
+
+ecaop.core.method.mofa.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.mofa.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(20)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.mofa.param.msg={\
+     operatorId:{type:"String(20)",required:true,validators:null},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true,validators:null},\
+     channelId:{type:"String(20)",required:true,validators:null},\
+     channelType:{type:"String(7)",required:true,validators:null},\
+     orderNo:{type:"String(20)",required:true,validators:null},\
+     userName:{type:"String(12)",required:false,validators:null},\
+     serialNumber:{type:"String(40)",required:true,validators:null},\
+     netType:{type:"String(2)",required:false,validators:null},\
+     brandNumber:{type:"String(40)",required:false,validators:null},\
+     contactPerson:{type:"String(20)",required:true,validators:null},\
+     contactPhone:{type:"String(20)",required:true,validators:null},\
+     contactAddress:{type:"String(200)",required:false,validators:null},\
+     userInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofa.userInfoSchema)"},\
+     tradeItem:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofa.tradeItemSchema)"},\
+     subItem:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mofa.subItemSchema)"},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+# 用户信息
+    ecaop.trades.mofa.userInfoSchema={\
+        certName:{type:"String(100)",required:"true"},\
+        certType:{type:"String(2)",required:"true"},\
+        certNum:{type:"String(20)",required:"true"}\
+    }
+    
+    ecaop.trades.mofa.tradeItemSchema={\
+        attrCode:{type:"String(40)",required:"true"},\
+        attrValue:{type:"String(40)",required:"true"},\
+    }
+    
+    ecaop.trades.mofa.subItemSchema={\
+        attrCode:{type:"String(40)",required:"true"},\
+        attrValue:{type:"String(40)",required:"true"},\
+    }
+
+#定义processors
+
+ecaop.core.method.mofa.processors=BroadChangeApp()
+

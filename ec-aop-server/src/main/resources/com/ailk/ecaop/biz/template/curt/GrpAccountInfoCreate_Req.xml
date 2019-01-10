@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 集团客户管理系统;用于集团 账户 资料的创建GrpAccountAOPSer -->
+<CRTGRPACCOUNTINFO_INPUT>
+    <_include
+        src="com/ailk/ecaop/biz/template/include/HeaderReqIncludeNoChannel_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CRTGRPACCOUNTINFO_REQ>
+            <!-- 客户业务请求 -->
+            <CRTGRPACCOUNTINFO_REQ_BODY
+                mappedOut="true">
+                <!-- 帐户信息 -->
+                <TF_F_ACCOUNT constraint="1" mappedName="accInfo">
+                    <!-- 客户标识 归属的集团客户的唯一标识 -->
+                    <CUST_ID constraint="1" length="V16"
+                        mappedName="custId" />
+                    <!-- 省份 账户的归属区域来源于所归属的客户-->
+                    <PROVINCE_CODE constraint="1" length="V6"
+                        mappedName="province" />
+                    <!-- 归属地市 账户的归属区域来源于所归属的客户 -->
+                    <EPARCHY_CODE constraint="?" length="V6"
+                        mappedName="city" />
+                    <!-- 归属区县 账户的归属区域来源于所归属的客户-->
+                    <COUNTY_CODE constraint="?" length="V6"
+                        mappedName="district" />
+                    <!-- 末梢区域 账户的归属区域来源于所归属的客户 -->
+                    <B_CITY_CODE constraint="?" length="V6"
+                        mappedName="district" />
+                    <!-- 帐户名称 -->
+                    <PAY_NAME constraint="1" length="V128"
+                        mappedName="payName" />
+                    <!--帐户类型 参照CUI_000084 -->
+                    <PAY_MODE_CODE constraint="1" length="F1"
+                        mappedName="payModeCode" />
+                    <!-- 更新部门 -->
+                    <UPDATE_DEPART_ID constraint="1"
+                        length="F7" mappedName="depId" />
+                    <!-- 更新员工 -->
+                    <UPDATE_STAFF_ID constraint="1"
+                        length="V20" mappedName="operatorId" />
+                    <!-- 帐务周期 详见CUI_000085 -->
+                    <ACCOUNT_CYCLE constraint="?" length="V2"
+                        mappedName="accCycle" />
+                    <!-- 备注 -->
+                    <REMARK constraint="?" length="V256"
+                        mappedName="remark" />
+                    <!-- 付费周期 详见CUI_000085 -->
+                    <PAY_CYCLE constraint="?" length="V2"
+                        mappedName="payCycle" />
+                    <!-- 账户联系人名称 -->
+                    <ACCT_CONTACT_NAME constraint="?"
+                        length="V128" mappedName="accContactPerson" />
+                    <!-- 账户联系电话 -->
+                    <ACCT_CONTACT_PHONE constraint="?"
+                        length="V50" mappedName="accContactPhone" />
+                    <!-- 账户联系地址 -->
+                    <ACCT_CONTACT_ADDR constraint="?"
+                        length="V255" mappedName="accContactAddr" />
+                    <!-- 联系人email -->
+                    <CONTACT_EMAIL constraint="?" length="V255"
+                        mappedName="accContactEmail" />
+                    <!-- 活动id 暂时为空-->
+                    <ACTIVE_CODE constraint="?" length="V255"
+                        mappedName="activeCode" />
+                </TF_F_ACCOUNT>
+                <!-- 托收信息 -->
+                <CONSIGN_INFO constraint="?" mappedName="conSignInfo">
+                    <!-- 银行帐号名称 账户类型为“托收”、“银行代扣”、“一户通” 、“小额支付”、“手工托收”、“第三方支付平台”时必传 -->
+                    <BANK_ACCT_NAME constraint="1"
+                        length="V100" mappedName="bankAccName" />
+                    <!-- 银行付费帐号 账户类型为“托收”、“银行代扣”、“一户通” 、“小额支付” 、“手工托收”、“第三方支付平台”时必传 -->
+                    <BANK_ACCT_NO constraint="1" length="V30"
+                        mappedName="bankAccNo" />
+                    <!-- 托收协议号 -->
+                    <AGREEMENTNO constraint="?" length="V44"
+                        mappedName="agreementNo" />
+                    <!-- 开户银行编码 采用B-SDM同步编码，账户类型为“托收” 、“银行代扣”、“一户通”、“小额支付”、“手工托收”、“第三方支付平台”时是必传 -->
+                    <BANK_CODE constraint="?" length="V20"
+                        mappedName="bankCode" />
+                    <!-- 上级银行编码 采用B-SDM同步编码，账户类型为“托收”、“银行代扣”、“一户通”、“小额支付” 
+                        、“手工托收”、“第三方支付平台” 时必传 -->
+                    <SUPER_BANK_CODE constraint="?"
+                        length="V20" mappedName="superBankCode" />
+                    <!--托收开始时间YYYYMM -->
+                    <START_CYCLE_ID constraint="1"
+                        length="F6" mappedName="startCycleId" />
+                    <!-- 托收结束时间YYYYMM -->
+                    <END_CYCLE_ID constraint="1" length="F6"
+                        mappedName="endCycleId" />
+                    <!-- 限额标记 0-全额; 1-限额; 3-定额; 账户类型为“托收” 、“一户通”、“小额支付”、“手工托收”、“第三方支付平台”时必传 -->
+                    <LIMIT_MODE constraint="?" length="F1"
+                        mappedName="limitMode" />
+                    <!-- 限额值 账户类型为“托收”、“一户通”、“小额支付” 、“手工托收” 、“第三方支付平台”时是必传 -->
+                    <LIMIT_MONEY constraint="?" length="V11"
+                        mappedName="limitMoney" />
+                    <!-- 备注 -->
+                    <REMARK constraint="?" length="V500"
+                        mappedName="remark" />
+                </CONSIGN_INFO>
+                <!-- 邮寄信息 -->
+                <MAIL_INFO constraint="?" mappedName="mailInfo">
+                    <!-- 邮寄名称 -->
+                    <POST_NAME constraint="1" length="V120"
+                        mappedName="postName" />
+                    <!-- 邮寄标识 邮寄标识 0-不邮寄 1-邮寄 -->
+                    <POST_TAG constraint="1" length="V1"
+                        mappedName="postTag" />
+                    <!-- 邮寄内容 0-账单 1-清单 2-发票 3-广告 4-所有内容 -->
+                    <POST_CONTENT constraint="1" length="V10"
+                        mappedName="postContent" />
+                    <!-- 邮寄周期 0-按月 1-按季 2-按年 -->
+                    <POST_CYC constraint="1" length="V1"
+                        mappedName="postCyc" />
+                    <!-- 邮寄地址 -->
+                    <POST_ADDRESS constraint="?" length="V80"
+                        mappedName="postAddr" />
+                    <!-- 邮寄邮编 -->
+                    <POST_CODE constraint="?" length="V6"
+                        mappedName="postCode" />
+                    <!-- EMAIL地址 -->
+                    <EMAIL constraint="?" length="V50" mappedName="email" />
+                    <!-- 传真号码 -->
+                    <FAX_NBR constraint="?" length="V100"
+                        mappedName="faxNbr" />
+                    <!-- 邮寄方式编码 0-快递 1-传真 2-EMAIL 3-所有方式 -->
+                    <EMAIL_METHOD_ID constraint="1"
+                        length="V3" mappedName="emailMethodId" />
+                </MAIL_INFO>
+            </CRTGRPACCOUNTINFO_REQ_BODY>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CRTGRPACCOUNTINFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CRTGRPACCOUNTINFO_INPUT>

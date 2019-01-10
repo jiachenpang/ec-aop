@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+    <!-- 集团客户资料认证接口应答报文 -->
+    <QRY_SIMPLE_CUST_INFO_RSP mappedOut="true">
+        <RESP_CODE mappedName="code" />
+        <RESP_DESC mappedName="detail" length="V500" />
+        <CUST_INFO constraint="*" mappedName="custInfo">
+            <JOB_TYPE mappedName="jobType" length="V30" constraint="?"/>
+            <CUST_ID mappedName="custId" length="V16" />
+            <CUST_COMPL_FLAG mappedName="custComplFlag" constraint="?" range="0,1" />
+            <OPER_TAG mappedName="operTag" constraint="?" length="F2" />
+            <CUST_NAME mappedName="custName" length="V100" />
+            <CUST_TYPE mappedName="custType" length="F1" />
+            <CUST_STATE mappedName="custState" length="F1" />
+            <CERT_END_DATE mappedName="certEndDate" constraint="?" length="F14" />
+            <CERT_ADDR mappedName="certAddr" constraint="?" length="V256" />
+            <CERT_TYPE_CODE mappedName="certTypeCode" length="V2" />
+            <CERT_CODE mappedName="certCode" length="V50" />
+            <PROVINCE_CODE mappedName="proviceCode" constraint="?" length="F2" />
+            <EPARCHY_CODE mappedName="eparchyCode" length="V6" />
+            <EPARCHY_NAME mappedName="eparchyName" constraint="?" length="V20"/>
+            <CITY_CODE mappedName="cityCode" constraint="?" length="V20" />
+            <CITY_NAME mappedName="cityName" constraint="?" length="V30"/>
+            <CUST_PASSWD mappedName="custPasswd" constraint="?" length="V10" />
+            <DEVELOP_DEPART_ID mappedName="developDepartId" constraint="?" length="V20" />
+            <DEVELOP_STAFF_ID mappedName="developStaffId" constraint="?" length="V20" />
+            <IN_DEPART_ID mappedName="inDepartId" constraint="?" length="V20" />
+            <IN_STAFF_ID mappedName="inStaffId" constraint="?" length="V20" />
+            <IN_DATE mappedName="inDate" length="F14" />
+            <CUST_CLASS_TYPE mappedName="custClassType" constraint="?" length="V3" />
+            <CUSTOMER_LEVEL mappedName="customerLevel" constraint="?" length="V3" />
+            <CERT_VERIFIED mappedName="certVerified" constraint="?" length="F1" />
+            <CUSTOMER_LOC mappedName="customerLoc" constraint="?" length="F1" />
+            <PARTY_ISBWL mappedName="partyIsbwl" constraint="?" length="F1"/>
+            <SCORE_VALUE mappedName="scoreValue" constraint="?" length="V11" />
+            <SIMPLE_SPELL mappedName="simpleSpell" constraint="?" length="V100" />
+            <RELE_OFFICE_ID mappedName="releOfficeId" constraint="?" length="V20" />
+            <INDIVIDUAL_BRAND_ID mappedName="indivdualBrandId" constraint="?" length="V20" />
+            <GROUP_BRAND_ID mappedName="groupBrandId" constraint="?" length="V20" />
+            <SEX mappedName="sex" constraint="?" length="F1" />
+            <BIRTHDAY mappedName="birthday" constraint="?" length="F8" />
+            <BIRTHDAY_LUNAR mappedName="birthdayLundr" constraint="?" length="V50" />
+            <BIRTHDAY_FLAG mappedName="birthdayFlag" constraint="?" length="F1" />
+            <POST_ADDRESS mappedName="postAddress" constraint="?" length="V256" />
+            <POST_CODE mappedName="postCode" constraint="?" length="F6" />
+            <POST_PERSON mappedName="postPerson" constraint="?" length="V50" />
+            <PHONE mappedName="phone" constraint="?" length="V40" />
+            <FAX_NBR mappedName="faxNbr" constraint="?" length="V40" />
+            <EMAIL mappedName="email" constraint="?" length="V50" />
+            <HOME_ADDRESS mappedName="homeAddress" constraint="?" length="V256" />
+            <HOME_PHONE mappedName="homePhone" constraint="?" length="V40" />
+            <WORK_NAME mappedName="workName" constraint="?" length="V40" />
+            <WORK_KIND mappedName="workKind" constraint="?" length="F2" />
+            <WORK_ADDRESS mappedName="workAddress" constraint="?" length="V256" />
+            <WORK_PHONE mappedName="workPhone" constraint="?" length="V40" />
+            <WORK_POST_CODE mappedName="workPostCode" constraint="?" length="F6" />
+            <INDUSTRY_TYPE_CODE mappedName="industryTypeCode" constraint="?" length="F6" />
+            <WORK_DEPART mappedName="workDepart" constraint="?" length="V50" />
+            <JOB mappedName="job" constraint="?" length="V20" />
+            <CONTACT mappedName="contact" constraint="?" length="V60" />
+            <CONTACT_PHONE mappedName="contactPhone" constraint="?" length="V40" />
+            <CONTACT_TYPE_CODE mappedName="contactTypeCode" constraint="?" length="F1" />
+            <CONTACT_FREQ mappedName="contactFreq" constraint="?" length="F1" />
+            <CONTACT_EMAIL mappedName="contactEmail" constraint="?" length="V30" />
+            <NATIONALITY_CODE mappedName="nationaltityCode" constraint="?" length="V4" />
+            <LOCAL_NATIVE_CODE mappedName="localNativeCode" constraint="?" length="V4" />
+            <POPULATION mappedName="population" constraint="?" length="V4" />
+            <LANGUAGE_CODE mappedName="languageCode" constraint="?" length="F1" />
+            <FOLK_CODE mappedName="folkCode" constraint="?" length="V2" />
+            <RELIGION_CODE mappedName="religionCode" constraint="?" length="F1" />
+            <JOB_TYPE_CODE mappedName="jobTypeCode" constraint="?" length="F1" />
+            <REVENUE_LEVEL_CODE mappedName="revenumLevelCode" constraint="?" length="F1" />
+            <EDUCATE_DEGREE_CODE mappedName="educationDegreeCode" constraint="?" length="F1" />
+            <GRADUATE_SCHOOL mappedName="graduateSchool" constraint="?" length="V100" />
+            <SPECIALITY mappedName="speciality" constraint="?" length="V50" />
+            <CHARACTER_TYPE_CODE mappedName="characterTypeCode" constraint="?" length="F1" />
+            <HEALTH_STATE_CODE mappedName="healthStateCode" constraint="?" length="F1" />
+            <MARRIAGE mappedName="marriage" constraint="?" length="F1" />
+            <WEBUSER_ID mappedName="webserId" constraint="?" length="V20" />
+            <WEB_PASSWD mappedName="webPasswd" constraint="?" length="V10" />
+            <COMMUNITY_ID mappedName="communityId" constraint="?" length="V30" />
+            <ORG_ID mappedName="orgId" constraint="?" length="V20" />
+            <ORG_LEGAL_REP mappedName="orgLegalRep" constraint="?" length="V20" />
+            <OPEN_LIMIT mappedName="openLimit" constraint="?" length="V10" />
+            <REMOVE_CHANGE mappedName="removeChange" constraint="?" length="V100" />
+            <REMOVE_TAG mappedName="removeTag" constraint="?" length="F1" />
+            <REMOVE_STAFF_ID mappedName="removeStaffId" constraint="?" length="V20" />
+            <REMOVE_DATE mappedName="removeDate" constraint="?" length="F14" />
+            <REMARK mappedName="remark" constraint="?" length="V500" />
+            <AUDIT_NUM mappedName="auditNum" constraint="?" length="V10" />
+            <CUST_CERT_PICTURE_URL mappedName="custCertPictureUrl" constraint="?" length="V512" />
+            <GROUP_INFO mappedName="groupInfo" constraint="?">
+                <GROUP_ID mappedName="groupId" constraint="?" length="V40" />
+                <GROUP_TYPE mappedName="groupType" constraint="?" length="F1" />
+                <CLASS_ID mappedName="classId" constraint="?" length="V5" />
+                <LAST_CLASS_ID mappedName="lastClassId" constraint="?" length="V5" />
+                <CLASS_CHANGE_DATE mappedName="classChangeDate" constraint="?" length="F14" />
+                <CUST_CLASS_TYPE mappedName="custClassType" constraint="?" length="V1"/>
+                <GROUP_ATTR mappedName="groupAttr" constraint="?" length="F1" />
+                <GROUP_STATUS mappedName="groupStatus" constraint="?" length="F1" />
+                <GROUP_ADDR mappedName="groupAddr" constraint="?" length="V200" />
+                <SUPER_GROUP_ID mappedName="superGroupId" constraint="?" length="V40" />
+                <MP_GROUP_CUST_CODE mappedName="mpGroupCustCode" constraint="?" length="V30" />
+                <UNIFY_PAY_CODE mappedName="unifyPayCode" constraint="?" length="V30" />
+                <ORG_STRUCT_CODE mappedName="orgStructCode" constraint="?" length="V30" />
+                <CUST_MANAGER_ID mappedName="custManagerId" constraint="?" length="V8" />
+                <CUST_MANAGER_APPR mappedName="custManagerAppr" constraint="?" length="V300" />
+                <ASSIGN_DATE mappedName="assignDate" constraint="?" length="F14" />
+                <ASSIGN_STAFF_ID mappedName="assignStateId" constraint="?" length="V20" />
+                <CALLING_TYPE_CODE mappedName="callingTypeCode" constraint="?" length="V6" />
+                <SUB_CALLING_TYPE_CODE mappedName="subCallingTypeCode" constraint="?" length="V6" />
+                <X_SELCOUNT mappedName="xSelcount" constraint="?" length="V11"/>
+            </GROUP_INFO>
+        </CUST_INFO>
+        <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </QRY_SIMPLE_CUST_INFO_RSP>
+</UNI_BSS_BODY>

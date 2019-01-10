@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AUTHGRPCUST_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <!--请求报文体-->  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <!-- 集团客户资料认证接口请求报文 -->  
+    <AUTHGRPCUST_REQ> 
+      <!-- 集团客户信息 -->  
+      <GRP_CUST_INFO mappedOut="true"> 
+        <!-- 证件类型  01 15位身份证  02 18位身份证  03 驾驶证  04 军官证  05 教师证  06 学生证  07 营业执照  08  武警身份证09  港澳居民来往内地通行证10  台湾居民来往大陆通行证11  户口本12  护照    13组织机构代码证  14事业单位法人证书  15介绍信 17 社会团体法人登记证书 18 照会 99 其它 -->  
+        <PRO_CUST_CERT_TYPE mappedName="certType" length="F2" range="01~15,17,18,99,21"/>  
+        <!-- 证件号码 -->  
+        <PRO_CUST_CERT mappedName="certNum" length="V100"/>  
+        <!-- 归属省分 -->  
+        <PROVINCE_CODE length="F2" mappedName="province"/>  
+        <!-- 归属地市 -->  
+        <EPARCHY_CODE length="F3" mappedName="city"/>  
+        <!-- 归属区县 -->  
+        <COUNTY_CODE constraint="?" length="V10" mappedName="district"/> 
+      </GRP_CUST_INFO>  
+    <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/> 
+    </AUTHGRPCUST_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED> 
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/> 
+  </UNI_BSS_ATTACHED> 
+</AUTHGRPCUST_INPUT>

@@ -1,0 +1,18 @@
+#查询电子沃店订单信息
+ecaop.core.method.map.ecaop.trades.query.ordi.ccsordinfo.qry=qoco
+ecaop.core.method.qoco.def={"mothod":"qoco","remark":"查询电子沃店订单信息"}
+ecaop.core.method.qoco.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qoco.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.qoco.msg.schema={\
+    ordersId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+
+#定义processors
+ecaop.core.method.qoco.processors=@TransReqParam4xjwyd()\
+                                    @AopCall(ecaop.comm.conf.url.adapter.dzwd)

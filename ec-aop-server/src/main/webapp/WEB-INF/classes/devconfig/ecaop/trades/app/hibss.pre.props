@@ -1,0 +1,5 @@
+#海南bss
+ecaop.core.app.map.hibss.pre=hibpr
+ecaop.core.app.hibpr.def={"code":"hibpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.hibpr.allow={appkey:"hibpr",allow:"qrtb", deny:null}
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CommitRsp mappedOut="true">
+    <!-- 应答编码 0000 成功 0006 业务预收理异常 0007 正式受理异常 1100 发票校验错误 1110 发票编码错误 1120 发票与操作员归属不一致1130 发票已打印过 1140 操作员有未稽核的发票 9999 其它错误 -->
+    <RespCode length="F4" range="0000,0006,0007,1100,1110,1120,1130,1140,9999" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V2000" mappedName="detail" />
+    <!-- 税控码 -->
+    <TaxNo length="V30" constraint="?" mappedName="taxNo" />
+    <!-- 受理单模板编码 -->
+    <AcceptanceTp length="V30" constraint="?" mappedName="acceptanceTp" />
+    <!-- 0：套打；1：白打 -->
+    <AcceptanceMode length="F1" constraint="?" range="0,1" mappedName="acceptanceMode" />
+    <!-- 受理单打印内容 -->
+    <AcceptanceForm length="V3000" constraint="?" mappedName="acceptanceForm" />
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</CommitRsp>

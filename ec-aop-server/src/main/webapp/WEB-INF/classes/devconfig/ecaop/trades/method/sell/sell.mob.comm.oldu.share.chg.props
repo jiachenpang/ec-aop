@@ -1,0 +1,43 @@
+#融合共享版业务变更申请
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.oldu.share.chg=mscg
+ecaop.core.method.mscg.def={"method":"mscg","remark":"融合共享版业务变更申请"}
+ecaop.core.method.mscg.params=[\
+    {"param":"msg",type:"JSON",required:false, validators:"@JSONSchema(ecaop.trade.mscg.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trade.mscg.param.msg={\
+	operatorId:{type:"String(20)",required:true},\
+	province:{type:"String(2)",required:true},\
+	city:{type:"String(3)",required:true},\
+	district:{type:"String(10)",required:true},\
+	channelId:{type:"String(20)",required:true},\
+	channelType:{type:"String(7)",required:true},\
+	ordersId:{type:"String(20)",required:true},\
+	serialNumber:{type:"String(20)",required:true},\
+	serialNumberB:{type:"String(20)",required:false},\
+	productInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trade.mscg.param.productInfo)"},\
+	recomPersonId:{type:"String(30)",required:false},\
+	recomPersonName:{type:"String(30)",required:false},\
+	para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+	}
+	
+#校验产品
+ecaop.trade.mscg.param.productInfo={\
+	productMode:{type:"String(1)",required:true},\
+	productId:{type:"String(20)",required:true},\
+	speed:{type:"String(4)",required:false},\
+	packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mscg.packageElement)"}\
+	}
+
+#产品下附加包及包元素（资费，服务）
+ecaop.trades.mscg.packageElement={\
+    packageMode:{type:"String(1)",required:true,validators:null},\
+	packageOptType:{type:"String(2)",required:false,validators:null},\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null},\
+    }
+
+ecaop.core.method.mscg.processors=@MixShareBizChangeApp()                                    

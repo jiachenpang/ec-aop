@@ -1,0 +1,65 @@
+#老用户业务校验
+ecaop.core.method.map.ecaop.trades.check.oldu.check=codc
+ecaop.core.method.codc.def={"mothod":"codc","remark":"老用户业务校验"}
+ecaop.core.method.codc.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.param.msg.schema.codc)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+ecaop.param.msg.schema.codc={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    bipType:{type:"String(1)",required:true},\
+    numId:{type:"String(20)",required:true},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.param.msg.schema.productInfo)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.param.msg.schema.activityInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.param.msg.schema.productInfo={\
+    productId:{type:"String(20)",required:true}\
+}
+ecaop.param.msg.schema.activityInfo={\
+    actPlanId:{type:"String(20)",required:true},\
+    actProtPer:{type:"String(3)",required:false},\
+    resourcesModel:{type:"String(10)",required:false},\
+    resourcesBrand:{type:"String(10)",required:false},\
+    extensionTag:{type:"String(1)",required:false},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.param.msg.schema.actPara)"}\
+}
+ecaop.param.msg.schema.actPara={\
+    actParaId:{type:"String(20)",required:true},\
+    actParaValue:{type:"String(60)",required:true}\
+}
+ecaop.core.method.codc.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.codc.flowConfig)
+#配置跳转
+ecaop.core.method.codc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.n6.codc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.mall.codc.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#北六省处理
+ecaop.n6.codc.processors=n6OldUserCheck()
+#南25省的处理
+ecaop.mall.codc.processors=@ParametersMapper(ecaop.param.mapping.codc)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.param.template.codc)
+ecaop.param.mapping.codc=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00026",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"OldUserCheckReq",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.param.template.codc@3GE"}\
+]
+ecaop.param.template.codc=com/ailk/ecaop/biz/template/userCheck/OldUserCheck

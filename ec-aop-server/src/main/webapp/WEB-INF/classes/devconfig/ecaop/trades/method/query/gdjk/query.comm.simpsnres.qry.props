@@ -1,0 +1,105 @@
+#号码查询（单卡销售）
+ecaop.core.method.map.ecaop.trades.query.comm.simpsnres.qry=snqy
+ecaop.core.method.snqy.def={"mothod":"snqy","remark":"号码查询简单版"}
+ecaop.core.method.snqy.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.snqy.params.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+    ]
+
+ecaop.trades.snqy.params.msg={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+busType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+groupFlag:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+busType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+groupFlag:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+serType:{type:"Number(1)",required:true,validators:"@FixedLen(1)"},\
+queryParas:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trades.snqy.params.msg.queryParas)"},\
+para:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.snqy.params.msg.queryParas={\
+queryType:{type:"Number(2)",required:true},\
+queryPara:{type:"String(30)",required:false}\
+}
+
+#流程控制
+ecaop.core.method.snqy.processors=@NumRoute\
+                           @checkCalllAgain\
+                           @route\
+                           @FlowProcessor(ecaop.core.method.snqy.flowConfig)
+                           
+   #北六和南25的不同处理 numSwitch 0 号卡中心流程 1原有流程
+ecaop.core.method.snqy.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(callAgain)", transitions:"0->04 1->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(checkSerType)", transitions:"0->04 1->03"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(selCard)", transitions:"0->07 1->04"},\
+{id:"04", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->05 N6->06"},\
+{id:"05", processor:"AopHandler(ecaop.trades.snqy4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"06", processor:"AopHandler(ecaop.trades.snqy4N6.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"07", processor:"AopHandler(ecaop.trades.snqy.numCenter.processors)", selector:"Noop", transitions:"*->STOP"}\
+]                        
+ 
+                           
+ #号卡中心逻辑
+ecaop.trades.snqy.numCenter.processors=\
+                 @QueryNumberCenter()
+                
+
+ 
+ #南25省号码查询
+ecaop.trades.snqy4N25.processors=\
+                @NumResQryParamsCheckProcessor\
+                @ParametersMapper(ecaop.trades.snqy.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonMapper(ecaop.trades.snqy.template)\
+                @dealSerialNumber()\
+                @commSerialNumerDLHFromInch()
+#北六省号码查询
+ecaop.trades.snqy4N6.processors=\
+                @TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ec-aop.rest)\
+                @dealSerialNumber()\
+                @commSerialNumerDLH()
+ecaop.trades.snqy.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00023",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"NumberResQueryReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.snqy.template@3GE"}\
+]
+
+ecaop.trades.snqy.template=com/ailk/ecaop/biz/template/number/NumberResQuery
+#调用CBSS号码接口
+ecaop.trade.cbss.checkSerialNumber.param=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"QueryIdleNumberSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"chgNumEcs",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"9900",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"NUM_QUERY_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg"},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.cbss.checkSerialNumber.template@FBS@NUM_QUERY_INPUT@n993296623@NUM_QUERY_REQ"}\
+]
+ecaop.trade.cbss.checkSerialNumber.template=com/ailk/ecaop/biz/template/number/QryCBSSSerialNumber

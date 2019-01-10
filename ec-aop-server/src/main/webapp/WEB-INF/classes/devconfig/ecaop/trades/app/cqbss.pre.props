@@ -1,0 +1,6 @@
+#重庆bss
+ecaop.core.app.map.cqbss.pre=cqbpr
+ecaop.core.app.cqbpr.def={"code":"cqbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.cqbpr.allow={appkey:"cqbpr",allow:"qrtb,ppoq,cuck,opap,opsb,cdqy,cdnt,cdsn,qrtc,snqy,nboc,crck,dvqy,dvck,qcsp,cdaq,qcaq,\
+smnp,mpsb,qmoq,codc,ccic,oata,mold,cuck,cack,trao,2324,234o,opsb,sc4s,oupc,qctc,mvoa,cmck,mofc,ofcs,oupc,trao,cuck,qcsp,qcfq,\
+qctq,smct,qcbl,qofq,spfs,qcpq,qcpa,qcgq", deny:null}

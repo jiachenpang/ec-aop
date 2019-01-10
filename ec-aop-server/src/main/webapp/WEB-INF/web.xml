@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>aopservlet</servlet-name>
+        <servlet-class>org.n3r.ecaop.core.servlet.EcAopMainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>aopservlet</servlet-name>
+        <url-pattern>/aopservlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AxisServlet</servlet-name>
+        <servlet-class>org.apache.axis2.transport.http.AxisServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- change by wangmc -->
+    <servlet>
+        <servlet-name>SvnCommit</servlet-name>
+        <servlet-class>newTest.main.SvnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvnCommit</servlet-name>
+        <url-pattern>/SvnCommit/*</url-pattern>
+    </servlet-mapping>
+  
+  
+</web-app>

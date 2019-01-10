@@ -1,0 +1,17 @@
+#开户返销提交
+ecaop.core.method.map.ecaop.trades.serv.curt.23to4cannel.sub=sc4s
+ecaop.core.method.sc4s.def={"mothod":"sc4s","remark":"开户返销提交"}
+ecaop.core.method.sc4s.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sc4s.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.sc4s.param.msg={\
+     soNbr:{type:"String(16)",required:true},\
+     cancelReason:{type:"String(500)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.sc4s.processors=@TransReqParamsMapper()\
+                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)

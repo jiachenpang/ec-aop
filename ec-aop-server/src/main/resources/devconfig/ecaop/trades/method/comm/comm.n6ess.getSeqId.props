@@ -1,0 +1,27 @@
+#调CB的生成id接口
+ecaop.trades.seqid.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"getSeqid",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"GET_SEQID_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.seqid.template@FBS@GET_SEQID_INPUT@n-1562169335@GET_SEQID_REQ"}\
+]
+
+#请求和返回报文模版路径
+ecaop.trades.seqid.template=com/ailk/ecaop/biz/template/n6ess/getSeqIDFromN6ess

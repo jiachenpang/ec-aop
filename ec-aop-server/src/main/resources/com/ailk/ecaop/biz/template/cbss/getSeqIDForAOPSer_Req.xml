@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SEQUQRY_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <SEQUQRY_REQ>
+            <SEQUENCE_NAME constraint="?" defaultValue="seq_trade_id" length="V30" mappedName="getSeqId"/>
+            <NUM constraint="?" defaultValue="1" length="V10" mappedName="getSeqCount"/>
+        </SEQUQRY_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</SEQUQRY_INPUT>

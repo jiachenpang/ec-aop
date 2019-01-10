@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <SvcCont>
+        <!-- 终端销售信息应答报文 -->
+        <ChkSaleTermRsp constraint="?" mappedName="resourcesRsp">
+            
+            <!-- 终端销售信息类型 -->
+            <ResourcesType length="F2" mappedName="resourcesType" />
+            <!-- 资源唯一标识 -->
+            <ResourcesCode length="V30" mappedName="resourcesCode" />
+            <!-- 串码2 -->
+            <ResourcesCode2 constraint="?" length="V15" mappedName="resourcesCode2" />
+            <!-- 资源校验结果编码 -->
+            <RscStateCode length="F4" mappedName="rscStateCode" />
+            <!-- 资源校验结果描述 -->
+            <RscStateDesc length="V60" mappedName="rscStateDesc" />
+            <!-- 终端机型编码 -->
+            <MachineTypeCode constraint="?" length="V20" mappedName="machineTypeCode" />
+            <!-- 终端机型名称 -->
+            <MachineTypeName constraint="?" length="V100" mappedName="machineTypeName" />
+             <!-- 保留字段 -->
+            <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+        </ChkSaleTermRsp>
+    </SvcCont>
+

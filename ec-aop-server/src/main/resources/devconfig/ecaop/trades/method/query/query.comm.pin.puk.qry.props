@@ -1,0 +1,50 @@
+#用户卡资源查询
+ecaop.core.method.map.ecaop.trades.query.comm.pin.puk.qry=pipu
+ecaop.core.method.pipu.def={"mothod":"pipu","remark":"用户卡资源查询"}
+ecaop.core.method.pipu.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.pipu.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.pipu.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true},\
+     channelId:{type:"String(20)",required:true},\
+     channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+     serialNumber:{type:"String(20)",required:false},\
+     simCardNo:{type:"String(20)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.pipu.processors=@ParametersMapper(ecaop.trades.pin.puk.qry.paramtersmapping)\
+                                  @WsCall(ecaop.comm.conf.url.cbss.services.WoOrderSer)\
+                                  @Xml2JsonMapper4Fbs(ecaop.trades.pin.puk.qry.template)
+
+#CBSS返销预提交
+ecaop.trades.pin.puk.qry.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"WoOrderSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryPinPuk",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_PIN_PUK_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.pin.puk.qry.template@FBS@QRY_PIN_PUK_INPUT@n1529397156@QRY_PIN_PUK_REQ"}\
+]
+ecaop.trades.pin.puk.qry.template=com/ailk/ecaop/biz/template/cbss/PinPukCodeQry

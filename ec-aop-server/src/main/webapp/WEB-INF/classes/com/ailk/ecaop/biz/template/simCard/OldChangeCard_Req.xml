@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <OldChangeCardReq>
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <Province length="F2" mappedName="province"/>
+            <City length="F3" mappedName="city"/>
+            <District length="V10" mappedName="district"/>
+            <ChannelID length="V20" mappedName="channelId"/>
+            <ChannelType length="F7" mappedName="channelType"/>
+            <OrdersID length="V20" mappedName="ordersId"/>
+            <OpeType length="F1" mappedName="opeType"/>
+            <SerialNumber length="V20" mappedName="serialNumber"/>
+            <SysCode length="V4" mappedName="sysCode"/>
+            <CertType length="V2" mappedName="certType"/>
+            <CertNum length="V50" mappedName="certNum"/>
+            <ICCID length="V20" mappedName="iccid"/>
+            <CardType length="V22" mappedName="cardType"/>
+            <BusiType length="V22" mappedName="busiType"/>
+            <IMSI length="V15" mappedName="imsi"/>
+            <CardData length="V1024" mappedName="cardData"/>
+            <ProcID length="V30" mappedName="procId"/>
+            <CardFee length="V10" constraint="?" mappedName="cardFee"/>
+            <PayInfo constraint="*" mappedName="payInfo">
+                <PayType length="V2" mappedName="payType"/>
+                <PayOrg length="V30" constraint="?" mappedName="payOrg"/>
+                <PayNum length="V20" constraint="?" mappedName="payNum"/>
+            </PayInfo>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </OldChangeCardReq>
+    </SvcCont>
+</UniBSS>

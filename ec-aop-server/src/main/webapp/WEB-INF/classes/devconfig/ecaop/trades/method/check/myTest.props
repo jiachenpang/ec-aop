@@ -1,0 +1,31 @@
+#验证多线程
+ecaop.core.method.map.ecaop.trades.myTest.check=test
+
+ecaop.core.method.test.def={"mothod":"test","remark":"验证多线程"}
+
+ecaop.core.method.test.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.param.msg.schema.test)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+ecaop.param.msg.schema.test={\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+}
+
+#定义processors
+ecaop.core.method.test.processors=@testThread()
+
+ecaop.param.mapping.test=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00050",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CheckProvinceReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.template.3g.checkProvince@3GE"}\
+]
+
+ecaop.template.3g.checkProvince = com/ailk/ecaop/biz/template/test/CheckProvince

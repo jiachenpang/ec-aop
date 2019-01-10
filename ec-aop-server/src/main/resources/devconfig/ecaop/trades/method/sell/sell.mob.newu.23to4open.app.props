@@ -1,0 +1,136 @@
+#各网别用户综合信息查询
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.23to4open.app=234o
+ecaop.core.method.234o.def={"mothod":"234o","remark":"23转4开户信息预提交，提交信息包括：三户资料、产品信息、活动信息、特服信息等"}
+ecaop.core.method.234o.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.234o.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.234o.MsgSchema={\
+   operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:false},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    ordersId:{type:"String(30)",required:true},\
+    opeSysType:{type:"String(1)",required:false},\
+    numId:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrcksnumId)"},\
+    customerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrckscustomerInfo)"},\
+    acctInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrcksacctInfo)"},\
+    userInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrcksuserInfo)"},\
+    recomPersonId:{type:"String(30)",required:false},recomPersonName:{type:"String(128)",required:false},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#号码资料
+ecaop.trade.234o.CrcksnumId={\
+    serialNumber:{type:"String(20)",required:true},proKey:{type:"String(20)",required:false}\
+}
+#客户信息
+ecaop.trade.234o.CrckscustomerInfo={\
+    authTag:{type:"String(1)",required:true},\
+    realNameType:{type:"String(1)",required:true},\
+    custType:{type:"String(1)",required:true},\
+    custId:{type:"String(20)",required:false},\
+    newCustomerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrcksnewCustomerInfo)"}\
+}
+#新客户信息
+ecaop.trade.234o.CrcksnewCustomerInfo={\
+    certType:{type:"String(2)",required:true},\
+    certNum:{type:"String(20)",required:true},\
+    certAdress:{type:"String(200)",required:true},\
+    customerName:{type:"String(128)",required:true},\
+    certExpireDate:{type:"String(8)",required:false},\
+    contactPerson:{type:"String(20)",required:false},\
+    contactPhone:{type:"String(20)",required:false},\
+    contactAddress:{type:"String(200)",required:false},\
+    custType:{type:"String(30)",required:false},\
+    customerRemark:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrckscustomerRemark)"}\
+}
+#客户备注
+ecaop.trade.234o.CrckscustomerRemark={\
+    customerRemarkId:{type:"String(20)",required:true},\
+    customerRemarkValue:{type:"String(60)",required:true}\
+}
+#账户信息
+ecaop.trade.234o.CrcksacctInfo={\
+    createOrExtendsAcct:{type:"String(1)",required:true},\
+    accountPayType:{type:"String(2)",required:true},\
+    debutySn:{type:"String(20)",required:false}\
+}
+
+#用户信息
+ecaop.trade.234o.CrcksuserInfo={\
+    userType:{type:"String(1)",required:true},\
+    bipType:{type:"String(1)",required:true},\
+    is3G:{type:"String(1)",required:true},\
+    serType:{type:"String(1)",required:true},\
+    packageTag:{type:"String(1)",required:true},\
+    firstMonBillMode:{type:"String(2)",required:false},\
+    checkType:{type:"String(2)",required:false},\
+    creditVale:{type:"String(2)",required:false},\
+    checkCreditVale:{type:"String(2)",required:false},\
+    userPwd:{type:"String(2)",required:false},\
+    product:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trade.234o.Crcksproduct)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrcksactivityInfo)"},\
+    groupFlag:{type:"String(1)",required:false},\
+    groupId:{type:"String(50)",required:false},\
+    appType:{type:"String(1)",required:false},\
+    subAppType:{type:"String(2)",required:false},\
+    guarantorType:{type:"String(2)",required:false},\
+    guaratorID:{type:"String(200)",required:false},\
+    guCertType:{type:"String(2)",required:false},\
+    guCertNum:{type:"String(50)",required:false},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trade.234o.CrckspayInfo)"}\
+ }
+
+#开户时选择的产品信息
+ecaop.trade.234o.Crcksproduct={\
+    productId:{type:"String(8)",required:true},\
+    productMode:{type:"String(1)",required:true},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.packageElement)"},\
+    productCode:{type:"String(8)",required:false}\
+}
+#开户时活动信息
+ecaop.trade.234o.CrcksactivityInfo={\
+    actPlanId:{type:"String(20)",required:true},\
+    resourcesType:{type:"String(2)",required:false},\
+    resProcId:{type:"String(20)",required:false},\
+    resourcesCode:{type:"String(30)",required:false},\
+    resourcesFee:{type:"String(20)",required:false},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.CrcksactPara)"},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234o.packageElement)"}\
+}
+#活动扩展字段
+ecaop.trade.234o.CrcksactPara={\
+    actParaId:{type:"String(20)",required:true},\
+    actParaValue:{type:"String(60)",required:true}\
+}
+#营销产品下附加包及包元素（资费，服务）
+ecaop.trade.234o.packageElement={\
+    packageId:{type:"String(20)",required:true},\
+    elementId:{type:"String(20)",required:true},\
+    elementType:{type:"String(2)",required:true},\
+}
+#开户时选择的产品信息
+ecaop.trade.234o.CrckspayInfo={\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+}
+#流程控制,根据胥总最新要求,实施透传操作
+#ecaop.core.method.234o.processors=@qryChkTermN6()\
+#                                  @TransReqParamsMapper()\
+#                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)
+
+#新流程，产品改造
+ecaop.core.method.234o.processors=@qryChkTermN6()\
+                                   @TransToCBSSProcessor()
+#CBSS合约信息查询接口
+ecaop.trades.contractTransFer.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.234o.contractTransFer",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.contractTransFer.template@FBS@CHECK_USERCONTRCT_TRANSFER_INPUT@busi@CHECK_USERCONTRCT_TRANSFER_REQ"}\
+]
+ecaop.trades.contractTransFer.template=com/ailk/ecaop/biz/template/CheckUserContractTransferAopSer/checkUserContractTransferAop

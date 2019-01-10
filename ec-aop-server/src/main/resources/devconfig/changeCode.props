@@ -1,0 +1,16 @@
+#用于转换数据的文件,生产上线若不发布服务时,要修改ec-aop.props中的时间戳才能生效
+
+#调用能力平台转换上游系统编码
+ecaop.global.param.change.sysCode.toNumCenter={"cqpre.sub":"83WO","zjbss.pre":"3602","zjpre.sub":"36WO","ynpre.sub":"86WO",\
+"xjpre.sub":"89WO","xjwyd.sub":"8902","xzpre.sub":"79WO","cmall.sub":"6300","tjpre.sub":"13WO","scpre.sub":"81WO",\
+"shpre.sub":"31WO","mall.sub":"0002","snpre.sub":"84WO","sxbss.pre":"1902","sdpre.sub":"17WO","sdbss.pre":"1702",\
+"qhpre.sub":"70WO","apple.sub":"1400","nxpre.sub":"88WO","nmbss.pre":"1002","nmpre.sub":"10WO","lnbss.pre":"9102",\
+"jxpre.sub":"75WO","jspre.sub":"34WO","jlpre.sub":"90WO","hnpre.sub":"74WO","hupre.sub":"71WO","hlpre.sub":"97WO",\
+"hlbss.pre":"9702","hapre.sub":"76WO","habss.pre":"7602","hbpre.sub":"18WO","hebss.pre":"1802","hipre.sub":"50WO",\
+"gzpre.sub":"85WO","gxbss.pre":"5902","gdpre.sub":"51WO","gspre.sub":"87WO","fjpre.sub":"38WO","n6ess.sub":"0008",\
+"bjpre.sub":"11WO","bjbss.pre":"1102","ahpre.sub":"30WO","mini.sub":"A400","ecs.sub":"0002","cbss.sub":"9900",\
+"apaas.sub":"9200","mappln.sub":"S91001","autersys.sub":"A00001","ass.sub":"A00002","tsst.sub":"A00003","esal.sub":"A00004",\
+"intrp.sub":"A00005","wxh.sub":"A00006","wsg.sub":"A00007","wolm.sub":"A00008","shcp.sub":"S31001","shaip.sub":"S31002",\
+"sxaop.sub":"S19001","partner.biz":"A00009","gzch.sub":"S85001","gzref.sub":"S85002","gskl.sub":"S87001","wosabj.sub":"S11001",\
+"uss.sub":"S59001","b2b.sub":"A00010","gdmall.sub":"S51001","gdjk.sub":"S51002","gdinte.sub":"S51003","gdaop.sub":"S51004",\
+"zjmall.sub":"S36001","sdapp.sub":"S17001","jkzy.sub":"5300","hlperser.sub":"S97001"}

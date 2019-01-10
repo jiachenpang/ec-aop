@@ -1,0 +1,9 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.brd.sinp.openpre.app=bson
+ecaop.core.method.bson.def={"mothod":"bson","remark":"宽带无条件受理预提交"}
+ecaop.core.method.bson.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.masb.bsop.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#配置见sell.brd.sinp.open.app.props

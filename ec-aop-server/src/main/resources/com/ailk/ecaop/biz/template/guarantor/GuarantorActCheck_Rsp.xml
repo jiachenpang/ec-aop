@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GuarantorChkRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />
+    <GuarantorActRsp constraint="*" mappedName="guarantorActRsp">
+    <ContractId length="V50" mappedName="contractId"/>
+    <SignDate length="F8" mappedName="signDate"/>
+    <EffDate length="F8" mappedName="effDate" />
+    <ExpDate length="F8" mappedName="expDate" />
+    <ContractGrade length="F1" mappedName="contractGrade" range="1,2"/>
+    <CompanyName length="V100" mappedName="companyName" />
+    <CompanyDevPerson length="V50" mappedName="companyDevPerson" />
+    <ContractRele length="V6" mappedName="contractRele" />
+    <GuaNum length="V10" mappedName="guaNum"/>
+    </GuarantorActRsp>
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</GuarantorChkRsp>

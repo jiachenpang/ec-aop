@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<QRY_COMM_INFO_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY>
+    <QRY_COMM_INFO_REQ>
+      <SERVICE_PROVIDE_DOMAIN constraint="?" mappedName="serviceProvideDomain"></SERVICE_PROVIDE_DOMAIN>
+      <QRY_SYS_TYPE constraint="?" mappedName="qrySysType"></QRY_SYS_TYPE>
+      <PARA constraint="*" mappedName="para">
+        <!--保留字段 -->
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!--保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+          <!--保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </QRY_COMM_INFO_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+    <MEDIA_INFO length="V20" defaultValue="1GB"/>
+  </UNI_BSS_ATTACHED>
+</QRY_COMM_INFO_INPUT>

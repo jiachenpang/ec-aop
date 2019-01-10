@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GET_IPTV_INFO4G_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <GET_IPTV_INFO4G_REQ>
+            <CITY_CODE length="V20" mappedName="cityCode" />
+            <QRY_TYPE length="F1" mappedName="qryType" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V500" mappedName="paraValue"/>
+            </PARA>
+        </GET_IPTV_INFO4G_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</GET_IPTV_INFO4G_INPUT>

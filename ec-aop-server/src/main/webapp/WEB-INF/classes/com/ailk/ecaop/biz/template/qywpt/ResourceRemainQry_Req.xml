@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_RESOURCE_REMAIN_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_RESOURCE_REMAIN_REQ>
+            <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode"/>
+            <SERIAL_NUMBER constraint="1" length="V40" mappedName="numId"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V60" mappedName="paraValue"/>
+            </PARA>
+        </QRY_RESOURCE_REMAIN_REQ>
+    </UNI_BSS_BODY>
+     <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_RESOURCE_REMAIN_INPUT>

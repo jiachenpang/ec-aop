@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 集团客户管理系统;用于集团客户资料的创建 -->
+<CRTGRPCUSTINFO_INPUT>
+    <_include
+        src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CRTGRPCUSTINFO_REQ>
+            <!-- 集团客户新增业务请求 -->
+            <CRTGRPCUSTINFO_REQ_BODY mappedOut="true">
+                <!-- 集团客户资料 -->
+                <CUSTOMER mappedOut="true">
+                    <!-- 集团客户资料 -->
+                    <CUST_INFO constraint="1" mappedName="custInfo">
+                        <!-- 客户名称 -->
+                        <CUST_NAME constraint="1" length="V100"
+                            mappedName="customerName" />
+                        <!-- 参照客户级别CUI_000015 集客只接收： 2 中小企业客户 3 大客户 -->
+                        <CUST_TYPE constraint="1" length="F1"
+                            mappedName="customerType" />
+                        <!-- 省份 来自B-SDM系统的行政区域编码 -->
+                        <PROVINCE_CODE constraint="1"
+                            length="V6" mappedName="province" />
+                        <!-- 归属地市 来自B-SDM系统的地市标识 -->
+                        <EPARCHY_CODE constraint="1"
+                            length="V6" mappedName="city" />
+                        <!-- 末梢区域 来自B-SDM系统的地市标识 -->
+                        <B_CITY_CODE constraint="1" length="V6"
+                            mappedName="district" />
+                        <!-- 建档员工（省份BSS的工号）从集中集客系统工号与省分BSS工号对应关系进行转换 -->
+                        <CREATE_STAFF_ID constraint="1"
+                            length="V20" mappedName="createStaffId" />
+                        <!--建档时间 YYYYMMDDh24mmss -->
+                        <CREATE_DATE constraint="1" length="F14"
+                            mappedName="createDate" />
+                        <!-- 客户通讯地址 -->
+                        <CUST_ADDR constraint="1" length="V200"
+                            mappedName="certAddress" />
+                        <!-- 联系人姓名 -->
+                        <CONTACT_NAME constraint="1"
+                            length="V50" mappedName="contactPerson" />
+                        <!-- 联系人电话 -->
+                        <CONTACT_PHONE constraint="1"
+                            length="V50" mappedName="contactPhone" />
+                        <!-- 联系人EMAIL -->
+                        <CONTACT_EMAIL constraint="?"
+                            length="V50" mappedName="contactEmail" />
+                        <!-- 邮政编码 -->
+                        <POST_CODE constraint="1" length="V6"
+                            mappedName="postCode" />
+                        <!--总部行业分类 -->
+                        <CALLING_TYPE_CODE constraint="1"
+                            length="V6" mappedName="callingTypeCode" />
+                        <!-- 备注 -->
+                        <REMARK constraint="?" length="V200"
+                            mappedName="remark" />
+                    </CUST_INFO>
+                    <!-- 集团客户证件资料列表 -->
+                    <CUST_CERT_INFOS mappedOut="true">
+                        <!-- 集团客户证件资料列表 -->
+                        <CUST_CERT_INFO constraint="+"
+                            mappedName="custCertInfo">
+                            <!-- 参照SHO_000006 中06、14、15、21四种集团证件类型 -->
+                            <CERT_TYPE_CODE constraint="1"
+                                length="V2" mappedName="certTypeCode" />
+                            <!-- 主证件标识 1主证件，空为未设定 每个客户有且只有一个主证件 -->
+                            <MAIN_CERT_FLAG constraint="?"
+                                length="V6" mappedName="mainCertFlag" />
+                            <!-- 证件名称 证件上的名称 -->
+                            <CERT_NAME constraint="1" length="V100"
+                                mappedName="certName" />
+                            <!-- 证件号码 -->
+                            <CERT_CODE constraint="1" length="V50"
+                                mappedName="certCode" />
+                            <!-- 发证机关 -->
+                            <SEND_DEPT constraint="?" length="V100"
+                                mappedName="sendDept" />
+                            <!--证件地址 -->
+                            <ADDR constraint="1" length="V255"
+                                mappedName="addr" />
+                            <!-- 证件有效期 -->
+                            <CERT_END_DATE constraint="?"
+                                length="F14" mappedName="certEndDate" />
+                            <!-- 营业执照扩展信息 -->
+                            <BUSI_LICENSE_INFO
+                                constraint="?" mappedName="busiLicenseInfo">
+                                <!--营业执照类型 参照SHO_000006 中的22~27 -->
+                                <LICENSE_TYPE constraint="1"
+                                    length="V2" mappedName="licenseType" />
+                                <!-- 法人 -->
+                                <LEGAL_NAME constraint="1"
+                                    length="V128" mappedName="legalName" />
+                                <!-- 经营范围 -->
+                                <BUSI_AREA constraint="?"
+                                    length="V255" mappedName="busiArea" />
+                                <!-- 发证日期 -->
+                                <ISSUE_DATE constraint="?"
+                                    length="F14" mappedName="issueDate" />
+                                <!-- 注册资本 -->
+                                <REGISTERED_CAPITAL constraint="1"
+                                    length="V255" mappedName="registeredCapital" />
+                            </BUSI_LICENSE_INFO>
+                            <!-- 法人证书扩展信息 -->
+                            <LEGALID_INFO constraint="?"
+                                mappedName="legalIdInfo">
+                                <!-- 法人证件类型 参照SHO_000006中的28~29 -->
+                                <LEGAL_TYPE constraint="1"
+                                    length="V2" mappedName="legalType" />
+                                <!-- 法人 -->
+                                <LEGAL_NAME constraint="1"
+                                    length="V128" mappedName="legalName" />
+                                <!-- 经费来源 -->
+                                <FUNDING_SOURCE
+                                    constraint="?" length="V100"
+                                    mappedName="fundingSource" />
+                                <!-- 业务范围 -->
+                                <BUSI_AREA constraint="?"
+                                    length="V100" mappedName="busiArea" />
+                                <!-- 开办资金 -->
+                                <START_FUNDS constraint="?"
+                                    length="V20" mappedName="startFunds" />
+                                <!-- 举办单位 -->
+                                <HOLD_DEPT constraint="?"
+                                    length="V100" mappedName="holdDept" />
+                                <!-- 登记管理机关 -->
+                                <MANAGE_DEPT constraint="?"
+                                    length="V100" mappedName="manageDept" />
+                            </LEGALID_INFO>
+                            <!-- 组织机构代码证扩展信息 -->
+                            <ORGLD_INFO constraint="?"
+                                mappedName="orgIdInfo">
+                                <!-- 法人 -->
+                                <LEGAL_NAME constraint="1"
+                                    length="V100" mappedName="legalName" />
+                                <!-- 机构类型 -->
+                                <DEPT_TYPE constraint="?"
+                                    length="V50" mappedName="deptType" />
+                            </ORGLD_INFO>
+                            <!-- 民办非企业单位登记证书扩展息 -->
+                            <PRIVATE_N_INFO constraint="?"
+                                mappedName="privateNInfo">
+                                <!-- 民办证件子类型 参照SHO_000006中的30~32 -->
+                                <PRIVATE_TYPE constraint="1"
+                                    length="V2" mappedName="privateType" />
+                                <!-- 负责人 -->
+                                <LEGAL_NAME constraint="?"
+                                    length="V128" mappedName="legalName" />
+                                <!-- 业务范围 -->
+                                <BUSI_AREA constraint="?"
+                                    length="V100" mappedName="busiArea" />
+                            </PRIVATE_N_INFO>
+                        </CUST_CERT_INFO>
+                    </CUST_CERT_INFOS>
+                </CUSTOMER>
+                <!-- 经办人 -->
+                <ATTN_INFO constraint="1" mappedName="attnInfo">
+                    <!-- 经办人姓名 -->
+                    <ATTN_NAME constraint="1" length="V50"
+                        mappedName="attnName" />
+                    <!-- 经办人电话 -->
+                    <ATTN_PHONE constraint="1" length="V50"
+                        mappedName="attnPhone" />
+                    <!-- 经办人EMAIL -->
+                    <ATTN_EMAIL constraint="?" length="V50"
+                        mappedName="attnEmail" />
+                    <!-- 经办人证件类别 公众客户证件类型，见SHO_000006， 01、02、05、08、09、 10、11 -->
+                    <ATTN_CERT_TYPE_CODE constraint="1"
+                        length="V2" mappedName="attnCertTypeCode" />
+                    <!-- 经办人证件号码 -->
+                    <ATTN_CERT_CODE constraint="1"
+                        length="V40" mappedName="attnCertCode" />
+                    <!-- 经办人证件地址 -->
+                    <ATTN_CERT_ADDR constraint="1"
+                        length="V200" mappedName="attnCertAddr" />
+                </ATTN_INFO>
+            </CRTGRPCUSTINFO_REQ_BODY>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CRTGRPCUSTINFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CRTGRPCUSTINFO_INPUT>

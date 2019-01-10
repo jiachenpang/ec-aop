@@ -1,0 +1,5 @@
+#北六ESS预受理订单查询
+ecaop.core.app.map.n6ess.sub=n6sb
+ecaop.core.app.n6sb.def={"code":"n6sb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.n6sb.timeslimit=max 100 per 1 minute
+ecaop.core.app.n6sb.allow={appkey:"n6sb",allow:"ppoq,qcfc,qcfd", deny:null}

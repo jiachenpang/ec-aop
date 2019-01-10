@@ -1,0 +1,46 @@
+#沃账户创建接口
+ecaop.core.method.map.ecaop.serv.curt.wo.acct.create=cwac
+ecaop.core.method.cwac.def={"mothod":"cwac","remark":"沃账户创建接口"}
+ecaop.core.method.cwac.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.cwac.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器
+ecaop.trades.cwac.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+     orderId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     operType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     woAccountId:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certCode:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     certName:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     developDapart:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     businessHallCode:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     businessHallName:{type:"String(80)",required:false,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.cwac.processors=@CertTypeChg()\
+                                 @ParametersMapper(ecaop.trades.cwac.ParametersMapping)\
+                                 @WsCall(ecaop.comm.conf.url.cbss.services.WoAccountSer)\
+                                 @Xml2JsonMapper4Fbs(ecaop.trades.cwac.addWoAccount.template)
+
+#请求参数
+ecaop.trades.cwac.ParametersMapping=[\
+    {paramterName:"route",extractor:"fix",extractorConfig:"48",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.woAccountSer.addWoAccount,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cwac.addWoAccount.template@FBS@ADD_WO_ACCOUNT_INPUT@n720382109@ADD_WO_ACCOUNT_REQ"}\
+]
+
+
+ecaop.trades.cwac.addWoAccount.template=com/ailk/ecaop/biz/template/curt/AddWoAccount

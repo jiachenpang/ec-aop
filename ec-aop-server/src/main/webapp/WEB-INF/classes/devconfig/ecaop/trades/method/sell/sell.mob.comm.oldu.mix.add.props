@@ -1,0 +1,44 @@
+#融合成员纳入接口 by zsq
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.oldu.mix.add=smcom
+ecaop.core.method.smcom.def={"mothod":"smcom","remark":"融合成员纳入"}
+ecaop.core.method.smcom.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smcom.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.smcom.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    ordersId:{type:"String(20)",required:true,validators:null},\
+    serialNumber:{type:"String(20)",required:true,validators:null},\
+    mixSerialNumber:{type:"String(20)",required:true,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smcom.productInfo)"},\
+    contactPerson:{type:"String(60)",required:true,validators:null},\
+    contactPhone:{type:"String(40)",required:true,validators:null},\
+    recomPersonId:{type:"String(30)",required:false,validators:null},\
+    recomPersonName:{type:"String(30)",required:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+ecaop.trades.smcom.productInfo={\
+    oldProductId:{type:"String(20)",required:true,validators:null},\
+    newProductId:{type:"String(20)",required:true,validators:null},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smcom.packageElement)"}}
+
+ecaop.trades.smcom.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}}
+
+#CB统一预提交
+ecaop.smcom.preSub.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.smcom.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.smcom.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+ecaop.core.method.smcom.processors=mixBringInto()

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IPTV_TO_NET_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <IPTV_TO_NET_REQ>
+            <PROVINCE length="F2" mappedName="province"/>
+            <CITY length="F3" mappedName="city"/>
+            <DISTRICT length="V10" mappedName="district"/>
+            <!-- 账号信息 -->
+            <IPTV_NBR length="V20" mappedName="iptvNumber"/>
+            <!-- 1：IPTV 2:互联网电视 -->
+            <OPERATE_TYPE length="V1" mappedName="operateType"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </IPTV_TO_NET_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</IPTV_TO_NET_INPUT>

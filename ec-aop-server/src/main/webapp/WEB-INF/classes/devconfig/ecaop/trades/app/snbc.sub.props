@@ -1,0 +1,5 @@
+#陕西BSS国政通测试
+ecaop.core.app.map.snbc.sub=snbc
+ecaop.core.app.snbc.def={"code":"snbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.snbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.snbc.allow={appkey:"snbc",allow:"crck", deny:null}

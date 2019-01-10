@@ -1,0 +1,62 @@
+#用于进行客户资料的创建，包括担保人资料创建
+ecaop.core.method.map.ecaop.serv.curt.custinfo.create=ccic
+ecaop.core.method.ccic.def={"mothod":"ccic"}
+ecaop.core.method.ccic.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.ccic.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.ecsb.ccic.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     custInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.ccic.custinfo)"},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#省份开关，格式如：76|34|98
+ecaop.ccic.params.config.province=76|
+#客户信息
+ecaop.ecsb.ccic.custinfo={\
+     customerName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     customerType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     isAssure:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     certExpireDate:{type:"String(8)",required:true,encrypted:false,validators:null},\
+     certAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certNum:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     postAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     phone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     contactPerson:{type:"String(60)",required:true,encrypted:false,validators:null},\
+     contactPhone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     checkType:{type:"String(2)",required:false,encrypted:false,validators:null}\
+}
+
+#流程控制
+ecaop.core.method.ccic.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.ccic.flowConfig)
+
+#配置跳转 办理业务系统：1：ESS(2/3G) 2：CBSS(4G) 该字段没传的时候默认CBSS
+ecaop.core.method.ccic.flowConfig=[\
+    {id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 *->03"},\
+    {id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->05 N25->04"},\
+    {id:"03", processor:"AopHandler(ecaop.cbss.ccic.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"04", processor:"AopHandler(ecaop.n25.ccic.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"05", processor:"AopHandler(ecaop.n6.ccic.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+
+ecaop.cbss.ccic.processors=@CustInfoCreateCheck()
+
+ecaop.n6.ccic.processors=@N6CustInfoCreateCheck()
+                         
+#请求参数
+ecaop.trades.ccic.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.custSer.crtCustInfoOSN",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.ccic.crtCustInfo.OSN.template@FBS@CRT_CUSTINFO_INPUT@n1529121386@CRT_CUSTINFO_REQ"}\
+]
+ecaop.trades.ccic.crtCustInfo.OSN.template=com/ailk/ecaop/biz/template/curt/crtCustInfoOSN

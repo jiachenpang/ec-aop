@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <OldChangeCardRsp mappedOut="true"> 
+     <RespCode length="F4" range="0000,0001,9999" mappedName="code" />
+     <RespDesc length="V200" mappedName="detail"/>
+      <ProvOrderId constraint="1" length="V30" mappedName="provOrderId"> 
+        <!--落地系统订单号--> 
+      </ProvOrderId>  
+    <PARA constraint="*" mappedName="para"> 
+      <!--保留-->  
+      <PARA_ID constraint="1" length="V20" mappedName="paraId"> 
+        <!--保留字段ID--> 
+      </PARA_ID>  
+      <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue"> 
+        <!--保留字段值--> 
+      </PARA_VALUE> 
+    </PARA> 
+  </OldChangeCardRsp> 

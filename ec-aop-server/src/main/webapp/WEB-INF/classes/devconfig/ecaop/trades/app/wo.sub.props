@@ -1,0 +1,6 @@
+#上海小沃
+ecaop.core.app.map.wo.sub=wosb
+ecaop.core.app.wosb.def={"code":"wosb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.wosb.timeslimit=max 100 per 1 second
+
+ecaop.core.app.wosb.allow={appkey:"wosb",allow:"qccq,snqy,cccc,crck,ccic,cuck,cmck,snqy,nboc,opap,opsb,cdqy,cdnt,cdsn,mcoa,cdaq,qcsp", deny:null}

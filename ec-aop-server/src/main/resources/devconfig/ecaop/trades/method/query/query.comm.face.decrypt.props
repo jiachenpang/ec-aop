@@ -1,0 +1,18 @@
+#活体检测 SDK解密
+ecaop.core.method.map.ecaop.trades.query.comm.face.decrypt=qcfd
+ecaop.core.method.qcfd.def={"mothod":"qcfd","remark":"活体检测解密"}
+ecaop.core.method.qcfd.params=[{"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.query.qcfd.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg 校验器 
+ecaop.query.qcfd.Msg={\
+    province:{ type:"String(2)", required:true,validators:"@FixedLen(2)" },\
+    city:{ type:"String(3)", required:true,validators:"@FixedLen(3)" },\
+    businessSystem:{ type:"String(2)", required:true,validators:"@FixedLen(2)" },\
+    dataPackage:{ type:"String(999999)", required:true,validators:null },\
+    imageOpt:{ type:"String(1)", required:true,validators:null },\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+#定义processors
+ecaop.core.method.qcfd.processors=@faceDecrypt()

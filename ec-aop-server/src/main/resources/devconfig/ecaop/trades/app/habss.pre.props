@@ -1,0 +1,4 @@
+#河南BSS
+ecaop.core.app.map.habss.pre=habpr
+ecaop.core.app.habpr.def={"code":"habpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.habpr.allow={appkey:"habpr",allow:"tsos", deny:null}

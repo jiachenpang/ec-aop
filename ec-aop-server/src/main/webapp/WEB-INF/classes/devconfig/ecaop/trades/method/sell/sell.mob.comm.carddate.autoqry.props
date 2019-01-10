@@ -1,0 +1,57 @@
+#写卡数据查询-支持自动调拨
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.carddate.autoqry=cdaq
+ecaop.core.method.cdaq.def={"mothod":"cdaq","remark":"写卡数据查询"}
+ecaop.core.method.cdaq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ota.cdaq.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.ota.cdaq.Msg={\
+     operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    iccid:{type:"String(22)",required:true,validators:null},\
+    cardUseType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    reDoTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    procId:{type:"String(30)",required:false,validators:null},\
+    opeSysType:{type:"String(1)",required:false,validators:"@FixedLen(1)"},\
+    activeId:{type:"String(30)",required:false,validators:null},\
+    oldIccid:{type:"String(22)",required:false,validators:null},\
+    numId:{type:"String(20)",required:true,validators:null},\
+    busiType:{type:"String(2)",required:true,validators:null},\
+    allocationFlag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    cardType:{type:"String(30)",required:false,validators:null},\
+    userType:{type:"String(2)",required:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.cdaq.processors=@getChangeCardOldCardIdProcessor\
+                                  @route\
+                                  @FlowProcessor(ecaop.core.method.cdaq.masb.flowConfig)
+
+ecaop.core.method.cdaq.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.ota.cdaq.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#空中写卡数据查询
+ecaop.ota.cdaq.processors=\
+                          @QueryCardDateProcrssor()
+
+ecaop.ota.cdaq.paramtersmapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00033",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"GetDataReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.ota.cdaq.template@3GE"}\
+]
+
+ecaop.ota.cdaq.template=com/ailk/ecaop/biz/template/simcard/OtaCardAutoQry

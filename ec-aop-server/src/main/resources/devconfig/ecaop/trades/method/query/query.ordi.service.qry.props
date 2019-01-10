@@ -1,0 +1,23 @@
+#已订业务查询及退订
+ecaop.core.method.map.ecaop.trades.query.ordi.service.qry=qoqy
+ecaop.core.method.qoqy.def={"mothod":"qoqy","remark":"已订业务查询及退订"}
+ecaop.core.method.qoqy.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qoqy.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg校验
+ecaop.ecsb.qoqy.MsgSchema={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true,validator:"@FixedLen(2)"},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+serviceClassCode:{type:"String(4)",required:true},\
+areaCode:{type:"String(6)",required:false},\
+serialNumber:{type:"String(40)",required:true}\
+}
+
+#定义processors
+ecaop.core.method.qoqy.processors=@FlowProcessor(ecaop.core.method.comm.appkey.flowConfig)

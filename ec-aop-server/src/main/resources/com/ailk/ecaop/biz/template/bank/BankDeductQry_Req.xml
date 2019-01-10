@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<QRY_SIGN_INFO_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <QRY_SIGN_INFO_REQ> 
+      <TRADE_TYPE_CODE constraint="1" length="F4" mappedName="tradeTypeCode"> 
+        <!--业务受理类型, 0127 银行卡代扣签约, 0128 银行卡代扣解约, 0129 银行卡代扣查询--> 
+      </TRADE_TYPE_CODE>  
+      <QRY_TYPE constraint="?" length="F2" mappedName="qryType"> 
+        <!--01: 服务号码+账户编号;, 02:证件类型+证件号码;, 03:服务号码;, 04：签约协议号--> 
+      </QRY_TYPE>  
+      <CERT_TYPE_CODE constraint="?" length="V2"> 
+        <!--证件类别编码，见附录--> 
+      </CERT_TYPE_CODE>  
+      <CERT_CODE constraint="?" length="V50"> 
+        <!--证件号码--> 
+      </CERT_CODE>  
+      <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode"> 
+        <!--电信业务网别，编码见附录--> 
+      </SERVICE_CLASS_CODE>  
+      <AREA_CODE constraint="?" length="V6" mappedName="areaCode"> 
+        <!--区号--> 
+      </AREA_CODE>  
+      <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"> 
+        <!--服务号码--> 
+      </SERIAL_NUMBER>  
+      <ACCOUNT_INFO constraint="?"> 
+        <!--账户信息-->  
+        <ACCOUNT_ID constraint="?" length="V30"> 
+          <!--账户编号--> 
+        </ACCOUNT_ID>  
+        <CONTRACT_NUMBER constraint="?" length="V40"> 
+          <!--签约协议号--> 
+        </CONTRACT_NUMBER>  
+        <BANK_NAME constraint="?" length="V30"> 
+          <!--银行名称--> 
+        </BANK_NAME>  
+        <BANK_CARD_TYPE constraint="?" length="F1"> 
+          <!--银行帐号类型, 信用卡:0, 借记卡:1, 对公账号：2--> 
+        </BANK_CARD_TYPE>  
+        <ACCOUNT_LAST_FOUR constraint="?" length="F4"> 
+          <!--银行卡账号后4位--> 
+        </ACCOUNT_LAST_FOUR> 
+      </ACCOUNT_INFO>  
+      <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/> 
+    </QRY_SIGN_INFO_REQ> 
+  </UNI_BSS_BODY> 
+  <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_SIGN_INFO_INPUT>

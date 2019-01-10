@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 集团客户管理系统;用于集团客户资料的创建 -->
+<UNI_BSS_BODY>
+    <CRTGRPACCOUNTINFO_RSP mappedOut="true">
+        <!--0000 集团账户新增成功。 0002 该省份工号没有对应的集客系统工号，请联系集客系统增加相应的工号。 0003 该工号没有创建集团账户资料的权限，请联系集客系统为该工号配置相应权限。 
+            0004 集团账户资料同步cBSS失败。详见错误信息。 0005 集团账户资料同步省分BSS失败。详见错误信息。 0006 集团账户资料同步省分BSS、cBSS均失败。详见错误信息。 
+            8888 其他，详见错误信息。 -->
+        <RSP_CODE constraint="1" length="F4"
+            range="0000,0001,0002,0003,0004,0005,0006,8888,9999" mappedName="code" />
+        <!--应答描述 -->
+        <RSP_DESC constraint="1" length="V512" mappedName="detail" />
+        <!--应答细节 -->
+        <RSP_DETAIL constraint="?" length="V512" mappedName="moreDetail" />
+        <!-- 客户业务反馈 -->
+        <CRTGRPACCOUNTINFO_RSP_BODY
+            mappedOut="true">
+            <TF_F_ACCOUNT constraint="?" mappedName="respInfo">
+                <!-- 帐户标识 集客帐户资料唯一标识 -->
+                <ACCT_ID constraint="?" length="V16" mappedName="accId" />
+                <!-- BSS帐户标识 BSS帐户资料唯一标识 -->
+                <PROVINCE_ACCT_ID constraint="?"
+                    length="V40" mappedName="provinceAccId" />
+                <!-- cBSS帐户标识 cBSS帐户资料唯一标识 -->
+                <CBSS_ACCT_ID constraint="?" length="V16"
+                    mappedName="cbssAcctId" />
+            </TF_F_ACCOUNT>
+        </CRTGRPACCOUNTINFO_RSP_BODY>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </CRTGRPACCOUNTINFO_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,6 @@
+#新疆电子沃店&新疆BSS
+ecaop.core.app.map.xjwyd.sub=xjwyd
+ecaop.core.app.xjwyd.def={"code":"xjwyd", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.xjwyd.timeslimit=max 100 per 1 minute
+ecaop.core.app.xjwyd.allow={appkey:"xjwyd",allow:"scis,qoco", deny:null}
+ecaop.core.app.xjwyd.bizAllow={allow:"DS-007,QS-017",deny:null}

@@ -1,0 +1,8 @@
+[selAreaCode]
+SELECT
+    TD.AREA_CODE
+FROM
+    TD_M_AREA_CHG TD
+WHERE
+    TD.EPARCHY_CODE =#city#
+AND TD.PROVINCE_CODE =#province#

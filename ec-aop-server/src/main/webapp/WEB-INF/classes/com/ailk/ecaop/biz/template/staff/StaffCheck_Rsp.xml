@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StaffCheckRsp mappedOut="true">
+    <RespCode length="F4" range="0000,0001,0002,9999" mappedName="code" />
+    <!-- 操作员ID -->
+    <OperatorID length="V20" mappedName="operatorId" />
+    <!-- 省份 -->
+    <Province length="F2" constraint="?" mappedName="province" />
+    <!-- 地市 -->
+    <City length="F3" constraint="?" mappedName="city" />
+    <!-- 区县 -->
+    <District length="V10" constraint="?" mappedName="district" />
+    <!-- 渠道编码 -->
+    <ChannelID length="V20" constraint="?" mappedName="channelId" />
+    <!-- 渠道名称 -->
+    <ChannelName length="V128" constraint="?" mappedName="channelName" />
+    <!-- 渠道类型 -->
+    <ChannelType length="F7" constraint="?" mappedName="channelType" />
+    <!-- 部门名称 -->
+    <DepartId length="V20" constraint="?" mappedName="departId" />
+    <!-- 部门编码 -->
+    <DepartName length="V128" constraint="?" mappedName="departName" />
+
+    <!-- 客户名称 -->
+    <StaffInfo constraint="?" mappedName="staffInfo">
+        <!-- 员工姓名 -->
+        <StaffName length="V60" mappedName="staffName" />
+        <!-- 联系号码 -->
+        <StaffNumber length="V20" mappedName="staffNumber" />
+        <!-- 员工性别 -->
+        <StaffSex length="F1" mappedName="staffSex" />
+        <!-- 证件类型 -->
+        <StaffPsptType length="F2" mappedName="staffPsptType" />
+        <!-- 证件号码 -->
+        <StaffPsptId length="V20" mappedName="staffPsptId" />
+    </StaffInfo>
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</StaffCheckRsp>

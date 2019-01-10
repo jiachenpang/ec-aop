@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECK_USER_TRANSFER_FIXED_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECK_USER_TRANSFER_FIXED_REQ>
+             <TRADE_TYPE_CODE length="F4" mappedName="tradeTypeCode"/>
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serClassCode"/>
+            <AREA_CODE length="V6" constraint="?" mappedName="areaCode"/>
+            <SERIAL_NUMBER length="V40"  mappedName="numId"/>
+            <USER_PASSWD length="V30" constraint="?" mappedName="userPasswd" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CHECK_USER_TRANSFER_FIXED_REQ>
+    </UNI_BSS_BODY>
+     <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECK_USER_TRANSFER_FIXED_INPUT>

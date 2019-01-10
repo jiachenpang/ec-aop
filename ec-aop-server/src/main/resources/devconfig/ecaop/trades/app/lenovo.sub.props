@@ -1,0 +1,5 @@
+#联想白卡开户测试
+ecaop.core.app.map.lenovo.sub=lenovo
+ecaop.core.app.lenovo.def={"code":"lenovo", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.lenovo.timeslimit=max 100 per 1 minute
+ecaop.core.app.lenovo.allow={appkey:"lenovo",allow:"snqy,qcsc,cuck,qrtc,opap,opsb,cdqy,cdnt,cdsn,qctc,sccc,chph", deny:null}

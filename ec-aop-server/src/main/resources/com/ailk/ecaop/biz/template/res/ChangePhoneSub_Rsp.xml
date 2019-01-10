@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 换机提交返回报文 -->
+<ChangePhoneSubRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />   
+    <ProvOrderId length="V30" mappedName="provOrderId" constraint="?"/>
+    <BssOrderId length="V30" mappedName="bssOrderId" constraint="?"/>
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</ChangePhoneSubRsp>

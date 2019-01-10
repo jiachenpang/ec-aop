@@ -1,0 +1,79 @@
+#按活动缴费
+ecaop.core.method.map.ecaop.trades.serv.curt.actfee.rev=hdjf
+ecaop.core.method.hdjf.def={"mothod":"hdjf","remark":"按活动交费"}
+ecaop.core.method.hdjf.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.mall.sub.scar.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.mall.sub.scar.param.payInfo={\
+payFeeMode:{type:"Number(2)",required:true},\
+payOrg:{type:"String(200)",required:false},\
+payNum:{type:"String(30)",required:false}\
+}
+ecaop.mall.sub.scar.param.msg={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+outerTradeId:{type:"String(30)",required:true},\
+outerTradeTime:{type:"String(17)",required:true},\
+payType:{type:"Number(1)",required:true},\
+acctId:{type:"String(16)",required:false},\
+userId:{type:"String(16)",required:false},\
+serviceClassCode:{type:"String(4)",required:true},\
+areaCode:{type:"String(6)",required:false},\
+serialNumber:{type:"String(40)",required:false},\
+recvFee:{type:"String(11)",required:true},\
+printTag:{type:"Number(1)",required:true},\
+isTax:{type:"Number(1)",required:true},\
+noteSourceInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.mall.sub.scar.param.noteSourceInfo)"},\
+actionCode:{type:"String(20)",required:true},\
+payInfo:{type:"JSON",required:true, validator:"@JSONSchema(ecaop.mall.sub.scar.param.payInfo)"},\
+para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.mall.sub.scar.param.noteSourceInfo={\
+noteBatchNo:{type:"String(30)",required:true},\
+noteNo:{type:"String(20)",required:true}\
+}
+#定义流程跳转
+ecaop.core.method.hdjf.processors=@route\
+                           @FlowProcessor(ecaop.core.method.hdjf.flowConfig)
+
+#配置跳转
+ecaop.core.method.hdjf.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.cbss.sub.hdjf.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.cbss.sub.hdjf.processors=\
+                                @ParametersMapper(ecaop.trades.hdjf.submitfee.paramtersmapping)\
+                                @WsCall(ecaop.comm.conf.url.osn.services.PayCleSer)\
+                                @Xml2JsonMapper4Fbs(ecaop.trades.hdjf.submitfee.template)
+
+
+ecaop.trades.hdjf.submitfee.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"PayCleSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"actionRecvFee",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ACTION_RECV_FEE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.hdjf.submitfee.template@FBS@ACTION_RECV_FEE_INPUT@ns232"}\
+]
+
+ecaop.trades.hdjf.submitfee.template=com/ailk/ecaop/biz/template/activity/ActionRecvFee
+

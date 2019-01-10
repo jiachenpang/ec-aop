@@ -1,0 +1,32 @@
+#获取宽带账号编码
+ecaop.core.method.map.ecaop.trades.query.brd.num.qry=qbnq
+ecaop.core.method.qbnq.def={"mothod":"qbnq","remark":"获取宽带账号编码"}
+ecaop.core.method.qbnq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.qbnq.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.qbnq.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null },\
+    qryType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)" },\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+    
+#定义processors
+ecaop.core.method.qbnq.processors=@ParametersMapper(ecaop.ecsb.qbnq.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.cbss.services.Number4GSer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.qbnq.template)
+#报文头参数
+ecaop.ecsb.qbnq.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.Number4GSer.getBroadbandAcctInfo4G",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.qbnq.template@FBS@GET_BROADBAND_ACCT_INFO4G_INPUT@n1529455@GET_BROADBAND_ACCT_INFO4G_REQ"}\
+]
+
+ecaop.trades.qbnq.template=com/ailk/ecaop/biz/template/curt/GetBroadBandAcctInfo4G

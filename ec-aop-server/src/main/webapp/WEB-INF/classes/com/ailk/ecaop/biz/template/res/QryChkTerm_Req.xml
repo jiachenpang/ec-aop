@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <CheckResReq>
+            <!-- 员工信息 -->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省分 -->
+            <Province length="F2" mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3" mappedName="city"/>
+            <!-- 區縣 -->
+            <District length="V10" mappedName="district"/>
+            <!-- 渠道編碼 -->
+            <ChannelID length="V20" mappedName="channelId"/>
+            <!-- 渠道類型 -->
+            <ChannelType length="F7" mappedName="channelType"/>
+            <!-- 接入類型 -->
+            <AccessType length="F2" range="01,02,03,99" mappedName="accessType"/>
+            <!-- 总部订单号 -->
+            <SubscribeID constraint="?" length="V30" mappedName="subscribeId"/>
+            <!-- 资源信息 -->
+            <ResourcesInfo constraint="+" mappedName="resourcesInfo">
+                <!-- 资源类型 -->
+                <ResourcesType length="F2" range="01~09,10,13,14" constraint="?" mappedName="resourcesType"/>
+                <!-- 请求标准包类型 -->
+                <PackageType constraint="?" length="F2" range="10,11,12,13,14,15,16,17,19,20,21,31" mappedName="packageType"/>
+                <!-- 资源唯一标识 -->
+                <ResourcesCode length="V30" mappedName="resourcesCode"/>
+                <!-- 操作类型0：查询1：校验 -->
+                <OperType length="F1" range="0,1" mappedName="operType"/>
+                <!-- 使用类型 0：促销销售 1：积分兑换 2：积分抽奖 -->
+                <UseType length="F1" range="0,1,2" mappedName="useType"/>
+                <!-- 预占标识0 不预占1 预占 -->
+                <OccupiedFlag length="F1" mappedName="occupiedFlag"/>
+                <!-- 測試標記 0：測試 1：正式 -->
+                <IsTest length="F1" mappedName="isTest" defaultValue="1"/>
+                <!-- 业务类型00: 顺价销售01：合约销售02：退机03：维修点换机04：phone换机05：开机损 -->
+                <TradeType length="F2" range="00~06" constraint="?" mappedName="tradeType" defaultValue="01"/>
+                <!-- 旧资源唯一标识，换机时必填，包括业务类型为（03，04，05） -->
+                <OldResourcesCode length="V30" constraint="?" mappedName="oldResourcesCode"/>
+                <!-- 社会渠道编码，业务类型为06时必传 -->
+                <SaleChannelID length="V20" constraint="?" mappedName="saleChannelID"/>
+                <!-- 无线上网卡号码 -->
+                <ResourcesNumber length="V20" constraint="?" mappedName="resourcesNumber"/>
+            </ResourcesInfo>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" /> <!-- 保留字段 -->
+        </CheckResReq>
+    </SvcCont>
+</UniBSS>

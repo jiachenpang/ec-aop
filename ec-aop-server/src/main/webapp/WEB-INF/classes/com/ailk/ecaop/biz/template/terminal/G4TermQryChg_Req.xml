@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS> <!-- 无串码终端状态变更   请求报文模板 -->
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <TerminalQryChgReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省分 -->
+            <Province required="true" length="F2" mappedName="province"/>
+            <!-- 地市 -->
+            <City required="true" length="F3" mappedName="city"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType required="true" length="F7" mappedName="channelType"/>
+            <!-- 接入类型  01 WEB； 02 短信； 03 WAP； 99 其他 -->
+            <AccessType required="true" length="F2" range="01~03,99" defaultValue="01"/>
+            <!-- 总部订单 -->
+            <SubscribeID length="V30" constraint="?" mappedName="tradeId"/>
+            <!-- 原订单 -->
+            <OldSubscribeID length="V30" constraint="?" mappedName="subLogId"/>
+            <!-- 机型编码-->
+            <MachineTypeCode length="V10" mappedName="machineTypeCode"/>
+            <!-- 资源数量（正整数），查询时可为空，其他必填 -->
+            <ResourcesNum length="V10" constraint="?"/>
+            <!-- 操作标识 0查询、1校验、2销售、3释放、4换机 -->
+            <OccupiedFlag length ="V1" mappedName="occupiedFlag"/>
+            <!-- 发展人姓名 -->
+            <RecommendName length ="V100" constraint="?"/>
+            <!-- 发展人手机号 -->
+            <RecommendNumber length ="V40" constraint="?"/>
+            <!-- 发展人编码 -->
+            <RecommendID length ="V20" constraint="?"/>
+            <!-- 保留字段 -->
+              <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </TerminalQryChgReq>
+    </SvcCont>
+</UniBSS>

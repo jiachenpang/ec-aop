@@ -1,0 +1,4 @@
+#山西bss
+ecaop.core.app.map.sxbss.pre=sxpre
+ecaop.core.app.sxpre.def={"code":"sxpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.sxpre.allow={appkey:"sxpre",allow:"qrtb,tsos", deny:null}

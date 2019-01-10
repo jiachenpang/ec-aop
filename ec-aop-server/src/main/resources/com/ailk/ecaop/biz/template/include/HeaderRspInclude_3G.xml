@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<include>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <Response constraint="?">
+        <RspType length="F1" /> <!-- 应答或错误类型，参见应答/错误类型表 -->
+        <RspCode length="F4" /> <!-- 应答或错误代码，参见应答/错误代码表 -->
+        <RspDesc length="V1024" /> <!-- 应答或错误描述 -->
+    </Response>
+</include>

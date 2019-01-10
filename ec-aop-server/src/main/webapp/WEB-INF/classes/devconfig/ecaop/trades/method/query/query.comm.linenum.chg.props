@@ -1,0 +1,48 @@
+#固网号码预占释放
+ecaop.core.method.map.ecaop.trades.query.comm.linenum.chg=lncg
+ecaop.core.method.lncg.def={"mothod":"lncg","remark":"固网号码预占释放"}
+ecaop.core.method.lncg.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.lncg.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器
+ecaop.trades.lncg.msg={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:false,encrypted:false,validators:"@FixedLen(7)"},\
+    areaCode:{type:"String(6)",required:true,encrypted:false,validators:null},\
+    multiNumber:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.lncg.multiNumber)"},\
+    provinceBrandCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    productId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    brandCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    userId:{type:"String(16)",required:false,encrypted:false,validators:null},\
+    tradeId:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.lncg.multiNumber={\
+operType:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+nbrInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.lncg.nbrInfo)"}\
+}
+ecaop.trades.lncg.nbrInfo={\
+serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+oldSerialNumber:{type:"String(40)",required:false,encrypted:false,validators:null}\
+}
+#定义流程跳转
+ecaop.core.method.lncg.processors=\
+                                 @ParametersMapper(ecaop.masb.lncg.chkLineNum4GParametersMapping)\
+                                 @WsCall(ecaop.comm.conf.url.osn.services.number4GSer)\
+                                 @Xml2JsonMapper4Fbs(ecaop.trade.lncg.chkLineNum4GTemplate)
+
+ecaop.masb.lncg.chkLineNum4GParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.Number4GSer.chkLineNum4G",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trade.lncg.chkLineNum4GTemplate@FBS@CHK_LINE_NUM4G_INPUT"}\
+]
+#指定模板路径
+ecaop.trade.lncg.chkLineNum4GTemplate=com/ailk/ecaop/biz/template/broadband/ChkLineNum4G
+ecaop.soap.bodyns.lncg=chk

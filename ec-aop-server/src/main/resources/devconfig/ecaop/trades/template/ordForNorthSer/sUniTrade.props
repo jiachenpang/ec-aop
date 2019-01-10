@@ -1,0 +1,2 @@
+#CBSS预提交接口
+ecaop.trade.template.ordForNorthSer.sUniTrade={"serviceName":"OrdForNorthSer","operateName":"sUniTrade","content":"SGL_UNI_TRADE_REQ"}

@@ -1,0 +1,24 @@
+#写卡数据查询
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.createcarddate.qry=ccqy
+ecaop.core.method.ccqy.def={"mothod":"ccqy","remark":"成卡数据查询"}
+ecaop.core.method.ccqy.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.numcenter.ccqy.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.numcenter.ccqy.Msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    cardUseType:{type:"String(1)",required:true,validators:null},\
+    activeId:{type:"String(30)",required:false,validators:null},\
+    iccid:{type:"String(22)",required:true,validators:null},\
+    numId:{type:"String(20)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.ccqy.processors=@qryCreateCardDateFromNumberCenter()

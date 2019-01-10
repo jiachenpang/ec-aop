@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <PSPT_INSERT_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+        </RESP_DESC> 
+        <CUST_NAME constraint="?" length="V100" mappedName="customerName" />
+        <PSPT_ID constraint="?" length="V100" mappedName="certNum" />
+        <!-- 认证方式 -->
+        <AUTH_TYPE constraint="?" length="V30" />
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID constraint="1" length="V20" mappedName="paraId" />
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue" />
+        </PARA>
+    </PSPT_INSERT_RSP>
+</UNI_BSS_BODY>

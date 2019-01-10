@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--老用户业务校验接口 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <OldUserCheckReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId" />
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province" />
+            <!-- 地市 -->
+            <City length="F3" mappedName="city" />
+            <!-- 区县 -->
+            <District length="V10" mappedName="district" />
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId" />
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType" />
+            <!-- 业务类型：1-号卡类业务2-合约类业务3-上网卡4-上网本5-其它配件类 -->
+            <BipType length="F1" range="1,2,3,4,5" mappedName="bipType" />
+            <!-- 服务号码 -->
+            <NumID length="V20" mappedName="numId" />
+            <!-- 开户时选择的产品信息 -->
+            <ProductInfo constraint="*" mappedName="productInfo">
+                <!-- 产品Id（客户选定） -->
+                <ProductID length="V20" mappedName="productId" />
+            </ProductInfo>
+            <!-- 新活动信息 -->
+            <ActivityInfo constraint="*" mappedName="activityInfo">
+                <!-- 活动方案ID（客户选定） -->
+                <ActPlanID length="V20" mappedName="actPlanId" />
+                <!-- 活动协议期限，单位：月 -->
+                <ActProtPer length="V3" constraint="?" mappedName="actProtPer" />
+                <!-- 终端型号（购机必传） -->
+                <ResourcesModel length="V10" constraint="?" mappedName="resourcesModel" />
+                <!-- 终端品牌（购机必传） -->
+                <ResourcesBrand length="V10" constraint="?" mappedName="resourcesBrand" />
+                <!-- 续约标记：0：不续约1：续约 -->
+                <ExtensionTag length="F1" constraint="?" range="0,1" mappedName="extensionTag" />
+                <!-- 活动扩展字段 -->
+                <ActPara constraint="*" mappedName="actPara">
+                    <!-- 活动扩展字段ID -->
+                    <ActParaID length="V20" mappedName="actParaId" />
+                    <!-- 活动扩展字段值 -->
+                    <ActParaValue length="V60" mappedName="actParaValue" />
+                </ActPara>
+            </ActivityInfo>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </OldUserCheckReq>
+    </SvcCont>
+</UniBSS>

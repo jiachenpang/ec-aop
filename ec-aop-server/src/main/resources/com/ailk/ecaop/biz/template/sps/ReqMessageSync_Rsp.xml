@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY mappedOut="true">
+  <MESSAGE_SYNC_RSP>
+    <RESP_DESC constraint="1" length="V200" mappedName="detail">
+      <!-- 应答描述 -->
+    </RESP_DESC>
+    <PRO_ORDER_ID constraint="1" length="V20" mappedName="proOrderId">
+      <!-- 预受理单号 -->
+    </PRO_ORDER_ID>
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!-- 返回编码，固定长度4位0000:成功0001:网络超时8888:其他错误 -->
+    </RESP_CODE>
+    <PARA constraint="*" mappedName="para">
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!-- 保留字段ID -->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!-- 保留字段值 -->
+      </PARA_VALUE>
+    </PARA>
+  </MESSAGE_SYNC_RSP>
+</UNI_BSS_BODY>
+

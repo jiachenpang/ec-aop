@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <ChangePhoneSubReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <OrdersId length="V20" mappedName="ordersId" />
+            <OpeSysType length="F1" constraint="?" mappedName="opeSysType" defaultValue="1" range="1,2"/> 
+            <NewResourcesCode length="V30" mappedName="newResourcesCode" />
+            <OldResourcesCode length="V30" mappedName="oldResourcesCode" />
+            <ChangeType length="F1" mappedName="changeType" defaultValue="0"/>
+            <CheckId length="V30" constraint="?" mappedName="checkId"/>
+            <BrokenRe length="v256" constraint="?" mappedName="brokenRe"/>
+            <!-- 是否为资源中心 by wangmc 20180622 -->
+            <ResCenterSwitch constraint="?" length="V1" mappedName="resCenterSwitch"/>
+            <!-- 原号码 -->
+            <NumberId constraint="?" length="V12" mappedName="numberId"/>
+            <!-- 原销售订单 -->
+            <OldResSaleOrderId constraint="?" length="V30" mappedName="oldResSaleOrderId"/>
+           <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </ChangePhoneSubReq>
+    </SvcCont>
+</UniBSS>

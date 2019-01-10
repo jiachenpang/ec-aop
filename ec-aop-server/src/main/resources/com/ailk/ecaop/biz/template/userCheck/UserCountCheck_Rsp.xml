@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserCountCheckRsp mappedOut="true">
+     <!--0000: 成功  0100:该使用人在全网数量已经大于或等于5 0200：责任人/使用人证件格式不合法  0201:责任人/使用人证件类型不合法  0202：责任人/使用人证件号码不合法  0203:责任人/使用人证件需要升位  9999: 其它错误 -->
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+        <Para constraint="*" mappedName="para">
+            <ParaID mappedName="paraId" />
+            <ParaValue mappedName="paraValue" />
+        </Para>
+</UserCountCheckRsp>

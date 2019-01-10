@@ -1,0 +1,2 @@
+#全业务用户数量查询查询,用于一证五户校验
+ecaop.trade.template.ProductSubSer.QryUserNumber={"serviceName":"ProductSubSer","operateName":"QryUserNumber","content":"QRY_USER_NUMBER_REQ"}

@@ -1,0 +1,4 @@
+#海南智能短厅
+ecaop.core.app.map.ecss.sub=ecss
+ecaop.core.app.ecss.def={"code":"ecss", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.ecss.allow={appkey:"ecss",allow:"msoa", deny:null}

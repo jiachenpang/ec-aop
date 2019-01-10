@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <SEND_CARD_PAY_NOTIFY_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <ORDER_ID length="V30" constraint="?" mappedName="orderId" />
+            <PROVINCE_ORDER_ID length="V30" constraint="?" mappedName="provinceOrderId" />
+        </RESP_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID mappedName="paraId" />
+            <PARA_VALUE mappedName="paraValue" />
+        </PARA>
+    </SEND_CARD_PAY_NOTIFY_RSP>
+</UNI_BSS_BODY>

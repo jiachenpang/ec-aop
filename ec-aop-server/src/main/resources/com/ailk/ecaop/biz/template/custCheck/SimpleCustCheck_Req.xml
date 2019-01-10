@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<QRY_SIMPLE_CUST_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <!--请求报文体 -->
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_SIMPLE_CUST_INFO_REQ>
+            <TRADE_TYPE_CODE mappedName="tradeTypeCode" length="F4" constraint="?" />
+            <OPERATE_TYPE mappedName="operateType" length="V2" />
+            <CUST_TYPE length="F1" mappedName="custType" constraint="?" />
+            <CUST_NAME length="V100" mappedName="custName" constraint="?" />
+            <TRADE_ID constraint="?" length="V30" mappedName="tradeId" />
+            <GROUP_ID constraint="?" length="V40" mappedName="groupId" />
+            <CUST_CHECK_TYPE length="F1" mappedName="custCheckType" />
+            <CERT_TYPE_CODE constraint="?" length="V2" mappedName="certTypeCode" />
+            <CERT_CODE constraint="?" length="V50" mappedName="certCode" />
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode" />
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode" />
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber" />
+            <USER_PASSWD constraint="?" length="V30" mappedName="userPasswd" />
+            <VIP_CARD_TYPE constraint="?" length="F1" mappedName="vipCardType" />
+            <VIP_CARD_NO constraint="?" length="V20" mappedName="vipCardNo" />
+            <SIM_CARD_NO constraint="?" length="V30" mappedName="simCardNo" />
+            <CONTRACT_NO constraint="?" length="V40" mappedName="contractNo" />
+            <BANK_ACCT_NO constraint="?" length="V30" mappedName="bankAcctNo" />
+            <CUST_ID constraint="?" length="V16" mappedName="custId" />
+            <EPARCHY_CODE constraint="?" length="V16" mappedName="eparchyCode" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+        </QRY_SIMPLE_CUST_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_SIMPLE_CUST_INFO_INPUT>

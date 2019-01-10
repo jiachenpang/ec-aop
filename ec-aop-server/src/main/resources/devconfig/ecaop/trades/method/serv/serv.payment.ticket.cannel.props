@@ -1,0 +1,37 @@
+#电子券支付
+ecaop.core.method.map.ecaop.trades.serv.payment.ticket.cannel=sptc
+ecaop.core.method.sptc.def={"mothod":"sptc","remark":"电子券返销"}
+ecaop.core.method.sptc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.sptc.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.trades.sptc.msg.schema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    orderNo:{type:"String(20)",required:true},\
+    oldOrderNo:{type:"String(20)",required:true},\
+    ticketType:{type:"String(30)",required:false},\
+    merchantId:{type:"String(30)",required:true},\
+    orderBalance:{type:"String(20)",required:false},\
+    oldOrderTime:{type:"String(14)",required:false},\
+    businessCode:{type:"String(6)",required:true},\
+    orderTime:{type:"String(14)",required:true},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.sptc.processors=@ParametersMapper(ecaop.trades.sptc.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.osn.services.TicketBuySer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.sptc.template)
+                              
+ecaop.trades.sptc.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ticketBuySer.transSaleReturn,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sptc.template@OSN@TRANS_SALE_RETURN_INPUT@n-1469109132@TRANS_SALE_RETURN_REQ"}\
+]
+
+ecaop.trades.sptc.template=com/alik/ecaop/biz/template/ticketBuySer

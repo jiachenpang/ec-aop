@@ -1,0 +1,78 @@
+#北四宽带退费
+#定义method
+ecaop.core.method.map.ecaop.trades.sell.brdcomm.cannelfee.sub=cfsb
+ecaop.core.method.cfsb.def={"mothod":"cfsb","remark":"宽带退费"}
+ecaop.core.method.cfsb.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":"@JSONSchema(ecaop.masb.cfsb.Crcksmsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#定义processor
+ecaop.core.method.cfsb.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.cfsb.flowConfig)
+#配置跳转
+ecaop.core.method.cfsb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.cbss.sub.cfsb.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->04 N6->05"},\
+{id:"04", processor:"AopHandler(ecaop.mall.sub.cfsb.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.mall.sub.cfsb.processors=\
+                           @FeeParamsProcessor\
+                           @ParametersMapper(ecaop.masb.cfsb.ParametersMapping)\
+                           @WsCall(ecaop.comm.conf.url.osn.services.ordser)\
+                           @Xml2JsonMapper4Fbs(ecaop.masb.cfsb.template)
+ecaop.cbss.sub.cfsb.processors=\
+                           @FeeParamsProcessor\
+                           @ParametersMapper(ecaop.trades.sccc.cancel.paramtersmapping)\
+                           @WsCall(ecaop.comm.conf.url.cbss.services.orderSub)\
+                           @Xml2JsonMapper4Fbs(ecaop.trades.sccc.cancel.template)
+#请求报文验证格式
+ecaop.masb.cfsb.Crcksmsg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    orderNo:{type:"String(20)",required:true,validators:null},\
+    provOrderId:{type:"String(30)",required:true},\
+    feeInfo:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.masb.cfsb.feeInfo.Crcksmsg)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    para:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.masb.cfsb.feeInfo.Crcksmsg={\
+    feeId:{type:"String(20)",required:true},\
+    feeCategory:{type:"String(1)",required:true},\
+    calculateTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    feeDes:{type:"String(120)",required:true},\
+    origFee:{type:"String(10)",required:true},\
+    reliefFee:{type:"String(10)",required:true},\
+    reliefResult:{type:"String(60)",required:false},\
+}
+
+#请求参数
+ecaop.masb.cfsb.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.operationType,03"},\
+{paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.cancleTotalFee,msg.origTotalFee"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.origTotalFee,0"},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.cfsb.template@FBS@ORDERSUB_INPUT"}]
+#报文模版路径
+ecaop.masb.cfsb.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+ecaop.soap.bodyns.cfsb=ord

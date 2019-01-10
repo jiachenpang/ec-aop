@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <GetDataReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <CardUseType length="F1" range="0,1" mappedName="cardUseType" />
+            <ReDoTag length="F1" mappedName="reDoTag" />
+            <ProcId constraint="?" length="V30" mappedName="procId" />
+            <ActiveId constraint="?" length="V30" mappedName="activeId" />
+            <ICCID length="V22" mappedName="iccid" />
+            <OldICCID constraint="?" length="V22" mappedName="oldIccid" />
+            <NumID length="V20" mappedName="numId" />
+            <BusiType length="F2" mappedName="busiType" />
+            <AllocationFlag length="F1" mappedName="allocationFlag"/>
+            <CardType length="V30" mappedName="cardType" />
+            <UserType length="F2" mappedName="userType" />
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </GetDataReq>
+    </SvcCont>
+</UniBSS>

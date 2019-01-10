@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_BANK_CARD_REAL_PAY_RESULT_RSP mappedOut="true">
+        <RespCode length="F4" mappedName="code" />
+        <RespDesc length="V500" mappedName="detail" />
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <ORDER_ID length="V30" mappedName="orderId" />
+            <PROVINCE_ORDER_ID length="V30" mappedName="provinceOrderId" />
+            <TRADE_TIME length="V8" constraint="?" mappedName="tradeTime" />
+            <TRADE_DATETIME length="V14" constraint="?" mappedName="tradeTime" />
+            <TRADE_TYPE length="F1" range="0,1" mappedName="tradeType" />
+            <PAY_RESULT length="F4"
+                range="0000,1511,1512,1513,1514,1515,1516,1517,1518,1519,1520,1521,1522,1523,1531,1532,1533,8888"
+                mappedName="payResult" />
+            <RESULT_INFO length="V500" constraint="?" mappedName="resultInfo" />
+            <TRADE_INFO constraint="?" mappedName="tradeInfo">
+                <ORG_PROVINCE_ORDER_ID length="V30" constraint="?" mappedName="orgProvinceOrderId" />
+                <SYSTEM_CODE length="F4" constraint="?" mappedName="systemCode" />
+                <ACCESS_TYPE length="F2" constraint="?" range="01,02,03,04,05,06,07,08,09,99" mappedName="accessType" />
+                <PAY_MODE length="F2" constraint="?" mappedName="payMode" />
+                <ORG_ORDER_ID length="V30" constraint="?" mappedName="orgOrderId" />
+                <ORG_TRADE_TIME length="V8" constraint="?" mappedName="orgTradeTime" />
+                <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+                <AREA_CODE length="V6" constraint="?" mappedName="areaCode" />
+                <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+                <EPARCHY_CODE length="V6" mappedName="eparchyCode" />
+                <CITY_CODE length="V60" constraint="?" mappedName="cityCode" />
+                <PROV_MERCHANT_ID length="V20" mappedName="provMerchantId" />
+                <ACCOUNT_ID length="V30" constraint="?" mappedName="accountId" />
+                <CONTRACT_NUMBER length="V40" constraint="?" mappedName="contractNumber" />
+                <PAY_FEE length="V11" mappedName="payFee" />
+                <TRACK_INFO_CODE length="V60" constraint="?" mappedName="trackInfoCode" />
+                <Para constraint="*" mappedName="para">
+                    <ParaID length="V20" mappedName="paraId" />
+                    <ParaValue length="V60" mappedName="paraValue" />
+                </Para>
+            </TRADE_INFO>
+        </RESP_INFO>
+    </QRY_BANK_CARD_REAL_PAY_RESULT_RSP>
+</UNI_BSS_BODY>

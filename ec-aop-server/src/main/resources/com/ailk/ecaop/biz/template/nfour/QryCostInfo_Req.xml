@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <CurrentMonthFeeReq>
+            <AccProvince length="F2" constraint="?" mappedName="accProvince"/>
+            <AccCity length="F3" constraint="?" mappedName="accCity"/>
+            <Code length="V4" constraint="?" mappedName="code"/>
+            <NetType length="F2"  mappedName="netType"/>
+            <UserNumber length="V30" mappedName="userNumber"/>
+          
+            <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </CurrentMonthFeeReq>
+    </SvcCont>
+</UniBSS>

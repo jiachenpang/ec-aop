@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OldUserFeeRsp mappedOut="true"><!--老用户存费送费-费用计算接口及申请： 请求报文模板 -->
+    <RespCode length="F4" range="0000,0100,0002,0003,0200,0300,0400,1000,1001,1002,1003,2000,2001,2002,2003,2004,2100,3001,3002,3003,3004,4001,5001,6001,7000,7001,7200,7300,7400,7500,7600,7700,9999" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />
+    <!-- ESS订单交易流水 -->
+    <ProvOrderId length="V30" mappedName="provOrderId"></ProvOrderId>
+    <!-- BSS订单ID -->
+    <BssOrderId length="V30" mappedName="bssOrderId"></BssOrderId>
+    <!-- 收费信息*（ESS从BSS获取到的） -->
+    <FeeInfo constraint="*" mappedName="feeInfo">
+        <!-- 收费项编码，以省分现有编码为准 -->
+        <FeeID length="V20" mappedName="feeId"></FeeID>
+        <!-- 收费项科目 -->
+        <FeeCategory length="V1" mappedName="feeCategory"></FeeCategory>
+        <!-- 收费项描述 -->
+        <FeeDes length="V120" mappedName="feeDes"></FeeDes>
+        <!-- 最大减免金额正整数单位：分 -->
+        <MaxRelief length="V10" constraint="?" mappedName="maxRelief"></MaxRelief>
+        <!-- 应收费用正整数单位：分 -->
+        <OrigFee length="V10" mappedName="origFee"></OrigFee>
+    </FeeInfo>
+    <!-- 总费用正整数单位：分 -->
+    <TotalFee length="V10" mappedName="totalFee"></TotalFee>
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</OldUserFeeRsp>

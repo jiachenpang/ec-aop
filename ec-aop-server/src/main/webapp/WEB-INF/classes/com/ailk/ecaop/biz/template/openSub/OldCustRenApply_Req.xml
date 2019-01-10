@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <OldApplyReq >
+           <!-- 操作员ID-->
+            <OperatorID length="V20" constraint="?" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province"/>
+            <!-- 地市 -->
+            <City constraint="?" length="F3" mappedName="city"/>
+            <!-- 区县 -->
+            <District constraint="?" length="V10" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType"/>
+            <!-- 电子商城订单ID -->
+            <OrdersId length="V20" mappedName="ordersId"/>
+            <!-- BIPCODE -->
+            <BIPCode length="F8" defaultValue="BIP2F039"/>
+            <!-- 手机号码 -->
+            <SerialNumber length="V20" mappedName="serialNumber" />
+            <!-- 系统编码 -->
+            <SysCode length="F4" mappedName="sysCode" defaultValue="EAOP"/>
+            <!-- 产品信息 -->
+            <ProductInfo constraint="*" mappedName="productInfo">
+                <!-- 产品ID -->
+                <ProductId length="V20" mappedName="productId" />
+                <!-- 0：可选产品；1：主产品 -->
+                <ProductMode length="F1" range="0,1"  mappedName="productMode"/>
+                <!-- 产品操作标示（待用）。00：订购；01：退订；02：变更 -->
+                <OptType length="F2" constraint="?" range="00,01,02,03" mappedName="optType" />
+            </ProductInfo>
+            <!-- 活动信息 -->
+            <ActivityInfo constraint="*" mappedName="activityInfo">
+                <!-- 活动方案ID -->
+                <ActPlanId length="V20"  mappedName="actPlanId" />
+                <!-- 资源类型 -->
+                <ResourcesType length="F2" constraint="?" mappedName="resourcesType" />
+                <!-- 预占流水，保持前后多次资源操作的内容一致，保证多次操作是同一订单的前后关联 -->
+                <ResProcId length="V20" constraint="?" mappedName="resProcId" />
+                <!-- 资源唯一标识 -->
+                <ResourcesCode length="V30" constraint="?" mappedName="resourcesCode" />
+                <!-- 资源费用 -->
+                <ResourcesFee length="V20" constraint="?" mappedName="resourcesFee" />
+                <!-- 活动扩展字段 -->
+                <ActPara constraint="*" mappedName="actPara">
+                    <!-- 活动扩展字段ID -->
+                    <ActParaId  length="V20" mappedName="actParaId" />
+                    <!-- 活动扩展字段值 -->
+                    <ActParaValue  length="V60"  mappedName="actParaValue"/>
+                </ActPara>
+            </ActivityInfo>
+            <!-- 发展人标识 -->
+            <RecomPersonId length="V30" constraint="?" mappedName="recomPersonId" />
+            <!-- 发展人名称 -->
+            <RecomPersonName length="V30" constraint="?" mappedName="recomPersonName" />
+            <!-- 集团标识 -->
+            <GroupFlag length="F1" constraint="?" range="0,1" mappedName="groupFlag" />
+            <!-- 集团ID -->
+            <GroupId length="V40" constraint="?" mappedName="groupId"/>
+            <!-- 应用类别，当加入具体集团时为必填       0：行业应用    1：非行业应用 -->
+            <AppType length="F1" constraint="?" range="0,1" mappedName="appType"/>
+            <!-- 应用子类别 -->
+            <SubAppType length="F2" constraint="?" mappedName="subAppType"/>
+            <!-- 担保方式 -->
+            <GuarantorType length="F2" constraint="?" mappedName="guarantorType"/>
+            <!-- 担保信息参数 -->
+            <GuaratorID length="V200" constraint="?" mappedName="guaratorID"/>
+            <!-- 被担保人证件类型 -->
+            <GuCertType length="F2" constraint="?" mappedName="guCertType"/>
+            <!-- 被担保人证件号码 -->
+            <GuCertNum length="V50" constraint="?" mappedName="guCertNum"/>
+            <ResourcesInfo constraint="*" mappedName="resourcesInfo">
+                <!-- 销售价格（单位：厘） -->
+                <SalePrice length="V10" constraint="?" mappedName="salePrice"/>
+                <!-- 成本价格（单位：厘） -->
+                <Cost length="V11" constraint="?" mappedName="cost"/>
+                <!-- 卡费（单位：厘） -->
+                <CardPrice length="V10" constraint="?" mappedName="cardPrice"/>
+                <!-- 预存话费金额（单位：厘） -->
+                <ReservaPrice length="V10" constraint="?" mappedName="reservaPrice"/>
+                <!-- 套包对应产品活动信息 -->
+                <ProductActivityInfo constraint="*" mappedName="productActivityInfo">
+                    <!-- 资源可选产品ID -->
+                    <ProductId length="V20" mappedName="productId"/>
+                    <!-- 已打包终端套餐对应活动编码。 -->
+                    <ResourcesActivityCode constraint="?" length="V20" mappedName="resourcesActivityCode"/>
+                    <!-- 活动协议期限，单位：月，正整数 -->
+                    <ResourcesActivityPer constraint="?" length="V2" mappedName="resourcesActivityPer"/>
+                </ProductActivityInfo>
+                <!-- 品牌 -->
+                <ResourcesBrandCode length="V20" constraint="?" mappedName="resourcesBrandCode"/>
+                <!-- 3GESS维护品牌，当iphone时品牌与上面的一致 --> 
+                <OrgDeviceBrandCode length="V20" constraint="?" mappedName="orgDeviceBrandCode"/> 
+                <!-- 终端品牌名称 -->
+                <ResourcesBrandName length="V50" constraint="?" mappedName="resourcesBrandName"/> 
+                <!-- 型号 -->
+                <ResourcesModelCode length="V20" constraint="?" mappedName="resourcesModelCode"/>
+                <!-- 终端型号名称 --> 
+                <ResourcesModelName length="V100" constraint="?" mappedName="resourcesModelName"/> 
+                <!-- 终端来源编码 -->
+                <ResourcesSrcCode length="V4" constraint="?" mappedName="resourcesSrcCode"/> 
+                <!-- 终端来源名称 -->
+                <ResourcesSrcName length="V50" constraint="?" mappedName="resourcesSrcName"/> 
+                <!-- 终端供货商名称 -->
+                <ResourcesSupplyCorp length="V100" constraint="?" mappedName="resourcesSupplyCorp"/> 
+                <!-- 终端服务商名称 -->
+                <ResourcesServiceCorp length="V100" constraint="?" mappedName="resourcesServiceCorp"/>
+                <!-- 终端颜色 -->
+                <ResourcesColor length="V20" constraint="?" mappedName="resourcesColor"/>
+                <!-- 终端机型编码 -->
+                <MachineTypeCode length="V20" constraint="?" mappedName="MachineTypeCode"/>
+                <!-- 终端机型名称 -->
+                <MachineTypeName length="V100" constraint="?" mappedName="machineTypeName"/>
+                <!-- 铺货标志   0非铺货终端    1铺货终端-->
+                <DistributionTag length="F1" constraint="?" range="0,1" mappedName="distributionTag"/>
+                <!-- 资源归属 -->
+                <ResRele length="F2" constraint="?" range="01,02,03,04" mappedName="resRele"/>
+                <!-- 终端类别编码： -->
+                <TerminalType length="F2" constraint="?" mappedName="terminalType"/>
+                <!-- 当终端类别为智能终端时，该字段必填，终端子类别编码：入门级：04普及型：03中高端：02 明星：01 -->
+                <TerminalTSubType length="F2" constraint="?" range="01,02,03,04" mappedName="terminalTSubType"/>
+                <!-- 终端绑定的服务号码，当终端为打包的预付费产品时必传，如上网卡套包等 -->
+                <ServiceNumber length="V40" constraint="?" mappedName="serviceNumber"/>
+            </ResourcesInfo>
+           <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </OldApplyReq>
+    </SvcCont>
+</UniBSS>

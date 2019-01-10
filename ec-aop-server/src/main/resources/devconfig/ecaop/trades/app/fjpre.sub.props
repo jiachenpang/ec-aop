@@ -1,0 +1,8 @@
+#福建预受理
+ecaop.core.app.map.fjpre.sub=fjpre
+ecaop.core.app.fjpre.def={"code":"fjpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.fjpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.fjpre.allow={appkey:"fjpre",allow:"cmck,snqy,nboc,qrtc,opap,opsb,cdsn,cdqy,cdnt,sccc,\
+ucca,cumd,chph,qctc,trao,oupc,2324,234o,sc4s,codc,cuck,oata,mold,ccic,syps,cack,smcc,\
+smnp,mpsb,ppoq,qmoq,qcacq,spfs,qcar,qcpq,qcpa,jffx,qcbl,qofq,smosa,smoss,mofc,ofcs,qrtac,sbaq,qrsq,qrsc,csaq,mcoa,sjxs,smct,\
+msoa,tsos,qcrq,spff,quacq,scacs,qcua,qcfc",deny:null}

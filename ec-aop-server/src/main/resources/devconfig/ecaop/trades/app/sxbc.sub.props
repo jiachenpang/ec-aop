@@ -1,0 +1,5 @@
+#山西BSS国政通测试
+ecaop.core.app.map.sxbc.sub=sxbc
+ecaop.core.app.sxbc.def={"code":"ahbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.sxbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.sxbc.allow={appkey:"sxbc",allow:"crck", deny:null}

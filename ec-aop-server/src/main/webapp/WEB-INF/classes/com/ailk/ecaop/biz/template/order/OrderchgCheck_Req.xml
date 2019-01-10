@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORDERCHG_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <ORDERCHG_REQ>
+            <!--待改撤的订单类型0：父订单1：子订单 -->
+            <OPER_TYPE constraint="1" length="F1" mappedName="operType" defaultValue="0" range="0,1">
+            </OPER_TYPE>
+            <!--原总部订单ID（可为父订单，也可为子订单）,当OPER_TYPE为时表示总部父订单，为1时表示总部子订单 -->
+            <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+            </ORDER_ID>
+            <!--待校验省分订单ID，即原省分订单ID(（可为父订单，也可为子订单）当OPER_TYPE为时表示省分父订单，为1时表示省分子订单 -->
+            <CHECK_ORDER_ID constraint="?" length="V30" mappedName="checkOrderId">
+            </CHECK_ORDER_ID>
+            <!--电信业务网别，参见附录 -->
+            <SERVICE_CLASS_CODE constraint="1" length="F4" defaultValue="0200" mappedName="serviceClassCode">
+            </SERVICE_CLASS_CODE>
+            <!--区号 -->
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+            </AREA_CODE>
+            <!--服务号码 -->
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+            </SERIAL_NUMBER>
+            <!--校验类型0改单1撤单 -->
+            <CHECK_TYPE constraint="?" length="F1" mappedName="checkType" range="0,1">
+            </CHECK_TYPE>
+            <!--操作员工ID -->
+            <OPER_ID constraint="?" length="V20" mappedName="operId">
+            </OPER_ID>
+            <!--时间段开始时间 -->
+            <START_DATE constraint="?" length="F14" mappedName="startDate">
+            </START_DATE>
+            <!--时间段结束时间 -->
+            <END_DATE constraint="?" length="F14" mappedName="endDate">
+            </END_DATE>
+        </ORDERCHG_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</ORDERCHG_INPUT>

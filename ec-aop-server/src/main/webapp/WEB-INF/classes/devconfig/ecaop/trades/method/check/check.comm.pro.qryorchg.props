@@ -1,0 +1,35 @@
+#产品查询变更校验 by wangmc
+ecaop.core.method.map.ecaop.trades.check.comm.pro.qryorchg=ccpq
+ecaop.core.method.ccpq.def={"mothod":"ccpq","remark":"产品查询变更校验"}
+ecaop.core.method.ccpq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.ccpq.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器
+ecaop.trades.ccpq.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    businessType:{type:"String(2)",required:true,encrypted:false,validators:null },\
+    productId:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    netType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    resourcesType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#定义流程跳转
+ecaop.core.method.ccpq.processors=checkProductChangeProcessor()
+
+#报文头参数
+ecaop.ecsb.ccpq.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.checkProduct.checkProduct",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.ccpq.template@FBS@QRY_PRODUCT_INFO_INPUT@n1529397156@QRY_PRODUCT_INFO_REQ"}\
+]
+
+ecaop.trades.ccpq.template=com/ailk/ecaop/biz/template/product/CheckProductChange

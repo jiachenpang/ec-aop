@@ -1,0 +1,9 @@
+#河南预受理
+ecaop.core.app.map.hapre.sub=hapr
+ecaop.core.app.hapr.def={"code":"hapr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hapr.timeslimit=max 100 per 1 minute
+ecaop.core.app.hapr.allow={appkey:"hapr",allow:"cuck,ccic,ppoq,qmoq,snqy,nboc,qrtc,smnp,mpsb,cdqy,cdnt,cdsn,cack,scmc,\
+codc,oata,mold,2324,234o,opsb,sc4s,oupc,trao,qctc,chph,cmck,opap,sccc,smcc,cumd,ucca,qrta,csaq,syps,smosa,smoss,qrtac,kdwy,\
+ipry,bsoa,sbso,bsop,odsb,baoa,sbaos,psoa,psos,faoa,fasb,adnu,tzcx,sack,sfso,sfss,mofc,ofcs,modr,23t4,ofpc,ofps,scmc,scac,mnca,\
+qcacq,qcar,qcpq,qcpa,spfs,bypc,byps,234s,234t,23l4,orta,modr,msoa,smct,mmvc,mvoa,scaf,crck,cbpq,spec,spes,spff,scgq,smno,mpdsb\
+,qcfc,tsos,qcfd,scccs,mcoa,qcrq,qofq,qcbl,cdaq", deny:null}

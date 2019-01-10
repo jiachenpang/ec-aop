@@ -1,0 +1,4 @@
+#内蒙bss
+ecaop.core.app.map.nmbss.pre=nmbpr
+ecaop.core.app.nmbpr.def={"code":"nmbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.nmbpr.allow={appkey:"nmbpr",allow:"qrtb,seft", deny:null}

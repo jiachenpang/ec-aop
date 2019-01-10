@@ -1,0 +1,75 @@
+#异步补换卡申请
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.changecard.app=smcc
+ecaop.core.method.smcc.def={"mothod":"smoca","remark":"异步补换卡申请"}
+ecaop.core.method.smcc.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smcc.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.smcc.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     channelId:{type:"String(20)",required:true},\
+     ordersId:{type:"String(20)",required:true},\
+     opeType:{type:"String(1)",required:true},\
+     serialNumber:{type:"String(20)",required:true},\
+     certType:{type:"String(2)",required:true},\
+     certNum:{type:"String(50)",required:true},\
+     iccid:{type:"String(20)",required:true},\
+     cardType:{type:"String(22)",required:true},\
+     busiType:{type:"String(22)",required:false},\
+     imsi:{type:"String(15)",required:true},\
+     cardData:{type:"String(1024)",required:true},\
+     procId:{type:"String(30)",required:true},\
+     cardFee:{type:"String(10)",required:false},\
+     payInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.payInfo.vali.para)"},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+#9/18增加checkAndSentMISPOSInfoToCB，为MISPOS支付时，AOP通过支付信息同步接口将MISPOS支付信息同步给cBSS后，再调用正式提交接口。17-2-27 by Zeng
+ecaop.core.method.smcc.processors=@checkAndSentMISPOSInfoToCB
+                                  
+#checkAndSentMISPOSInfoToCB类中调用固定格式"ecaop.trades.mispos." + exchange.getMethodCode() + ".processors"
+ecaop.trades.mispos.smcc.processors=@route\
+                                    @FlowProcessor(ecaop.core.method.smcc.route.flowConfig)
+
+ecaop.core.method.smcc.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.cb.smcc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.n6.smcc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.n25.smcc.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.cb.smcc.processors=@cbssChangeCardProcessor()\
+                         @callNotifyResultProcessor()
+
+ecaop.n6.smcc.processors=@n6ChangeCardProcessor()\
+                         @callNotifyResultProcessor()
+
+ecaop.n25.smcc.processors=@ParametersMapper(ecaop.trades.smcc.ParametersMapping)\
+                          @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                          @Xml2JsonMapper(ecaop.trades.smcc.template)
+ecaop.trades.smcc.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00047",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"OldChangeCardReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.smcc.template@3GE"}\
+]
+ecaop.trades.smcc.template=com/ailk/ecaop/biz/template/simcard/OldChangeCard
+
+#通过全业务调用号卡中心,实占卡,路由值为A1
+ecaop.trades.smcc.ess.notify.paramtersmapping=[\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"route",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"simCardSwitch",extractor:"fix",extractorConfig:"A1",temp:true},\
+    {paramterName:"procId",extractor:"propertyGet",extractorConfig:"msg.procId",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.BIP2G022.T2000610",temp:true},\
+    {paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.smcc.ess.notify.template@ONS"}\
+]
+ecaop.trades.smcc.ess.notify.template=com/ailk/ecaop/biz/template/simcard/AopCallEssNotifyResult

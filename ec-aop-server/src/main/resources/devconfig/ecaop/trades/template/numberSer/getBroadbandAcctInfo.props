@@ -1,0 +1,4 @@
+#获取宽带账号/编码
+ecaop.trade.template.numberSer.getBroadbandAcctInfo={"serviceName":"NumberSer","operateName":"getBroadbandAcctInfo","content":"GET_BROADBAND_ACCT_INFO_REQ"}
+#报文模版路径
+ecaop.trade.cbpq.getBroadbandAcctInfo.template=com/ailk/ecaop/biz/template/number/GetBroadbandAcctInfo

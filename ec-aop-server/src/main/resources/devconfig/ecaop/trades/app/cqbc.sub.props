@@ -1,0 +1,5 @@
+#重庆BSS国政通测试
+ecaop.core.app.map.cqbc.sub=cqbc
+ecaop.core.app.cqbc.def={"code":"cqbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.cqbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.cqbc.allow={appkey:"cqbc",allow:"crck", deny:null}

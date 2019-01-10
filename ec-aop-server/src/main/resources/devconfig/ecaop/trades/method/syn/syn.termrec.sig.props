@@ -1,0 +1,36 @@
+#订单中心仓库将到货的终端串码提供给ESS做自动签收
+ecaop.core.method.map.ecaop.trades.syn.termrec.sig=syts
+ecaop.core.method.syts.def={"mothod":"syts","remark":"订单中心仓库将到货的终端串码提供给ESS做自动签收"}
+ecaop.core.method.syts.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.syts.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.syts.param.msg={\
+     operatorId:{type:"String(20)",required:false},\
+     province:{type:"String(2)",required:true},\
+     city:{type:"String(3)",required:false},\
+     stoId:{type:"String(20)",required:false},\
+     resourcesInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.syts.resourcesInfo)"},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+ecaop.trades.syts.resourcesInfo={\
+    resourcesType:{type:"String(2)",required:false},\
+    resCodeType:{type:"String(2)",required:true},\
+    resourcesCode:{type:"String(30)",required:true}\
+}
+#定义processors
+ecaop.core.method.syts.processors=@ParametersMapper(ecaop.trades.syts.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonMapper(ecaop.trades.syts.template)
+ecaop.trades.syts.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00040",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"TmlAutoSignInReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.syts.template@3GE"}\
+]
+ecaop.trades.syts.template=com/ailk/ecaop/biz/template/res/TmlAutoSignIn

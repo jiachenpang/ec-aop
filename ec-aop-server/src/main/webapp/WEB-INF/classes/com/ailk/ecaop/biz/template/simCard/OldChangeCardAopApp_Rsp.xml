@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <OldChangeCardRsp mappedOut="true"> 
+     <RespCode length="F4"  mappedName="code" />
+     <RespDesc length="V200" mappedName="detail"/>
+     <EssSubscribeId constraint="?" length="V30" mappedName="essSubscribeId"> 
+        <!--落地方订单ID  为正式提交时使用--> 
+      </EssSubscribeId>  
+      
+      <FeeInfo constraint="*"  mappedName="feeInfo"> 
+        <!--收费信息--> 
+        
+         <FeeID constraint="1" length="V20" mappedName="feeId"> 
+           <!--收费项编码，以省分现有编码为准--> 
+         </FeeID>  
+      
+         <FeeCategory constraint="1" length="F1" mappedName="feeCategory"> 
+          <!--收费项科目--> 
+         </FeeCategory>  
+         
+         <FeeDes constraint="1" length="V120" mappedName="feeDes"> 
+          <!--收费项描述--> 
+         </FeeDes>
+         
+         <MaxRelief constraint="?" length="V10" mappedName="maxRelief"> 
+          <!--最大减免金额正整数单位：分--> 
+         </MaxRelief>
+         
+         <OrigFee constraint="1" length="V10" mappedName="origFee"> 
+          <!--应收费用正整数单位：分--> 
+         </OrigFee>
+         
+      </FeeInfo>  
+      
+      <TotalFee constraint="?" length="V10" mappedName="totalFee"> 
+          <!--总费用正整数单位：分--> 
+      </TotalFee>
+
+    <PARA constraint="*" mappedName="para"> 
+      <!--保留-->  
+      <PARA_ID constraint="1" length="V20" mappedName="paraId"> 
+        <!--保留字段ID--> 
+      </PARA_ID>  
+      <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue"> 
+        <!--保留字段值--> 
+      </PARA_VALUE> 
+    </PARA> 
+  </OldChangeCardRsp> 
+

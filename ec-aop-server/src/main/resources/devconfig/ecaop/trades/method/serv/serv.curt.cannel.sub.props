@@ -1,0 +1,157 @@
+#开户返销提交
+ecaop.core.method.map.ecaop.trades.serv.curt.cannel.sub=sccc
+ecaop.core.method.sccc.def={"mothod":"sccc","remark":"开户返销提交"}
+ecaop.core.method.sccc.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sccc.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.sccc.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true},\
+     channelId:{type:"String(20)",required:true},\
+     channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+     ordersId:{type:"String(20)",required:true},\
+     opeSysType:{type:"Number(1)",required:false},\
+     essOrigOrderId:{type:"String(20)",required:true},\
+     cardType:{type:"Number(1)",required:false},\
+     imei:{type:"String(30)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.sccc.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.sccc.flowConfig)
+#配置跳转
+ecaop.core.method.sccc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.cbss.sub.sccc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.core.3g.sccc.flowConfig)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.core.3g.sccc.flowConfig=@NumRoute\
+				@route()\
+				@FlowProcessor(ecaop.core.3g.sccc.route.flowConfig)
+ecaop.core.3g.sccc.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.n25.sccc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#cBSS调用返销接口的业务流程
+ecaop.cbss.sub.sccc.processors=@cbssCancel()
+
+#南25调用返销接口的业务流程  待处理
+ecaop.n25.sccc.processors=@ParametersMapper(ecaop.param.mapping.n25.sccc)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.trades.template.n25.sccc)
+ecaop.param.mapping.n25.sccc=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00037",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CancelSubReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.template.n25.sccc@3GE"}\
+]
+
+ecaop.trades.template.n25.sccc=com/ailk/ecaop/biz/template/order/CancelSub
+ecaop.trade.template.T3M00037={"activityCode":"T3M00037","content":"CancelSubReq"}
+
+
+#3GE终端返销预判
+#ecaop.trades.sccc.cancelTmlPre.paramtersmapping=[\
+#{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+#{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+#{paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000004",temp:true},\
+#{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+#{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+#{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+#{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+#{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+#{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+#{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+#{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+#{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+#{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+#{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+#{paramterName:"content",extractor:"fix",extractorConfig:"TerminalRollBackPreReq",temp:true},\
+#{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancelTmlPre.template@ONS"}\
+#]
+ecaop.trades.sccc.cancelTmlPre.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub3G
+ecaop.trades.sccc.cancelTmlPre.paramtersmapping=[\
+    {paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.T4000004.BIP4F001",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancelTmlPre.template@ONS"}\
+    ]
+
+#3GE终端返销
+#ecaop.trades.sccc.cancelTml.paramtersmapping=[\
+#{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+#{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+#{paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000005",temp:true},\
+#{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+#{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+#{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+#{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+#{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+#{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+#{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+#{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+#{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+#{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+#{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+#{paramterName:"content",extractor:"fix",extractorConfig:"TerminalRollBackReq",temp:true},\
+#{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancelTml.template@ONS"}\
+#]
+ecaop.trades.sccc.cancelTml.template=com/ailk/ecaop/biz/template/terminal/CancelSub3G
+ecaop.trades.sccc.cancelTml.paramtersmapping=[\
+    {paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.T4000005.BIP4F001",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancelTml.template@ONS"}\
+    ]
+#CBSS返销预提交
+ecaop.trades.sccc.cancelPre.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,@50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancelPre.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+ecaop.trades.sccc.cancelPre.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+
+#CBSS终端返销提交
+ecaop.trades.sccc.cancel.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordSer.orderSub,@50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancel.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.sccc.cancel.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+
+
+#总部crm白卡返销处理接口
+#ecaop.trades.sccc.cancel.crm.paramtersmapping=[\
+#{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+#{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+#{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP2G018",temp:true},\
+#{paramterName:"activityCode",extractor:"fix",extractorConfig:"T2000618",temp:true},\
+#{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+#{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+#{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+#{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+#{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+#{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+#{paramterName:"iccid",extractor:"propertyGet",extractorConfig:"msg.iccid",temp:true},\
+#{paramterName:"numID",extractor:"propertyGet",extractorConfig:"msg.numID",temp:true},\
+#{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+#{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+#{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+#{paramterName:"content",extractor:"fix",extractorConfig:"ReturnSaleReq",temp:true},\
+#{paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancel.crm.template@ONS"}\
+#]
+ecaop.trades.sccc.cancel.crm.template=com/ailk/ecaop/biz/template/cbss/CrmWriteCardReturnSale
+ecaop.trades.sccc.cancel.crm.paramtersmapping=[\
+    {paramterName:"simCardSwitch",extractor:"fix",extractorConfig:"A1",temp:true},\
+     {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.T2000618.BIP2G018",temp:true},\
+    {paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancel.crm.template@ONS"}\
+    ]

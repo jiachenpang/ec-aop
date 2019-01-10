@@ -1,0 +1,10 @@
+#浙江预受理
+ecaop.core.app.map.zjpre.sub=zjpre
+ecaop.core.app.zjpre.def={"code":"zjpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.zjpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.zjpre.allow={appkey:"zjpre",allow:"cmck,snqy,nboc,qrtc,msoa,opap,opsb,cdsn,cdqy,cdnt,sccc,\
+ucca,cumd,chph,qctc,trao,oupc,2324,234o,sc4s,codc,cuck,oata,mold,ccic,syps,qrtb,cack,scmc,jffx,\
+smnp,mpsb,ppoq,qmoq,mofc,ofcs,spfs,23l4,fasb,faoa,mnca,qcsp,tzcx,mvoa,ipry,kdwy,scac,scaf,bypc,\
+byps,smcc,smosa,orta,modr,bsop,odsb,sbso,bsoa,baoa,sbaos,sfso,sfss,faoa,fasb,ofpc,ofps,smoss,smno,\
+mpdsb,sfck,qrtac,cdaq,dvqy,qcsc,sjxs,oolq,qobq,qbcq,mcba,mcbd,cbpn,qcbl,qofq,smct,qcop,quuq,qcfq,\
+qcpq,paid,tsos,qcdq,mxcg,qcpa,sgfs,seft,quacq,scacs,rned,qcfd",  deny:null}

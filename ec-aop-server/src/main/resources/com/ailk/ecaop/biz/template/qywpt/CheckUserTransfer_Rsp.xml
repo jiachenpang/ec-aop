@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <CHECK_USER_TRANSFER_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code"><!--应答编码, 0000 成功, 8888 失败 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="1" length="V500" mappedName="detail"><!--应答描述 -->
+        </RESP_DESC>
+        <REQUSET_INFO constraint="*" mappedName="requestInfo"><!--校验结果, -->
+            <REQUSET_CODE constraint="1" length="F4" mappedName="requestCode"><!--1204 号码不存在, 1202欠费号码( 需判断号码欠费，在办理时点判断是否有逾期欠费（不需判断号码所属账户欠费），用户不需要缴纳当期欠费就可以办理转4G业务), 
+                    1203 该用户是黑名单用户（针对所在集团客户下某个用户进入黑名单的情况，仅对进黑名单的用户进行23转4G业务办理限制，不影响该集团客户下其他用户办理23转4业务）。, 1205 密码错误（服务密码错误或初始密码错误都属于密码错误）, , 1303 
+                    用户为集团成员（对于用户是集团成员用户（收入归集集团、一点缴费集团），且没有选择任何集团群组产品，则该用户可转4G，否则，如果该用户存在VPN（IVPN、WVPN）、VPDN（全网性VPDN、省内VPDN）、群组共享优惠类等产品，则返回该错误信息，不允许上转）, 
+                    1307 用户在协议期内（针对来源于电子渠道的用户，不允许合约用户办理23转4，对于下月失效的合约，比照单卡用户办理）, 1406该用户在锁定期或充值期内（适用于OCS预付费用户，在“锁定期或充值期”内，返回该错误信息，不允许上转）, 1309 
+                    融合业务未退订（如用户属于沃家庭、沃商务等融合业务成员，则提示该信息，需营业员在BSS侧办理该用户的“融合业务成员退出”业务后，再做23转4）, 1490 必须先解散亲情关系（用户号码与其他2G/3G号码间存在亲情号码、交叉优惠、共享业务，则不允许办理；需要用户取消亲情关系方可办理转4G业务）, 
+                    1493 当前用户存在在途工单（省份BSS判断如果用户存在融合拆分、vpn拆分、亲情拆分、分账户、取消高级付费关系等次月生效的在途工单，需返回成功；用户号码下存在的其他在途工单不允许办理，提示该信息）, 1540 当前用户已处于停机状态（挂失）（紧急停机、停机保号、违章停机、挂失）, 
+                    1014 客户信息不完整（为业务部门下发客户资料实名制要求的判断信息）, 1024 老客户证件不合规（为业务部门下发客户资料实名制要求的判断信息）, 1025 身份证件需要升位（为业务部门下发客户资料实名制要求的判断信息）, 1026 客户资料未返档（为业务部门下发客户资料实名制要求的判断信息）, 
+                    , 1542 用户存在预约业务（省份BSS判断如果用户存在融合拆分、vpn拆分、亲情拆分、分账户、取消高级付费关系等次月生效的预约工单，需返回成功；如果用户存在总部统一的次月生效的一个合约计划或半年流量包的预约业务，不提示该错误信息，允许用户转入cBSS；其它预约业务，不允许上转，并提示该信息。）, 
+                    1543 合帐用户不能办理（如果该用户是合帐用户，则返回此信息，并提示用户需在省分BSS做账户拆分）, , 1546有代付关系的用户不准办理此业务（如果该用户存在高级付费关系，则提示该信息，需营业员在省分BSS办理“付费关系变更”业务后方可办理转4G业务）, 
+                    1547 “用户有包年附加产品或资费”不允许受理（除总部和省分的网龄升级计划外，其他省分自行推出的包年、包半年或包季附加产品或资费不能上转，提示该信息）, 1600 用户存在续约未生效合约(如果用户存在一个总部统一的合约计划或半年流量包（可以为已生效，也可以为办理当月次月生效的合约），则允许转入cBSS系统；如果用户存在2个总部统一的合约计划（即用户有一个未生效预约合约，且此预约合约非次月生效），则返回1600), 
+                    1601 该用户为上网卡用户，不能转4G。, 1602：该用户为行业应用用户，不能转4G。（省分自行判断各省的行业应用用户是否允许转4G。对于不允许转4G的行业应用用户，省份BSS返回该错误；对于允许转4G的行业应用用户，转4G后行业应用特性不继承）, 
+                    1603 当前用户合约不能转4G（由省分自行判断带有省分个性化合约的用户是否允许转4G。如果不允许则返回1603；如果允许，可以办理）。, 1604 携号转网用户不能办理23转4业务。, 1611 用户存在合约计划不允许转入智慧沃家共享版（当月月底合约到期的用户可以加入智慧沃家共享版）, 
+                    1617 省分迁转的固网号码必须带区号（含群组节点中固网号码、共线号码）, 8888 其它错误(不满足以上错误类型，返回8888), -->
+            </REQUSET_CODE>
+            <REQUSET_DESC constraint="1" length="V4000" mappedName="requestDesc"><!--错误描述, -->
+            </REQUSET_DESC>
+        </REQUSET_INFO>
+        <CUST_INFO constraint="*" mappedName="custInfo"><!--客户信息, （除返回错误编码“1204 号码不存在的情况”下，其它情况下均需返回此节点） -->
+            <CUST_ID constraint="1" length="V16" mappedName="custId"><!--客户标识 -->
+            </CUST_ID>
+            <CUST_NAME constraint="1" length="V100" mappedName="custName"><!--客户名称 -->
+            </CUST_NAME>
+            <CUST_TYPE constraint="1" length="F1" mappedName="custType"><!--客户类型编码，, 数据模型编码：CUI_000012客户类型 -->
+            </CUST_TYPE>
+            <CUST_STATE constraint="1" length="F1" mappedName="custType"><!--客户状态编码，, 数据模型编码：CUI_000013客户状态 -->
+            </CUST_STATE>
+            <CERT_END_DATE constraint="?" length="F8" mappedName="certEndDate"><!--证件有效期,格式YYYYMMDD -->
+            </CERT_END_DATE>
+            <CERT_ADDR constraint="1" length="V256" mappedName="certAddr"><!--证件地址 -->
+            </CERT_ADDR>
+            <CERT_TYPE_CODE constraint="1" length="V2" mappedName="certTypeCode"><!--证件类别编码，参见总册附录证件类别 -->
+            </CERT_TYPE_CODE>
+            <CERT_CODE constraint="1" length="V50" mappedName="certCode"><!--证件号码 -->
+            </CERT_CODE>
+            <PROVINCE_CODE constraint="?" length="F2" mappedName="provinceCode"><!--省分编码，统一数据模型编码SHS_000001 -->
+            </PROVINCE_CODE>
+            <EPARCHY_CODE constraint="1" length="V6" mappedName="eparchyCode"><!--归属地市 -->
+            </EPARCHY_CODE>
+            <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId"><!--发展渠道 -->
+            </DEVELOP_DEPART_ID>
+            <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId"><!--发展员工 -->
+            </DEVELOP_STAFF_ID>
+            <IN_DEPART_ID constraint="?" length="V20" mappedName="inDepartId"><!--建档渠道 -->
+            </IN_DEPART_ID>
+            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId"><!--建档员工 -->
+            </IN_STAFF_ID>
+            <IN_DATE constraint="1" length="F14" mappedName="inDate"><!--建档时间，格式YYYYMMDDHH24MISS -->
+            </IN_DATE>
+            <REMOVE_DATE constraint="?" length="F14" mappedName="removeDate"><!--销档时间，格式YYYYMMDDHH24MISS -->
+            </REMOVE_DATE>
+            <REMARK constraint="?" length="V500" mappedName="remark"><!--备注 -->
+            </REMARK>
+            <CUST_CLASS_TYPE constraint="?" length="V3" mappedName="custClssType"><!--客户级别编码，统一数据模型编码CUI_000015 -->
+            </CUST_CLASS_TYPE>
+            <CUSTOMER_LEVEL constraint="?" length="V3" mappedName="customerLevel"><!--客户等级编码，统一数据模型编码CUI_000082 -->
+            </CUSTOMER_LEVEL>
+            <CREDIT_CLASS constraint="1" length="V8" mappedName="creditClass"><!--信用等级，编码见PRD_000054 -->
+            </CREDIT_CLASS>
+            <CUSTOMER_LOC constraint="?" length="F1" mappedName="customerLoc"><!--本外地标志编码，统一数据模型编码CLB_000015 -->
+            </CUSTOMER_LOC>
+            <SEX constraint="?" length="F1" mappedName="sex"><!--客户性别编码，统一数据模型编码SHO_000020 -->
+            </SEX>
+            <BIRTHDAY constraint="?" length="F8" mappedName="birthday"><!--阳历生日，格式YYYYMMDD -->
+            </BIRTHDAY>
+            <BIRTHDAY_LUNAR constraint="?" length="V50" mappedName="birthdayLunar"><!--阴历生日, 格式为YYYY-MM-DD -->
+            </BIRTHDAY_LUNAR>
+            <BIRTHDAY_FLAG constraint="?" length="F1" mappedName="birthdayFlag"><!--阴阳历生日标记编码，统一数据模型编码CUI_000100 -->
+            </BIRTHDAY_FLAG>
+            <POST_ADDRESS constraint="1" length="V256" mappedName="postAddress"><!--通信地址 -->
+            </POST_ADDRESS>
+            <POST_CODE constraint="?" length="F6" mappedName="postCode"><!--邮政编码 -->
+            </POST_CODE>
+            <POST_PERSON constraint="?" length="V50" mappedName="postPerson"><!--收件人 -->
+            </POST_PERSON>
+            <PHONE constraint="1" length="V40" mappedName="phone"><!--联系电话 -->
+            </PHONE>
+            <FAX_NBR constraint="?" length="V40" mappedName="faxNbr"><!--传真号码 -->
+            </FAX_NBR>
+            <EMAIL constraint="?" length="V50" mappedName="email"><!--电子邮件 -->
+            </EMAIL>
+            <HOME_ADDRESS constraint="?" length="V256" mappedName="homeAddress"><!--家庭地址 -->
+            </HOME_ADDRESS>
+            <HOME_PHONE constraint="?" length="V40" mappedName="homePhone"><!--家庭电话 -->
+            </HOME_PHONE>
+            <CONTACT constraint="1" length="V60" mappedName="contact"><!--联系人姓名 -->
+            </CONTACT>
+            <CONTACT_PHONE constraint="1" length="V40" mappedName="contactPhone"><!--联系人电话 -->
+            </CONTACT_PHONE>
+            <NATIONALITY_CODE constraint="?" length="V4" mappedName="nationalityCode"><!--国籍编码，统一数据模型编码CUI_000030 -->
+            </NATIONALITY_CODE>
+            <LOCAL_NATIVE_CODE constraint="?" length="V4" mappedName="localNativeCode"><!--籍贯编码，统一数据模型编码SHS_000001 -->
+            </LOCAL_NATIVE_CODE>
+            <FOLK_CODE constraint="?" length="V2" mappedName="folkCode"><!--民族编码, 参见《中国联通IT系统BSS域统一数据模型编码规范》CUI_000020 民族编码 -->
+            </FOLK_CODE>
+            <RELIGION_CODE constraint="?" length="F1" mappedName="religionCode"><!--信仰编码, 参见《中国联通IT系统BSS域统一数据模型编码规范》CUI_000022信仰编码 -->
+            </RELIGION_CODE>
+            <REVENUE_LEVEL_CODE constraint="?" length="F1" mappedName="revenueLevelCode"><!--收入等级编码, 参见《中国联通IT系统BSS域统一数据模型编码规范》, 
+                    CUI_000024收入等级编码 -->
+            </REVENUE_LEVEL_CODE>
+            <EDUCATE_GRADE_CODE constraint="?" length="F1" mappedName="educateGradeCode"><!--学历, 参见《中国联通IT系统BSS域统一数据模型编码规范》CUI_000025教育程度编码 -->
+            </EDUCATE_GRADE_CODE>
+            <GRADUATE_SCHOOL constraint="?" length="V100" mappedName="graduateSchool"><!--毕业院校 -->
+            </GRADUATE_SCHOOL>
+            <SPECIALITY constraint="?" length="V50" mappedName="speciality"><!--专业 -->
+            </SPECIALITY>
+            <CHARACTER_TYPE_CODE constraint="?" length="F1" mappedName="characterTypeCode"><!--性格类型编码, 参见《中国联通IT系统BSS域统一数据模型编码规范》CUI_000026性格类型编码 -->
+            </CHARACTER_TYPE_CODE>
+            <HEALTH_STATE_CODE constraint="?" length="F1" mappedName="healthStateCode"><!--健康状况编码, 参见《中国联通IT系统BSS域统一数据模型编码规范》CUI_000027健康状况编码 -->
+            </HEALTH_STATE_CODE>
+            <IS_TAG constraint="1" length="F1" mappedName="isTag"><!--归属客户是否打印过专票, 0 否, 1 是 -->
+            </IS_TAG>
+            <ID_MARK constraint="1" length="F1" mappedName="idMark"><!--客户资料认证标识：, 2：实名-系统, 3：实名-公安, 4：实名-二代 -->
+            </ID_MARK>
+        </CUST_INFO>
+        <USER_INFO constraint="*" mappedName="userInfo"><!--用户信息, (当应答编码为成功时，此节点必填) -->
+            <USER_ID constraint="1" length="V16" mappedName="userId"><!--用户编码 -->
+            </USER_ID>
+            <USER_CODE_TYPE constraint="?" length="F1" mappedName="userCodeType"><!--密码类型：, 0：不传密码, 1：明文密码, 默认为0，此字段必填 -->
+            </USER_CODE_TYPE>
+            <USER_CODE constraint="?" length="V500" mappedName="userCode"><!--用户密码 -->
+            </USER_CODE>
+            <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode"><!--电信类型编码，编码参考中国联通服务集统一编码规范2.1 
+                    网别编码 -->
+            </SERVICE_CLASS_CODE>
+            <USER_STATE constraint="1" length="V2" mappedName="userState"><!--用户状态, 参见统一编码规范：用户状态编码（如果转入用户是预付费，请省分转成后付费编码上传） -->
+            </USER_STATE>
+            <BRAND_CODE constraint="?" length="F4" mappedName="brandCode"><!--品牌取值见附录，省分品牌由省分配置。 -->
+            </BRAND_CODE>
+            <PROVINCE_CODE constraint="1" length="F2" mappedName="provinceCode"><!--省分编码，统一数据模型编码SHS_000001 -->
+            </PROVINCE_CODE>
+            <EPARCHY_CODE constraint="1" length="V6" mappedName="eparchyCode"><!--城市代码 -->
+            </EPARCHY_CODE>
+            <CITY_CODE constraint="1" length="V6" mappedName="cityCode"><!--营业区编码 -->
+            </CITY_CODE>
+            <OPEN_DATE constraint="1" length="F14" mappedName="openDate"><!--入网时间yyyymmddhh24miss -->
+            </OPEN_DATE>
+            <IN_DATE constraint="1" length="F14" mappedName="inDate"><!--建档时间，格式YYYYMMDDHH24MISS -->
+            </IN_DATE>
+            <DEVELOP_STAFF_ID constraint="1" length="V20" mappedName="developStaffId"><!--发展员工 -->
+            </DEVELOP_STAFF_ID>
+            <DEVELOP_DATE constraint="?" length="F14" mappedName="developDate"><!--发展时间，格式YYYYMMDDHH24MISS -->
+            </DEVELOP_DATE>
+            <DEVELOP_EPARCHY_CODE constraint="?" length="V20" mappedName="developEparchyCode"><!--发展地市 -->
+            </DEVELOP_EPARCHY_CODE>
+            <DEVELOP_CITY_CODE constraint="?" length="V20" mappedName="developCityCode"><!--发展市县 -->
+            </DEVELOP_CITY_CODE>
+            <DEVELOP_DEPART_ID constraint="1" length="V20" mappedName="developDepartId"><!--发展渠道 -->
+            </DEVELOP_DEPART_ID>
+            <OPEN_DEPART_ID constraint="1" length="V20" mappedName="openDepartId"><!--开户渠道 -->
+            </OPEN_DEPART_ID>
+            <OPEN_STAFF_ID constraint="1" length="V20" mappedName="openStaffId"><!--开户员工 -->
+            </OPEN_STAFF_ID>
+            <IN_DEPART_ID constraint="?" length="V20" mappedName="inDepartId"><!--建档渠道 -->
+            </IN_DEPART_ID>
+            <IN_STAFF_ID constraint="?" length="V20" mappedName="inStaffId"><!--建档员工 -->
+            </IN_STAFF_ID>
+            <SUBSCRB_TYPE constraint="?" length="F1" mappedName="subscrbType"><!--0 后付费 1 准预付费 2 OCS 3 PPS -->
+            </SUBSCRB_TYPE>
+            <INTENET_TYPE constraint="?" length="F1" mappedName="intenetType"><!--智能网标识, 0 智能网用户, 1 非智能网用户 -->
+            </INTENET_TYPE>
+            <MAIN_CARD_TAG constraint="?" length="V1" mappedName="mainCardTag"><!--主卡标识, 0 副卡, 1 主卡, （没有主副卡关系此字段为空） -->
+            </MAIN_CARD_TAG>
+            <GROUP_INFO constraint="*" mappedName="groupInfo"><!--群组相关信息 -->
+                <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber"><!--服务号码 -->
+                </SERIAL_NUMBER>
+                <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode"><!--电信业务网别（编码参考中国联通服务集统一编码规范2.1章节 
+                        电信业务网别） -->
+                </SERVICE_CLASS_CODE>
+                <SHARE_NUMBER constraint="?" length="V40" mappedName="shareNumber"><!--共线号码 -->
+                </SHARE_NUMBER>
+                <BRAND_CODE constraint="?" length="F4" mappedName="brandCode"><!--品牌（编码参考中国联通服务集统一编码规范2.2章节） -->
+                </BRAND_CODE>
+                <AREA_CODE constraint="?" length="V6" mappedName="areaCode"><!--区号 -->
+                </AREA_CODE>
+                <GROUP_ID constraint="1" length="V16" mappedName="groupId"><!--虚拟群组编码 -->
+                </GROUP_ID>
+                <GROUP_TYPE constraint="1" length="V6" mappedName="groupType"><!--群组关系类型，参见统一编码规范 2.27. 群组关系类型 -->
+                </GROUP_TYPE>
+            </GROUP_INFO>
+            <COMBO_FEE constraint="1" length="V20" mappedName="comboFee"><!--套餐费用(单位：分) -->
+            </COMBO_FEE>
+            <COMBO_ID constraint="?" length="V30" mappedName="comboId"><!--原套餐ID（集中渠道结算佣金需要该字段信息，故需省分必填） -->
+            </COMBO_ID>
+            <COMBO_NAME constraint="1" length="V500" mappedName="comboName"><!--原套餐名称 -->
+            </COMBO_NAME>
+            <CONTRACT_INFO constraint="?" mappedName="contractInfo"><!--合约信息 -->
+                <PRODUCT_ID constraint="?" length="V8" mappedName="productId"><!--总部合约产品ID(集中渠道结算佣金需要该字段信息，故需省分必填） -->
+                </PRODUCT_ID>
+                <PRODUCT_TYPE constraint="1" length="F1" mappedName="productType"><!--合约计划类型, 1 存费送机, 2 购机送费, 3存费送费, 存费送业务（6，7，8，分别对应流量业务、语音业务、短信业务） -->
+                </PRODUCT_TYPE>
+                <PRESENT_NUM constraint="?" length="V10" mappedName="presentNum"><!--赠送业务量, (合约计划类型为6,7,8时，此字段必填。合约计划类型为6时，单位：MB；合约计划类型为7时，单位：分钟；合约计划类型为8时，单位：条) -->
+                </PRESENT_NUM>
+                <ASSURE_TYPE_CODE constraint="?" length="F1" mappedName="assureTypeCode"><!--担保类型, （E.在网固话担保, 0.预存担保, 1 担保人担保, 
+                        2.担保金担保, 3 零信用度担保, 4 无担保, 5 社保卡担保, 6.单位担保, 7.银行信贷担保, 8.银行保险公司担保, 9 银行存款担保, A 内部职工担保, B 政府担保, C 信用卡担保, D 银行存单担保, K.宽带预存担保, 
+                        W.企业固网担保, R.专业担保公司担保, M.集客银行存款担保, N.基于新险种的保险公司担保） -->
+                </ASSURE_TYPE_CODE>
+                <ASSURE_ID constraint="?" length="V500" mappedName="assureId"><!--担保协议ID -->
+                </ASSURE_ID>
+                <ASSURER_NAME constraint="?" length="V100" mappedName="assureName"><!--担保单位名称（或担保协议名称） -->
+                </ASSURER_NAME>
+                <ASSURE_DESCRIBE constraint="?" length="V500" mappedName="assureDescribe"><!--在网固网号码 -->
+                </ASSURE_DESCRIBE>
+                <START_TIME constraint="1" length="F14" mappedName="startTime"><!--原合约开始时间YYYYMMDDHH24MISS（必须为某个月份1号的00:00:00） -->
+                </START_TIME>
+                <END_TIME constraint="1" length="F14" mappedName="endTime"><!--原合约结束时间YYYYMMDDHH24MISS（必须为某个月份最后一天的23:59:59） -->
+                </END_TIME>
+                <CONTRACT_DESCRIBE constraint="1" length="V500" mappedName="contractDescribe"><!--原省分合约名称 -->
+                </CONTRACT_DESCRIBE>
+                <ORIGINAL_COMBO_FEE constraint="1" length="V20" mappedName="originalComboFee"><!--原始套餐值(单位：分) -->
+                </ORIGINAL_COMBO_FEE>
+                <CONVERT_INFO constraint="?" mappedName="convertInfo"><!--转兑包信息 -->
+                    <START_PAYMENT_TIME constraint="1" length="V6" mappedName="startPaymentTime"><!--开始账期YYYYMM -->
+                    </START_PAYMENT_TIME>
+                    <END_PAYMENT_TIME constraint="1" length="V6" mappedName="endPaymentTime"><!--结束账期YYYYMM -->
+                    </END_PAYMENT_TIME>
+                    <FREEZE_TOTAL_FEE constraint="1" length="V20" mappedName="freezeTotalFee"><!--总冻结金额(单位：分) -->
+                    </FREEZE_TOTAL_FEE>
+                    <FREEZE_SURPLUS_FEE constraint="1" length="V20" mappedName="freezeSurplusFee"><!--剩余冻结金额(只包含次月以及次月以后的剩余冻结金额,单位：分) -->
+                    </FREEZE_SURPLUS_FEE>
+                    <SURPLUS_MONTHS constraint="1" length="V2" mappedName="surplusMonths"><!--剩余月数 -->
+                    </SURPLUS_MONTHS>
+                    <SURPLUS_BILL_FEE constraint="1" length="V20" mappedName="surplusBillFee"><!--剩余发票可打金额(单位：分) -->
+                    </SURPLUS_BILL_FEE>
+                    <COMPAR_MONTHS constraint="1" length="V2" mappedName="comparMonths"><!--机卡比对剩余月数（购机送费只比对6个月，存费送机比对全部合约期，存费送费、存费送业务此字段传0） -->
+                    </COMPAR_MONTHS>
+                </CONVERT_INFO>
+                <EQUIPMENT_INFO constraint="?" mappedName="equipmentInfo"><!--设备信息 -->
+                    <BUY_EQUIPMENT_FEE constraint="1" length="V20" mappedName="buyEquipmentFee"><!--实缴购机款（单位：分） -->
+                    </BUY_EQUIPMENT_FEE>
+                    <EQUIPMENT_MODEL constraint="?" length="V30" mappedName="equipmentModel"><!--终端型号 -->
+                    </EQUIPMENT_MODEL>
+                    <EQUIPMENT_PRICE constraint="1" length="V20" mappedName="equipmentPrice"><!--终端成本价（单位：分）省份没有的填“-1” -->
+                    </EQUIPMENT_PRICE>
+                    <EQUIPMENT_NAME constraint="?" length="V100" mappedName="equipmentName"><!--终端型号名称 -->
+                    </EQUIPMENT_NAME>
+                    <EQUIPMENT_BRAND constraint="?" length="V30" mappedName="equipmentBrand"><!--终端品牌 -->
+                    </EQUIPMENT_BRAND>
+                    <IMEI constraint="1" length="V30" mappedName="imei"><!--IMEI(终端串号) -->
+                    </IMEI>
+                </EQUIPMENT_INFO>
+                <CONTRACT_DEVELOPER_INFO constraint="?" mappedName="contractDeveloperInfo"><!--合约发展人信息 -->
+                    <DEVELOPER_CODE constraint="1" length="V20" mappedName="developCode"><!--发展人编码 -->
+                    </DEVELOPER_CODE>
+                    <DEVELOPER_NAME constraint="1" length="V128" mappedName="developName"><!--发展人名称 -->
+                    </DEVELOPER_NAME>
+                    <DEVELOP_TIME constraint="1" length="F14" mappedName="developTime"><!--发展时间YYYYMMDDHH24MISS -->
+                    </DEVELOP_TIME>
+                    <DEVELOP_CHANNEL_CODE constraint="1" length="V20" mappedName="developChannelCode"><!--发展渠道编码 -->
+                    </DEVELOP_CHANNEL_CODE>
+                    <DEVELOPER_CONTACT_WAY constraint="1" length="V100" mappedName="developerContractWay"><!--发展人联系方式 -->
+                    </DEVELOPER_CONTACT_WAY>
+                </CONTRACT_DEVELOPER_INFO>
+            </CONTRACT_INFO>
+            <NETWORK_PLAN_INFO constraint="?" mappedName="networkPlanInfo"><!--网龄计划信息 -->
+                <DONATE_TYPE constraint="1" length="F1" mappedName="donateType"><!--赠送类型, 1：通话时长, 2：流量, 3：短信 -->
+                </DONATE_TYPE>
+                <ACEPT_TIME constraint="1" length="F14" mappedName="aceptTime"><!--网龄订购时间YYYYMMDDHH24MSS -->
+                </ACEPT_TIME>
+            </NETWORK_PLAN_INFO>
+            <CANCEL_OLDTRADE constraint="?" length="V2000" mappedName="cancelOldTrade"><!--不能携带的省分特殊业务描述 -->
+            </CANCEL_OLDTRADE>
+            <SUPER_NUMBER constraint="*" mappedName="superNumber"><!--靓号信息 -->
+                <START_DATE constraint="1" length="F14" mappedName="startDate"><!--靓号生效时间, yyyymmddhh24miss -->
+                </START_DATE>
+                <FINISH_DATE constraint="1" length="F14" mappedName="finishDate"><!--靓号失效时间, yyyymmddhh24miss -->
+                </FINISH_DATE>
+                <MONTH_MIN_CONSUME constraint="1" length="V11" mappedName="monthMinConsume"><!--月最低消费金额，单位：分 -->
+                </MONTH_MIN_CONSUME>
+            </SUPER_NUMBER>
+            <IS_SPECIAL constraint="1" length="F1" mappedName="isSpecial"><!--是否含有专款（该专款不包含客户赔付、已到账的可用赠款、靓号预存、普通预存）, 0 不包含, 
+                    1 包含 -->
+            </IS_SPECIAL>
+        </USER_INFO>
+        <ACCT_INFO constraint="*" mappedName="acctInfo"><!--账号资料, (当应答编码为成功时，此节点必填) -->
+            <ACCT_ID constraint="1" length="V16" mappedName="acctId"><!--账户标识 -->
+            </ACCT_ID>
+            <CUST_ID constraint="?" length="V16" mappedName="custId"><!--客户标识 -->
+            </CUST_ID>
+            <DEBUTY_USER_ID constraint="?" length="V16" mappedName="debutyUserId"><!--代表用户标识 -->
+            </DEBUTY_USER_ID>
+            <DEBUTY_CODE constraint="?" length="V40" mappedName="debutyCode"><!--代表号码 -->
+            </DEBUTY_CODE>
+            <PAY_NAME constraint="1" length="V100" mappedName="payName"><!--账户名称 -->
+            </PAY_NAME>
+            <PAY_MODE_CODE constraint="1" length="F1" mappedName="payModeCode"><!--付费方式编码，数据模型编码CUI_000084 -->
+            </PAY_MODE_CODE>
+            <PREPAY_TAG constraint="1" length="F1" mappedName="prePayTag"><!--预付费标识：, 0 后付费, 1 准预付费, 2 OCS, 3 PPS -->
+            </PREPAY_TAG>
+            <CONSIGN constraint="*" mappedName="consign"><!--省分托收信息 -->
+                <CONSIGN_MODE constraint="1" length="F1" mappedName="consignMode"><!--托收方式，统一数据模型编码PRD_000048 -->
+                </CONSIGN_MODE>
+                <SUPER_BANK_CODE constraint="1" length="V20" mappedName="superBankCode"><!--上级银行编码，省分上传 -->
+                </SUPER_BANK_CODE>
+                <BANK_CODE constraint="1" length="V20" mappedName="bankCode"><!--开户银行编码，省分上传 -->
+                </BANK_CODE>
+                <BANK_ACCT_NO constraint="1" length="V30" mappedName="bankAcctNo"><!--银行付费账号 -->
+                </BANK_ACCT_NO>
+                <AGREEMENT_NO constraint="1" length="V40" mappedName="agreementNo"><!--托收协议号 -->
+                </AGREEMENT_NO>
+                <ACCT_BALANCE_ID constraint="?" length="V16" mappedName="acctBalanceId"><!--账本标识 -->
+                </ACCT_BALANCE_ID>
+                <BANK_ACCT_NAME constraint="1" length="V100" mappedName="bankAcctName"><!--托收名称 -->
+                </BANK_ACCT_NAME>
+                <COMP_TAG constraint="?" length="F1" mappedName="compTag"><!--合并托收标记：, 0 非合并托收, 1 合并托收，主帐户, 2 合并托收，非主帐户 -->
+                </COMP_TAG>
+                <LIMIT_MODE constraint="?" length="F1" mappedName="limitMode"><!--限额标记：, 0 全额, 1 限额, 2 比率, 3 定额, 4 临时陈欠托收, 
+                        5 临时无主托收 -->
+                </LIMIT_MODE>
+                <LIMIT_MONEY constraint="?" length="V11" mappedName="limitMoney"><!--限额金额：, 缴费的时候根据配置的帐本科目限额参数填入限额值,或者话费比例 -->
+                </LIMIT_MONEY>
+            </CONSIGN>
+            <ACCOUNT_INFO constraint="*" mappedName="accountInfo"><!--总部银行卡代扣信息 -->
+                <ACCOUNT_ID constraint="1" length="V30" mappedName="accountId"><!--账户编号 -->
+                </ACCOUNT_ID>
+                <BANK_NAME constraint="1" length="V30" mappedName="bankName"><!--银行名称 -->
+                </BANK_NAME>
+                <BANK_CARD_TYPE constraint="1" length="F1" mappedName="bankCardType"><!--银行帐号类型, 信用卡:0, 借记卡:1, 对公账号：2 -->
+                </BANK_CARD_TYPE>
+                <ACCOUNT_LAST_FOUR constraint="1" length="F4" mappedName="accountLastFour"><!--银行卡账号后4位 -->
+                </ACCOUNT_LAST_FOUR>
+                <BANK_ACCOUNT_NAME constraint="1" length="V256" mappedName="bankAccountName"><!--银行账户户名 -->
+                </BANK_ACCOUNT_NAME>
+                <CONTRACT_CERT_TYPE_CODE constraint="?" length="V2" mappedName="contractCertTypeCode"><!--持卡人证件类别编码，见附录 -->
+                </CONTRACT_CERT_TYPE_CODE>
+                <CONTRACT_CERT_CODE constraint="?" length="V50" mappedName="contractCertCode"><!--持卡人证件号码 -->
+                </CONTRACT_CERT_CODE>
+                <CUST_NAME constraint="?" length="V100" mappedName="custName"><!--客户名称 -->
+                </CUST_NAME>
+                <ACTOR_NAME constraint="?" length="V100" mappedName="actorName"><!--经办人名称 -->
+                </ACTOR_NAME>
+                <ACTOR_CERTTYPEID constraint="?" length="V2" mappedName="actorCertTypeId"><!--经办人证件类型 -->
+                </ACTOR_CERTTYPEID>
+                <ACTOR_CERTNUM constraint="?" length="V50" mappedName="actorCertNum"><!--经办人证件号码 -->
+                </ACTOR_CERTNUM>
+                <CONTRACT_NUMBER constraint="1" length="V40" mappedName="contractNumber"><!--签约协议号 -->
+                </CONTRACT_NUMBER>
+                <START_TIME constraint="1" length="V14" mappedName="startTime"><!--协议生效时间, yyyymmddhh24miss -->
+                </START_TIME>
+                <END_TIME constraint="?" length="V14" mappedName="endTime"><!--协议失效时间, yyyymmddhh24miss -->
+                </END_TIME>
+                <LEVEL_VALUE constraint="1" length="V11" mappedName="levelValue"><!--代扣阀值（小于等于此阀值时，发起实时代扣请求）, 单位:分 -->
+                </LEVEL_VALUE>
+                <EVERYTIME_VALUE constraint="1" length="V11" mappedName="everytimeValue"><!--代扣次金额（每次发起代扣请求时的金额）, 单位：分 -->
+                </EVERYTIME_VALUE>
+            </ACCOUNT_INFO>
+        </ACCT_INFO>
+        <POST_INFO constraint="?" mappedName="postInfo"><!--邮寄信息 -->
+            <ID_TYPE constraint="?" length="F1" mappedName="idType"><!--标识类型：, 0 客户, 1 用户, 2 帐户 -->
+            </ID_TYPE>
+            <POST_NAME constraint="?" length="V120" mappedName="postName"><!--邮寄名称 -->
+            </POST_NAME>
+            <POST_TAG constraint="1" length="F1" mappedName="postTag"><!--邮寄标志：, 0 不邮寄, 1 邮寄 -->
+            </POST_TAG>
+            <POST_CONTENT constraint="?" length="V10" mappedName="postContent"><!--邮寄内容：, 0账单, 1清单, 2 发票, 3 广告, 可以为以上的集合,每种类型以“|”分隔 -->
+            </POST_CONTENT>
+            <POST_TYPESET constraint="?" length="V10" mappedName="postTypeSet"><!--邮寄方式：, 0 邮政, 1 传真, 2 Email, 可以为以上方式的集合，每种方式以“|”分隔 -->
+            </POST_TYPESET>
+            <POST_CYC constraint="?" length="F1" mappedName="postCyc"><!--邮寄周期：, 0按月, 1 按季, 2 按年 -->
+            </POST_CYC>
+            <POST_ADDRESS constraint="?" length="V250" mappedName="postAddress"><!--邮寄地址 -->
+            </POST_ADDRESS>
+            <POST_CODE constraint="?" length="F6" mappedName="postCode"><!--邮寄邮编 -->
+            </POST_CODE>
+            <EMAIL constraint="?" length="V50" mappedName="email"><!--EMAIL地址 -->
+            </EMAIL>
+            <FAX_NBR constraint="?" length="V100" mappedName="faxNbr"><!--传真号码 -->
+            </FAX_NBR>
+        </POST_INFO>
+        <SUB_SERV_INFOS constraint="*" mappedName="subServInfos"><!--特服信息集合, 特服结束时间在本月底之前（本月最后一天最后一秒之前）的, 特服信息不需要同步给cBss -->
+            <SUB_SERV_INFO constraint="+" mappedName="subServInfo"><!--特服信息 -->
+                <SERV_INSTID constraint="1" length="V20" mappedName="servInstid"><!--特服编码, 50019 无条件呼叫转移, 50020 遇忙前转, 50021 
+                        无应答前转, 50008 三方通话, 50009省内长途, 50010国内长途, 50011国际长途, 50013省内漫游, 50014国内漫游, 50015国际漫游, 50003 短信收发, 50004来电显示, 50012本地市话, 50006呼叫等待, 
+                        50022不可及前转, 50016 国际数据漫游屏蔽, 50104 WLAN服务, 50200 联通秘书, 50201 炫铃, 50300 4G流量提醒 -->
+                </SERV_INSTID>
+                <SERV_NAME constraint="1" length="V200" mappedName="servName"><!--特服名称, 参见附录 -->
+                </SERV_NAME>
+                <START_DATE constraint="?" length="F14" mappedName="startDate"><!--生效时间，格式：, yyyymmddhh24miss -->
+                </START_DATE>
+                <END_DATE constraint="?" length="F14" mappedName="endDate"><!--失效时间，格式：, yyyymmddhh24miss -->
+                </END_DATE>
+                <SERV_PRPTY_INFOS constraint="*" mappedName="servPrptyInfos"><!--特服属性信息集合 -->
+                    <SERV_PRPTY_INFO constraint="+" mappedName="servPrptyInfo"><!--特服属性信息 -->
+                        <PRPTY_ID constraint="1" length="V50" mappedName="prptyId"><!--属性标识 -->
+                        </PRPTY_ID>
+                        <PRPTY_NAME constraint="?" length="V200" mappedName="prptyName"><!--属性名称 -->
+                        </PRPTY_NAME>
+                        <PRPTY_VALUE_CODE constraint="?" length="V2000" mappedName="prptyValueCode"><!--属性值编码 -->
+                        </PRPTY_VALUE_CODE>
+                        <PRPTY_VALUE constraint="1" length="V2000" mappedName="prptyValue"><!--属性值 -->
+                        </PRPTY_VALUE>
+                    </SERV_PRPTY_INFO>
+                </SERV_PRPTY_INFOS>
+            </SUB_SERV_INFO>
+        </SUB_SERV_INFOS>
+        <VAC_INFOS constraint="?" mappedName="vacInfos"><!--增值业务信息集 -->
+            <VAC_INFO constraint="+" mappedName="vacInfo"><!--增值业务信息 -->
+                <SP_PRODUCT_ID constraint="1" length="V20" mappedName="spProductId"><!--增值业务ID：集中prm产生的唯一标识 -->
+                </SP_PRODUCT_ID>
+                <SP_PRODUCT_NAME constraint="1" length="V60" mappedName="spProductName"><!--增值业务的名称 -->
+                </SP_PRODUCT_NAME>
+                <START_DATE constraint="1" length="F14" mappedName="startDate"><!--增值业务的生效时间 -->
+                </START_DATE>
+                <END_DATE constraint="1" length="F14" mappedName="endDate"><!--增值业务的失效时间 -->
+                </END_DATE>
+                <EXTRA_INFO1 constraint="?" length="V500" mappedName="extraInfo1"><!--备用字段 -->
+                </EXTRA_INFO1>
+                <EXTRA_INFO2 constraint="?" length="V500" mappedName="extraInfo2"><!--备用字段 -->
+                </EXTRA_INFO2>
+                <EXTRA_INFO3 constraint="?" length="V500" mappedName="extraInfo3"><!--备用字段 -->
+                </EXTRA_INFO3>
+                <SP_PRODUCT_ATTR constraint="*" mappedName="spProductAttr"><!--增值属性 -->
+                    <ATTR_CODE constraint="1" length="V30" mappedName="attrCode"><!--增值属性标识 -->
+                    </ATTR_CODE>
+                    <ATTR_VALUE constraint="1" length="V20" mappedName="attrValue"><!--增值属性值 -->
+                    </ATTR_VALUE>
+                </SP_PRODUCT_ATTR>
+            </VAC_INFO>
+        </VAC_INFOS>
+        <PARA constraint="*" mappedName="para"><!--保留字段 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </CHECK_USER_TRANSFER_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<include>
+    <UNI_BSS_HEAD>
+        <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+        <RESPONSE>
+            <RSP_TYPE length="F1" /> <!-- 应答或错误类型，参见应答/错误类型表 -->
+            <RSP_CODE length="F4" /> <!-- 应答或错误代码，参见应答/错误代码表 -->
+            <RSP_DESC length="V512" /> <!-- 应答或错误描述 -->
+        </RESPONSE>
+    </UNI_BSS_HEAD>
+</include>

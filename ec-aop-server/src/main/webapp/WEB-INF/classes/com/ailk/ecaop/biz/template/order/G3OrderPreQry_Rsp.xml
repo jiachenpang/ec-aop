@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+        <OrderPreQryRsp mappedOut="true" >
+            <OrderList constraint="*" mappedName="orderInfo">
+                <OrderID length="V20" mappedName="orderId"/>
+                <OrderState length="F1" mappedName="orderState"/>
+            </OrderList>
+            <!-- 响应结果编码 0000：成功 9999：失败（失败原因参见响应结果描述） -->
+            <RespCode length="F4" mappedName="code"/>
+            <!-- 错误描述 -->
+            <RespDesc length="V500" mappedName="detail"/>
+            <!-- 保留字段 -->
+            <Para constraint="*"  mappedName="para">
+                 <ParaID length="V20" type="String" mappedName="paraId"/>
+                 <ParaValue length="V20" type="String" mappedName="paraValue"/>
+            </Para>
+        </OrderPreQryRsp>
+

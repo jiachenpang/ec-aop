@@ -1,0 +1,11 @@
+config.implementation=org.n3r.config.impl.RedisConfigable(132.35.81.218,6379)
+
+#id
+id.generator.impl=redis(id.generator.redis.prefix, id.generator.redis.connect)
+id.generator.redis.prefix=${bizconfigdir}.ecaop.core.id.generator
+id.generator.redis.connect=132.35.81.218:6379
+
+
+#timeslimit
+ecaop.timeslimit.strategy=redis
+ecaop.timeslimit.redis.connect=132.35.81.218:6379

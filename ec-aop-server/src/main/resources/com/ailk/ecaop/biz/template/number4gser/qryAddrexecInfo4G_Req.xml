@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QRY_ADDREXEC_INFO4G_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <QRY_ADDREXEC_INFO4G_REQ> 
+      <CITY_CODE constraint="1" length="V20" mappedName="city"> 
+        <!--营业区编码--> 
+      </CITY_CODE>  
+      <QRY_TYPE constraint="1" length="F1" mappedName="qryType"> 
+        <!--资源预判类型：, 0-按标准地址预判, 1-  按就近号码预判, 2-地址简拼查询方式  3-按共线号码预判--> 
+      </QRY_TYPE>  
+      <PARENT_ADDRESS_CODE constraint="?" length="V40" mappedName="parentAddressCode"> 
+        <!--上级标准地址编码--> 
+      </PARENT_ADDRESS_CODE>  
+      <INSTALL_ADDRESS constraint="?" length="V200" mappedName="installAddress"> 
+        <!--地址关键字/地址简拼--> 
+      </INSTALL_ADDRESS>  
+      <NEIGHBOR_NUM constraint="?" length="V40" mappedName="neighborNum"> 
+        <!--邻居号码/共线号码--> 
+      </NEIGHBOR_NUM>  
+      <AREA_CODE constraint="?" length="V6" mappedName="areaCode"> 
+        <!--区号--> 
+      </AREA_CODE>  
+      <RETURN_EXEC_CODE constraint="?" length="F1" mappedName="returnExecCode"> 
+        <!--0 不返回局向信息1 返回局向信息--> 
+      </RETURN_EXEC_CODE>  
+      <PARA_LIST constraint="*" mappedName="para"> 
+        <!--保留字段-->  
+        <PARA_ID constraint="1" length="V20" mappedName="paraId"> 
+          <!--保留字段ID--> 
+        </PARA_ID>  
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"> 
+          <!--保留字段值--> 
+        </PARA_VALUE> 
+      </PARA_LIST> 
+    </QRY_ADDREXEC_INFO4G_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED> 
+    <MEDIA_INFO length="V20" defaultValue="1GB"/> 
+  </UNI_BSS_ATTACHED> 
+</QRY_ADDREXEC_INFO4G_INPUT>

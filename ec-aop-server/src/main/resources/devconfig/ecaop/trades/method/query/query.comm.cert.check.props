@@ -1,0 +1,67 @@
+#身份证校验
+ecaop.core.method.map.ecaop.trades.query.comm.cert.check=crck
+ecaop.core.method.crck.def={"mothod":"crck"}
+ecaop.core.method.crck.timeslimit=max 1 per 1 minute
+ecaop.core.app.masb.mock={"method":"crck", "mocked":"true", "mockid":"mockgzt"}
+ecaop.core.method.crck.params=[\
+    {"param":"msg","type":"JSON","required":true, encrypted:false, validators:"@JSONSchema(ecaop.masb.crck.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, encrypted:false, validators:null},\
+    {"param":"bizkey",type:"String(10)","required":false, encrypted:false, validators:null},\
+    {"param":"apptx",type:"String(30)","required":true, encrypted:false, validators:null}]
+
+#msg 校验器 
+ecaop.masb.crck.msg.schema={\
+    province:{ type:"Number(2)", encrypted:false, required:true, validators:"@FixedLen(2)"},\
+    city:{ type:"Number(3)", encrypted:false, required:true, validators:"@FixedLen(3)"},\
+    certId:{ type:"String(15, 18)", encrypted:false, required:true, validators:null},\
+    certName:{ type:"String(60)", encrypted:false, required:true, validators:null},\
+    certType:{ type:"String(2)", encrypted:false,required:false,validators:"@FixedLen(2)"}\
+}
+
+ecaop.core.method.crck.processors=\
+                @CertCheckType()\
+                @ParametersMapper(method.crck.params.mapping) \
+                @AopCall(ecaop.comm.conf.url.phw-eop, 60) \
+                @FormatDateAndDealException4Gzt()\
+                @JSONParametersMapper(ecaop.crck.params.json.mapping)\
+                @removeEmpty()
+
+# 如果类型为03, 不需要配置  cbss占用0025不做配置
+ecaop.crck.params.config.type={"masb":"03"}
+ecaop.crck.params.config.syscode=\
+    {"ptbz":"0001","n6Ess":"0002","3Gess":"0003","ecsb":"0004","shsb":"0005","gdml":"0006","rlct":"0007","pshl":"0008","mshl":"0009",\
+    "xjsb":"0010", "mnsb":"0011","masb":"0012","esal":"0013","jingfen":"0014","gzsb":"0015","zjsb":"0016","gdbc":"0017","jlsb":"0018",\
+    "jkzy":"0019","cqbc":"0020","gxbc":"0021","hbbc":"0022","2bsb":"0023","hnbc":"0024","cbss":"0025","ynbc":"0026","fjbc":"0027",\
+    "gsbc":"0028","sdBSS":"0029","jssb":"0030","ahbc":"0031","hibc":"0033","habc":"0035","jxsb":"0037","nmsb":"0039","nxbc":"0040","qhbc":"0041",\
+    "sxbc":"0042","snbc":"0043","scsb":"0044","tjbc":"0045","xzbc":"0046","mabc":"0047","gzds":"0048","bjsb":"0049","bopl":"0050",\
+    "tjpr":"0051","paysb":"0052","tjin":"0053","scrs":"0054","apas":"0055","hapr":"0056","hupr":"0071","gdaop":"0072","hpsb":"0073",\
+    "jxpre":"0074","tsst":"0075","gzbpr":"0076","zjms":"0077","wosb":"0078","bjaop":"0079","hipre":"0080","jkgrp":"0081","nxpr":"0082",\
+    "sxaop":"0083","itsb":"0093","hlpr":"0094","cpsb":"0095"}
+
+method.crck.params.mapping=[\
+{paramterName:"eop_appcode",extractor:"fix",extractorConfig:"D765425380464D8EAB5A9F51249FE4C1"},\
+{paramterName:"eop_action",extractor:"fix",extractorConfig:"idservice.ess.idcheck"},\
+{paramterName:"eop_reqts",extractor:"currentTime",extractorConfig:""},\
+{paramterName:"transIDO",extractor:"GztTransIdFromRds",extractorConfig:""},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province", temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city", temp:true},\
+{paramterName:"certId",extractor:"propertyGet",extractorConfig:"msg.certId", temp:true},\
+{paramterName:"certName",extractor:"propertyGet",extractorConfig:"msg.certName", temp:true},\
+{paramterName:"Message",extractor:"freemarker",extractorConfig:\
+    "{\\\"actionCode\\\":\\\"0\\\",\\\"actionRelation\\\":\\\"0\\\",\\\"activityCode\\\":\\\"T3G00001\\\",\\\"bipCode\\\":\\\"BIP4F002\\\",\\\"bipVer\\\":\\\"0100\\\",\\\"homeDomain\\\":\\\"UGZT\\\",\\\"msgReceiver\\\":\\\"9800\\\",\\\"msgSender\\\":\\\"9801\\\",\\\"origDomain\\\":\\\"UESS\\\",\\\"procID\\\":\\\"${transIDO}\\\",\\\"processTime\\\":\\\"${processTime}\\\",\\\"routing\\\":{\\\"routeType\\\":\\\"00\\\",\\\"routeValue\\\":\\\"00\\\"},\\\"svcCont\\\":{\\\"@type\\\":\\\"org.phw.eop.api.bean.checkcustid5.ess.CheckId5ReqBody4Ess\\\",\\\"accessType\\\":\\\"01\\\",\\\"checkCustId\\\":\\\"${certId}\\\",\\\"checkCustName\\\":\\\"${certName}\\\",\\\"checkType\\\":\\\"${type}\\\",\\\"sysCode\\\":\\\"${sysCode}\\\",\\\"city\\\":\\\"${city}\\\",\\\"province\\\":\\\"${province}\\\"},\\\"svcContVer\\\":\\\"0100\\\",\\\"testFlag\\\":\\\"0\\\",\\\"transIDO\\\":\\\"${transIDO}\\\"}"}\
+]
+
+ecaop.crck.params.json.mapping=[\
+{paramterName:"certName",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.checkCustName"},\
+{paramterName:"certId",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.checkCustId"},\
+{paramterName:"photo",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.photo"},\
+{paramterName:"sex",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.gender"},\
+{paramterName:"sex",extractor:"Decode",extractorConfig:"sex,0,M,1,F"},\
+{paramterName:"birthday",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.birthday"},\
+{paramterName:"nation",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.nationality"},\
+{paramterName:"addr",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.address"},\
+{paramterName:"exp",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.validityPeriod"},\
+{paramterName:"issue",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.licenceIssAuth"},\
+{paramterName:"certTypeR",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.checkType"}\
+]

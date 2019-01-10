@@ -1,0 +1,60 @@
+#购买记录查询
+ecaop.core.method.map.ecaop.trades.query.ordi.purrecs.qry=qopq
+ecaop.core.method.qopq.def={"mothod":"qopq"}
+ecaop.core.method.qopq.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.ecsb.qopq.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, validators:null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, validators:null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, validators:null}\
+]
+#msg 校验器 
+ecaop.ecsb.qopq.msg.schema={\
+  operatorId:{type:"String(20)", required:true, validators:null},\
+  province:{ type:"Number(2)", required:true, validators:"@FixedLen(2)"},\
+  city:{type:"Number(3)", required:true, validators:"@FixedLen(3)"},\
+  district:{type:"String(10)", required:false, validators:null},\
+  channelId:{type:"String(20)", required:true, validators:null},\
+  channelType:{type:"String(7)", required:true, validators:"@FixedLen(7)"},\
+  numId:{type:"String(20)", required:true, validators:null},\
+  qryStaDate:{type:"String(8)", required:true, validators:"@FixedLen(8)"},\
+  qryEndDate:{type:"String(8)", required:true, validators:"@FixedLen(8)"},\
+  opeSysType:{type:"Number(1)", required:true, validators:null},\
+  serviceClassCode:{type:"Number(4)", required:true, validators:"@FixedLen(4)"},\
+  para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+#定义processors
+ecaop.core.method.qopq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.qopq.flowConfig)
+                                  
+#配置跳转
+ecaop.core.method.qopq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routecode)", transitions:"N6->02  N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.masb.qopq.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#定义processors
+ecaop.masb.qopq.processors=\
+                      @ParametersMapper(ecaop.masb.qopq.ParametersMapping)\
+                      @WsCall(ecaop.comm.conf.url.osn.services.ResourcePurchaseSer)\
+                      @Xml2JsonMapper4Fbs(ecaop.masb.qopq.template)
+                      
+ecaop.masb.qopq.template=com/ailk/ecaop/biz/template/order/OrdPurRecs
+ecaop.soap.bodyns.qopq=qry                      
+ecaop.masb.qopq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"ResourcePurchaseSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryResourcePurchaseRecord",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_RESOURCE_PURCHASE_RECORD_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.qopq.template@FBS@QRY_RESOURCE_PURCHASE_RECORD_INPUT"}\
+]

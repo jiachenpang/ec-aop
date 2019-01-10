@@ -1,0 +1,50 @@
+#沃享成员列表查询
+ecaop.core.method.map.ecaop.trades.query.comm.user.card.check=ucck
+ecaop.core.method.ucck.def={"mothod":"ucck","remark":"省份用户资料校验-补换卡"}
+ecaop.core.method.ucck.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.query.ucck.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.query.ucck.msg.schema={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    tradeTypeCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+}
+
+#定义processors
+ecaop.core.method.ucck.processors=@userCardCheck()
+
+#请求参数
+ecaop.query.ucck.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP2F065",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T2000533",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"routeType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"route",extractor:"propertyGet",extractorConfig:"msg.serialNumber",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"UserInfoQueryReq",temp:true},\
+{paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.query.ucck.template@ONS"}\
+]
+
+#报文模版路径
+ecaop.query.ucck.template=com/ailk/ecaop/biz/template/userCheck/UserCardCheck

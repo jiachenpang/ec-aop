@@ -1,0 +1,12 @@
+#卡数据同步
+ecaop.core.method.map.ecaop.trades.query.ecaop.everything.qry=qeeq
+ecaop.core.method.qeeq.def={"mothod":"qeeq","remark":"用于查询AOP内容"}
+
+ecaop.core.method.qeeq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":false, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+    
+ecaop.core.method.qeeq.processors=@EcAopQuery()

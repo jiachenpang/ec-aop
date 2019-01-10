@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TerminalDistributeRsp mappedOut="true">
+    <!-- 应答编码0000 成功0001 单个资源处理失败9999 其他错误 -->
+    <RespCode length="F4" type="String" range="0000,9999" mappedName="code" />
+    <!-- 错误描述，返回详细的错误信息 -->
+    <RespDesc length="V100" type="String" mappedName="detail" />
+    <ResInfo constraint="*" mappedName="resInfo">
+        <ResourcesCode length="V20" type="String" constraint="?" mappedName="resourcesCode" />
+        <!-- 1 成功 2 失败 -->
+        <ResType length="F1" type="String" mappedName="resType" />
+        <!-- "失败原因：01：无发货单 02：终端已签收 03：其它原因" -->
+        <ErrCode length="F2" type="String" mappedName="errCode" constraint="?" />
+        <ErrDesc length="V256" type="String" constraint="?" mappedName="errDesc" />
+    </ResInfo>
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</TerminalDistributeRsp>

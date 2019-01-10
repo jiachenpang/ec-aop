@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <AccountReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <AccessType length="F2" defaultValue="01" />
+            <SysCode length="F4" ignoredMapping="true" mappedName="sysCode" defaultValue="EAOP" />
+            <OrdersID length="V20" mappedName="ordersId" />
+            <NewTradeCon length="F1" range="0,1" mappedName="newTradeCon" defaultValue="0" />
+            <ProvOrderID constraint="?" length="V20" mappedName="provOrderId" />
+            <NumSwitch constraint="?" length="F1"  mappedName="numSwitch"/>
+            <RelationTypeCode constraint="?" length="V10" mappedName="relationTypeCode"/>
+            <SerialNumberA constraint="?" length="V50" mappedName="serialNumberA"/>
+            <!--delayTag是否压单 0 否 1 是-->
+            <IsBacklogOrder constraint="?" length="F1"  mappedName="delayTag"/>
+            <NumID constraint="*" mappedName="numId">
+                <SerialNumber length="V20" mappedName="serialNumber" />
+                <ProKey length="V20" constraint="?" mappedName="proKey" defaultValue="EAOP"/>
+                <ServiceType constraint="?" length="F2" mappedName="serviceType" />
+                <AreaCode constraint="?" length="V4" mappedName="areaCode" />
+                <BindNumID constraint="?" length="V64" mappedName="bindNumId" />
+                <NiceInfo constraint="?" mappedName="niceInfo">
+                    <AdvancePay length="V11" mappedName="advancePay" />
+                    <ClassId length="V5" mappedName="classId" />
+                    <LowCostPro constraint="?" length="V11" mappedName="lowCostPro" />
+                    <TimeDurPro constraint="?" length="V5" mappedName="timeDurPro" />
+                </NiceInfo>
+            </NumID>
+            <SimCardNo constraint="*" mappedName="simCardNo">
+                <CardDataProcID constraint="?" length="V30" mappedName="cardDataProcId" />
+                <SimID length="V20" mappedName="simId" />
+                <IMSI constraint="?" length="F15" mappedName="imsi" />
+                <CardType constraint="?" length="V30" mappedName="cardType" />
+                <CardData constraint="?" length="V1024" mappedName="cardData" />
+            </SimCardNo>
+            <CustomerInfo constraint="*" mappedName="customerInfo">
+                <AuthTag length="F1" mappedName="authTag" />
+                <RealNameType length="F1" mappedName="realNameType" />
+                <CustType length="F1" mappedName="custType" />
+                <CustId constraint="?" length="V20" mappedName="custId" />
+                <NewCustomerInfo constraint="?" mappedName="newCustomerInfo">
+                    <CertType length="F2" mappedName="certType" />
+                    <CertNum length="V20" required="true" mappedName="certNum" />
+                    <CertAdress length="V200" required="true" defaultValue="AOP" mappedName="certAdress" />
+                    <CustomerName length="V128" required="true" defaultValue="AOP" mappedName="customerName" />
+                    <CertExpireDate required="true" defaultValue="20130710" length="F8" mappedName="certExpireDate" />
+                    <ContactPerson constraint="?" length="V80" mappedName="contactPerson" />
+                    <ContactPhone length="V20" required="true" defaultValue="123456789" mappedName="contactPhone" />
+                    <ContactAddress length="V200" required="true" defaultValue="AOP" mappedName="contactAddress" />
+                    <CustType defaultValue="02" range="01,02" mappedName="custType" />
+                    <CustomerRemark constraint="*" mappedName="customerRemark">
+                        <CustomerRemarkID length="V20" mappedName="customerRemarkId" />
+                        <CustomerRemarkValue length="V60" mappedName="customerRemarkValue" />
+                    </CustomerRemark>
+                </NewCustomerInfo>
+            </CustomerInfo>
+            <AcctInfo constraint="*" mappedName="acctInfo">
+                <CreateOrExtendsAcct length="F1" mappedName="createOrExtendsAcct" />
+                <AccountPayType length="F2" mappedName="accountPayType" />
+                <AccountID constraint="?" length="V30"  mappedName="accId"/> <!--账户ID(继承账户时使用，可选，BSS中真实存在 ) ,(当是否继承账户标示为1时账户ID为必填，当为0时不需要填写账户ID)-->
+            </AcctInfo>
+            <UserInfo constraint="*" mappedName="userInfo">
+                <UserType length="F1" mappedName="userType" />
+                <BipType length="F1" mappedName="bipType" />
+                <SerType length="F1" mappedName="serType" />
+                <PackageTag length="F1" range="0,1" mappedName="packageTag" />
+                <FirstMonBillMode constraint="?" length="F2" mappedName="firstMonBillMode" />
+                <CheckType constraint="?" length="F2" mappedName="checkType" />
+                <CreditVale constraint="?" length="V20" mappedName="creditVale" />
+                <CheckCreditVale constraint="?" length="V20" mappedName="checkCreditVale" />
+                <ProductInfo constraint="*" mappedName="product">
+                    <ProductID length="V20" mappedName="productId" />
+                    <ProductMode length="F1" range="0,1" mappedName="productMode" />
+                </ProductInfo>
+                <ActivityInfo constraint="*" mappedName="activityInfo">
+                    <ActPlanID length="V20" mappedName="actPlanId" />
+                    <IsTest constraint="?" length="V2" mappedName="isTest" />
+                    <ResourcesType constraint="?" length="F2" mappedName="resourcesType" />
+                    <ResProcId constraint="?" length="V20" mappedName="resProcId" />
+                    <ResourcesCode constraint="?" length="V30" mappedName="resourcesCode" />
+                    <ResourcesFee constraint="?" length="V20" mappedName="resourcesFee" />
+                    <ActPara constraint="*" mappedName="actPara">
+                        <ActParaID length="V20" mappedName="actParaId" />
+                        <ActParaValue length="V60" mappedName="actParaValue" />
+                    </ActPara>
+                </ActivityInfo>
+                <GroupFlag constraint="?" length="F1" mappedName="groupFlag" />
+                <GroupID constraint="?" length="V50" mappedName="groupId" />
+                <AppType constraint="?" length="F1" mappedName="appType" />
+                <SubAppType constraint="?" length="F2" mappedName="subAppType" />
+                <GuarantorType constraint="?" length="F2" mappedName="guarantorType" />
+                <GuaratorID constraint="?" length="V200" mappedName="guaratorID" />
+                <GuCertType constraint="?" length="F2" mappedName="guCertType" />
+                <GuCertNum constraint="?" length="V50" mappedName="guCertNum" />
+                <PayInfo constraint="*" mappedName="payInfo">
+                    <PayType length="F2" range="10~15" mappedName="payType" />
+                    <PayOrg length="V30" constraint="?" mappedName="payOrg" />
+                    <PayNum length="V20" constraint="?" mappedName="payNum" />
+                </PayInfo>
+            </UserInfo>
+             <UseCustInfo constraint="*" mappedName="useCustInfo">
+                    <UseCustName length="V128" mappedName="useCustName" />
+                    <UseCustPsptType length="V2" mappedName="useCustPsptType" />
+                    <UseCustPsptCode length="V20" mappedName="useCustPsptCode" />
+                    <UseCustPsptAddress length="V200" mappedName="useCustPsptAddress" />
+                    <ItmPrdRespobsible length="F1" constraint="?" mappedName="itmPrdRespobsible" />
+             </UseCustInfo>
+            <RecomPersonID constraint="?" length="V30" mappedName="recomPersonId" />
+            <RecomPersonName constraint="?" length="V128" mappedName="recomPersonName" />
+            <PhotoTag constraint="?" length="F1" mappedName="photoTag" />
+            <RealPersonTag constraint="?" length="F1" mappedName="realPersonTag" />
+            <!-- 是否为资源中心 by wangmc 20180521 -->
+            <ResCenterSwitch constraint="?" length="V1" mappedName="resCenterSwitch"/>
+            <!-- 从资源中心获取的资源数据 by wangmc 20180521 -->
+            <ResProActData constraint="?" mappedName="resProActData"/>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </AccountReq>
+    </SvcCont>
+</UniBSS>

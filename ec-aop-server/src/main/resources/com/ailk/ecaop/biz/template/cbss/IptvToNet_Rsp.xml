@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <IPTV_TO_NET_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <!-- 用户USER_ID -->
+        <USER_ID length="V20" mappedName="userId"/>
+        <!-- 宽带统一编码 -->
+        <SERIAL_NUMBER length="V20" mappedName="serialNumber"/>
+        <!-- 宽带账号 -->
+        <ACCT_NBR length="V20" mappedName="acctNumber"/>
+        <!-- IPTV/互联网电视业务账号 -->
+        <IPTV_NBR length="V20" mappedName="iptvNumber"/>
+        <!-- 服务id -->
+        <SERVICE_ID length="V10" constraint="*" mappedName="serviceId"/>
+        <!-- 1：IPTV  2:互联网电视 -->
+        <OPERATE_TYPE length="V1" mappedName="operateType"/>
+        <!-- 终端信息 -->
+        <TERMINAL_SRCMODE length="V50" mappedName="terminalSrcmode"/>
+        <TERMINAL_TYPE1  length="V50" constraint="*" mappedName="terminalType"/>
+        <TERMINAL_BRAND length="V50" constraint="*" mappedName="terminalBrand"/>
+        <TERMINAL_MODEL length="V50" constraint="*" mappedName="terminalModel"/>
+        <TERMINAL_SN length="V50" constraint="*" mappedName="terminalSn"/>
+        <TERMINAL_MAC length="V50" constraint="*" mappedName="terminalMac"/>
+        <!-- 生效/失效时间 -->
+        <START_DATE length="V50" mappedName="startDate"/>
+        <END_DATE length="V50" mappedName="endDate"/>
+        <!-- 备用字段 -->
+        <RSRV_VAULE1 length="V50" constraint="*" mappedName="rsrvValue1"/>
+        <RSRV_VAULE2 length="V50" constraint="*" mappedName="rsrvValue2"/>
+        <RSRV_VAULE3 length="V50" constraint="*" mappedName="rsrvValue3"/>
+        <RSRV_VAULE4 length="V50" constraint="*" mappedName="rsrvValue4"/>
+    </IPTV_TO_NET_RSP>
+</UNI_BSS_BODY>

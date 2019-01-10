@@ -1,0 +1,50 @@
+ecaop.core.method.map.ecaop.trades.query.comm.brdband.check=kdwy
+ecaop.core.method.kdwy.def={"mothod":"kdwy","remark":"宽带账号唯一性校验"}
+ecaop.core.method.kdwy.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.masb.kdwy.msg.schema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:true,validators:null},\
+    authAcctId:{type:"String(60)",required:true,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:null}\
+}
+
+#宽带账号唯一性校验
+ecaop.trade.bss.checkCodePasswdParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"Number4GSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"checkBroadbandAcctUni4G",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"9900",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECK_BROADBAND_ACCT_UNI4G_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg"},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.cbss.checkCodePasswdTemplate@FBS@CHECK_BROADBAND_ACCT_UNI4G_INPUT@n993296623@CHECK_BROADBAND_ACCT_UNI4G_REQ"}\
+]
+ecaop.trade.cbss.checkCodePasswdTemplate=com/ailk/ecaop/biz/template/cbss/CheckBroadbandAcctUni4G
+   #REQ路径
+   ecaop.biz.template.cbss.CheckBroadbandAcctUni4G=ecaop/biz/template/cbss/CheckBroadbandAcctUni4G
+#定义宽带无条件受理预提交
+ecaop.core.method.kdwy.processors=@brdbandCheck()

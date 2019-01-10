@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_MULT_USER_INFO_INPUT>
+	<_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+	<UNI_BSS_BODY mappedOut="true">
+<QRY_MULT_USER_INFO_RSP>
+	<RESP_CODE constraint="1" length="F4" mappedName="respCode">
+		<!--应答编码 0000 成功 1497 非融合产品成员 1498 非融合业务/组合业务 1499 非融合产品主成员（根据省份情况定是否判断） 
+			8888 其他 -->
+	</RESP_CODE>
+	<RESP_DESC constraint="1" length="V500" mappedName="respDesc">
+		<!--应答描述 -->
+	</RESP_DESC>
+	<VIR_USER_ID constraint="?" length="V16" mappedName="virUserId">
+		<!--组合用户标识 -->
+	</VIR_USER_ID>
+	<COMBINATION_INFO constraint="*" mappedName="combinationInfo">
+		<!--组合信息 -->
+		<COMBINATION_NO constraint="?" length="V20" mappedName="combinationNo">
+			<!--组合编号 -->
+		</COMBINATION_NO>
+		<COMBINATION_PRODUCT constraint="+" mappedName="combinationProduct">
+			<!--组合产品信息 -->
+			<PRODUCT_ID constraint="1" length="V8" mappedName="productId">
+				<!--产品标识 -->
+			</PRODUCT_ID>
+			<MKT_CAMP_ID constraint="?" length="V20" mappedName="makCampId">
+				<!--活动 -->
+			</MKT_CAMP_ID>
+			<PRODUCT_MODE constraint="?" length="F2" mappedName="productMode">
+				<!--产品模式，见附录 -->
+			</PRODUCT_MODE>
+			<DEFAULT_TAG constraint="1" length="F1" mappedName="defaultLag">
+				<!--是否取默认构成，如取，则构成信息不再传 0：不取；1：取默认 -->
+			</DEFAULT_TAG>
+			<PRODUCT_PACKAGE constraint="*" mappedName="productPackage">
+				<!--产品构成信息 -->
+				<PACKAGE_ID constraint="1" length="V20" mappedName="packageId">
+					<!--构成/包标识 -->
+				</PACKAGE_ID>
+				<DEFAULT_TAG constraint="1" length="f1" mappedName="defaultLag">
+					<!--是否取默认业务和资费 0：不取；1：取默认。 如取默认则业务信息、资费信息不传。 -->
+				</DEFAULT_TAG>
+				<SERVICE constraint="*" mappedName="service">
+					<!--业务信息 -->
+					<SERVICE_ID constraint="1" length="V8" mappedName="serviceId">
+						<!--业务标识 -->
+					</SERVICE_ID>
+					<SVC_TYPE constraint="1" length="F1" mappedName="svcType">
+						<!--业务类型 0：增值业务 2：基础业务 -->
+					</SVC_TYPE>
+					<SERVICE_ITEM constraint="*" mappedName="serviceItem">
+						<!--业务属性信息 -->
+						<ATTR_CODE constraint="1" length="V30" mappedName="attrCode">
+							<!--属性编码 -->
+						</ATTR_CODE>
+						<ATTR_VALUE constraint="?" length="V2000" mappedName="attrVaule">
+							<!--属性值 -->
+						</ATTR_VALUE>
+					</SERVICE_ITEM>
+				</SERVICE>
+				<CUST_DISCNT constraint="*" mappedName="custDiscnt">
+					<!--资费信息 -->
+					<DISCNT_CODE constraint="1" length="V8" mappedName="discntCode">
+						<!--资费编码 -->
+					</DISCNT_CODE>
+					<CUST_DISCNT_ITEM constraint="*" mappedName="custDiscntItem">
+						<!--资费属性信息 -->
+						<ATTR_CODE constraint="1" length="V30" mappedName="attrCode">
+							<!--属性编码 -->
+						</ATTR_CODE>
+						<ATTR_VALUE constraint="?" length="V2000" mappedName="attrVaule">
+							<!--属性值 -->
+						</ATTR_VALUE>
+					</CUST_DISCNT_ITEM>
+				</CUST_DISCNT>
+			</PRODUCT_PACKAGE>
+			<PRODUCT_ITEM constraint="*" mappedName="productItem">
+				<!--产品属性信息 -->
+				<ATTR_CODE constraint="1" length="V30" mappedName="attrCode">
+					<!--属性编码 -->
+				</ATTR_CODE>
+				<ATTR_VALUE constraint="?" length="V2000" mappedName="attrVaule">
+					<!--属性值 -->
+				</ATTR_VALUE>
+			</PRODUCT_ITEM>
+		</COMBINATION_PRODUCT>
+		<MULT_USER_INFO constraint="?" mappedName="mutiUserInfo">
+			<!--融合产品用户信息 -->
+			<SUB_USER_COUNT constraint="1" length="V4" mappedName="subUserCount">
+				<!--融合产品下用户数 -->
+			</SUB_USER_COUNT>
+			<SUB_USER_LIST constraint="*" mappedName="subUserList">
+				<!--融合产品用户列表 -->
+				<SERVICE_CLASS_CODE constraint="1" length="F4"
+					mappedName="serviceClassCode">
+					<!--电信类型编码，编码见附录 -->
+				</SERVICE_CLASS_CODE>
+				<SERVICE_CLASS_CODE_NAME constraint="?"
+					length="V30" mappedName="serviceClassCodeName">
+					<!--电信类型名称 -->
+				</SERVICE_CLASS_CODE_NAME>
+				<AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+					<!--区号 -->
+				</AREA_CODE>
+				<SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber">
+					<!--服务号码 -->
+				</SERIAL_NUMBER>
+				<USER_ID constraint="1" length="V16" mappedName="userId">
+					<!--用户编码 -->
+				</USER_ID>
+				<BRAND_CODE constraint="1" length="F4" mappedName="brandCode">
+					<!--品牌取值见附录，省分品牌由省分配置。 -->
+				</BRAND_CODE>
+				<BRAND_NAME constraint="?" length="V30" mappedName="brandName">
+					<!--品牌名称 -->
+				</BRAND_NAME>
+				<PRODUCT_ID constraint="?" length="V8" mappedName="productId">
+					<!--产品编码 -->
+				</PRODUCT_ID>
+				<PRODUCT_NAME constraint="?" length="V100" mappedName="productName">
+					<!--产品名称 -->
+				</PRODUCT_NAME>
+				<START_DATE constraint="?" length="F14" mappedName="startDate">
+					<!--组合成员生效时间 -->
+				</START_DATE>
+				<END_DATE constraint="?" length="F14" mappedName="endDate">
+					<!--组合成员失效时间 -->
+				</END_DATE>
+				<USER_MKT_CAMP constraint="*" mappedName="userMktCamp">
+					<!--活动信息 -->
+					<MKT_CAMP_ID constraint="1" length="V20" mappedName="makCampId">
+						<!--活动ID -->
+					</MKT_CAMP_ID>
+					<START_DATE constraint="1" length="F14" mappedName="startDate">
+						<!--开始时间 -->
+					</START_DATE>
+					<END_DATE constraint="1" length="F14" mappedName="endDate">
+						<!--终止时间 -->
+					</END_DATE>
+					<ASSURE_TYPE_CODE constraint="？" length="F2"
+						mappedName="assureTypeCode">
+						<!--担保类型 01 担保人 02 担保金 03 零信用度 04 无担保 05 社保卡担保 06 单位担保 07银行信贷模式担保 08 
+							银行/保险公司担保 -->
+					</ASSURE_TYPE_CODE>
+				</USER_MKT_CAMP>
+			</SUB_USER_LIST>
+		</MULT_USER_INFO>
+	</COMBINATION_INFO>
+</QRY_MULT_USER_INFO_RSP>
+		  </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_MULT_USER_INFO_INPUT>

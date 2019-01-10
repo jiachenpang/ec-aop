@@ -1,0 +1,89 @@
+ecaop.core.method.map.ecaop.trades.sell.mix.newu.opencarddata.sub=mpdsb
+ecaop.core.method.mpdsb.def={"mothod":"mpdsb","remark":"融合业务正式提交--写卡前置"}
+ecaop.core.method.mpdsb.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.mpdsb.param.schemaMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.mpdsb.param.schemaMsg={\
+    operatorId:{type:"String(20)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    ordersId:{type:"String(30)",required:false},\
+    opeSysType:{type:"String(1)",required:false},\
+    simCardNo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpdsb.simCardNo)"},\
+    subOrderInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpdsb.subOrderInfo)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    invoiceNo:{type:"String(30)",required:false},\
+    payInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpdsb.payInfo)"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+ecaop.trades.mpdsb.simCardNo={\
+    cardFee:{type:"String(10)",required:false,validators:null}\
+}
+ecaop.trades.mpdsb.subOrderInfo={\
+    subOrderId:{type:"String(30)",required:true,validators:null},\
+    feeInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mpdsb.feeInfo)"}\
+}
+ecaop.trades.mpdsb.feeInfo={\
+    feeId:{type:"String(20)",required:true,validators:null},\
+    feeCategory:{type:"String(1)",required:true,validators:null},\
+    feeDes:{type:"String(120)",required:true,validators:null},\
+    origFee:{type:"String(10)",required:true,validators:null},\
+    reliefFee:{type:"String(10)",required:true,validators:null},\
+    reliefResult:{type:"String(60)",required:true,validators:null},\
+    realFee:{type:"String(10)",required:true,validators:null}\
+}
+ecaop.trades.mpdsb.payInfo={\
+    payType:{type:"String(2)",required:true,validators:null},\
+    payOrg:{type:"String(30)",required:true,validators:null},\
+    payOrg:{type:"String(20)",required:true,validators:null}\
+}
+ecaop.core.method.mpdsb.processors=@ChangeFeeType\
+                                   @mixOrderSubCardData()
+ecaop.trades.mpdsb.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mpdsb.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.mpdsb.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+
+ecaop.trades.mpdsb.okopen.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOneKeyOpenSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"oneKeyUserOpenResOper",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SYN_RES_REQ",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mpdsb.okopen.template@FBS@SYN_RES_INPUT@n-1024464957@SYN_RES_REQ"}\
+]
+
+ecaop.trades.mpdsb.okopen.template=/com/ailk/ecaop/biz/template/cbss/AOPOneKeyOpen

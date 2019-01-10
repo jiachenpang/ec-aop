@@ -1,0 +1,86 @@
+#银行卡代扣签约
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.bankdeduct.app=mcba
+ecaop.core.method.mcba.def={"mothod":"mcba","remark":"银行卡签约"}
+ecaop.core.method.mcba.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.mcba.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg校验器
+ecaop.ecsb.mcba.MsgSchema={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"Number(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    city:{type:"Number(3)",required:true,encrypted:false,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:null},\
+    orderId:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    accountId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    bankName:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    bankCardType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    accountLastFour:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    contractNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    levelValue:{type:"String(11)",required:false,encrypted:false,validators:null},\
+    everyValue:{type:"String(11)",required:false,encrypted:false,validators:null},\
+    appDate:{type:"String(8)",required:false,encrypted:false,validators:null},\
+    actorName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+    actorCerttypeId:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    actorCertnum:{type:"String(50)",required:false,encrypted:false,validators:null}}
+
+ecaop.core.method.mcba.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.mcba.flowConfig)
+#配置跳转
+ecaop.core.method.mcba.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.ecsb.mcba4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+]
+
+ecaop.ecsb.mcba4N25.processors=@StoreInParamProcessor(bankAppInParam)\
+                @bankOrderCommitProcesser()
+#预提交请求参数
+ecaop.ecsb.mcba.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"BankPaymentSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"signContractTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SIGN_CONTRACT_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.mcba.template@FBS@SIGN_CONTRACT_INPUT@sig"}\
+]
+ecaop.ecsb.mcba.template=com/ailk/ecaop/biz/template/bank/BankDeductApp
+
+#银行卡通知请求参数
+ecaop.ecsb.mcba.notifyParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"AutoRemoveTreatyNotifySer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"signRemoveTreatyNotify",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"routeValue",extractor:"fix",extractorConfig:"16",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SIGN_REMOVE_TREATY_NOTIFY_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.mcba.notifytemplate@FPAY@SIGN_REMOVE_TREATY_NOTIFY_INPUT@sig"}\
+]
+ecaop.ecsb.mcba.notifytemplate=com/ailk/ecaop/biz/template/bank/BankDeductPay

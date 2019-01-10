@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_LANG_LINE_NUM4G_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+        </RESP_DESC>
+        <LAND_LINE_NUM_LIST constraint="*" mappedName="numInfo">
+            <EPARCHY_CODE constraint="1" length="V6" mappedName="eparchyCode">
+            </EPARCHY_CODE>
+            <CITY_CODE constraint="1" length="V20" mappedName="cityCode">
+            </CITY_CODE>
+            <AREA_CODE constraint="1" length="V6" mappedName="areaCode">
+            </AREA_CODE>
+            <NUMBER constraint="1" length="V30" mappedName="number">
+            </NUMBER>
+            <LEVEL_CODE constraint="1" length="V6" mappedName="levelCode">
+            </LEVEL_CODE>
+            <EXCH_CODE constraint="1" length="V64" mappedName="exchCode">
+            </EXCH_CODE>
+            <PRODUCT_ID constraint="?" length="V8" mappedName="productId">
+            </PRODUCT_ID>
+            <ADVANCE_PAY constraint="?" length="V11" mappedName="advancePay">
+            </ADVANCE_PAY>
+            <LEASE_PROPERTY_TAG constraint="?" length="F1" mappedName="leasePropertyTag">
+            </LEASE_PROPERTY_TAG>
+            <MIN_CONSUME constraint="?" length="V11" mappedName="minConsume">
+            </MIN_CONSUME>
+            <LEASE_LENGTH constraint="?" length="V11" mappedName="leaseLength">
+            </LEASE_LENGTH>
+            <PARA_LIST constraint="*" mappedName="paraList">
+                <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+                </PARA_VALUE>
+            </PARA_LIST>
+        </LAND_LINE_NUM_LIST>
+    </QRY_LANG_LINE_NUM4G_RSP>
+</UNI_BSS_BODY>

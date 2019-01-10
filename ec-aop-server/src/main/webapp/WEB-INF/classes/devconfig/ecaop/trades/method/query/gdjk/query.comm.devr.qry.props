@@ -1,0 +1,36 @@
+#发展人查询
+ecaop.core.method.map.ecaop.trades.query.comm.devr.qry=dvqy
+ecaop.core.method.dvqy.def={"mothod":"dvqy","remark":"发展人查询"}
+ecaop.core.method.dvqy.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.gdjk.dvqy.dvqyMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.gdjk.dvqy.dvqyMsg={\
+    province:{type:"Number(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    city:{type:"Number(3)",required:true,encrypted:false,validators:null},\
+    chnlName:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    developerId:{type:"String(16)",required:false,encrypted:false,validators:null},\
+    developerName:{type:"String(128)",required:false,encrypted:false,validators:null},\
+    developerNumber:{type:"String(20)", required:false, encrypted:false, validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#广东集客发展人查询
+ecaop.core.method.dvqy.processors=\
+                @ParametersMapper(ecaop.gdjk.dvqy.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonMapper(ecaop.gdjk.dvqy.template)
+ 
+ecaop.gdjk.dvqy.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00018",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"DeveloperQueryReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.gdjk.dvqy.template@3GE"}\
+]
+ecaop.gdjk.dvqy.template=com/ailk/ecaop/biz/template/developer/DeveloperQuery

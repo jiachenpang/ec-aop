@@ -1,0 +1,105 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.brd.yearly.pay.ecs.check=spec
+ecaop.core.method.spec.def={"mothod":"spec","remark":"宽带趸交验证，支持统一宽带编码、宽带号码、共线固话、与宽带绑定的手机号码"}
+ecaop.core.method.spec.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.spec.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.spec.msgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:null},\
+    accessType:{type:"String(2)",required:true,validators:null},\
+    inModeCode:{type:"String(4)",required:true,validators:null},\
+    areaCode:{type:"String(46)",required:true,validators:null},\
+    queryType:{type:"String(1)",required:true,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    orderNo:{type:"String(30)",required:true,validators:null},\
+    changeTag:{type:"String(1)",required:false,validators:null},\
+    speedLevel:{type:"String(10)",required:false,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.spec.productInfo)"},\
+    boradDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.spec.boradDiscntInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.spec.boradDiscntInfo={\
+    boradDiscntId:{type:"String(20)",required:true,validators:null},\
+    boradDiscntAttr:{type:"String(20)",required:false,validators:null},\
+    delayType:{type:"String(20)",required:false,validators:null},\
+    delayDiscntId:{type:"String(20)",required:false,validators:null},\
+    delayDiscntType:{type:"String(20)",required:false,validators:null}\
+}
+ecaop.trades.spec.productInfo={\
+    oldProductId:{type:"String(20)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    optType:{type:"String(2)",required:true,validators:null}\
+}
+#定义processors
+ecaop.core.method.spec.processors=@yearPayEcsCheck()
+ecaop.masb.spec.sProductChgParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"ProductChgSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sProductChg",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_PRODUCT_CHG_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.spec.template@FBS@SGL_PRODUCT_CHG_INPUT@pro"}]
+ecaop.masb.spec.template=com/ailk/ecaop/biz/template/product/SProductChg
+ecaop.trades.spec.queryVagueInfoParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"UsrForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"queryVagueInfo",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QUERY_INFO_BY_VAGUE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.spec.queryInfoByVague.template@FBS@QUERY_INFO_BY_VAGUE_INPUT@qry"}]
+ecaop.trades.spec.queryInfoByVague.template=com/ailk/ecaop/biz/template/usrForNorthSer/QueryVagueInfo
+
+ecaop.trades.spec.qryRelationInfoParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"UsrForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryRelationInfo",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_RELATION_INFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.spec.qryRelationInfo.template@FBS@QRY_RELATION_INFO_INPUT@qry"}]
+ecaop.trades.spec.qryRelationInfo.template=com/ailk/ecaop/biz/template/usrForNorthSer/QryRelationInfo
+
+#CBSS返销预提交
+ecaop.trades.spec.sUniTrade.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.spec.sUniTrade.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+ecaop.trades.spec.sUniTrade.template=com/ailk/ecaop/biz/template/n6ess/SUniTradeN6

@@ -1,0 +1,65 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.mob.sp.order.app=msoa
+ecaop.core.method.msoa.def={"mothod":"msoa","remark":"老用户sp类产品订购和退订"}
+ecaop.core.method.msoa.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.msoa.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.msoa.msgSchema={\
+province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+district:{type:"String(10)",required:false,validators:null},\
+operatorId:{type:"String(20)",required:true,validators:null},\
+channelId:{type:"String(20)",required:true,validators:null},\
+channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+ordersId:{type:"String(30)",required:true,validators:null},\
+serialNumber:{type:"String(20)",required:true,validators:null},\
+productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.msoa.proSchema)"},\
+productInfoBss:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.msoa.productInfoBss)"},\
+recomPersonId:{type:"String(30)",required:false,validators:null},\
+recomPersonName:{type:"String(30)",required:false,validators:null},\
+
+para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#产品下附加包及包元素（资费，服务）
+ecaop.trades.msoa.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}}
+ecaop.trades.msoa.proSchema={\
+productId:{type:"String(20)",required:true,validators:null},\
+productMode:{type:"String(1)",required:false,validators:null},\
+enableTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+optType:{type:"String(2)",required:false,validators:null},\
+packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.msoa.packageElement)"}}
+
+ecaop.trades.msoa.productInfoBss={\
+productId:{type:"String(20)",required:true,validators:null},\
+updateType:{type:"String(2)",required:true,validators:null},\
+spId:{type:"String(21)",required:true,validators:null}}
+
+#定义processors
+ecaop.core.method.msoa.decide.processors=@getOpeSysType\
+                                  @FlowProcessor(ecaop.core.method.msoa.flowConfig)
+
+ecaop.core.method.msoa.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.core.method.msoa.bss.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.core.method.msoa.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#定义processors
+ecaop.core.method.msoa.bss.processors=@bssSpServerOrder()
+
+#定义processors
+ecaop.core.method.msoa.processors=@cbssSpServerOrder()
+
+#报文头参数
+ecaop.bss.msoa.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.SpProductSubSer.revOrderRelationUpdateNotify",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.template.bss.msoa.terminfo@OSN@REV_ORDER_RELATION_UPDATE_NOTIFY_INPUT@n1529397157@REV_ORDER_RELATION_UPDATE_NOTIFY_REQ"}\
+]
+
+#定义模板  
+ecaop.template.bss.msoa.terminfo=com/ailk/ecaop/biz/template/order/bssSpOrder

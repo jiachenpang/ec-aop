@@ -1,0 +1,8 @@
+#重庆预受理系统
+ecaop.core.app.map.cqpre.sub=cqps
+ecaop.core.app.cqps.def={"code":"cqps", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.cqps.timeslimit=max 100 per 1 minute
+ecaop.core.app.cqps.allow={appkey:"cqps",allow:"oolq,ppoq,cuck,opap,opsb,cdqy,cdnt,cdsn,qrtc,snqy,nboc,crck,dvqy,dvck,qcsp,cdaq,qcaq,\
+smnp,mpsb,qmoq,codc,ccic,oata,mold,cuck,cack,trao,2324,234o,opsb,sc4s,oupc,qctc,mvoa,qcacq,qcar,spfs,qcpq,qcpa,23l4,234s,234t,cdqy,cdnt,smcc,smoss,oupc,mofc,ofcs,orta,modr,\
+smosa,tzcx,ipry,kdwy,bsop,odsb,sfso,sfss,scmc,scac,bypc,byps,ofpc,ofps,qccq,23t4,chph,sjxs,qcfq,qctq,smct,qcbl,qofq,qrtb,mxcg,msoa,ccpk,quuq,qcdq,qcfc,tsos,cues,ucca,qrtac,\
+crdk,qcrq,qauq,sjgs,qcop,qoqy,qupq,qcus,qurq,qubq", deny:null}

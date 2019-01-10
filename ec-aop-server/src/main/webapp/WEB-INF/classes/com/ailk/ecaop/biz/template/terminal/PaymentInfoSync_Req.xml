@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PAYMENT_INFO_SYNC_INPUT>
+    <_include
+        src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <PAYMENT_INFO_SYNC_REQ>
+            <!--业务类型：01 营业支付流水号；02 资源支付流水号 （标识卖场系统要获取cBSS营业还是资源流水号，其中裸机销售需要获取资源流水号，开户、合约销售要获取营业支付流水号） -->
+            <TRADE_TYPE length="F2" mappedName="tradeType" />
+            <!--CBSS系统业务订单号 -->
+            <TRADE_ID length="V20" mappedName="tradeId" />
+            <!--mispos刷卡标识值为'MPOS' -->
+            <MPOS_VALUE_CODE length="F4" mappedName="mposValueCode" />
+            <!--消费（BUSI_AMT 交易金额 单位：分，）；退货（REFUND_AMT 本次退款交易金额） -->
+            <TRADE_AMT length="V20" mappedName="tradeAmt" />
+            <!--消费（交易类型 1:扫码；2:刷卡;3:分期）； 退货（原始交易类型 1:扫码；2:刷卡;3:分期） -->
+            <ORIGINAL_TRANS_TYPE length="V2"
+                mappedName="originalTransType" />
+            <!--无 退货（ORIGINAL_BUSI_AMT原始交易总金额 单位：分） -->
+            <ORIGINAL_BUSI_AMT length="V20"
+                constraint="?" mappedName="originalBusiAmt" />
+            <!--无 退货（已退款金额合计） -->
+            <REFUND_AMT_SUM length="V20" constraint="?"
+                mappedName="refundAmtSum" />
+            <!--无 退货（REMAIN_AMT剩余可退货金额 单位：分） -->
+            <REMAIN_AMT length="V20" constraint="?"
+                mappedName="remainAmt" />
+            <!--消费，退货（TRANS_CARD_NO 交易卡号） -->
+            <TRANS_CARD_NO length="V30" mappedName="transCardNo" />
+            <!--支付流水号（消费），退货流水号（退货） -->
+            <BUSI_ORDER_ID length="V50" mappedName="busiOrderId" />
+            <!--营业厅编号（总部渠道编码） -->
+            <CHANNEL_ID length="V30" mappedName="channelId" />
+            <!--营业员工号 -->
+            <STAFF_ID length="V30" mappedName="operatorId" />
+            <!--接口类型（1：消费 2：退货 3：撤销 ） -->
+            <BUSI_TRANS_TYPE length="V2" mappedName="busiTransType" />
+            <!--用户号码 -->
+            <SERIAL_NUMBER length="V20" constraint="?"
+                mappedName="serialNumber" />
+            <!--2是待处理（消费，退货，撤销 调用前存）， 0 成功（消费，退货，撤销 调用后前存），1失败 （消费，退货，撤销 
+                调用后前存） -->
+            <MODIFY_TAG length="V2" mappedName="modifyTag" />
+            <!--POS终端号 消费和退货） -->
+            <TRANS_POINT length="V50" mappedName="transPoint" />
+            <!--POS商户号 消费和退货 -->
+            <TRANS_MERCHANT length="V50" mappedName="transMerchant" />
+            <!--POS流水号 消费和退货 -->
+            <TRANS_TRACE length="V50" mappedName="transTrace" />
+            <!--V50 POS批次号 消费和退货 -->
+            <TRANS_BATCH length="V50" mappedName="transBatch" />
+            <!--POS系统检索号 消费和退货 -->
+            <TRANS_RETRIEVAL length="V50" mappedName="transRetrieval" />
+            <!--交易时间 （支付公司返回）刷卡，重订购，退货 -->
+            <TRANS_TIME length="F14" mappedName="transTime" />
+            <!--退货时间（退货时填写) -->
+            <REFUND_TIME length="F14" constraint="?"
+                mappedName="refundTime" />
+            <!-- 业务侧支付订单号(原始订单号) -退货时填 -->
+            <ORIGINAL_BUSI_ORDER_ID length="V50"
+                constraint="?" mappedName="originalBusiOrderId" />
+            <!--支付订单 的交易状态：（消费 调用前）2是待处理 ，（消费 调用后） 0 成功，1失败 ，（退货接口调用成功后修改）3 
+                已退货 （撤销接口调用成功后修改）4 已撤销 （冲正接口调用后）5 已冲正 -->
+            <TRANS_STATUS length="V2" mappedName="transStatus" />
+            <!--地市编码 参见《中国联通BSS域服务集规范_总册》 -->
+            <EPARCHY_CODE length="V10" mappedName="city" />
+            <!--省分编码 参见《中国联通BSS域服 -->
+            <PROVINCE_CODE length="V2" mappedName="province" />
+            <!--客户归属业务区 -->
+            <CITY_CODE length="V8" constraint="?" mappedName="district" />
+            <!--备用字段1 -->
+            <RSRV_STR1 length="V500" constraint="?"
+                mappedName="rsrvStr1" />
+            <!--备用字段2 -->
+            <RSRV_STR2 length="V500" constraint="?"
+                mappedName="rsrvStr2" />
+            <!--备用字段3 -->
+            <RSRV_STR3 length="V500" constraint="?"
+                mappedName="rsrvStr3" />
+            <!--备用字段4 -->
+            <RSRV_STR4 length="V500" constraint="?"
+                mappedName="rsrvStr4" />
+            <!--备用字段5 -->
+            <RSRV_STR5 length="V500" constraint="?"
+                mappedName="rsrvStr5" />
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID length="V20" mappedName="paraId" /><!--保留字段ID -->
+                <PARA_VALUE length="V60" mappedName="paraValue" /><!--保留字段值 -->
+            </PARA>
+        </PAYMENT_INFO_SYNC_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="?" />
+    </UNI_BSS_ATTACHED>
+</PAYMENT_INFO_SYNC_INPUT>

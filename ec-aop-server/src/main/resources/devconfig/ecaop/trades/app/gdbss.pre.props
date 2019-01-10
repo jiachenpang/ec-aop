@@ -1,0 +1,4 @@
+#广东bss
+ecaop.core.app.map.gdbss.pre=gdbpr
+ecaop.core.app.gdbpr.def={"code":"gdbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.gdbpr.allow={appkey:"gdbpr",allow:"qrtb,tsos,qcfc", deny:null}

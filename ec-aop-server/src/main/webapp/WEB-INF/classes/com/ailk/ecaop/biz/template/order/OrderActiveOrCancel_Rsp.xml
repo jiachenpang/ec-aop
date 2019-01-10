@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+    <ORDER_ACTIVATE_OR_CANCEL_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+            <!--应答编码, 0000成功, 8888 其他原因错误 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="1" length="V5000" mappedName="detail">
+            <!--错误描述 -->
+        </RESP_DESC>
+        <PARA constraint="*" mappedName="para">
+            <!--保留 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </ORDER_ACTIVATE_OR_CANCEL_RSP>
+</UNI_BSS_BODY>

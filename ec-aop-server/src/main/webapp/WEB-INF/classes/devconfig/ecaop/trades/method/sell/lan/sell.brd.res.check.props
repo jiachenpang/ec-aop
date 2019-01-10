@@ -1,0 +1,57 @@
+#固网资源预判
+ecaop.core.method.map.ecaop.trades.sell.brd.res.check=sbrc
+ecaop.core.method.sbrc.def={"mothod":"sbrc","remark":"网资源预判"}
+ecaop.core.method.sbrc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sbrc.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.sbrc.param.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    antiTpye:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)" },\
+    antiMode:{type:"String(1)",required:false,encrypted:false,validators:"@FixedLen(1)" },\
+    cityCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    exchCode:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    addressCode:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    simpleAddress:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    neighborNbr:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    prodCatId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    brandCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    provinceBrandCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    productId:{type:"String(8)",required:false,encrypted:false,validators:null},\
+    serviceId:{type:"String(8)",required:false,encrypted:false,validators:null},\
+    accessType:{type:"String(3)",required:false,encrypted:false,validators:null},\
+    brandSpeed:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    tradeTypeCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    shareType:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    oldServiceId:{type:"String(8)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    phyNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    NpFlag:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    shareNbrInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.trades.sbrc.shareNbrInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+    
+ecaop.trades.sbrc.shareNbrInfo={\
+   serviceClassCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+   brandCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+   areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+   shareNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+   vnId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+   departId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+   staffId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+   userName:{type:"String(20)",required:false,encrypted:false,validators:null}\
+   }
+
+#定义processors
+ecaop.core.method.sbrc.processors=@DealBrdResCheck()\
+                                  @ParametersMapper(ecaop.trades.sack.cbres.paramtersmapping)\
+                                  @WsCall(ecaop.comm.conf.url.cbss.services.resAnticipation4GSer)\
+                                  @Xml2JsonMapper4Fbs(ecaop.trades.sack.cbres.template)

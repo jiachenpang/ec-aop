@@ -1,0 +1,63 @@
+#照片上传申请
+ecaop.core.method.map.ecaop.trades.syn.pic.sub=syps
+ecaop.core.method.syps.def={"mothod":"syps","remark":"照片上传申请"}
+ecaop.core.method.syps.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.syps.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.syps.param.msg={\
+     operatorId:{type:"String(20)",required:false},\
+     province:{type:"String(2)",required:false},\
+     city:{type:"String(3)",required:false},\
+     channelId:{type:"String(20)",required:false},\
+     district:{type:"String(10)",required:false},\
+     psptTypeCode:{type:"String(2)",required:true},\
+     customerName:{type:"String(100)",required:true},\
+     psptAddr:{type:"String(256)",required:false},\
+     certNum:{type:"String(100)",required:true},\
+     sex:{type:"String(1)",required:false},\
+     folkCode:{type:"String(2)",required:false},\
+     startDate:{type:"String(14)",required:true},\
+     endDate:{type:"String(14)",required:true},\
+     workName:{type:"String(80)",required:false},\
+     birthday:{type:"String(50)",required:false},\
+     pic1:{type:"String(9999)",required:false},\
+     updateStaffId:{type:"String(20)",required:false},\
+     updateDepId:{type:"String(20)",required:false},\
+     updateTime:{type:"String(14)",required:false},\
+     authType:{type:"String(30)",required:false},\
+     authTime:{type:"String(30)",required:false},\
+     state:{type:"String(1)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+     
+#定义processors
+ecaop.core.method.syps.processors=@picSubCbss()
+
+#准备参数,调用cBSS身份证上传接口
+ecaop.trades.cbss.services.uploadCustInfo=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"CustForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"crtPersonCard",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"PSPT_INSERT_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cbss.uploadCustInfo.template@FBS@PSPT_INSERT_INPUT@n-1469109129@PSPT_INSERT_REQ"}\
+]
+
+ecaop.trades.cbss.uploadCustInfo.template=com/ailk/ecaop/biz/template/cbss/PsptInsert

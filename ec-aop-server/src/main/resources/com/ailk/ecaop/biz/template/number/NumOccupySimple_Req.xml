@@ -1,0 +1,29 @@
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderRspInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <CheckNumReq >
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <SerType length="F1" constraint="?" mappedName="serType" range="1,2" defaultValue="1"/>
+            <SysCode mappedName="sysCode"/>
+            <ResourcesInfo constraint="+" mappedName="resourcesInfo">
+                <ResourcesType length="F2" range="01,02,03,04,05" mappedName="resourcesType"/>
+                <!-- 资源唯一标识 -->
+                <ResourcesCode length="V30" mappedName="resourcesCode"/>
+                <ProKey mappedName="proKey" defaultValue="EAOP"/>
+                <!-- 预占标识 0 不预占 1 预占 2 预订(未付费) 3 预订(付费) 4 释放资源 -->
+                <OccupiedFlag length="F1" range="0,1,2,3,4" mappedName="occupiedFlag" />
+                <!-- 预占有效期 yyyymmddhh24miss OccupiedFlag:1的时候必填 -->
+                <OccupiedTime constraint="?" length="V20" mappedName="occupiedTime"/>
+            </ResourcesInfo>
+            <Para  constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </CheckNumReq>
+    </SvcCont>
+</UniBSS>

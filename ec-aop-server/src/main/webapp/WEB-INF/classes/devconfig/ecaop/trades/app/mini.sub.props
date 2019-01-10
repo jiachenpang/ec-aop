@@ -1,0 +1,18 @@
+#mini厅
+ecaop.core.app.map.mini.sub=mnsb
+ecaop.core.app.mnsb.def={"code":"mnsb", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.mnsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.mnsb.allow={appkey:"mnsb",allow:"qctc,smcc,oolq,mccr,mccn,cuck,opap,opsb,cdqy,cdnt,cdsn,qcsc,qcsq,qrtc,crck,\
+nboc,snqy,cccc,sccc,mvoa,sjxs,qcfc,qcfd,ccic,sbaq,sbrc,qrsq,lncg,oopq,spps", deny:null}
+
+#新增mock增加数组元素
+ecaop.core.app.mnsb.mock=[\
+{method:"cuck",mocked:true,mockid:"mockcuck",idscript:null,callback:null},\
+{method:"opsb",mocked:true,mockid:"mockcuck",idscript:null,callback:null},\
+{method:"cdqy",mocked:true,mockid:"mockcuck",idscript:null,callback:null},\
+{method:"cdnt",mocked:true,mockid:"mockcuck",idscript:null,callback:null},\
+{method:"cdsn",mocked:true,mockid:"mockcuck",idscript:null,callback:null},\
+{method:"qcsc",mocked:true,mockid:"mockqcsc",idscript:null,callback:null},\
+{method:"qcsq",mocked:true,mockid:"mockqcsq",idscript:null,callback:null},\
+{method:"opap",mocked:true,mockid:"mockqcsq",idscript:null,callback:null}\
+]

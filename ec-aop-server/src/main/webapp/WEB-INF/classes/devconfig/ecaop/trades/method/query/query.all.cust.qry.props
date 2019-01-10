@@ -1,0 +1,13 @@
+#各网别用户综合信息查询
+ecaop.core.method.map.ecaop.trades.query.all.cust.qry=cust
+ecaop.core.method.cust.def={"mothod":"cust","remark":"各网别用户综合信息查询"}
+ecaop.core.method.cust.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#定义processors,未做优化原因,不通过省份和APP可以进行区分
+ecaop.core.method.cust.processors=\
+                @TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ec-aop.rest)

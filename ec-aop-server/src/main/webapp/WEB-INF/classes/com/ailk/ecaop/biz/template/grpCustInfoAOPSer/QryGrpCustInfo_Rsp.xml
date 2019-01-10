@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_GRPCUST_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code" />
+        <RESP_DESC constraint="1" length="V500" mappedName="detail" />
+        <GROUP_ID constraint="?" length="V20" mappedName="groupId" />
+        <CUST_NAME constraint="?" length="V100" mappedName="custName" />
+        <CUST_ID constraint="?" length="V30" mappedName="custId" />
+        <GRP_CUST_LEVEL constraint="?" length="F1" mappedName="grpCustLevel" />
+        <CERT_TYPE_CODE constraint="?" length="V2" mappedName="certTypeCode" />
+        <CERT_CODE constraint="?" length="V100" mappedName="certCode" />
+        <GROUP_ADDR constraint="?" length="V200" mappedName="groupAddr" />
+        <ENTERPRISE_TYPE_CODE constraint="?" length="V2" mappedName="enterpriseTypeCode" />
+        <MANAGE_LEVEL_ID constraint="?" length="F1" mappedName="manageLevelId" />
+        <ACCT_ID constraint="?" length="V30" mappedName="acctId" />
+        <PAY_NAME constraint="?" length="V128" mappedName="payName" />
+        <PAY_MODE_CODE constraint="?" length="F1" mappedName="payModeCode" />
+        <USER_LIST constraint="*" mappedName="userList">
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <USER_ID length="V16" mappedName="userId" />
+            <ACCT_ID length="V30" mappedName="acctId" />
+            <PAY_NAME length="V128" mappedName="payName" />
+            <PAY_MODE_CODE length="F1" mappedName="payModeCode" />
+        </USER_LIST>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID constraint="1" length="V20" mappedName="paraId" />
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue" />
+        </PARA>
+    </QRY_GRPCUST_RSP>
+</UNI_BSS_BODY>

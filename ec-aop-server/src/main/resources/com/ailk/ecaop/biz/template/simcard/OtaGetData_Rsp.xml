@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetDataRsp mappedOut="true">
+    <!-- 0000：成功 0001：预占IMSI失败 9999 其它错误。 -->
+    <RespCode length="F4" range="0000,0001,5555,9999" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V100" mappedName="detail" />
+    <!-- 大卡卡号 -->
+    <ICCID length="V22" mappedName="iccid" />
+    <!-- IMSI号 -->
+    <IMSI length="F15" constraint="?" mappedName="imsi" />
+    <!-- 读卡序列 -->
+    <ProcId length="V30" mappedName="procId" />
+    <!-- 预配手机号 -->
+    <PreNumID length="V20" constraint="?" mappedName="numId" />
+    <!-- 交易流水（ESS生成返回） -->
+    <ActiveId length="V30" mappedName="activeId" />
+    <!-- 制卡脚本 -->
+    <ScriptSeq length="V256" mappedName="scriptSeq" />
+    <!-- PUK2（明文） -->
+    <puk2 length="V10" mappedName="puk2" />
+    <!-- ekey（明文） -->
+    <ekey length="V40" mappedName="ekey" />
+    <!-- 白卡数据 -->
+    <CardData length="V1024" constraint="?" mappedName="cardData" />
+    <!-- 白卡业务类型 -->
+    <CardType length="V30" constraint="?" mappedName="cardType"/>
+    <ReservPara length="V60" constraint="?" mappedName="ParaValue" />
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" type="String" mappedName="paraId" />
+        <ParaValue length="V20" type="String" mappedName="paraValue" />
+    </Para>
+</GetDataRsp>

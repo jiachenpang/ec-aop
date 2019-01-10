@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <CommitReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <AccessType length="F2" mappedName="accessType" defaultValue="01" />
+            <SysCode length="F4" mappedName="sysCode" defaultValue="EAOP" />
+            <OrdersID length="V20" mappedName="ordersId" />
+            <NewTradeCon length="F1" range="0,1" mappedName="newTradeCon" defaultValue="0" />
+            <ProvOrderID constraint="?" length="V20" mappedName="provOrderId" />
+            <NumSwitch constraint="?" length="F1" mappedName="numSwitch" />
+            <SimCardNo constraint="*" mappedName="simCardNo">
+                <CardDataProcID constraint="?" length="V30" mappedName="cardDataProcId" />
+                <SimID length="V20" mappedName="simId" />
+                <IMSI constraint="?" length="F15" mappedName="imsi" />
+                <CardType constraint="?" length="V30" mappedName="cardType" />
+                <CardData constraint="?" length="V1024" mappedName="cardData" />
+                <CardFee constraint="?" length="V10" mappedName="cardFee" />
+            </SimCardNo>
+            <FeeInfo constraint="*" mappedName="feeInfo">
+                <FeeID length="V20" mappedName="feeId" />
+                <FeeCategory length="V60" mappedName="feeCategory" />
+                <OrigFee length="V10" mappedName="origFee" />
+                <ReliefFee length="V10" mappedName="reliefFee" />
+                <FeeDes length="V120" constraint="?" mappedName="feeDes" />
+                <ReliefResult length="V60" mappedName="reliefResult" />
+                <RealFee length="V10" mappedName="realFee" />
+            </FeeInfo>
+            <OrigTotalFee length="V10" mappedName="origTotalFee" />
+            <InvoiceNo length="V30" constraint="?" mappedName="invoiceNo" />
+            <PayInfo mappedName="payInfo">
+                <PayType length="F2" range="10~15" mappedName="payType" />
+                <PayOrg length="V30" constraint="?" mappedName="payOrg" />
+                <PayNum length="V20" constraint="?" mappedName="payNum" />
+            </PayInfo>
+            <AcceptanceReqTag length="F1" range="0,1" mappedName="acceptanceReqTag" />
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </CommitReq>
+    </SvcCont>
+</UniBSS>

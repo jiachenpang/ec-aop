@@ -1,0 +1,33 @@
+#施工收费接口
+ecaop.core.method.map.ecaop.trades.sell.order.charges.sub=socs
+ecaop.core.method.socs.def={"mothod":"socs","remark":"施工收费接口"}
+ecaop.core.method.socs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.socs.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.socs.param.msg={\
+     operatorId:{type:"String(20)",required:true,validators:null},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:false,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:false,validators:null},\
+     channelId:{type:"String(20)",required:false,validators:null},\
+     channelType:{type:"String(7)",required:false,validators:null},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+     
+
+
+#定义processors
+
+ecaop.core.method.socs.processors=workCharge()
+                
+
+#请求参数
+ecaop.trades.socs.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ConstructionOrderForAopSer.chgConstructionOrder,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.socs.template@FBS@CHG_CONSTRUC_ORDER_INPUT@n1529397156@CHG_CONSTRUC_ORDER_REQ"}\
+]
+
+ecaop.trades.socs.template=com/ailk/ecaop/biz/template/cbss/ChgCinstrucOrder

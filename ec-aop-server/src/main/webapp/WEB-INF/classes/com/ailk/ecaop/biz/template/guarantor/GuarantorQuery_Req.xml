@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <GuarantorQryReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <OpeSysType length="F1" mappedName="opeSysType" defaultValue="1" range="1,2"/>
+            <CertType length="F2" constraint="?" mappedName="certType" />
+            <CertNum length="V30" constraint="?" mappedName="certNum"/>
+            <ContractTpye length="F2" mappedName="contractTpye"/>
+           <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </GuarantorQryReq>
+    </SvcCont>
+</UniBSS>

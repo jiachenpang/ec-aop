@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <CRT_CUSTINFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V5000" mappedName="detail"/>
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <PROVINCE_ORDER_ID length="V20" constraint="?" mappedName="provinceOrderId"/>
+            <CUST_ID length="V1" constraint="?" mappedName="custId"/>
+        </RESP_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId"/>
+            <PARA_VALUE length="V4000" mappedName="paraValue"/>
+        </PARA>
+    </CRT_CUSTINFO_RSP>
+</UNI_BSS_BODY>

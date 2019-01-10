@@ -1,0 +1,5 @@
+#智网科技实名制系统
+ecaop.core.app.map.zwkj.sub=zwkj
+ecaop.core.app.zwkj.def={"code":"zwkj", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.llsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.zwkj.allow={appkey:"zwkj",allow:"qcfc,qcfd", deny:null}

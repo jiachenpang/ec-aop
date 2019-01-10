@@ -1,0 +1,5 @@
+#apaas系统
+ecaop.core.app.map.apaas.sub=apas
+ecaop.core.app.apas.def={"code":"apas", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.apas.timeslimit=max 100 per 1 minute
+ecaop.core.app.apas.allow={appkey:"apas",allow:"crck", deny:null}

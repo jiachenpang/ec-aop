@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECKUERCHG_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECKUERCHG_REQ>
+             <PROVINCE_CODE length="F2" mappedName="provinceCode"/>
+            <EPARCHY_CODE length="V6" mappedName="serviceClassCode"/>
+            
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber"/>
+            <PROVINCE_USER_ID length="V30"   mappedName="provinceUserId" />
+            <OPT_TYPE length="V2"   mappedName="optType" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CHECKUERCHG_REQ>
+    </UNI_BSS_BODY>
+     <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECKUERCHG_INPUT>

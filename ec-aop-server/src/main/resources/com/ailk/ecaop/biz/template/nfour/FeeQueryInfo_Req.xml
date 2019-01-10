@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <FeeQueryReq>
+            <CostBillsTransIdo length="V30"  mappedName="costBillsTransId"/>
+            <OperatorID length="V20"  mappedName="operatorId"/>
+            <Province length="F2"  mappedName="province"/>
+            <City length="F3"  mappedName="city"/>
+            <District length="V10"  mappedName="district"/>
+            <ChannelID length="V20"  mappedName="channelId"/>
+            <ChannelType length="F7"  mappedName="channelType"/>
+            <PayTerminalsCode length="V30" constraint="?" mappedName="payTerminalsCode"/>
+            <AccessType length="F2"  mappedName="accessType"/>
+            <NetType length="F2"  mappedName="netType"/>
+            <AccProvince length="F2" constraint="?" mappedName="accProvince"/>
+            <AccCity length="F3" constraint="?" mappedName="accCity"/>
+            <Code length="V4" constraint="?" mappedName="code"/>
+            <UserNumber length="V30" mappedName="userNumber"/>
+            <CostTime length="F14"  mappedName="CostTime"/>
+            <CostFee length="V15"  mappedName="CostFee"/>
+            <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </FeeQueryReq>
+    </SvcCont>
+</UniBSS>

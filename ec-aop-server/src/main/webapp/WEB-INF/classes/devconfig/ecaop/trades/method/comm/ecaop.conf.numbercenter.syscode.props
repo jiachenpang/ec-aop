@@ -1,0 +1,13 @@
+#appcode与卡号中心sysCode转换
+
+ecaop.conf.params.numbercenter.syscode=\
+    {"ahbc":"3002","ahbpr":"3002","ahpre":"ahpre","apas":"9200","apsb":"apple","assb":"ass","auto":"autersys","2bsb":"b2b","bjsb":"bjpre",\
+    "cbsb":"9900", "cmsb":"cmall","cqbc":"8302","cqbpr":"8302","cqps":"cqpre","ecsb":"0002","elsb":"esal","fjbc":"3802","fjbpr":"3802",\
+    "fjpre":"fjpre","gdbc":"5102","gdbpr":"5102","gdsb":"gdjk","gdml":"gdmall","gdps":"gdpre","gsbc":"8702","gspr":"gspre","hibc":"5002",\
+    "gxbc":"5902","gxbpr":"5902","gzsb":"8502","gzpre":"gzpre","habc":"7602","hapr":"hbpre","hbbc":"7102","hbbpr":"7102","hpsb":"hbpre",\
+    "hibpr":"5002","hipre":"hipre","hnbc":"7402","hnbpr":"7402","hnpr":"hnpre","hupr":"hupre","jkzy":"jkzy","jlsb":"9002","jlpr":"jlpre",\
+    "jssb":"3402","jspr":"jspre","jxsb":"7502","jxpre":"jxpre","mphl":"mapphl","mpln":"mappln","mnsb":"mini","n6sb":"0008","nmsb":"1002",\
+    "nmbpr":"1002","nmpr":"nmpre","nxbc":"8802","nxbss":"8802","nxpr":"nxpre","paysb":"1600","qhbc":"7002","qhpr":"qhpre","scsb":"8102",\
+    "scpr":"scpre","sdpr":"sdpre","swsb":"sdwu","saip":"shaip","shsb":"3102","shbss":"3102","shpre":"shpre","snbc":"8402","snpre":"snpre",\
+    "sxbc":"1902","sxpr":"sxpre","tjbc":"1302","tjin":"tjintinn","tjpr":"tjpre","tsst":"tsst","wolm":"wolm","xjsb":"8902","xjpr":"xjpre",\
+    "xzbc":"7902","xzpre":"xzpre","ynbc":"8602","ynpre":"ynpre","zjsb":"3602","zjbpr":"3602","zjpre":"zjpre","masb":"mall"}

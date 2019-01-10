@@ -1,0 +1,4 @@
+#组合业务查询接口
+ecaop.trade.template.UsrSer.qryMultUserInfo={"serviceName":"UsrSer","operateName":"qryMultUserInfo","content":"QRY_MULT_USER_INFO_REQ"}
+#报文模版路径
+#ecaop.trade.cbpq.qryMultUserInfo.template=com/ailk/ecaop/biz/template/usrSer/qryMultUserInfo

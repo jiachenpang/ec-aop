@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY> 
+  <!-- 集团客户资料认证接口应答报文 -->  
+  <AUTHGRPCUST_RSP mappedOut="true"> 
+    <!-- 应答编码  0000成功 原客户  0001无此客户信息  1000证件类型不合法  1110证件号码不合法  8888 其它错误 -->  
+    <RSP_CODE mappedName="code" range="0000,0001,1000,1110,8888">
+    </RSP_CODE>
+    <!-- 应答描述 -->  
+    <RSP_DESC mappedName="detail" length="V512">
+    </RSP_DESC>  
+    <!-- 相应消息体 -->  
+    <AUTHGRPCUST_RSP_BODY constraint="?" mappedOut="true"> 
+      <!-- 集团客户资料集合 -->  
+      <GRP_CUST_LIST constraint="?" mappedOut="true" > 
+        <!-- 集团客户资料 -->  
+        <GRP_CUST_INFO constraint="*" mappedName="existedCustomer"> 
+          <!-- 是否黑名单客户标识 -->  
+          <BLACK_LIST_FLAG mappedName="blackListFlag" range="0,1"/>  
+          <!-- 是否达到最大用户数标识 -->  
+          <MAX_USER_FLAG mappedName="maxUserFlag" constraint="?" range="0,1"/>  
+          <!-- 是否欠费 -->  
+          <ARREARAGE_FLAG mappedName="arrearageFlag" constraint="?" range="0,1"/>  
+          <!-- 欠费信息 -->  
+          <ARREARAGE_INFO mappedName="arrearageMess" constraint="*"> 
+            <!-- 欠费号码 -->  
+            <ARREARAGE_NUM mappedName="serialNumber" constraint="?" length="V20"/>  
+            <!-- 欠费金额 -->  
+            <ARREARAGE_FEE mappedName="arrearageFee" constraint="?" length="V10"/> 
+          </ARREARAGE_INFO>  
+          <!-- 省分客户ID -->  
+          <PROVINCE_CUST_ID mappedName="custId" length="V20"/>  
+          <!-- 集团客户编号 -->  
+          <GROUP_ID mappedName="groupId" length="V40"/>  
+          <!-- 集团客户名称 -->  
+          <CUST_NAME mappedName="customerName" length="V100"/>  
+          <!-- 客户类型 -->  
+          <CUST_TYPE_CODE mappedName="customerType" range="01,02"/>  
+          <!-- 归属省分 -->  
+          <PROVINCE_CODE length="F2" mappedName="provinceCode"/>  
+          <!-- 归属地市 -->  
+          <EPARCHY_CODE mappedName="customerLoc" length="F3"/>  
+          <!-- 归属区县 -->  
+          <COUNTY_CODE constraint="?" length="V10" mappedName="countyCode"/>  
+          <!-- 集团客户通讯地址 -->  
+          <GROUP_ADDR length="V200" mappedName="groupAddr"/>  
+          <!-- 集团客户email -->  
+          <GROUP_EMAIL mappedName="CustomerEmail" constraint="?" length="V128"/>  
+          <!-- 集团客户邮政编码 -->  
+          <GROUP_POST_CODE mappedName="CustomerZip" constraint="?" length="V6"/>  
+          <!-- 联系人姓名 -->  
+          <CONTACT_NAME mappedName="contactPerson" constraint="?" length="V50"/>  
+          <!-- 联系人电话 -->  
+          <CONTACT_PHONE mappedName="contactPhone" constraint="?" length="V20"/>  
+          <!-- 联系人EMAIL -->  
+          <CONTACT_EMAIL mappedName="ContactEmail" constraint="?" length="V50"/>  
+          <!-- 联系人地址 -->  
+          <CONTACT_ADDR mappedName="ContactAddr" constraint="?" length="V256"/>  
+          <!-- 联系人邮编 -->  
+          <CONTACT_POST_CODE mappedName="ContactZip" constraint="?" length="V6"/>  
+          <!-- 证件类型  01 15位身份证  02 18位身份证  03 驾驶证  04 军官证  05 教师证  06 学生证  07 营业执照  08 护照  13 组织机构代码证 14事业单位法人证书  15介绍信 17 社会团体法人登记证书 18 照会99 其它 -->  
+          <CERT_TYPE_CODE mappedName="certType" constraint="?" range="01~15,17,18,99,21"/>  
+          <!-- 证件号码 -->  
+          <CERT_CODE mappedName="certNum" constraint="?" length="V50"/>  
+          <!-- 集团证件地址 -->  
+          <CUST_ADDR mappedName="certAdress" constraint="?" length="V200"/>  
+          <!-- 法人代表 -->  
+          <CUST_LEAGAL mappedName="OrgLeagalRep" constraint="?" length="V128"/>  
+          <!-- 证件失效日期 -->  
+          <CERT_END_DATE mappedName="certExpireDate" constraint="?" length="F8"/>  
+          <!-- 客户性别 女 0 男 1 range="0,1"-->  
+          <CUST_SEX mappedName="CustomerSex" constraint="?" length="F1"/>  
+          <!-- 证件生效日期  格式：yyyymmdd-->  
+          <CUST_BIRTH mappedName="CustomerBirth" constraint="?" length="F8"/> 
+        </GRP_CUST_INFO> 
+      </GRP_CUST_LIST> 
+    </AUTHGRPCUST_RSP_BODY>  
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/> 
+  </AUTHGRPCUST_RSP> 
+</UNI_BSS_BODY>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <CHK_LINE_NUM4G_RSP mappedOut="true">
+        <RESP_CODE length="F4" range="0000,8888" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <RESP_NUMBER constraint="*" mappedName="respNumber">
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <RESP_NUM_CODE length="F4" range="0000,1435,1438,8888" mappedName="respNumCode"/>
+            <RESP_NUM_DESC length="V500" mappedName="respNumDesc" />
+        </RESP_NUMBER>
+    </CHK_LINE_NUM4G_RSP>
+</UNI_BSS_BODY>

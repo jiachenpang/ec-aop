@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckNumRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+    <ResourcesRsp constraint="+" mappedName="resourcesRsp">
+        <!-- 手机号码 -->
+        <Number length="V30" mappedName="number" />
+        <RankMoney length="V10" mappedName="rankMoney" />
+        <ProductInfo constraint="*" mappedName="productInfo">
+            <ProductId length="V20" mappedName="productId" />
+        </ProductInfo>
+        <!-- 号码当前状态 -->
+        <NumStatus constraint="?" length="F1" range="0,1,2,3,4,5,6,7" mappedName="numStatus" />
+        <!-- 结果编码 -->
+        <RscStateCode length="F4" mappedName="rscStateCode" />
+    </ResourcesRsp>
+    <Para constraint="*" mappedName="para">
+        <ParaID mappedName="paraId" />
+        <ParaValue mappedName="paraValue" />
+    </Para>
+</CheckNumRsp>

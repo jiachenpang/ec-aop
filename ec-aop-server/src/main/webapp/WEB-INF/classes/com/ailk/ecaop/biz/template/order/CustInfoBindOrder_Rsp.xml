@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 全业务全业务客户资料与订单绑定 -->
+<UNI_BSS_BODY>
+    <BIND_CUST_AND_TRADE_RSP mappedOut="true">
+        <!--应答编码： 0000 成功 1017客户已存在 8888其他错误 -->
+        <RESP_CODE mappedName="code" length="F4" />
+        <!--应答描述 -->
+        <RESP_DESC mappedName="detail" length="V500" />
+        <!--应答信息 -->
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <!--客户标识 -->
+            <CUST_ID mappedName="custId" length="V16" />
+        </RESP_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </BIND_CUST_AND_TRADE_RSP>
+</UNI_BSS_BODY>

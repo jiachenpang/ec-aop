@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_REAL_FEE_INFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V500" mappedName="detail"/>
+        <REAL_FEE_INFO constraint="?" mappedName="realFeeInfo">
+            <DEPOSIT_MONEY length="V11" constraint="1" mappedName="depositMoney" />
+            <BALANCE_BEFORE_LAST length="V11" constraint="1" mappedName="balanceBeforeLast" />
+            <LAST_BALANCE length="V11" constraint="1" mappedName="lastBalance" />
+            <FEE length="V11" constraint="1" mappedName="fee" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V60" mappedName="paraValue"/>
+            </PARA>
+        </REAL_FEE_INFO>
+    </QRY_REAL_FEE_INFO_RSP>
+</UNI_BSS_BODY>

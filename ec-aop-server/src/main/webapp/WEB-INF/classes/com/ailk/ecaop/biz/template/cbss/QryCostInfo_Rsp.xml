@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_COST_INFO_RSP mappedOut="true">
+    <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V500" mappedName="detail"/>
+        <BUSINESS  constraint="?"  mappedName="business">
+            <SERIAL_NUMBER length="V20" mappedName="serialNumber"/>
+            <USER_NAME length="V40" mappedName="userName"/>
+            <ACCT_ID length="V20" mappedName="acctId"/>
+            <CITY_ID length="V10" mappedName="cityId"/>
+            <PROVINCE_CODE length="F2" mappedName="provinceCode"/>
+            <OWE_DATE length="V6" mappedName="oweDate"/>
+            <BEFORE_BALANCE length="V10" mappedName="beforeBalance"/>
+            <FEE_DETAIL_INFO constraint="*"  mappedName="feeDetailInfo">
+                   <CYCLE_ID length="V6" mappedName="cycleId"/>
+                   <ITEM_CODE length="V8" mappedName="itemCode"/>
+                   <FEE_NAME length="V100" mappedName="feeName"/>
+                   <FEE length="V11" mappedName="fee"/>                  
+            </FEE_DETAIL_INFO>
+            <ACCT_BALANCE length="V10" mappedName="acctBalance"/>
+             <TOTAL_FEE length="V10" mappedName="totalFee"/>
+             <DELAYING_TOTAL_FEE length="V10" mappedName="delayingTotalFee"/>
+             <PAY_FEE length="V10" mappedName="payFee"/>
+        </BUSINESS>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </QRY_COST_INFO_RSP>
+</UNI_BSS_BODY>

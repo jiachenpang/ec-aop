@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_SHARE_NBR_ORD_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+    	
+        <QRY_SHARE_NBR_ORD_REQ>
+            <NUMBER length="V20"  constraint="1" mappedName="serialNumber"/>
+            <!-- SERVICE_CLASS_CODE：暂时为空 -->
+            <NET_TYPE length="V2"  constraint="?" mappedName="netType"/>
+            <IS_EXISTS length="F1" constraint="1" mappedName="isExists">
+            </IS_EXISTS>
+            
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_SHARE_NBR_ORD_REQ>
+    </UNI_BSS_BODY>
+</QRY_SHARE_NBR_ORD_INPUT>

@@ -1,0 +1,2 @@
+#CBSS订单信息查询接口
+ecaop.trade.template.ordForNorthSer.qryTrade={"serviceName":"OrdForNorthSer","operateName":"qryTrade","content":"QRYTRADE_REQ"}

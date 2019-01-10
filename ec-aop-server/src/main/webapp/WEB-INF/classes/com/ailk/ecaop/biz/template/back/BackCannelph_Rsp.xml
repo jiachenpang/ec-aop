@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RollBackRsp mappedOut="true">
+    <!-- 应答编码 0000：退款预提交成功、0100：费用信息校验错误、9999：其他错误 -->
+    <!-- 收费信息 -->
+    <RspCode length="F4" range="0000,0100,9999" mappedName="code" />
+    <RspDesc length="V100" constraint="?" mappedName="detail" />
+    <FeeInfo>
+    <!-- 收费项编码 -->
+        <FeeId length="V20" mappedName="feeId"/>
+        <!-- 收费项科目 -->
+        <feeCategory length="F1" mappedName="feeCategory"/>
+        <!-- 收费项描述 -->
+        <FeeDes length="V120" mappedName="feeDes"/>
+        <!-- 最大减免金额正整数单位:分 -->
+        <MaxRelief constraint="?" length="V10" mappedName="maxRelief"/>
+        <!-- 应收费用正整数单位：分 -->
+        <OrigFee length="V10" mappedName="origFee"/>
+    </FeeInfo>
+    <!-- 总费用正整数单位：分 -->
+    <TotalFee length="V10" mappedName="totalFee"/>
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</RollBackRsp>

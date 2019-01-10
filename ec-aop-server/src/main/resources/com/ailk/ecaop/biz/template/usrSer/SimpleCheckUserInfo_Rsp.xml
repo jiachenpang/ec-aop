@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <SIMPLE_CHECK_USER_INFO_RSP mappedOut="true">
+        <RESP_CODE mappedName="code" length="F4" />
+        <RESP_DESC mappedName="detail" length="V500" />
+        <USER_INFO constraint="?">
+            <USER_ID mappedName="UserId" length="V20" />
+            <PROVINCE_CODE mappedName="ProvinceCode" length="F2" />
+            <OPEN_DATE mappedName="OpenDate" length="F14" />
+            <ACTIVATION_DATA mappedName="ActivationData" length="F14" />
+        </USER_INFO>
+        <PARA constraint="*" mappedName="Para">
+            <PARA_ID length="V20" mappedName="ParaID" />
+            <PARA_VALUE length="V60" mappedName="ParaValue" />
+        </PARA>
+    </SIMPLE_CHECK_USER_INFO_RSP>
+</UNI_BSS_BODY>

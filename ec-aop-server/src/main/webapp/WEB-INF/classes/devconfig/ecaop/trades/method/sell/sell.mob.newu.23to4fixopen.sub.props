@@ -1,0 +1,46 @@
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.23to4fixopen.sub=234t
+ecaop.core.method.234t.def={"mothod":"234t","remark":"23转4开户处理提交—固网"}
+ecaop.core.method.234t.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.234t.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.234t.MsgSchema={\
+   operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:false},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false},\
+    orderNo:{type:"String(20)",required:false},\
+    provOrderId:{type:"String(30)",required:false},\
+    feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234t.feeInfo)"},\
+    origTotalFee:{type:"String(10)",required:false},\
+    payInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234t.payInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#收费信息
+ecaop.trade.234t.feeInfo={\
+    feeId:{type:"String(20)",required:true},\
+    feeCategory:{type:"String(1)",required:true},\
+    calculateTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    feeDes:{type:"String(120)",required:true},\
+    origFee:{type:"String(10)",required:true},\
+    reliefFee:{type:"String(10)",required:true},\
+    reliefResult:{type:"String(60)",required:false},\
+    realFee:{type:"String(10)",required:true}\
+    }
+#客户支付信息
+ecaop.trade.234t.payInfo={\
+    payMode:{type:"String(1)",required:true},\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+}
+
+#定义processor
+ecaop.core.method.234t.processors=@ChangeFeeType()\
+                                  @FixOpenSub()

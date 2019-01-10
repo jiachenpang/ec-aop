@@ -1,0 +1,8 @@
+#上海AIP开户
+ecaop.core.app.map.shaip.sub=saip
+ecaop.core.app.saip.def={"code":"saip", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.saip.timeslimit=max 100 per 1 minute
+ecaop.core.app.saip.allow={appkey:"saip",allow:"cack,ccic,cdqy,cdnt,opap,opsb,cdsn,nboc,snqy,qrtc,oolq,cmck,cumd,sccc,crck,\
+smnp,mpsb,ppoq,2324,234o,sc4s,23t4,234s,234t,mofc,ofcs,kdwy,baoa,fasb,sfso,sfss,ofpc,psoa,psos,bypc,byps,scac,sbaos,bsoa,sbso,\
+bsop,odsb,sbcs,ofps,orta,modr,scmc,cuck,csaq,qcsp,qcacq,qcar,qcpq,qcpa,spfs,smno,tzcx,smcc,smosa,smoss,ipry,qctc,faoa,scaf,\
+codc,oata,mold,sony", deny:null}

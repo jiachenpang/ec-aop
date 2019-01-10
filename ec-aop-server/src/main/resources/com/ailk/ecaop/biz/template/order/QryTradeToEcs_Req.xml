@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QRY_TRADE_TO_ECS_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <QRY_TRADE_TO_ECS_REQ>
+      <OPERATORID length="V20" mappedName="operatorId"/>
+      <PROVINCE_CODE length="F2" mappedName="province"/>
+      <TRADE_ID constraint="?" length="V20" mappedName="ordersId">
+        <!--强制加锁标识, 可空非必传。, 1：强制加锁, 不传：非强制加锁-->
+      </TRADE_ID>
+      <CERT_NUM constraint="?" length="V18" mappedName="certNum"/>
+      <PARA constraint="*" mappedName="para">
+        <!--保留字段-->
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!--保留字段ID-->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!--保留字段值-->
+        </PARA_VALUE>
+      </PARA>
+    </QRY_TRADE_TO_ECS_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED> 
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/> 
+  </UNI_BSS_ATTACHED> 
+</QRY_TRADE_TO_ECS_INPUT>

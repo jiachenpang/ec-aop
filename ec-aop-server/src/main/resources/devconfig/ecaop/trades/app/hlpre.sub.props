@@ -1,0 +1,9 @@
+#黑龙江预受理
+ecaop.core.app.map.hlpre.sub=hlpr
+ecaop.core.app.hlpr.def={"code":"hlpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jlpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.hlpr.allow={appkey:"hlpr",allow:"ppoq,smnp,mpsb,qmoq,cack,cuck,snqy,nboc,2324,ccic,syps,opap,opsb,cdsn,cdqy,cdnt,cack,scmc,\
+codc,oata,mold,2324,234o,opsb,sc4s,oupc,trao,qctc,chph,cmck,opap,sccc,cumd,ucca,qrta,csaq,cumd,oupc,syps,bsop,odsb,kdwy,faoa,fasb,\
+sfso,sfss,smno,234s,234t,smcc,mofc,ofcs,ofpc,orta,modr,smosa,smoss,psoa,psos,scaf,scac,scmc,23t4,ipry,csaq,qcsp,ppoq,\
+tzcx,baoa,sbaos,bsoa,sbso,bsop,bypc,byps,sbcs,ofps,qcacq,qcar,qcpq,qcpa,spfs,qrtc,qrtac,msoa,smct,spff,qcbl,sjxs,qofq,mvoa,mmvc,adnu,cfsb,\
+isoa,ccqy,scccs,tsos,crck,qcsc,oolq,qopq,qcop,quuq", deny:null}

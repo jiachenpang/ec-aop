@@ -1,0 +1,5 @@
+#用于生产环境appCode的权限测试
+ecaop.core.app.map.ztest.sub=ztest
+ecaop.core.app.ztest.def={"code":"ztest", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow,timeslimit"}
+ecaop.core.app.ztest.timeslimit=max 0 per 1 minute
+ecaop.core.app.ztest.allow={appkey:"ztest",allow:"crck,mytest,cuck,cmck,paid,qcfd,qcfc", deny:null}

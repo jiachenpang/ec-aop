@@ -1,0 +1,53 @@
+#获取iptv相关信息
+ecaop.core.method.map.ecaop.trades.query.comm.iptv.qry=ipry
+ecaop.core.method.ipry.def={"mothod":"ipry","remark":"获取iptv相关信息"}
+
+ecaop.core.method.ipry.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.hpsb.ipry.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.hpsb.ipry.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    qryType:{type:"string(1)",required:true,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+    
+#定义processors
+ecaop.core.method.ipry.processors=@ParametersMapper(ecaop.hpsb.ipry.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.cbss.services.Number4GSer)\
+                              @Xml2JsonMapper4Fbs(ecaop.template.iptv.getiptvinfo)
+#请求参数
+ecaop.hpsb.ipry.ParametersMapping=[\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"Number4GSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"getIPTVInfo4G",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"GET_IPTV_INFO4G_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.template.iptv.getiptvinfo@FBS@GET_IPTV_INFO4G_INPUT@res@GET_IPTV_INFO4G_REQ"}\
+]
+
+ecaop.template.iptv.getiptvinfo=com/ailk/ecaop/biz/template/cbss/GetIptvInfo
+

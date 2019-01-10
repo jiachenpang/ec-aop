@@ -1,0 +1,61 @@
+#CBSS销户提交接口
+ecaop.core.method.map.ecaop.trades.serv.curt.canneluser.sub=sccs
+ecaop.core.method.sccs.def={"mothod":"sccs","remark":"销户提交"}
+ecaop.core.method.sccs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sccs.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.sccs.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true},\
+     city:{type:"String(3)",required:true},\
+     district:{type:"String(10)",required:true},\
+     channelId:{type:"String(20)",required:true},\
+     channelType:{type:"String(7)",required:true},\
+     ordersId:{type:"String(30)",required:true},\
+     opeSysType:{type:"String(1)",required:true},\
+     orderSource:{type:"String(10)",required:false},\
+     serialNumber:{type:"String(20)",required:true},\
+     destroyUserTag:{type:"String(1)",required:false},\
+     contactPhone:{type:"String(40)",required:false},\
+     userTag:{type:"String(1)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.sccs.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.sccs.route.flowConfig)
+                           
+ecaop.core.method.sccs.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->05 1->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->03"},\
+{id:"03", processor:"AopHandler(ecaop.n25.sccs.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.n6.sccs.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.cbss.sccs.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.n6.sccs.processors=@cancelUserToN6()
+ecaop.n25.sccs.processors=@cancelUserToN25()
+ecaop.cbss.sccs.processors=@cancelUser()
+
+#CBSS预提交
+ecaop.trades.sccs.cancelPre.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,@50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccs.cancelPre.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+ecaop.trades.sccs.cancelPre.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+#CBSS提交
+ecaop.trades.sccs.cancel.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordSer.orderSub,@50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccs.cancel.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.sccs.cancel.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+
+ecaop.trades.sccs.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.custCleSer.mobileCustCle",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccs.template@FBS@MOBILE_CUST_CLE_INPUT@n1529397156@MOBILE_CUST_CLE_REQ"}\
+]
+
+ecaop.trades.sccs.template=com/ailk/ecaop/biz/template/custCleSer/MobileCustCle

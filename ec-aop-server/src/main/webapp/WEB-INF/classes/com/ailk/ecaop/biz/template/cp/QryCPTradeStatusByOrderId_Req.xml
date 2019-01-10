@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_CP_TRADE_STATUS_BY_ORDERID_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_CP_TRADE_STATUS_BY_ORDERID_REQ>
+            <ORDER_ID constraint="1" length="F16" mappedName="orderId">
+                <!--订单编号-->
+            </ORDER_ID>
+            <PROVINCE_CODE constraint="1" length="F2" mappedName="provinceCode">
+                <!-- 省份编码-->
+            </PROVINCE_CODE>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" constraint="1" mappedName="paraId"/>
+                <PARA_VALUE length="V60" constraint="1" mappedName="paraValue"/>
+            </PARA>
+        </QRY_CP_TRADE_STATUS_BY_ORDERID_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"/>
+    </UNI_BSS_ATTACHED>
+</QRY_CP_TRADE_STATUS_BY_ORDERID_INPUT>

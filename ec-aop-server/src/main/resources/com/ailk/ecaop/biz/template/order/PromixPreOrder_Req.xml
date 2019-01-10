@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_PRETRADE_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_PRETRADE_INFO_REQ >
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" defaultValue="0200"/>
+            <PRE_TRADE_ID length="V20" mappedName="proOrderId"/>
+            <EPARCHY_CODE length="V6" mappedName="city"/>
+            <TRADE_TYPE_CODE length="V10" mappedName="tradeTypeCode" defaultValue="127"/>
+        </QRY_PRETRADE_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_PRETRADE_INFO_INPUT>

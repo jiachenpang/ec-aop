@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORDER_ACTIVATE_OR_CANCEL_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <ORDER_ACTIVATE_OR_CANCEL_REQ>
+            <OPER_TYPE constraint="1" length="F1" mappedName="operType">
+                <!-- 操作类型0：激活1：撤单 -->
+            </OPER_TYPE>
+            <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+            </ORDER_ID>
+            <PARA constraint="*">
+                <!--保留字段 -->
+                <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                    <!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+                    <!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </ORDER_ACTIVATE_OR_CANCEL_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</ORDER_ACTIVATE_OR_CANCEL_INPUT>

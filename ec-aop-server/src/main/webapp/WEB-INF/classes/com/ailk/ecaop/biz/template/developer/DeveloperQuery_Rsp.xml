@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 发展人信息查询返回报文 -->
+<DeveloperQueryRsp mappedOut="true">
+    <!-- 0000 成功1001无发展人信息，9999 其他错误（错误原因） -->
+    <RespCode length="F4" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V2000" mappedName="detail" />
+    <!-- 返回发展人信息 -->
+    <DeveloperInfo constraint="*" mappedName="developerInfo">
+        <!-- 发展人渠道名称 -->
+        <ChnlName length="V200" mappedName="chnlName" />
+        <!-- 发展人渠道编码 -->
+        <ChannelId length="V20" mappedName="channelId" />
+        <!-- 发展人Id -->
+        <DeveloperId length="V16" mappedName="developerId" />
+        <!-- 发展人名称 -->
+        <DeveloperName length="V128" mappedName="developerName" />
+        <!-- 发展人手机号码 -->
+        <DeveloperNumber length="V20" constraint="?" mappedName="developerNumber" />
+    </DeveloperInfo>
+</DeveloperQueryRsp>

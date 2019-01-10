@@ -1,0 +1,29 @@
+#esim号码获取 create by zhaok Date 17/10/16
+ecaop.core.method.map.ecaop.trades.query.resi.esim.qry=qreq
+
+ecaop.core.method.qreq.def={"mothod":"qreq","remark":"esim号码获取"}
+
+ecaop.core.method.qreq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.param.msg.schema.qreq)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg 校验器 
+ecaop.param.msg.schema.qreq={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:null },\
+    departId:{type:"String(10)",required:false,encrypted:false,validators:null },\
+    tradeType:{type:"String(2)",required:false,encrypted:false,validators:null },\
+    queryType:{type:"String(40)",required:true,encrypted:false,validators:null },\
+    serialNumber:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#流程控制
+ecaop.core.method.qreq.processors=QueryResiEsim()
+                                  

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <GetDataReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <CardUseType length="F1" range="0,1" mappedName="cardUseType" />
+            <ReDoTag length="F1" mappedName="reDoTag" />
+            <ProcId constraint="?" length="V30" mappedName="procId" />
+            <ActiveId constraint="?" length="V30" mappedName="activeId" />
+            <ICCID length="V22" mappedName="iccid" />
+            <OldICCID constraint="?" length="V22" mappedName="oldIccid" />
+            <NumID length="V20" mappedName="numId" />
+            <BusiType length="F2" mappedName="busiType" />
+            <CardType length="V30" mappedName="cardType" />
+            <UserType length="F2" mappedName="userType" />
+            <ErrorCode constraint="?" length="V10" defaultValue="9804"/>
+            <ErrorComments constraint="?" length="V256" defaultValue="0"/>
+            <!-- 白卡割接省份标识 1-割接,其他-未割接 by wangmc 20171218-->
+            <SimCardSwitch constraint="?" length="V1" defaultValue="0" mappedName="simCardSwitch" />
+            <!-- 3GE用的是ReservPara字段做备用字段,会直接透传给下游 -->
+            <ReservPara constraint="?" length="V60" mappedName="ReservPara" />
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </GetDataReq>
+    </SvcCont>
+</UniBSS>

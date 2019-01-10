@@ -1,0 +1,2 @@
+#CBSS获取序列
+ecaop.trade.template.getSeqIDForAOPSer.getSeqID={"serviceName":"GetSeqIDForAOPSer","operateName":"getSeqID","content":"SEQUQRY_REQ"}

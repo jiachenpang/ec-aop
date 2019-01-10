@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+<SIGN_CONTRACT_RSP mappedOut="true">
+  <RESP_CODE constraint="1" length="F4" mappedName="code">
+    <!--应答编码, 0000成功, 8888 其它-->
+  </RESP_CODE>
+  <RESP_DESC constraint="1" length="V500" mappedName="detail">
+    <!--应答描述-->
+  </RESP_DESC>
+  <RESP_INFO constraint="?" mappedName="respInfo">
+    <!--返回信息-->
+    <PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="provOrderId">
+      <!--省分订单ID-->
+    </PROVINCE_ORDER_ID>
+  <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/> 
+  </RESP_INFO>
+</SIGN_CONTRACT_RSP>
+</UNI_BSS_BODY>

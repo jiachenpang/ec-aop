@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS> <!-- 终端销售请求报文模板-->
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <TerminalSaleReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" constraint="1" mappedName="operatorId" />
+            <!-- 省分 -->
+            <Province required="true" length="F2" constraint="1" mappedName="province"/>
+            <!-- 地市 -->
+            <City required="true" length="F3" constraint="1" mappedName="city"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" constraint="1" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType required="true" length="F7" constraint="1" mappedName="channelType"/>
+            <!-- 接入类型  01 WEB； 02 短信； 03 WAP； 99 其他 -->
+            <AccessType required="true" length="F2" range="01~03,99" constraint="1" defaultValue="01"/>
+            <!-- 总部订单号-->
+            <SubscribeID length="V30" constraint="1" mappedName="ordersId"/>
+            <!-- 原有总部订单号（业务类型03,08：换机时用） -->
+            <OldSubscribeID constraint="?" length="V30" mappedName="OldSubscribeId"/>
+            <!-- 手机号码,如果是合约计划销售中，必须要填写 -->
+            <SerialNumber constraint="?" length="V30" mappedName="number"/>
+            <!-- 业务子类型(合约销售子类型10：自备机、11：非自备机,退机子类型20：Phone退机、21：维修点退机,换机子类型30：Phone换机、31：维修点换机 、32：开机损换机-->
+            <TradeType constraint="?" length="V30" range="10,11,20,21,30,31,32"  mappedName="tradeType"/><!-- 30 -->
+            <!-- 代理商渠道编码 -->
+            <AgentChannelID constraint="?" length="V20"  mappedName="agentChannelId"/>
+            <!-- 资源类型 -->
+            <ResourcesType constraint="?" length="F2" defaultValue="07" mappedName="resourcesType"/>
+            <!-- 标准包类型 -->
+            <PackageType constraint="?" length="F2" range="10,11,12,13,14,15,16,17,19,20,21,31" defaultValue="10" mappedName="packageType"/>
+            <!-- 业务类型 00: 顺价销售01：合约销售02：退机03：换机04：无线上网卡社会渠道批销
+                       05: 4G终端顺价销售06：4G终端合约销售07：4G终端退机08：4G终端换机09：4G终端无线上网卡社会渠道批销
+            -->
+            <OperType length="F2" range="00,01,02,03,04,05,06,07,08,09" constraint="1" mappedName="operType"/>
+            <!-- 社会渠道编码，业务类型为04,09时必传 -->
+            <SaleChannelID constraint="?" length="V20" mappedName="saleChannelId"/>
+            <!-- 无线上网卡号码 -->
+            <ResourcesNumber constraint="?" length="V20"  mappedName="resourcesNumber"/>
+            <!-- 资源串号（终端IMEI或ICCID） -->
+            <ResourcesCode length="V30" constraint="1" mappedName="resourcesCode"/>
+            <!-- 原有资源串号（终端IMEI或ICCID）业务类型03,08：换机时用 -->
+            <OldResourcesCode constraint="?" length="V30"  mappedName="oldResourcesCode"/>
+            <!-- 预存话费实收金额(单位：厘) -->
+            <DepositSaleFee constraint="?" length="V10" mappedName="depositSaleFee"/>
+            <!-- 终端实收金额(单位：厘) -->
+            <TerminalSaleFee constraint="?" length="V10"  mappedName="terminalSaleFee"/>
+            <!-- USIM卡费实收金额(单位：厘) -->
+            <UsimSaleFee constraint="?" length="V10"  mappedName="UsimSaleFee"/>
+            <!-- 减免原因 -->
+            <ReduceReason constraint="?" length="V256"  mappedName="reduceReason"/>
+            <!-- 发票号码 -->
+            <InvoiceNo constraint="?" length="V20" mappedName="invoiceNo"/>
+            <!-- 01预存话费送手机 02 购手机送话费 -->
+            <ActiveType constraint="?" length="V2" mappedName="activeType"/>
+            <!-- 保留字段 -->
+              <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </TerminalSaleReq>
+    </SvcCont>
+</UniBSS>

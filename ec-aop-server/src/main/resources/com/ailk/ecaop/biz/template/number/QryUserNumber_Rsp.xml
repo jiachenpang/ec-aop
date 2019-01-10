@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 全业务用户数量查询,用于查询一证五户 -->
+<UNI_BSS_BODY>
+    <QRY_USER_NUMBER_RSP mappedOut="true">
+        <RESP_CODE mappedName="code" length="F4" />
+        <RESP_DESC mappedName="detail" length="V500" />
+        <RESP_INFO constraint="*" mappedName="respInfo">
+            <USER_AMOUNT mappedName="userAmount" length="V5" />
+            <DATA_INFO constraint="+" mappedName="dataInfo">
+                <DATA_CODE mappedName="dataCode" length="F2" />
+                <DATA_VALUE mappedName="dataValue" length="V20" />
+            </DATA_INFO>
+            <NUMBER_INFO constraint="*" mappedName="numberInfo">
+                <SERIAL_NUMBER mappedName="serialNumber"
+                    length="V30" />
+                <PROVINCE_CODE length="F2" mappedName="provinceCode" />
+                <EPARCHY_CODE length="V6" mappedName="eparchyCode" />
+                <USER length="V2" constraint="?" mappedName="user" />
+                <PRE_TYPE length="V2" constraint="?"
+                    mappedName="preType" />
+            </NUMBER_INFO>
+        </RESP_INFO>
+        <PARA constraint="*" mappedName="Para">
+            <PARA_ID length="V20" mappedName="ParaID" />
+            <PARA_VALUE length="V60" mappedName="ParaValue" />
+        </PARA>
+    </QRY_USER_NUMBER_RSP>
+</UNI_BSS_BODY>

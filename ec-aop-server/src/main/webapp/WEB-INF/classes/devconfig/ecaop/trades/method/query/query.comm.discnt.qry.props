@@ -1,0 +1,24 @@
+#各类优惠查询
+ecaop.core.method.map.ecaop.trades.query.comm.discnt.qry=qcdq
+ecaop.core.method.qcdq.def={"mothod":"qcdq","remark":"各类优惠查询"}
+ecaop.core.method.qcdq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.qcdq.msg.schema)"},\    
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.trades.qcdq.msg.schema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\  
+    district:{type:"String(10)",required:false},\    
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    numId:{type:"String(20)",required:true},\
+    opeSysType:{type:"String(1)",required:true},\    
+    serviceClassCode:{type:"String(4)",required:true},\
+    qryType:{type:"String(1)",required:true},\    
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.qcdq.processors=@QueryDiscnt(ecaop.comm.conf.url.discnt-qry,ecaop.comm.conf.port.discnt-qry)

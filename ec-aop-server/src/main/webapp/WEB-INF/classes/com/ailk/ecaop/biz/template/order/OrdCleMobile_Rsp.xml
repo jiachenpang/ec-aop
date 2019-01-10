@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+ <CANCEL_TRADE_RSP>
+  <RESP_CODE constraint="1" length="F4" mappedName="respCode"><!--应答编码 0000 成功 1801 无此订单 1802 省分不允许撤单 1803 该订单为不可退订单 1804 
+    总部不允许撤单 1805 撤单类型不存在 1809 订单已竣工 1810 订单处理中（订单提交） 1811 订单已挂起 1812 系统错误，订单丢失 -->
+  </RESP_CODE>
+  <RESP_DESC constraint="1" length="V500" mappedName="respDesc"><!--应答描述 -->
+  </RESP_DESC>
+  <CANCEL_TRADE_INFO constraint="*" mappedName="cancelTradeInfo"><!--撤单订单信息 -->
+   <PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="provinceOrderId"><!--省份订单 -->
+   </PROVINCE_ORDER_ID>
+   <ORG_ORDER_ID constraint="1" length="V30" mappedName="orgOrderId"><!--原始总部订单 -->
+   </ORG_ORDER_ID>
+   <ORG_PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="orgProvinceOrderId"><!--原始省份订单 -->
+   </ORG_PROVINCE_ORDER_ID>
+   <FEE_INFO constraint="*" mappedName="feeInfo"><!--费用 -->
+    <FEE_MODE constraint="1" length="F1" mappedName="feeMode"><!--费用种类ESS提供，省分进行适配，见附录 -->
+    </FEE_MODE>
+    <FEE_TYPE_CODE constraint="1" length="V8" mappedName="feeTypeCode"><!--费用科目编码以省分编码为准 -->
+    </FEE_TYPE_CODE>
+    <FEE constraint="1" length="V11" mappedName="fee"><!--金额（为正整数，单位：分） -->
+    </FEE>
+    <OPERATE_TYPE constraint="1" length="F1" mappedName="operateType"><!--操作类型 1：收费；2：退费 -->
+    </OPERATE_TYPE>
+   </FEE_INFO>
+  </CANCEL_TRADE_INFO>
+  <TOTAL_FEE constraint="1" length="V11" mappedName="totalFee"><!--应收总金额（为正整数，单位：分） -->
+  </TOTAL_FEE>
+  <CANCEL_TOTAL_FEE constraint="1" length="V11" mappedName="cancelTotalFee"><!--应退总金额（为正整数，单位：分） -->
+  </CANCEL_TOTAL_FEE>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+ </CANCEL_TRADE_RSP>
+</UNI_BSS_BODY>

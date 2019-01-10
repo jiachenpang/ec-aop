@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <CHECK_USERCONTRACT_TRANSFER_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <HY_CONTRACT_INFO constraint="*" mappedName="hyContractInfo">
+            <HY_PRODUCT_INFO constraint="*" mappedName="hyProductInfo">
+                <HY_PRODUCT_TYPE length="V16" mappedName="hyProductType" />
+                <HY_PRODUCT_ID length="V16" mappedName="hyProductId" />
+                <HY_PRODUCT_MODE length="V16" mappedName="hyProductMode" />
+                <HY_PACKAGE_ID length="V16" mappedName="hyPackageId" />
+                <HY_DISCNT_CODE length="V16" mappedName="hyDiscntCode" />
+                <START_DATE length="V14" mappedName="startDate" />
+                <END_DATE length="V14" mappedName="endDate" />
+                <PARA1 constraint="?" length="V30" mappedName="para1" />
+                <PARA2 constraint="?" length="V30" mappedName="para2" />
+                <PARA3 constraint="?" length="V30" mappedName="para3" />
+                <PARA4 constraint="?" length="V30" mappedName="para4" />
+                <PARA5 constraint="?" length="V30" mappedName="para5" />
+            </HY_PRODUCT_INFO>
+            <HY_PURCHASE_INFO constraint="*" mappedName="hyPurchaseInfo">
+                <DEVICEIMEI constraint="?" length="V30" mappedName="deviceimei" />
+                <DEVICEBRAND constraint="?" length="V30" mappedName="devicebrand" />
+                <DEVICENO constraint="?" length="V30" mappedName="deviceno" />
+                <ASSURE_TYPE constraint="?" length="V1" mappedName="assureIype" />
+                <SALE_PRODUCT_LIST length="V8" mappedName="saleProductList" />
+                <HOLDUNITTYPE length="F1" mappedName="holdunittype" />
+                <PARA1 constraint="?" length="V30" mappedName="para1" />
+                <PARA2 constraint="?" length="V30" mappedName="para2" />
+                <PARA3 constraint="?" length="V30" mappedName="para3" />
+                <PARA4 constraint="?" length="V30" mappedName="para4" />
+                <PARA5 constraint="?" length="V30" mappedName="para5" />
+            </HY_PURCHASE_INFO>
+            <HY_SUB_ITEM_INFO constraint="*" mappedName="hySubItemInfo">
+                <DEVELOPERSTAFFNAME constraint="?" length="V200" mappedName="developerstaffname" />
+                <DEVELOPDATE constraint="?" length="V14" mappedName="developdate" />
+                <DEVELOPDEPARTID constraint="?" length="V20" mappedName="developdepartid" />
+                <DEVELOPCONTACT constraint="?" length="V100" mappedName="developcontact" />
+            </HY_SUB_ITEM_INFO>
+            <HY_TRADE_ITEM_INFO constraint="*" mappedName="hyTradeItemInfo">
+                <CANCEL_OLDTRADE constraint="?" length="V200" mappedName="cancelOldtrade" />
+                <NEW_PRESENT_RULE length="V50" mappedName="newPresentRule" />
+                <SUBSCRB_TYPE length="F1" mappedName="subscrbType" />
+                <IS_SFHY_EXTENDS constraint="?" length="F8" mappedName="isSfhyExtends" />
+                <PARA1 constraint="?" length="V50" mappedName="para1" />
+                <PARA2 constraint="?" length="V50" mappedName="para2" />
+                <PARA3 constraint="?" length="V50" mappedName="para3" />
+                <PARA4 constraint="?" length="V50" mappedName="para4" />
+                <PARA5 constraint="?" length="V50" mappedName="para5" />
+            </HY_TRADE_ITEM_INFO>
+            <PARA1 constraint="?" length="V50" mappedName="para1" />
+            <PARA2 constraint="?" length="V50" mappedName="para2" />
+            <PARA3 constraint="?" length="V50" mappedName="para3" />
+            <PARA4 constraint="?" length="V50" mappedName="para4" />
+            <PARA5 constraint="?" length="V50" mappedName="para5" />
+            <PARA6 constraint="?" length="V50" mappedName="para6" />
+            <PARA7 constraint="?" length="V50" mappedName="para7" />
+            <PARA8 constraint="?" length="V50" mappedName="para8" />
+        </HY_CONTRACT_INFO>
+        <PARA mappedName="para" constraint="?">
+            <PARA_ID constraint="?" mappedName="paraId" />
+            <PARA_VALUE constraint="?" mappedName="paraValue" />
+        </PARA>
+    </CHECK_USERCONTRACT_TRANSFER_RSP>
+</UNI_BSS_BODY>
+

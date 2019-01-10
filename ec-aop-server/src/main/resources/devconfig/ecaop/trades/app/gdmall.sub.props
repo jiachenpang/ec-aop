@@ -1,0 +1,4 @@
+#广东商城开户
+ecaop.core.app.map.gdmall.sub=gdml
+ecaop.core.app.gdml.def={"code":"gdml", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.gdml.allow={appkey:"gdml",allow:"crck", deny:null}

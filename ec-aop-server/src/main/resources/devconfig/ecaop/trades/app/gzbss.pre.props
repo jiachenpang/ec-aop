@@ -1,0 +1,5 @@
+#贵州bss
+ecaop.core.app.map.gzbss.pre=gzbpr
+ecaop.core.app.gzbpr.def={"code":"gzbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.gzbpr.allow={appkey:"gzbpr",allow:"qrtb,qcfd,qcfc,cmck,ccic,cumd,qcsq,qcsc,opap,opsb,cdsn,cdqy,cdnt,oolq,qcaq,\
+nboc", deny:null}

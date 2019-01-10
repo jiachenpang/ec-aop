@@ -1,0 +1,5 @@
+#cbss压单订单撤单
+ecaop.trades.scccs.pressCancel={"serviceName":"CbssOrderCleSer","operateName":"isCbssCleSo","content":"IS_CBSS_CLE_SO_REQ"}
+ecaop.trades.scccs.cancel.crm={"bipCode":"BIP2G018","activityCode":"T2000618","origDomain":"ULTE","content":"ReturnSaleReq"}
+ecaop.trades.scccs.cancelNum={"bipCode":"BIP4F001","activityCode":"T4000017","content":"CheckNumReq"}
+ecaop.trades.scccs.FbsPressCancel={"serviceName":"RealNameCardSer","operateName":"orderActivateOrCancel","content":"ORDER_ACTIVATE_OR_CANCEL_REQ"}

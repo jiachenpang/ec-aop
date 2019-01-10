@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+  <QRY_CHANGE_GROUP_RSP mappedOut="true">
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!-- 0000:成功8888：失败9999：其它 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V200" mappedName="detail">
+      <!-- 错误原因 -->
+    </RESP_DESC>
+    <STATE_CODE constraint="?" length="F2" mappedName="stateCode">
+      <!-- 校验结果：01：查询/变更成功02：无此团购信息；03：无法加入该团购；04：无法退出该团购； -->
+    </STATE_CODE>
+    <SERIAL_NUMBER constraint="?" length="V20" mappedName="serialNumber">
+      <!-- 手机号码 -->
+    </SERIAL_NUMBER>
+    <GROUP_PURCHASE_ID constraint="?" length="V20" mappedName="groupPurchaseId">
+      <!-- 团单 -->
+    </GROUP_PURCHASE_ID>
+    <GROUP_MEMBER_INFO constraint="*" mappedName="groupMemberInfo">
+        <GROUP_MEMBER_ID constraint="?" length="V20" mappedName="groupMemberId">
+          <!-- 团内成员号码 -->
+        </GROUP_MEMBER_ID>
+    </GROUP_MEMBER_INFO>
+    <GROUP_NUMBER constraint="?" length="V8" mappedName="groupNumber">
+      <!-- 团队数量 -->
+    </GROUP_NUMBER>
+    <GROUP_SUM constraint="?" length="V20" mappedName="groupSum">
+      <!-- 赠费金额 -->
+    </GROUP_SUM>
+    <PRODUCT_GROUP_PURCHASE_ID constraint="?" mappedName="productGroupPurchaseId">
+      <!-- 团购产品 -->
+    </PRODUCT_GROUP_PURCHASE_ID>
+    <PRODUCT_GROUP_PURCHASE_NAME constraint="?" length="V100" mappedName="productGroupPurchaseName">
+      <!-- 团产品名称 -->
+    </PRODUCT_GROUP_PURCHASE_NAME>
+    <RSRV_STR1 constraint="?" length="V20" mappedName="rsrvStr1">
+      <!-- 备用字段1 -->
+    </RSRV_STR1>
+    <RSRV_STR2 constraint="?" length="V20" mappedName="rsrvStr2">
+      <!-- 备用字段1 -->
+    </RSRV_STR2>
+    <RSRV_STR3 constraint="?" length="V60" mappedName="rsrvStr3">
+      <!-- 备用字段1 -->
+    </RSRV_STR3>
+    
+    <RSRV_STR4 constraint="?" length="V60" mappedName="rsrvStr4">
+      <!-- 备用字段1 -->
+    </RSRV_STR4>
+    <RSRV_STR5 constraint="?" length="V60" mappedName="rsrvStr5">
+      <!-- 备用字段1 -->
+    </RSRV_STR5>
+    <PARA constraint="*" mappedName="para">
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!-- 保留字段ID -->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!-- 保留字段值 -->
+      </PARA_VALUE>
+    </PARA>
+  </QRY_CHANGE_GROUP_RSP>
+</UNI_BSS_BODY>

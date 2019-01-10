@@ -1,0 +1,5 @@
+#助销系统
+ecaop.core.app.map.ass.sub=assb
+ecaop.core.app.assb.def={"code":"assb", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.assb.timeslimit=max 100 per 1 minute
+ecaop.core.app.assb.allow={appkey:"assb",allow:"qacq,cuck,opap,opsb,cdqy,cdnt,cdsn,qrtc,snqy,nboc,qcsc,qcsq,tsps", deny:null}

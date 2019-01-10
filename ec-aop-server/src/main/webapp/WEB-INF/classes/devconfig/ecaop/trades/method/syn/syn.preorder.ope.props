@@ -1,0 +1,102 @@
+#接收集客展业系统发起的预受理订单
+ecaop.core.method.map.ecaop.trades.syn.preorder.ope=spoo
+ecaop.core.method.spoo.def={"mothod":"spoo"}
+ecaop.core.method.spoo.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.spoo.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.ecsb.spoo.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     orderId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     opeType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)" },\
+     opeSysType:{type:"String(1)",required:false,encrypted:false,validators:null },\
+     custId:{type:"String(16)",required:false,encrypted:false,validators:null},\
+     checkType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+     groupId:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     custName:{type:"String(200)",required:false,encrypted:false,validators:null},\
+     certAddress:{type:"String(256)",required:false,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+     certNum:{type:"String(50)",required:false,encrypted:false,validators:null},\
+     postAddress:{type:"String(256)",required:false,encrypted:false,validators:null},\
+     phone:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     phoneSta:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     sparePhone:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     startTime:{type:"String(14)",required:false,encrypted:false,validators:null},\
+     endTime:{type:"String(14)",required:false,encrypted:false,validators:null},\
+     orderRemark:{type:"String(1000)",required:false,encrypted:false,validators:null},\
+     useCustName:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     usePsptType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+     usePsptCode:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     usePsptAdr:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     useResponsible:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     useCustMark:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     developChannelType:{type:"String(7)",required:false,encrypted:false,validators:null},\
+     developChannelId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     developdepartId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     developStaffId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     developStaffName:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.spoo.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.spoo.masb.flowConfig)
+                                  
+ecaop.core.method.spoo.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 2->03"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->04 N6->05"},\
+{id:"03", processor:"AopHandler(ecaop.masb.spoo.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.masb.spoo.preorder.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.masb.spoo.processors=@TransReqParam()\
+                           @ParametersMapper(ecaop.masb.spoo.preOrderParametersMapping)\
+                           @WsCall(ecaop.comm.conf.url.cbss.services.ExhibitionSer)\
+                           @Xml2JsonMapper4Fbs(ecaop.trades.spoo.preOrder.template)
+ 
+ecaop.masb.spoo.preOrderParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"ExhibitionSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"preOrderDeal",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"PRE_ORDER_DEAL_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.spoo.preOrder.template@FBS@PRE_ORDER_DEAL_INPUT@pre@PRE_ORDER_DEAL_REQ"}\
+]
+ecaop.trades.spoo.preOrder.template=com/ailk/ecaop/biz/template/order/PreOrderOpe
+
+ecaop.masb.spoo.preorder.processors=\
+                      @ParametersMapper(ecaop.masb.preorder.ParametersMapping)\
+                      @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                      @Xml2JsonMapper(ecaop.trades.syn.G3preorder.template)
+
+ecaop.masb.preorder.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00043",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"PreOrderOpeReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.syn.G3preorder.template@3GE@PreOrderOpeReq"}\
+]
+ecaop.trades.syn.G3preorder.template=com/ailk/ecaop/biz/template/order/G3PreOrderOpe

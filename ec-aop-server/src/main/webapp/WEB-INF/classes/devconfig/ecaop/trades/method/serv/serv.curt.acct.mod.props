@@ -1,0 +1,29 @@
+#客户账户信息修改
+ecaop.core.method.map.ecaop.trades.serv.curt.acct.mod=scam
+ecaop.core.method.scam.def={"mothod":"scam","remark":"客户账户信息修改"}
+ecaop.core.method.scam.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.scam.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.scam.param.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    orderId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:"@FixedLen(4)"},\
+    payName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+    payModeCode:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    debutyCode:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    urgeNbr:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    contactPerson:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    contactPhone:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.scam.processors=AcctModProcessor()    

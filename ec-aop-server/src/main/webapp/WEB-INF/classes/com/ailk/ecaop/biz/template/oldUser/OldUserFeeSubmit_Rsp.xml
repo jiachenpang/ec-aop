@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!--老用户存费送费订单预提交、收款结束后提交订单接口 请求报文模板 -->
+<OldUserFeeSubmitRsp mappedOut="true">
+    <RespCode length="F4" range="0000,0007,1100,1110,1120,1130,1140,9999" mappedName="code" />
+    <RespDesc length="V200" mappedName="detail" />
+    <!-- ESS订单交易流水 -->
+    <ProvOrderId length="V30" mappedName="provOrderId"></ProvOrderId>
+    <!-- BSS订单ID -->
+    <BssOrderId length="V30" constraint="?" mappedName="bssOrderId"></BssOrderId>
+    <!-- ESS总部订单ID -->
+    <EssOrderId length="V30" constraint="?" mappedName="essOrderId"></EssOrderId>
+    <!-- 税控码 -->
+    <TaxNo length="V30" constraint="?" mappedName="taxNo"></TaxNo>
+    <!-- 受理单模板编码 -->
+    <AcceptanceTp length="V20" constraint="?" mappedName="acceptanceTp"></AcceptanceTp>
+    <!-- 0：套打；1：白打 -->
+    <AcceptanceMode length="F1" constraint="?" range="0,1" mappedName="acceptanceMode"></AcceptanceMode>
+    <!-- 受理单打印内容 -->
+    <AcceptanceForm length="V1000" constraint="?" mappedName="acceptanceForm"></AcceptanceForm>
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml"/>
+</OldUserFeeSubmitRsp>

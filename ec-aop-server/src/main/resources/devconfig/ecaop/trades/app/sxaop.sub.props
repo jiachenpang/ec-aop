@@ -1,0 +1,7 @@
+#山西
+ecaop.core.app.map.sxaop.sub=sxaop
+ecaop.core.app.sxaop.def={"code":"sxaop", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.sxaop.timeslimit=max 100 per 1 minute
+ecaop.core.app.sxaop.allow={appkey:"sxaop",allow:"cuck,ccic,ppoq,qmoq,snqy,nboc,qrtc,smnp,mpsb,cdqy,cdnt,cdsn,cack,scmc,\
+codc,oata,mold,opsb,sc4s,trao,qctc,chph,cmck,opap,sccc,cumd,ucca,qrta,csaq,qcacq,qcar,spfs,mofc,ofcs,oupc,\
+2324,234o,qcbl,qofq,qcsp,sjgs,smct,crck,spff,qcfd,qcfc", deny:null}

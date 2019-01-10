@@ -1,0 +1,11 @@
+#易售宝接入配置
+ecaop.core.app.map.esal.sub=elsb
+
+ecaop.core.app.elsb.def=\
+    {"code":"elsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow,bizAllow",remark:"上海易售宝"}
+
+ecaop.core.app.elsb.allow=\
+    {appkey:"elsb",allow:"prqy,qcaq,dvqy,nboc,snqy,mnsa,opsb,cdsn,cdqy,cdnt", deny:null}
+ecaop.core.app.elsb.biz={"bizs":"TS-3G-010"}
+ecaop.core.app.elsb.TS-3G-010.provinceInBizAllow={allow:"31",deny:null}
+ecaop.core.app.elsb.bizAllow={allow:"TS-3G-010",deny:null}

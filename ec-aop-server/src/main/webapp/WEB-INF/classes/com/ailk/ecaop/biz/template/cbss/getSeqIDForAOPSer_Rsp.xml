@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <SEQUQRY_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V200" mappedName="detail" />
+        <SEQUENCE_INFO mappedName="info" constraint="*">
+            <SEQUENCE_ID length="V40" mappedName="id" />
+        </SEQUENCE_INFO>
+    </SEQUQRY_RSP>
+</UNI_BSS_BODY>

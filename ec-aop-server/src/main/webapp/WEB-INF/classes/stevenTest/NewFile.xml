@@ -1,0 +1,21 @@
+<UniBSS>
+    <OrigDomain>ECIP</OrigDomain>
+    <HomeDomain>UCRM</HomeDomain>
+    <BIPCode>BIP4F001</BIPCode>
+    <BIPVer>0100</BIPVer>
+    <ActivityCode>T4000001</ActivityCode>
+    <ActionCode>0</ActionCode>
+    <ActionRelation>0</ActionRelation>
+    <Routing>
+        <RouteType>00</RouteType>
+        <RouteValue>91</RouteValue>
+    </Routing>
+    <ProcID>9115052115020942</ProcID>
+    <TransIDO>9115052115020942</TransIDO>
+    <ProcessTime>20150521150209</ProcessTime>
+    <TestFlag>0</TestFlag>
+    <MsgSender>9801</MsgSender>
+    <MsgReceiver>9800</MsgReceiver>
+    <SvcContVer>0100</SvcContVer>
+    <SvcCont><![CDATA[<?xml version="1.0" encoding="UTF-8"?><CheckResReq><OperatorID>hlsc-liucy19</OperatorID><Province>97</Province><City>971</City><District>0000</District><ChannelID>97a4300</ChannelID><ChannelType>2010200</ChannelType><AccessType>01</AccessType><ResourcesInfo><ResourcesType>07</ResourcesType><ResourcesCode>354036047416231</ResourcesCode><OperType>0</OperType><UseType>0</UseType><OccupiedFlag>1</OccupiedFlag></ResourcesInfo></CheckResReq>]]></SvcCont>
+</UniBSS>

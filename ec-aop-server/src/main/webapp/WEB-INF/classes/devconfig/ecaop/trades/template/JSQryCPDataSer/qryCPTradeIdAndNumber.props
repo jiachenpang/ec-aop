@@ -1,0 +1,3 @@
+#查询融合业务订单编码和宽带号码
+ecaop.trade.template.JSQryCPDataSer.qryCPTradeIdAndNumber={\
+"serviceName":"JSQryCPDataSer","operateName":"qryCPTradeIdAndNumber","content":"QRY_CP_TRADEID_AND_NUMBER_REQ"}

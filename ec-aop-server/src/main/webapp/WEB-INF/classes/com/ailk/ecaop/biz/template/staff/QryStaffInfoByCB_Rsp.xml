@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_STAFF_INFO_RSP mappedOut="true">
+        <STANDARD_KIND_CODE constraint="*" length="V20" mappedName="standardKindCode">
+            <!-- 标注方式编码? -->
+        </STANDARD_KIND_CODE>
+        <STAFF_ID constraint="1" length="V20" mappedName="staffId">
+            <!--工号 -->
+        </STAFF_ID>
+        <DEPART_ID constraint="1" length="V20" mappedName="departId">
+            <!--部门编码 -->
+        </DEPART_ID>
+        <STAFF_NAME constraint="*" length="V50" mappedName="staffName">
+            <!--员工姓名 -->
+        </STAFF_NAME>
+        <SEX constraint="*" length="F1" mappedName="sex">
+            <!--员工性别 -->
+        </SEX>
+        <EMAIL constraint="*" length="V50" mappedName="email">
+            <!--员工邮箱 -->
+        </EMAIL>
+        <USER_PID constraint="*" length="V30" mappedName="userPid">
+            <!-- -->
+        </USER_PID>
+        <SERIAL_NUMBER constraint="*" length="V20" mappedName="serialNumber">
+            <!--联系电话 -->
+        </SERIAL_NUMBER>
+        <CUST_ID constraint="*" length="V30" mappedName="custId">
+            <!-- 客户ID -->
+        </CUST_ID>
+        <DIMISSION_TAG constraint="*" length="V20" mappedName="dimissionTag">
+            <!--联系电话 -->
+        </DIMISSION_TAG>
+        <BIRTHDAY constraint="*" length="V50" mappedName="birthday">
+            <!--生日 -->
+        </BIRTHDAY>
+        <LOGIN_FLAG constraint="*" length="V20" mappedName="loginFlag">
+            <!--登录状态标识-->
+        </LOGIN_FLAG>
+        <CITY_CODE constraint="*" length="V20" mappedName="cityCode">
+            <!--区县编码-->
+        </CITY_CODE>
+        <EPARCHY_CODE constraint="*" length="V20" mappedName="eparchyCode">
+            <!-- 地市编码 -->
+        </EPARCHY_CODE>
+        <PARA constraint="*" mappedName="para"><!--保留字段 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </QRY_STAFF_INFO_RSP>
+</UNI_BSS_BODY>

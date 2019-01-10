@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_ADDREXEC_INFO4G_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+            <!--资源预判结果编码, 0000：存在可用资源 8888：其它错误 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+            <!--资源预判描述信息或预判失败原因等 -->
+        </RESP_DESC>
+        <ADDRESS_LIST constraint="*" mappedName="addresList">
+            <!--产品类列表接入方式列 -->
+            <ADDRESS_CODE constraint="?" length="V40" mappedName="addresCode">
+                <!--产品类编码 -->
+            </ADDRESS_CODE>
+            <!--接入方式列表, -->
+            <ADDRESS_NAME constraint="1" length="V20" mappedName="addressName">
+                <!--接入方式编码 -->
+            </ADDRESS_NAME>
+            <EXCH_LIST constraint="*" mappedName="exchList">
+                <!--局向列表 -->
+                <EXCH_CODE constraint="1" length="V200" mappedName="exchCode">
+                    <!--局向编码 -->
+                </EXCH_CODE>
+                <EXCH_NAME constraint="1" length="V200" mappedName="exchName">
+                    <!--局向名称 -->
+                </EXCH_NAME>
+            </EXCH_LIST>
+            <RES_TYPE_LIST constraint="*" mappedName="resTypeList">
+                <RES_TYPE length="F1" mappedName="resType" />
+            </RES_TYPE_LIST>
+        </ADDRESS_LIST>
+    </QRY_ADDREXEC_INFO4G_RSP>
+</UNI_BSS_BODY>

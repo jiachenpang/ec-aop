@@ -1,0 +1,2 @@
+#订单激活
+ecaop.trade.template.cbssOrderCleSer.isCbssActivateSo={"serviceName":"CbssOrderCleSer","operateName":"isCbssActivateSo","content":"IS_CBSS_ACTIVATE_REQ"}

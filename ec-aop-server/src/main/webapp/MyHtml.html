@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="jquery-1.11.1.js"></script>
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <form method="post" name="qform">  
+      <label for="qname">请输入URL：</label>  
+      <input type="text" name="urltext" id="urltext" value="http://localhost:8080/aop/aopservlet" />  
+      <label for="qname">请输入Request内容：</label>  
+      <textarea  id="requesttext"></textarea>  
+      <input type="button" id="btnPostJson" data-inline="true" onclick="postJson();" value="提交" />  
+    </form>
+    <div id="resp"></div>
+  </body>
+  <script type="text/javascript">
+    function postJson() {  
+      
+    console.log(document.getElementById('requesttext').value);
+     var myDate = new Date();
+            var date = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + myDate.getDate() + " "
+                    + myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + "."
+                    + myDate.getMilliseconds();
+            date = "</br>发送请求时间: " + date;
+    $("#resp").html(date);
+    $.ajax({   
+        type : "POST",
+        url  : qform.urltext.value,
+        cache : false,   
+        data : document.getElementById('requesttext').value,   
+        success : function(response){
+        var myDate = new Date();
+            var date = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + myDate.getDate() + " "
+                    + myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + "."
+                    + myDate.getMilliseconds();
+            date = "</br> 接收返回时间: " + date;
+            $("#resp").append(response+date);
+        },   
+        error : function(){
+        var myDate = new Date();
+            var date = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + myDate.getDate() + " "
+                    + myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + "."
+                    + myDate.getMilliseconds();
+            date = "</br> 接收返回时间: " + date;
+            $("#resp").append(date);
+        }  
+    });
+      
+    return false;   
+  }  
+  </script>
+</html>

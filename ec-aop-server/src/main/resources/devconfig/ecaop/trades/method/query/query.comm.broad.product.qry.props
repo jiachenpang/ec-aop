@@ -1,0 +1,54 @@
+#宽带可变更产品查询
+ecaop.core.method.map.ecaop.trades.query.comm.broad.product.qry=cbpq
+ecaop.core.method.cbpq.def={"mothod":"qcaq","remark":"宽带可变更产品查询"}
+ecaop.core.method.cbpq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trade.cbpq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg校验
+ecaop.trade.cbpq.MsgSchema={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true,validator:"@FixedLen(2)"},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true,validator:"@FixedLen(7)"},\
+opeSysType:{type:"String(1)",required:true,validator:"@FixedLen(1)"},\
+queryType:{type:"String(1)",required:true,validator:"@FixedLen(1)"},\
+areaCode:{type:"String(6)",required:true,validator:"@FixedLen(1)"},\
+serialNumber:{type:"String(40)",required:true},\
+para:{type:"JSON",required:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#宽带可变更产品查询
+ecaop.core.method.cbpq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.cbpq.flowConfig)
+#配置跳转
+ecaop.core.method.cbpq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->03 N6->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->04 2->05"},\
+{id:"03", processor:"AopHandler(ecaop.trades.cbpq.3gn25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.trades.cbpq.3gn6.processors)", selector:"Noop", transitions:"*->STOP"}\
+{id:"05", processor:"AopHandler(ecaop.trades.cbpq.4g.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.trades.cbpq.3gn25.processors=@broadProductQryN25()
+ecaop.trades.cbpq.3gn6.processors=@broadProductQryN6()
+ecaop.trades.cbpq.4g.processors=@broadProductQryCBSS()
+#请求参数
+ecaop.trade.cbpq.BroadProductQryParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.broadbandUsrSer.qryChangeProduct",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.cbpq.template@FBS@QRY_CHANGE_PRODUCT_INPUT@n1529397156@QRY_CHANGE_PRODUCT_REQ"}\
+]
+
+#用户已订购产品查询请求参数
+ecaop.trade.cbpq.QryUserProInfoParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.usrSer.qryUserProInfo",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.cbpq.qryUserProInfo.template@FBS@QRY_USER_PRO_INFO_INPUT@n1529397156@QRY_USER_PRO_INFO_REQ"}\
+]
+
+#获取宽带账号/编码请求参数
+ecaop.trade.cbpq.getBroadbandAcctInfoParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.numberSer.getBroadbandAcctInfo",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.cbpq.getBroadbandAcctInfo.template@FBS@GET_BROADBAND_ACCT_INFO_INPUT@n1529397156@GET_BROADBAND_ACCT_INFO_REQ"}\
+]

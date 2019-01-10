@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<MESSAGE_SYNC_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY mappedOut="true">
+    <MESSAGE_SYNC_REQ>
+      <DEPORT_ID constraint="1" length="V20" mappedName="deportId">
+        <!-- 部门编码 -->
+      </DEPORT_ID>
+      <DISTRICT constraint="1" length="V10" mappedName="district">
+        <!-- 区县 -->
+      </DISTRICT>
+      <CHANNEL_TYPE constraint="1" length="V7" mappedName="channelType">
+        <!-- 渠道类型 -->
+      </CHANNEL_TYPE>
+      <OPERATOR_ID constraint="1" length="V20" mappedName="operatorId">
+        <!-- 操作员ID -->
+      </OPERATOR_ID>
+      <CHANNEL_ID constraint="1" length="V20" mappedName="channelId">
+        <!-- 渠道编码 -->
+      </CHANNEL_ID>
+      <PROVINCE constraint="1" length="F2" mappedName="province">
+        <!-- 省分 -->
+      </PROVINCE>
+      <CITY constraint="1" length="V3" mappedName="city">
+        <!-- 地市 -->
+      </CITY>
+      <ORDER_INFO constraint="*" mappedName="orderInfo">
+        <RECOM_DEPART_ID constraint="1" length="V128" mappedName="recomDepartId">
+          <!-- 发展人渠道 -->
+        </RECOM_DEPART_ID>
+        <PHONE_NAME constraint="?" length="V200" mappedName="phoneName">
+          <!-- 照片名称 -->
+        </PHONE_NAME>
+        <CONTACT_PERSON constraint="?" length="V20" mappedName="contactPerson">
+          <!-- 联系人（不能全数字） -->
+        </CONTACT_PERSON>
+        <PROORDER_ID constraint="1" length="V20" mappedName="proOrderId">
+          <!-- 预受理系统订单ID -->
+        </PROORDER_ID>
+        <RECOM_CITY constraint="1" length="F3" mappedName="recomCity">
+          <!-- 发展人地市 -->
+        </RECOM_CITY>
+        <ORD_TYPE constraint="1" length="F1" mappedName="ordType">
+          <!-- 业务受理类型： 0：单产品 1：融合 2：同装 -->
+        </ORD_TYPE>
+        <CONTACT_PHONE constraint="?" length="V20" mappedName="contactPhone">
+          <!-- 联系人电话>6位 -->
+        </CONTACT_PHONE>
+        <OPER_TYPE constraint="1" length="F1" mappedName="operType">
+          <!-- 操作类型： 0、新增 1、删除 -->
+        </OPER_TYPE>
+        <RECOM_PERSON_NAME constraint="1" length="V128" mappedName="recomPersonName">
+          <!-- 发展人名称 -->
+        </RECOM_PERSON_NAME>
+        <RECOM_PERSON_ID constraint="1" length="V30" mappedName="recomPersonId">
+          <!-- 发展员工 -->
+        </RECOM_PERSON_ID>
+        <CONTACT_ADDRESS constraint="?" length="V200" mappedName="contactAddress">
+          <!-- 通讯地址 -->
+        </CONTACT_ADDRESS>
+        <REMARK constraint="?" length="V500" mappedName="remark">
+          <!-- 备注 -->
+        </REMARK>
+        <MOBIL_TEMPLATE constraint="*" mappedName="mobilTemplate">
+          <INSTALL_MODE constraint="1" length="F1" mappedName="installMode">
+            <!-- 操作标识 0：新装 1：纳入 2：迁转 -->
+          </INSTALL_MODE>
+          <ACCT_SERIAL_NUMBER constraint="1" length="V12" mappedName="acctSerialNumber">
+            <!-- 移网号码 -->
+          </ACCT_SERIAL_NUMBER>
+          <PRODUCT_INFO constraint="*" mappedName="productInfo">
+            <PRODUCT_ID constraint="?" length="V20" mappedName="productId">
+              <!-- 产品ID -->
+            </PRODUCT_ID>
+            <PRODUCT_MODE constraint="?" length="F1" mappedName="productMode">
+              <!-- 产品类型： 0：主产品 1：附加产品 -->
+            </PRODUCT_MODE>
+            <PACKAGE_ELEMENT constraint="*" mappedName="packageElement">
+              <ELEMENT_TYPE constraint="1" length="F2" mappedName="elementType">
+                <!-- 元素类型 -->
+              </ELEMENT_TYPE>
+              <PACKAGE_ID constraint="1" length="V20" mappedName="packageId">
+                <!-- 包编号 -->
+              </PACKAGE_ID>
+              <ELEMENT_ID constraint="1" length="V20" mappedName="elementId">
+                <!-- 元素编号 -->
+              </ELEMENT_ID>
+            </PACKAGE_ELEMENT>
+          </PRODUCT_INFO>
+        </MOBIL_TEMPLATE>
+        <MIX_TEMPLATE constraint="?" mappedName="mixTemplate">
+          <INST_ALL_MODE constraint="1" length="F1" mappedName="instAllMode">
+            <!-- 操作标识 0：新装 1：变更 2：迁转 -->
+          </INST_ALL_MODE>
+          <MIX_ORD_ID constraint="?" length="V20" mappedName="mixOrdId">
+            <!-- 融合订单号，当融合产品中包括新装的移网号码时必传 -->
+          </MIX_ORD_ID>
+          <CP_TYPE constraint="1" length="F1" mappedName="cpType">
+            <!-- 加入融合产品类型 1：组合 2：共享 3：组合优化版 -->
+          </CP_TYPE>
+        </MIX_TEMPLATE>
+        <CUST_INFO constraint="*" mappedName="custInfo">
+          <CERT_CODE constraint="1" length="V100" mappedName="certCode">
+            <!-- 证件号码 -->
+          </CERT_CODE>
+          <CUST_NAME constraint="1" length="V40" mappedName="custName">
+            <!-- 客户名称 -->
+          </CUST_NAME>
+          <CUST_ID constraint="1" length="V16" mappedName="custId">
+            <!-- 客户标识 -->
+          </CUST_ID>
+          <CERT_TYPE_CODE constraint="1" length="F2" mappedName="certTypeCode">
+            <!-- 证件类别编码 -->
+          </CERT_TYPE_CODE>
+        </CUST_INFO>
+        <BROAD_BAND_TEMPLATE constraint="*" mappedName="broadBandTemplate">
+          <ACCT_SERIAL_NUMBER constraint="1" length="V12" mappedName="acctSerialNumber">
+            <!-- 服务号码，老用户纳入必填 -->
+          </ACCT_SERIAL_NUMBER>
+          <INST_ALL_MODE constraint="1" length="F1" mappedName="instAllMode">
+            <!-- 操作标识 0：新装 1：纳入 2：迁转 -->
+          </INST_ALL_MODE>
+          <ACCESS_MODE constraint="?" length="V10" mappedName="accessMode">
+            <!-- 接入方式(新用户必传) -->
+          </ACCESS_MODE>
+          <EXCH_CODE constraint="?" length="V20" mappedName="exchCode">
+            <!-- 局向编码 -->
+          </EXCH_CODE>
+          <CUST_ID constraint="?" length="V16" mappedName="custId">
+            <!-- 客户标识 -->
+          </CUST_ID>
+          <SPEED_LEVEL constraint="?" length="V10" mappedName="speedLevel">
+            <!-- 速率 -->
+          </SPEED_LEVEL>
+          <ACCOUNT_CODE constraint="?" length="V12" mappedName="accountCode">
+            <!-- 固网账号 -->
+          </ACCOUNT_CODE>
+          <AREA_EXCH_ID constraint="?" length="V200" mappedName="areaExchId">
+            <!-- 区局 -->
+          </AREA_EXCH_ID>
+          <SER_CODE constraint="1" length="F2" mappedName="serCode">
+            <!-- 网别:30、40 -->
+          </SER_CODE>
+          <INST_ALL_ADDRESS constraint="1" length="V200" mappedName="instAllAddress">
+            <!-- 装机地址 -->
+          </INST_ALL_ADDRESS>
+          <EXCH_NAME constraint="1" length="V200" mappedName="exchName">
+            <!-- 局向名称 -->
+          </EXCH_NAME>
+          <ADDRESS_NAME constraint="?" length="V1000" mappedName="addressName">
+            <!-- 标准地址名称 -->
+          </ADDRESS_NAME>
+          <POINT_EXCH_ID constraint="?" length="V200" mappedName="pointExchId">
+            <!-- 端局 -->
+          </POINT_EXCH_ID>
+          <ADDRESS_CODE constraint="?" length="V300" mappedName="addressCode">
+            <!-- 标准地址编码 -->
+          </ADDRESS_CODE>
+          <EXCH_INFO constraint="*" mappedName="exchInfo">
+            <VALUE constraint="1" length="V30" mappedName="value">
+              <!-- 值 -->
+            </VALUE>
+            <KEY constraint="1" length="V30" mappedName="key">
+              <!-- 关键字 -->
+            </KEY>
+          </EXCH_INFO>
+        </BROAD_BAND_TEMPLATE>
+      </ORDER_INFO>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </MESSAGE_SYNC_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+  </UNI_BSS_ATTACHED>
+</MESSAGE_SYNC_INPUT>

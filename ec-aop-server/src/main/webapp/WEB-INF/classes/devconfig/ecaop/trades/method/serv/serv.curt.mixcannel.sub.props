@@ -1,0 +1,100 @@
+#融合业务撤单提交
+#定义method
+ecaop.core.method.map.ecaop.trades.serv.curt.mixcannel.sub=scmc
+ecaop.core.method.scmc.def={"mothod":"scmc","remark":"融合业务撤单提交"}
+ecaop.core.method.scmc.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":"@JSONSchema(ecaop.trade.scmc.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trade.scmc.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    tradeTypeCode:{type:"String(4)",required:true,validators:"@FixedLen(4)"},\
+    mixCancelType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    soNbr:{type:"String(16)",required:true},\
+    cancelReason:{type:"String(500)",required:false},\
+    forceCancel:{type:"String(1)",required:false},\
+    para:{type:"JSON",required:false,"validators":"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#定义processor
+ecaop.core.method.scmc.processors=@mixcancel()
+
+#CB撤单许可预判接口
+ecaop.trade.scmc.isAllowCancelSoParametersMapping=[\
+       {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrderChgandCleSer",temp:true},\
+       {paramterName:"operateName",extractor:"fix",extractorConfig:"isAllowCancelSo",temp:true},\
+       {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+       {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+       {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+       {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+       {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+       {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+       {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+       {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+       {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+       {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+       {paramterName:"content",extractor:"fix",extractorConfig:"IS_ALLOW_CANCEL_SO_REQ",temp:true},\
+       {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+       {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+       {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trade.scmc.isAllowCancelSoTemplate@FBS@IS_ALLOW_CANCEL_SO_INPUT"}\
+]
+#CB撤单许可预判接口配置模板路径
+ecaop.trade.scmc.isAllowCancelSoTemplate=com/ailk/ecaop/biz/template/order/IsAllowCancel
+
+#CBSS撤单预提交
+ecaop.trades.scmc.cancelPre.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.scmc.cancelPre.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+ecaop.trades.scmc.cancelPre.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+#CBSS撤单提交
+ecaop.trades.scmc.cancel.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.scmc.cancel.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.scmc.cancel.template=com/ailk/ecaop/biz/template/nfour/OrderSub

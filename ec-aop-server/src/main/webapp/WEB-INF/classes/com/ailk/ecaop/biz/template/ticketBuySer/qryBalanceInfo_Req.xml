@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QRY_BALANCE_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_BALANCE_INFO_REQ>
+            <PROVINCE_CODE length="F2" mappedName="province" />
+            <EPARCHY_CODE length="V6" mappedName="district" />
+            <MERCHANT_ID length="V20" mappedName="merchantId" />
+            <OPER_TYPE length="F2" mappedName="operType" />
+            <BAR_CODE constraint="?" length="V30" mappedName="barCode" />
+            <SERIAL_NUMBER constraint="?" length="V30" mappedName="serialNumber" />
+            <PAY_PASSWORD constraint="?" length="F20" mappedName="payPassword" />
+            <TICKET_TYPE length="V12" mappedName="ticketType" />
+            <BUSINESS_CODE length="V6" mappedName="businessCode"></BUSINESS_CODE>
+            <ORDER_TIME length="F14" mappedName="orderTime"></ORDER_TIME>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId">
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue">
+                </PARA_VALUE>
+            </PARA>
+        </QRY_BALANCE_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_BALANCE_INFO_INPUT>

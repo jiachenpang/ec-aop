@@ -1,0 +1,89 @@
+ecaop.core.method.map.ecaop.trades.sell.fix.add.open.sub=fasb
+ecaop.core.method.fasb.def={"mothod":"fasb","remark":"固话新装 加装提交"}
+ecaop.core.method.fasb.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.fasb.param.schemaMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.fasb.param.schemaMsg={\
+    operatorId:{type:"String(20)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    ordersId:{type:"String(30)",required:false},\
+    opeSysType:{type:"String(1)",required:false},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    orderNo:{type:"String(20)",required:false,validators:null},\
+    feeInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.fasb.feeInfo)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    payInfo:{type:"JSON", required:true, validator:"@JSONSchema(ecaop.trades.fasb.payInfo)"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+ecaop.trades.fasb.feeInfo={\
+    feeId:{type:"String(20)",required:true,validators:null},\
+    feeCategory:{type:"String(1)",required:true,validators:null},\
+    feeDes:{type:"String(120)",required:true,validators:null},\
+    calculateTag:{type:"String(1)",required:true,validators:null},\
+    origFee:{type:"String(10)",required:true,validators:null},\
+    reliefFee:{type:"String(10)",required:true,validators:null},\
+    reliefResult:{type:"String(60)",required:false,validators:null},\
+    realFee:{type:"String(10)",required:true,validators:null}\
+}
+ecaop.trades.fasb.payInfo={\
+    payType:{type:"String(2)",required:true,validators:null},\
+    payMode:{type:"String(1)",required:true,validators:null},\
+    payNum:{type:"String(20)",required:false,validators:null},\
+    payOrg:{type:"String(30)",required:false,validators:null}\
+}
+ecaop.core.method.fasb.processors=@ChangeFeeType\
+                                  @fixOrderSub()
+
+#CB预提交
+ecaop.trades.fasb.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.fasb.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+#N6预提交
+ecaop.trades.fasb.N6.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"AOPOrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.fasb.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+
+ecaop.trades.fasb.template=com/ailk/ecaop/biz/template/nfour/OrderSub

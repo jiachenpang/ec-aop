@@ -1,0 +1,9 @@
+#湖南预受理
+ecaop.core.app.map.hnpre.sub=hnpr
+ecaop.core.app.hnpr.def={"code":"hnpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hnpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.hnpr.allow={appkey:"hnpr",allow:"cuck,ccic,ppoq,qmoq,snqy,nboc,qrtc,smnp,mpsb,cdqy,cdnt,cdsn,cack,scmc,\
+codc,oata,mold,2324,234o,opsb,sc4s,oupc,trao,qctc,chph,cmck,opap,sccc,cumd,ucca,qrta,csaq,syps,qcacq,qcpa,spfs,qcsp,\
+mofc,sack,qrsq,qrsc,bypc,byps,23t4,234s,234t,23l4,bsop,tzcx,qrtac,fasb,scac,\
+pipu,smno,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,qcar,qcpq,smcc,kdwy,smosa,smoss,sfss,sbaos,sbso,mcoa,orta,\
+modr,scaf,ofcs,mixk,jffx,smct,qrtb,spos,tsos,qcbl,qofq,spff,prqy,qcaq,dvqy,qctq,msoa,dvck,qcfq,qcfc,seft,qcfd,qcmd,qubq,qcdq", deny:null}

@@ -1,0 +1,9 @@
+#H2协议相关接口
+ecaop.core.app.map.h2.sub=h2sb
+ecaop.core.app.h2sb.def={"code":"h2sb", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.h2sb.timeslimit=max 100 per 1 minute
+ecaop.core.app.h2sb.allow={appkey:"h2sb",allow:"qcop,qcfq", deny:null}
+
+
+
+

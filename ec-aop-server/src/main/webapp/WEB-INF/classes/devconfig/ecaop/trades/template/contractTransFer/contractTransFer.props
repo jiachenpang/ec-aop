@@ -1,0 +1,2 @@
+#cbss合约查询
+ecaop.trades.234o.contractTransFer={"serviceName":"CheckUserContractTransferAopSer","operateName":"checkUserContractTransferAop","content":"CHECK_USERCONTRCT_TRANSFER_REQ"}

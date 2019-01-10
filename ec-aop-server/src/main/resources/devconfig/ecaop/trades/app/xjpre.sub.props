@@ -1,0 +1,8 @@
+#新疆沃受理 
+ecaop.core.app.map.xjpre.sub=xjpr
+ecaop.core.app.xjpr.def={"code":"xjpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.xjpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.xjpr.allow={appkey:"xjpr",allow:"mofc,prqy,csaq,qrtc,sack,snqy,cmck,nboc,qcsc,qcsq,smnp,ppoq,syps,cack,qmoq,scmc,mpsb,adnu,cuck,ccic,\
+qrsq,qrsc,cdsn,cdqy,mnsa,cdnt,qrta,opap,opsb,bypc,byps,2324,23t4,234o,234s,234t,23l4,bsop,tzcx,qrtac,fasb,scac,\
+pipu,smno,qctc,qcsp,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,qcacq,qcar,qcpq,smcc,kdwy,smosa,smoss,sfss,sbaos,sbso,qcpa,mcoa,oupc,orta,\
+modr,scaf,spfs,ofcs,qrtb,qofq,qcfc,qcfd,oolq,smct,spff,mofc,cuss,cumd,msoa,trao", deny:null}

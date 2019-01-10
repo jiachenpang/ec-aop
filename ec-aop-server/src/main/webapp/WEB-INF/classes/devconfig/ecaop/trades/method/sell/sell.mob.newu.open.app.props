@@ -1,0 +1,248 @@
+#开户处理申请
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.open.app=opap
+ecaop.core.method.opap.def={"mothod":"opap","remark":"开户处理申请"}
+ecaop.core.method.opap.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.gdjk.opap.Crcksmsg={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    ordersId:{type:"String(20)",required:true},\
+    numId:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksnumId)"},\
+    simCardNo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksimCardNo)"},\
+    customerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrckscustomerInfo)"},\
+    acctInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksacctInfo)"},\
+    userInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksuserInfo)"},\
+    resourcesInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksresourcesInfo)"},\
+    recomPersonId:{type:"String(30)",required:true},recomPersonName:{type:"String(128)",required:true},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#号码资料
+ecaop.gdjk.opap.CrcksnumId={\
+    serialNumber:{type:"String(20)",required:true},proKey:{type:"String(20)",required:true}\
+}
+#卡信息资料
+ecaop.gdjk.opap.CrcksimCardNo={\
+    cardDataProcId:{type:"String(30)",required:false},\
+    simId:{type:"String(20)",required:true},\
+    imsi:{type:"String(15)",required:false},\
+    cardType:{type:"String(30)",required:false},\
+    cardData:{type:"String(1024)",required:false}\
+}
+#客户信息
+ecaop.gdjk.opap.CrckscustomerInfo={\
+    authTag:{type:"String(1)",required:true},\
+    realNameType:{type:"String(1)",required:true},\
+    custType:{type:"String(1)",required:true},\
+    newCustomerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksnewCustomerInfo)"}\
+}
+#新客户信息
+ecaop.gdjk.opap.CrcksnewCustomerInfo={\
+    certType:{type:"String(2)",required:true},\
+    certNum:{type:"String(20)",required:true},\
+    certAdress:{type:"String(200)",required:true},\
+    customerName:{type:"String(128)",required:true},\
+    certExpireDate:{type:"String(8)",required:true},\
+    contactPerson:{type:"String(80)",required:false},\
+    contactPhone:{type:"String(20)",required:true},\
+    contactAddress:{type:"String(200)",required:false},\
+    custType:{type:"String(30)",required:false},\
+    customerRemark:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrckscustomerRemark)"}\
+}
+#客户备注
+ecaop.gdjk.opap.CrckscustomerRemark={\
+    customerRemarkId:{type:"String(20)",required:true},\
+    customerRemarkValue:{type:"String(60)",required:true}\
+}
+#账户信息
+ecaop.gdjk.opap.CrcksacctInfo={\
+    createOrExtendsAcct:{type:"String(1)",required:true},\
+    accountPayType:{type:"String(2)",required:true},\
+    debutySn:{type:"String(20)",required:false}\
+}
+
+#用户信息
+ecaop.gdjk.opap.CrcksuserInfo={\
+    userType:{type:"String(1)",required:true},\
+    bipType:{type:"String(1)",required:true},\
+    is3G:{type:"String(1)",required:true},\
+    serType:{type:"String(1)",required:true},\
+    packageTag:{type:"String(1)",required:true},\
+    firstMonBillMode:{type:"String(2)",required:false},\
+    checkType:{type:"String(2)",required:false},\
+    creditVale:{type:"String(2)",required:false},\
+    checkCreditVale:{type:"String(2)",required:false},\
+    userPwd:{type:"String(2)",required:false},\
+    product:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.gdjk.opap.Crcksproduct)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksactivityInfo)"},\
+    groupId:{type:"String(50)",required:false},appType:{type:"String(1)",required:false},\
+    subAppType:{type:"String(2)",required:false},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.gdjk.opap.CrckspayInfo)"}\
+ }
+
+#开户时选择的产品信息
+ecaop.gdjk.opap.Crcksproduct={\
+    productId:{type:"String(8)",required:true},\
+    productMode:{type:"String(1)",required:true}\
+}
+#开户时活动信息
+ecaop.gdjk.opap.CrcksactivityInfo={\
+    actPlanId:{type:"String(20)",required:true},\
+    resourcesType:{type:"String(2)",required:false},\
+    resProcId:{type:"String(20)",required:false},\
+    isTest:{type:"String(2)",required:false},\
+    resourcesCode:{type:"String(30)",required:false},\
+    resourcesFee:{type:"String(20)",required:false},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksactPara)"}\
+}
+#活动扩展字段
+ecaop.gdjk.opap.CrcksactPara={\
+    actParaId:{type:"String(20)",required:true},\
+    actParaValue:{type:"String(60)",required:true}\
+}
+#开户时选择的产品信息
+ecaop.gdjk.opap.CrckspayInfo={\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+}
+
+#资源信息
+ecaop.gdjk.opap.CrcksresourcesInfo={\
+    salePrice:{type:"String(10)",required:false},\
+    cost:{type:"String(11)",required:false},\
+    cardPrice:{type:"String(10)",required:false},\
+    reservaPrice:{type:"String(10)",required:false},\
+    productActivityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.opap.CrcksproductActivityInfo)"},\
+    resourcesBrandCode:{type:"String(20)",required:false},\
+    orgDeviceBrandCode:{type:"String(20)",required:false},\
+    resourcesBrandName:{type:"String(50)",required:false},\
+    resourcesModelCode:{type:"String(20)",required:false},\
+    resourcesModelName:{type:"String(100)",required:false},\
+    resourcesSrcCode:{type:"String(4)",required:false},\
+    resourcesSrcName:{type:"String(50)",required:false},\
+    resourcesSupplyCorp:{type:"String(100)",required:false},\
+    resourcesServiceCorp:{type:"String(100)",required:false},\
+    resourcesColor:{type:"String(20)",required:false},\
+    machineTypeCode:{type:"String(20)",required:false},\
+    machineTypeName:{type:"String(100)",required:false},\
+    distributionTag:{type:"String(1)",required:false},\
+    resRele:{type:"String(2)",required:false},\
+    terminalType:{type:"String(2)",required:false},\
+    terminalTSubType:{type:"String(2)",required:false},\
+    serviceNumber:{type:"String(40)",required:false}\
+}
+
+# 套包对应产品活动信息
+ecaop.gdjk.opap.CrcksproductActivityInfo={\
+    productId:{type:"String(20)",required:"true"},\
+    resourcesActivityCode:{type:"String(20)",required:"false"},\
+    resourcesActivityPer:{type:"String(2)",required:"false"}\
+}
+
+#定义processors
+ecaop.core.method.opap.processors=@NumRoute\
+                                  @route\
+                           	  @FlowProcessor(ecaop.core.method.opap.route.flowConfig)
+                           
+ecaop.core.method.opap.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->05 1->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->03"},\
+{id:"03", processor:"AopHandler(ecaop.masb.opap.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.n63G.opap.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.n6new.opap.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#南25一件开户开户处理申请  易售宝
+ecaop.n25.opap.processors=@OpenApplyProcessor()\
+			  @RecodeResourceInfo()
+
+#4G新开户流程
+ecaop.n6new.opap.processors=@qryChkTermN6()\
+                  @PreSubmit4GProcessor()\
+                  @RecodeResourceInfo()
+#n6一键开户开户处理申请
+#ecaop.n6.opap.processors=@qryChkTermN6()\
+#                 @TransReqParamsMapper()\
+#                 @AopCall(ecaop.comm.conf.url.ec-aop.rest)\
+#                 @RecodeResourceInfo()
+
+#n63g一键开户开户处理申请
+ecaop.n63G.opap.processors=@getCardDataInfo()\
+                 @qryChkTermN6()\
+                 @TransReqParamsMapper()\
+                 @AopCall(ecaop.comm.conf.url.ec-aop.rest)\
+                 @RecodeResourceInfo()\
+                 @callNumCenterPreeProcessor()
+ecaop.trades.qrychk.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3000001",temp:true},\
+{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP3F001",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CheckResReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.mnsb.opap.template@ONS"}\
+]
+ecaop.mnsb.opap.template=com/ailk/ecaop/biz/template/res/QryChkTerm
+#4G移网开户统一预提交接口  to CBSS
+ecaop.trades.sell.mob.opap4.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+    {paramterName:"routeValue",extractor:"fix",extractorConfig:"99",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sell.mob.opap4.template@FBS@SGL_UNI_TRADE_INPUT@ter@SGL_UNI_TRADE_REQ"}\
+]
+
+ecaop.trades.sell.mob.opap4.template=com/ailk/ecaop/biz/template/opensub/OpenApply4G
+
+#4G收入归集集团信息查询
+ecaop.trades.sell.mob.jtcp.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForAopthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryJtcpInfo",temp:true},\
+    {paramterName:"routeValue",extractor:"fix",extractorConfig:"99",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_JTCP_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sell.mob.jtcp.template@FBS@QRY_JTCP_INPUT@qry@QRY_JTCP_REQ"}\
+]
+
+ecaop.trades.sell.mob.jtcp.template=com/ailk/ecaop/biz/template/cbss/QryJtcpInfo
+#成卡数据查询走号卡中心省份开关
+ecaop.trades.sell.mob.opap4.province=99|59

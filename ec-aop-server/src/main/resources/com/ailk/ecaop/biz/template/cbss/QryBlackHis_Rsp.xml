@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_BLACK_HIS_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!-- 应答编码 0000 成功 1001无客户信息 1204 该号码不存在 8888其他 -->
+        </RESP_CODE>
+        <RESP_DESC length="V5000" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <BLACK_INFO constraint="*" mappedName="blackInfo">
+            <CERT_TYPE_CODE length="V2" mappedName="certTypeCode">
+            </CERT_TYPE_CODE>
+            <CERT_CODE length="V50" mappedName="certTypeCode">
+            </CERT_CODE>
+            <CUST_ID length="V16" mappedName="custId">
+            </CUST_ID>
+            <CUST_NAME length="V100" mappedName="custName">
+            </CUST_NAME>
+            <EPARCHY_CODE length="V6" mappedName="eparchyCode">
+            </EPARCHY_CODE>
+            <SERIAL_NUMBER length="V40" constraint="?" mappedName="serialNumber">
+            </SERIAL_NUMBER>
+            <ARREARAGE_FEE length="V11" constraint="?" mappedName="arrearageFee">
+                <!-- 欠费金额（单位：分） -->
+            </ARREARAGE_FEE>
+            <CREATE_DATE length="F14" constraint="?" mappedName="craeteDate">
+                <!-- 黑名单创建时间。格式：YYYYMMDDHH24MISS -->
+            </CREATE_DATE>
+            <DELETE_DATE length="F14" constraint="?" mappedName="deleteDate">
+                <!-- 清出黑名单时间。格式：YYYYMMDDHH24MISS -->
+            </DELETE_DATE>
+            <TRADE_STAFF_ID length="V20" constraint="?" mappedName="tradeStaffId">
+            </TRADE_STAFF_ID>
+            <OPER_TIME length="F14" constraint="?" mappedName="operDate">
+                <!-- 清出黑名单时间。格式：YYYYMMDDHH24MISS -->
+            </OPER_TIME>
+        </BLACK_INFO>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE length="V4000" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </QRY_BLACK_HIS_RSP>
+</UNI_BSS_BODY>

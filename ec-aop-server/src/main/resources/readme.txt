@@ -1,0 +1,3 @@
+devconfig文件存放本机调式程序用的配置，这个文件默认不连接redis，使用mock，
+testconfig下面存放上测试环境的配置，这个配置基本不用改，只有连接redis相关的配置
+本机开发将envspace.props里面内容修改为bizconfigdir=devconfig，不要上传该文件

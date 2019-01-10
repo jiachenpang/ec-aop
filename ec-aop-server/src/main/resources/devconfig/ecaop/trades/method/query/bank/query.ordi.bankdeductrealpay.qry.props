@@ -1,0 +1,49 @@
+#银行卡代扣代扣记录查询，可以查询银行卡代扣的所有记录
+ecaop.core.method.map.ecaop.trades.query.ordi.bankdeductrealpay.qry=qbcq
+ecaop.core.method.qbcq.def={"mothod":"qbcq","remark":"银行卡代扣状态查询"}
+ecaop.core.method.qbcq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qbcq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg校验器
+ecaop.ecsb.qbcq.MsgSchema={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    contractNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    startTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    endTime:{type:"String(14)",required:true,encrypted:false,validators:null}\
+}
+ecaop.core.method.qbcq.processors=@route\
+                           @FlowProcessor(ecaop.core.method.qbcq.flowConfig)
+#配置跳转
+ecaop.core.method.qbcq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.ecsb.qbcq4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.ecsb.qbcq4N25.processors=@BankRealpayQry()
+ecaop.ecsb.qbcq.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP2F012",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T8010005",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"1",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"BODY",temp:true},\
+{paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.qbcq.template@ONS"}\
+]
+#报文模版路径
+ecaop.ecsb.qbcq.template=com/ailk/ecaop/biz/template/bank/Qry_Bankdeductrealpay

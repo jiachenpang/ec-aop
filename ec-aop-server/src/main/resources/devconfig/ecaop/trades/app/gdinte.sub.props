@@ -1,0 +1,5 @@
+#广东互联网家平台
+ecaop.core.app.map.gdinte.sub=gdint
+ecaop.core.app.gdint.def={"code":"gdint", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gdint.timeslimit=max 100 per 1 minute
+ecaop.core.app.gdint.allow={appkey:"gdint",allow:"cmck,snqy", deny:null}

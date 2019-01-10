@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_RECV_FEE_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V500" mappedName="detail"/>
+       <RECV_FEE_REC_INFO constraint="*"  mappedName="recvFeeRecInfo">
+            <CHARGE_ID length="V20"   mappedName="chargeId"/>
+            <OUTER_TRADE_ID length="V30"  constraint="?"  mappedName="outerTradeId"/>
+            
+            <ACCT_ID length="V16" mappedName="acctId" />
+            <PAY_NAME length="V100" mappedName="payName" />
+            <USER_ID length="V16"  constraint="?"  mappedName="userId" />
+            <SERVICE_CLASS_CODE length="F4" constraint="?"  mappedName="serviceClassCode" />
+            <AREA_CODE length="V6"  constraint="?"  mappedName="areaCode" />
+            <SERIAL_NUMBER length="V40"  constraint="?"  mappedName="serialNumber" />
+            <ACTION_CODE length="V20"  constraint="?"  mappedName="actionCode" />
+            <ACTION_NAME length="V100"  constraint="?"  mappedName="actionName" />
+            <CHANNEL_ID length="V20"  mappedName="channelId" />
+            <PAYMENT_OP_DESC length="V20"  constraint="?"  mappedName="paymentOpDesc" />
+            <!-- 待确认 -->
+            <PAY_FEE_MODE length="F2"   mappedName="payFeeMode" />
+            <PAYMENT_ID length="V8"  constraint="?"  mappedName="paymentId" />
+            <BANK_ACCT_NO length="V30"  constraint="?"  mappedName="bankAcctNo" />
+            <BANK_CODE length="V10"  constraint="?"  mappedName="bankCode" />
+            <RECV_FEE length="V11"   mappedName="recvFee" />
+            <ITEM_NAME length="V20"   mappedName="itemName" />
+             <RECV_TIME length="F17"  constraint="?"  mappedName="recvTime" />
+            <RECV_EPARCHY_CODE length="V6"   mappedName="recvEparchyCode" />
+            <RECV_CITY_CODE length="V20"  constraint="?"  mappedName="recvCityCode" />
+            <RECV_DEPART_ID length="V20"   mappedName="recvDepartId" />
+            <RECV_STAFF_ID length="V20"   mappedName="recvStaffId" />
+            <STAFF_NAME length="V20"  constraint="?"  mappedName="staffName" />
+            <CANCEL_TAG length="F1"   mappedName="cancelTag" />
+            <CANCEL_TIME length="F17"  constraint="?"  mappedName="cancelTime" />
+            <CANCEL_CHARGE_ID length="V20"  constraint="?"  mappedName="cancelChargeId" />
+            <PRINT_TIMES length="V11"  constraint="?"  mappedName="printTimes" />
+       </RECV_FEE_REC_INFO>
+       <TOTAL_PRINT_FEE length="V11"  constraint="?"  mappedName="totalPrintFee" />
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </QRY_RECV_FEE_RSP>
+</UNI_BSS_BODY>

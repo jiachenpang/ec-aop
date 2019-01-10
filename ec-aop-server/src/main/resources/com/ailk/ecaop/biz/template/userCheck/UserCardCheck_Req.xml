@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS> <!--省份用户资料校验-补换卡（原 用户资料查询接口，请求报文模板）。 -->
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <UserInfoQueryReq>
+            <!-- 01:移动业务02:固定电话业务03：宽带统一编码04：宽带认证账号 -->
+            <ServiceType length="F2" range="01~04" mappedName="serviceType" />
+            <AreaCode constraint="?" length="V4" mappedName="areaCode" /> <!-- 区号 -->
+            <NumID length="V20" mappedName="serialNumber" /> <!-- 服务号码 -->
+            <PassWd constraint="?" length="V30" /> <!-- 服务密码 -->
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA> <!-- 保留字段 -->
+        </UserInfoQueryReq>
+    </SvcCont>
+</UniBSS>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AGENT_RECV_FEE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true"> 
+        <AGENT_RECV_FEE_REQ>
+            <!-- 缴费-请求 -->
+            <OUTER_TRADE_ID constraint="1" length="V30" mappedName="outerTradeId">
+                <!--总部交易流水号 -->
+            </OUTER_TRADE_ID>
+            <OUTER_TRADE_TIME constraint="?" length="F17" mappedName="outerTradeTime">
+                <!-- 总部交易时间 -->
+            </OUTER_TRADE_TIME>
+            <PAY_TYPE constraint="1" length="F1" mappedName="payType">
+                <!--缴费类型 1：按服务号码+电信业务网别+长途区号缴费 2：按账户ID缴费 3：按USER_ID缴费 -->
+            </PAY_TYPE>
+            <ACCT_ID constraint="?" length="V16" mappedName="acctId">
+                <!--帐户标识 -->
+            </ACCT_ID>
+            <USER_ID constraint="?" length="V16" mappedName="userId">
+                <!--用户标识 -->
+            </USER_ID>
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode">
+                <!--电信业务网别 -->
+            </SERVICE_CLASS_CODE>
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+                <!--区号 -->
+            </AREA_CODE>
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+                <!--服务号码 -->
+            </SERIAL_NUMBER>
+            <BAD_DEBT_TAG constraint="1" length="F1" mappedName="badDebtTag">
+                <!-- 0:普通缴费 1：呆坏账缴费 2：立即结账缴费 -->
+            </BAD_DEBT_TAG>
+            <IS_USER_PAY constraint="1" length="F1" mappedName="isUserPay">
+                <!-- 是否按用户交费 0：按账户 1：按账户+用户 -->
+            </IS_USER_PAY>
+            <RECV_FEE constraint="1" length="V11" mappedName="recvFee">
+                <!-- 收费金额 -->
+            </RECV_FEE>
+            <PAYMENT_ID constraint="?" length="V8" mappedName="payMentId">
+                <!-- 储值方式，编码由ESS配置-->
+            </PAYMENT_ID>
+            <AGENT_TAG constraint="1" length="F1" mappedName="agentTag">
+                <!-- 代理商标识 0:非代理商 1：代理商用户 -->
+            </AGENT_TAG>
+            <PRINT_TAG constraint="1" length="F1" mappedName="printTag">
+                <!--是否打印发票 0：不打印； 1：打印 -->
+            </PRINT_TAG>
+            <IS_TAX constraint="1" length="F1" mappedName="isTax">
+                <!-- 预存款是否分月打发票 0：不分月打 1：分月打 -->
+            </IS_TAX>
+            <AGENT_NOTE_SOURCE_INFO constraint="*" mappedName="agentNoteSourceInfo">
+                <!-- 发票资源信息 -->
+                <NOTE_BATCH_NO constraint="1" length="V30" mappedName="noteBatchNo">
+                    <!-- 发票批次号 -->
+                </NOTE_BATCH_NO>
+                <NOTE_NO constraint="1" length="V20" mappedName="noteNo">
+                    <!-- 票据号 -->
+                </NOTE_NO>
+            </AGENT_NOTE_SOURCE_INFO>
+            <PAY_CYCLEID_TAG constraint="1" length="F1" mappedName="payCycleidTag">
+                <!--是否指定账期缴费 0：不指定账期缴费  1：指定账期缴费  -->
+            </PAY_CYCLEID_TAG>
+            <AGENT_PAY_CYCLE_ID constraint="*" mappedName="AgentPayCycleId">
+                <!-- 指定账期缴费 -->
+                <CYCLE_ID constraint="1" length="F6" mappedName="cycleId">
+                    <!-- 账期标识 -->
+                </CYCLE_ID>
+                <CYCLE_FEE constraint="1" length="V11" mappedName="cycleFee">
+                    <!-- 分账期缴费金额 -->
+                </CYCLE_FEE>
+                <PAY_ITEM_TAG constraint="1" length="F1" mappedName="payItemTag">
+                    <!-- 是否指定账目缴费 0：不指定账目缴费 1：指定账目缴费 -->
+                </PAY_ITEM_TAG>
+                <AGENT_PAY_ITEM_CODE constraint="*" mappedName="AgentPayItemCode">
+                    <!-- 指定账目缴费 -->
+                    <PAYITEM_CODE constraint="1" length="V20" mappedName="payItemCode">
+                        <!-- 指定的账目 -->
+                    </PAYITEM_CODE>
+                </AGENT_PAY_ITEM_CODE>
+            </AGENT_PAY_CYCLE_ID>
+            <AGENT_PAY_INFO constraint="1" mappedName="agentPayInfo">
+                <!-- 支付信息 -->
+                <PAY_FEE_MODE constraint="1" length="F2" mappedName="payFeeMode">
+                    <!-- 支付方式 10：现金  ;11：现金支票; 12：转账支票; 13：信用卡; 14：缴费卡; 15：银行卡; 16：代收; 17：银行代扣
+                         18，托收; 19，非现金优惠; 20：银行卡代扣; 现金，不填写支付机构和支付账号  -->
+                </PAY_FEE_MODE>
+                <PAY_ORG constraint="?" length="V200" mappedName="payOrg">
+                    <!-- 支付机构名称 -->
+                </PAY_ORG>
+                <PAY_NUM constraint="?" length="V30" mappedName="payNum">
+                    <!-- 支付账号 -->
+                </PAY_NUM>
+            </AGENT_PAY_INFO>
+            <PARA constraint="*" mappedName="para"> 
+                <!--保留-->  
+                <PARA_ID constraint="1" length="V20" mappedName="paraId"> 
+                    <!--保留字段ID--> 
+                </PARA_ID>  
+                <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue"> 
+                    <!--保留字段值--> 
+                </PARA_VALUE> 
+            </PARA> 
+        </AGENT_RECV_FEE_REQ> 
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</AGENT_RECV_FEE_INPUT>

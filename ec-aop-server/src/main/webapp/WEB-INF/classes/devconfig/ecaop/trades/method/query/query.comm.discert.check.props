@@ -1,0 +1,61 @@
+#身份证校验
+ecaop.core.method.map.ecaop.trades.query.comm.discert.check=crdk
+ecaop.core.method.crdk.def={"mothod":"crdk"}
+
+ecaop.core.method.crdk.params=[\
+    {"param":"msg","type":"JSON","required":true, encrypted:false, validators:"@JSONSchema(ecaop.masb.crdk.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, encrypted:false, validators:null},\
+    {"param":"bizkey",type:"String(10)","required":false, encrypted:false, validators:null},\
+    {"param":"apptx",type:"String(30)","required":true, encrypted:false, validators:null}]
+
+#msg 校验器 
+ecaop.masb.crdk.msg.schema={\
+    province:{ type:"Number(2)", encrypted:false, required:true, validators:"@FixedLen(2)"},\
+    city:{ type:"Number(3)", encrypted:false, required:true, validators:"@FixedLen(3)"},\
+    certId:{ type:"String(15, 18)", encrypted:false, required:true, validators:null},\
+    certName:{ type:"String(60)", encrypted:false, required:true, validators:null}\
+}
+
+ecaop.core.method.crdk.processors=\
+                @CertCheckType()\
+                @ParametersMapper(method.crdk.params.mapping) \
+                @AopCall(ecaop.comm.conf.url.phw-eop, 60) \
+                @FormatDateAndDealException4Gzt()\
+                @JSONParametersMapper(ecaop.crdk.params.json.mapping)\
+                @removeEmpty()
+
+# 如果类型为03, 不需要配置
+ecaop.crdk.params.config.type={"masb":"03"}
+ecaop.crdk.params.config.syscode=\
+    {"ptbz":"0001","ecsb":"0004","shsb":"0005","gdml":"0006","rlct":"0007","pshl":"0008","mshl":"0009",\
+    "xjsb":"0010", "mnsb":"0011","masb":"0012","gzsb":"0015","zjsb":"0016"}
+
+method.crdk.params.mapping=[\
+{paramterName:"eop_appcode",extractor:"fix",extractorConfig:"D765425380464D8EAB5A9F51249FE4C1"},\
+{paramterName:"eop_action",extractor:"fix",extractorConfig:"idservice.ess.idcheck"},\
+{paramterName:"eop_reqts",extractor:"currentTime",extractorConfig:""},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:""},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province", temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city", temp:true},\
+{paramterName:"certId",extractor:"propertyGet",extractorConfig:"msg.certId", temp:true},\
+{paramterName:"certName",extractor:"propertyGet",extractorConfig:"msg.certName", temp:true},\
+{paramterName:"Message",extractor:"freemarker",extractorConfig:\
+    "{\\\"actionCode\\\":\\\"0\\\",\\\"actionRelation\\\":\\\"0\\\",\\\"activityCode\\\":\\\"T3G00001\\\",\\\"bipCode\\\":\\\"BIP4F002\\\",\\\"bipVer\\\":\\\"0100\\\",\\\"homeDomain\\\":\\\"UGZT\\\",\\\"msgReceiver\\\":\\\"9800\\\",\\\"msgSender\\\":\\\"9801\\\",\\\"origDomain\\\":\\\"UESS\\\",\\\"procID\\\":\\\"${transIDO}\\\",\\\"processTime\\\":\\\"${processTime}\\\",\\\"routing\\\":{\\\"routeType\\\":\\\"00\\\",\\\"routeValue\\\":\\\"00\\\"},\\\"svcCont\\\":{\\\"@type\\\":\\\"org.phw.eop.api.bean.checkcustid5.ess.CheckId5ReqBody4Ess\\\",\\\"accessType\\\":\\\"01\\\",\\\"checkCustId\\\":\\\"${certId}\\\",\\\"checkCustName\\\":\\\"${certName}\\\",\\\"checkType\\\":\\\"${type}\\\",\\\"sysCode\\\":\\\"${sysCode}\\\",\\\"city\\\":\\\"${city}\\\",\\\"province\\\":\\\"${province}\\\"},\\\"svcContVer\\\":\\\"0100\\\",\\\"testFlag\\\":\\\"0\\\",\\\"transIDO\\\":\\\"${transIDO}\\\"}"}\
+]
+
+ecaop.crdk.params.json.mapping=[\
+{paramterName:"certName",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.checkCustName"},\
+{paramterName:"certId",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.checkCustId"},\
+{paramterName:"checkType",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.checkType"},\
+{paramterName:"checkType",extractor:"Decode",extractorConfig:"checkType,01,01,02"},\
+{paramterName:"photo",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.photo"},\
+{paramterName:"sex",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.gender"},\
+{paramterName:"sex",extractor:"Decode",extractorConfig:"sex,0,M,1,F"},\
+{paramterName:"birthday",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.birthday"},\
+{paramterName:"nation",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.nationality"},\
+{paramterName:"addr",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.address"}\
+{paramterName:"exp",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.validityPeriod"}\
+{paramterName:"issue",extractor:"propertyGet",extractorConfig:"rspmsg.Message.svcCont.licenceIssAuth"}\
+
+]

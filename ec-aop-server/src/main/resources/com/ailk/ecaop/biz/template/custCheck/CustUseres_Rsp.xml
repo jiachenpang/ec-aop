@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustUseresRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code"/>
+    <!-- 错误描述  -->
+    <RespDesc length="V2000" mappedName="detail"/>
+    <!-- 使用人责任人标识  0 使用人   1 责任人 -->
+    <UseResponsible length="F1" constraint="?" mappedName="useResponsible"/>
+    <!-- 保留字段-->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</CustUseresRsp>

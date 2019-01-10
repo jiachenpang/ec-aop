@@ -1,0 +1,5 @@
+#天津互联网经营服务平台国政通测试
+ecaop.core.app.map.tjintinn.sub=tjin
+ecaop.core.app.tjin.def={"code":"tjin", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.tjin.timeslimit=max 100 per 1 minute
+ecaop.core.app.tjin.allow={appkey:"tjin",allow:"crck", deny:null}

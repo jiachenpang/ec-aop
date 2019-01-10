@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <PAY_KC_CANINFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V5000" mappedName="detail"/>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId"/>
+            <PARA_VALUE length="V4000" mappedName="paraValue"/>
+        </PARA>
+    </PAY_KC_CANINFO_RSP>
+</UNI_BSS_BODY>

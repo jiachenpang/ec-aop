@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <NumberResQueryReq>
+             <!-- 操作员ID-->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3" mappedName="city"/>
+            <!-- 区县 -->
+            <District length="V10" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType"/>
+            <!-- 业务类型 -->
+            <BusType length="F1" constraint="?" mappedName="busType" defaultValue="1" range="1,2"/>
+             <!-- 号码类型 1 公众 2 集团 3 员工权限-->
+            <GroupFlag length="F1" constraint="?" mappedName="groupFlag" defaultValue="3" range="1,2,3"/>
+            <!-- 受理类型 1：后付费  2：预付费 -->
+            <SerType length="F1" mappedName="serType" range="1,2"/>
+            <SysCode length="F4" mappedName="sysCode"/>
+            <!-- 选号参数 -->
+            <QueryParas constraint="*" mappedName="queryParas">
+             <QueryType length="F2" mappedName="queryType"/>
+             <QueryPara length="V30" mappedName="queryPara" constraint="?"/>
+            </QueryParas>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </NumberResQueryReq>
+    </SvcCont>
+</UniBSS>

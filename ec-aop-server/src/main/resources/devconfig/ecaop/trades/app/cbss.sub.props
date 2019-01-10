@@ -1,0 +1,5 @@
+#CB预受理订单查询
+ecaop.core.app.map.cbss.sub=cbsb
+ecaop.core.app.cbsb.def={"code":"cbsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.cbsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.cbsb.allow={appkey:"cbsb",allow:"ppoq,qcsp,smcc,sjgs,ucck,qcfc,qcfd,tsos", deny:null}

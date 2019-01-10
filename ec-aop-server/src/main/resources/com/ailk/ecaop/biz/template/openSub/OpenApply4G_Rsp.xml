@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+        <SGL_UNI_TRADE_RSP mappedOut="true">
+            <RESP_CODE constraint="1" length="F4"><!--应答编码, 0000成功, 8888 其他原因错误 -->
+            </RESP_CODE>
+            <RESP_DESC constraint="1" length="V5000"><!--错误描述 -->
+            </RESP_DESC>
+            <RSP_INFO constraint="*" mappedOut="true"><!--统一预提交应答信息 -->
+                <ORDER_ID constraint="1" length="V30"><!--总部订单ID -->
+                </ORDER_ID>
+                <PROVINCE_ORDER_ID constraint="1" length="V30"><!--省分订单ID -->
+                </PROVINCE_ORDER_ID>
+                <PROVINCE_ORDER_INFO constraint="*"><!--省分子订单信息 -->
+                    <AREA_CODE constraint="?" length="V6"><!--区号 -->
+                    </AREA_CODE>
+                    <SERIAL_NUMBER constraint="?" length="V40"><!--用户号码 -->
+                    </SERIAL_NUMBER>
+                    <SUB_ORDER_ID constraint="?" length="V30"><!--总部子订单ID -->
+                    </SUB_ORDER_ID>
+                    <SUB_PROVINCE_ORDER_ID constraint="1" length="V30"><!--省分子订单ID -->
+                    </SUB_PROVINCE_ORDER_ID>
+                    <PRE_FEE_INFO_RSP constraint="*"><!--整体费用 -->
+                        <OPERATE_TYPE constraint="1" length="F1"><!--操作类型 1：收费；2：退费，默认为1 -->
+                        </OPERATE_TYPE>
+                        <FEE_MODE constraint="1" length="V1"><!--费用种类, ESS提供，省分去适配 -->
+                        </FEE_MODE>
+                        <FEE_TYPE_CODE constraint="1" length="V8"><!--费用科目编码按省分编码为准 -->
+                        </FEE_TYPE_CODE>
+                        <FEE_TYPE_NAME constraint="1" length="V50"><!--费用科目名称 -->
+                        </FEE_TYPE_NAME>
+                        <PAY_TAG constraint="1" length="V1"><!--收费标志：, 0－未收费，1－已收费 -->
+                        </PAY_TAG>
+                        <MAX_DERATE_FEE constraint="1" length="V11"><!--最大减免金额（为正整数，单位：分） -->
+                        </MAX_DERATE_FEE>
+                        <OLDFEE constraint="1" length="V11"><!--金额（为正整数，单位：分） -->
+                        </OLDFEE>
+                        <FEE constraint="1" length="V11"><!--应收金额 -->
+                        </FEE>
+                    </PRE_FEE_INFO_RSP>
+                    <TOTAL_FEE constraint="1" length="V11"><!--应收总费用（为正整数，单位：分） -->
+                    </TOTAL_FEE>
+                    <TRADE_RECEIPT constraint="*"><!--免填单节点 -->
+                        <COMM_RECEIPTINFO constraint="?" length="V4000"><!--免填单信息公共信息 -->
+                        </COMM_RECEIPTINFO>
+                        <RECEIPT_INFO1 constraint="？" length="V4000"><!--免填单信息1 -->
+                        </RECEIPT_INFO1>
+                        <RECEIPT_INFO2 constraint="？" length="V4000"><!--免填单信息2 -->
+                        </RECEIPT_INFO2>
+                        <RECEIPT_INFO3 constraint="？" length="V4000"><!--免填单信息3 -->
+                        </RECEIPT_INFO3>
+                        <RECEIPT_INFO4 constraint="？" length="V4000"><!--免填单信息4 -->
+                        </RECEIPT_INFO4>
+                        <RECEIPT_INFO5 constraint="？" length="V4000"><!--免填单信息5 -->
+                        </RECEIPT_INFO5>
+                    </TRADE_RECEIPT>
+                </PROVINCE_ORDER_INFO>
+            </RSP_INFO>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+        </SGL_UNI_TRADE_RSP>
+        
+</UNI_BSS_BODY>
+            

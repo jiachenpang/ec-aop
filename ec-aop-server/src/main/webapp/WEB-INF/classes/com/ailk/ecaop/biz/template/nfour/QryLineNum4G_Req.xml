@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_LANG_LINE_NUM4G_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY mappedOut="true">
+    <QRY_LANG_LINE_NUM4G_REQ>
+    <!--固网空闲号码查询请求报文-->
+      <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode">
+        <!--电信类型：, 参见附录取值-->
+      </SERVICE_CLASS_CODE>
+      <BRAND_CODE constraint="?" length="F4" mappedName="brandeCode">
+        <!--品牌, 参见附录取值-->
+      </BRAND_CODE>
+      <PROVINCE_BRAND_CODE constraint="?" length="V20" mappedName="provinceBrandeCode">
+        <!--省分品牌-->
+      </PROVINCE_BRAND_CODE>
+      <PRODUCT_ID constraint="?" length="V8" mappedName="mainProd">
+        <!--产品标识-->
+      </PRODUCT_ID>
+      <CITY_CODE constraint="?" length="V20" mappedName="cityCode">
+        <!--营业区-->
+      </CITY_CODE>
+      <AREA_EXCH_ID constraint="?" length="V200" mappedName="areaExchId">
+      <!-- 区局 -->
+      </AREA_EXCH_ID>
+      <POINT_EXCH_ID constraint="?" length="V200" mappedName="pointExchId">
+      <!-- 端局 -->
+      </POINT_EXCH_ID>
+      <SWITCH_EXCH_ID constraint="?" length="V200" mappedName="switchExchId">
+      <!-- 交换局 -->
+      </SWITCH_EXCH_ID>
+      <MODULE_EXCH_ID constraint="?" length="V200" mappedName="moduleExchId">
+      <!-- 模块局 -->
+      </MODULE_EXCH_ID>
+      <EXCH_CODE constraint="?" length="V200" mappedName="exchCode">
+      <!-- 局向 -->
+      </EXCH_CODE>
+      <QRY_TYPE constraint="?" length="F1" mappedName="qryType">
+      <!-- 查询方式：2 空闲号码查询3 按号码头查询4 按号码尾查询-->
+      </QRY_TYPE>
+      <LEVEL_CODE constraint="?" length="V6" mappedName="levelCode">
+        <!--号码等级, 省分为一位的参见统一数据模型中BSY_000002编码-->
+      </LEVEL_CODE>
+      <NUM_KEY constraint="?" length="V20" mappedName="numKey">
+        <!--号码关键字-->
+      </NUM_KEY>
+      <NUM_HEAD_CODE constraint="?" length="V20" mappedName="NumHeadCode">
+        <!--号头信息-->
+      </NUM_HEAD_CODE>
+      <ADDRESS_CODE constraint="?" length="V40" mappedName="addressCode">
+        <!--标准地址编码-->
+      </ADDRESS_CODE>
+      <RES_TYPE constraint="?" length="F1" mappedName="resType">
+        <!--资源承载能力, 0 PSTN, 1 NGN, 2 EPON, 3 MDU, 4 GPON-->
+      </RES_TYPE>
+      <PARA_LIST constraint="*" mappedName="para">
+        <!--保留字段-->
+        <PARA_ID length="V20" mappedName="paraId">
+          <!--保留字段ID-->
+        </PARA_ID>
+        <PARA_VALUE length="V60" mappedName="paraValue">
+          <!--保留字段值-->
+        </PARA_VALUE>
+      </PARA_LIST>
+    </QRY_LANG_LINE_NUM4G_REQ>
+  </UNI_BSS_BODY>
+      <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_LANG_LINE_NUM4G_INPUT>

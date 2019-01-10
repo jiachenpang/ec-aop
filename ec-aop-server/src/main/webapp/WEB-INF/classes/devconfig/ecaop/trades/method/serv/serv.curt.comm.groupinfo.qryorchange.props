@@ -1,0 +1,33 @@
+#团购信息查询变更
+ecaop.core.method.map.ecaop.trades.serv.curt.comm.groupinfo.qryorchange=cgqe
+ecaop.core.method.cgqe.def={"mothod":"cgqe","remark":"团购信息查询变更"}
+ecaop.core.method.cgqe.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.cgqe.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.cgqe.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    serialNumber:{type:"String(20)",required:true,encrypted:false,validators:null },\
+    operateType:{type:"String(1)",required:true,encrypted:false,validators:null },\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+    
+#定义processors
+ecaop.core.method.cgqe.processors=@ParametersMapper(ecaop.ecsb.cgqe.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.cbss.services.AddGroupInfoSer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.cgqe.template)
+#报文头参数
+ecaop.ecsb.cgqe.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.AddGroupInfoSer.qryChangeGroupInfo",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.cgqe.template@FBS@QRY_CHANGE_GROUP_INPUT@n1529397157@QRY_CHANGE_GROUP_REQ"}\
+]
+
+ecaop.trades.cgqe.template=com/ailk/ecaop/biz/template/curt/QryChangeGroup
+

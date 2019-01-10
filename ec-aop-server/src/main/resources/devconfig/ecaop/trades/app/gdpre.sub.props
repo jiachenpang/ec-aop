@@ -1,0 +1,6 @@
+#广东预受理系统
+ecaop.core.app.map.gdpre.sub=gdps
+ecaop.core.app.gdps.def={"code":"gdps", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gdps.timeslimit=max 100 per 1 minute
+ecaop.core.app.gdps.allow={appkey:"gdps",allow:"cack,cdaq,cdnt,cdqy,cdsn,cmck,csaq,cuck,mnsa,mpsb,nboc,opap,opsb,oupc,\
+                                                prqy,qcsc,qcsq,qrtc,smno,snqy", deny:null}

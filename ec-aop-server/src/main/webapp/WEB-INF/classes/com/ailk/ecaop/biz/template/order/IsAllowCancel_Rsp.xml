@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY> 
+  <IS_ALLOW_CANCEL_SO_RSP mappedOut="true">
+    <RESULT_CODE constraint="?" length="F1" mappedName="code">
+      <!--处理结果编码：, 0-成功 1-失败-->
+    </RESULT_CODE>
+    <RESULT_REMARK constraint="?" length="V500" mappedName="detail">
+      <!--处理结果描述-->
+    </RESULT_REMARK>
+    <Cancel_Flag constraint="?" length="F1" mappedName="cancelFlag">
+      <!--是否允许撤单标志：, Y-允许 N-不允许-->
+    </Cancel_Flag>
+    <Cancel_No_Reason constraint="?" length="V500" mappedName="cancelNoReason">
+      <!--不允许撤单原因-->
+    </Cancel_No_Reason>
+    <PARA constraint="*" mappedName="para">
+      <!--保留字段-->
+      <PARA_ID constraint="1" length="V20" mappedName="paraId">
+        <!--保留字段ID-->
+      </PARA_ID>
+      <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+        <!--保留字段值-->
+      </PARA_VALUE>
+    </PARA>
+  </IS_ALLOW_CANCEL_SO_RSP> 
+</UNI_BSS_BODY>

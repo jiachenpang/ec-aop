@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CAN_SIM_DATA_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY mappedOut="true">
+    <CAN_SIM_DATA_REQ>
+      <ICCID constraint="1" length="V40" mappedName="eiccid">
+        <!-- 附卡ICCID -->
+      </ICCID>
+      <PROVIDER_ID constraint="1" length="V4" mappedName="providerId">
+        <!-- 运营商标识  1：中国联通 -->
+      </PROVIDER_ID>
+      <ESIM_MODE constraint="1" length="V4" mappedName="eSimMode">
+        <!-- eSIM模式   1：GSMA -->
+      </ESIM_MODE>
+      <EID constraint="?" length="V40" mappedName="eid">
+        <!-- 附卡eUICC标识 -->
+      </EID>
+      <MATCHINGID constraint="?" length="V4" mappedName="matchingId">
+        <!-- MATCHINGID -->
+      </MATCHINGID>
+      <FINALSTATUS constraint="?" length="V4" mappedName="finalStatus">
+        <!-- 最终PROFILE指示器 1：可用 0：不可用-->
+      </FINALSTATUS>
+      <SIM_TYPE constraint="1" length="V4" mappedName="simType">
+        <!-- 附卡卡类型1：eSIM成卡2：eSIM白卡 -->
+      </SIM_TYPE>
+      <PROFILE_TYPE constraint="?" defaultValue="1" length="V20" mappedName="profileType">
+        <!-- 卡数据类型参照订单类型 -->
+      </PROFILE_TYPE>
+      <TERMINAL_TYPE constraint="1" length="V4" mappedName="terminalType">
+        <!-- 附属终端类型1：苹果2：华为 -->
+      </TERMINAL_TYPE>
+      <MSISDN_A constraint="1" length="V20" mappedName="serialNumA">
+        <!-- 主卡手机号 -->
+      </MSISDN_A>
+      <MSISDN_B constraint="1" length="V20" mappedName="serialNumB">
+        <!-- 附卡手机号 -->
+      </MSISDN_B>
+      <IMEI constraint="1" length="V40" mappedName="imei">
+        <!-- 附属终端IMEI -->
+      </IMEI>
+      <PROVINCE_CODE constraint="1" length="V8" mappedName="provinceCode">
+        <!-- 归属省分 -->
+      </PROVINCE_CODE>
+      <EPARCHY_CODE constraint="1" length="V8" mappedName="eparchyCode">
+        <!-- 归属地市 -->
+      </EPARCHY_CODE>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </CAN_SIM_DATA_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+  </UNI_BSS_ATTACHED>
+</CAN_SIM_DATA_INPUT>

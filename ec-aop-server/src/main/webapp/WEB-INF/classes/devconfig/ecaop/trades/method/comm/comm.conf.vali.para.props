@@ -1,0 +1,11 @@
+#备用字段
+ecaop.comm.conf.para.vali.para={\
+    paraId:{type:"String(20)",required:true},\
+    paraValue:{type:"String(500)",required:true}\
+}
+#支付方式
+ecaop.comm.conf.payInfo.vali.para={\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_BANK_CARD_REAL_PAY_RESULT_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_BANK_CARD_REAL_PAY_RESULT_REQ>
+            <QRY_TYPE constraint="?" length="F2" range="01,02" mappedName="qryType" />
+            <ORG_PROVINCE_ORDER_ID length="V30" constraint="?" mappedName="orgProvinceOrderId" />
+            <TRADE_TIME length="V46" constraint="?" mappedName="tradeTime" />
+            <CONTRACT_NUMBER length="V40" constraint="?" mappedName="contractNumber" />
+            <START_TIME length="V14" constraint="?" mappedName="startTime" />
+            <END_TIME length="V14" constraint="?" mappedName="endTime" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_BANK_CARD_REAL_PAY_RESULT_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_BANK_CARD_REAL_PAY_RESULT_INPUT>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ACTION_RECV_FEE_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+  <ACTION_RECV_FEE_REQ>
+            <OUTER_TRADE_ID constraint="1" length="V30" mappedName="outerTradeId"><!--总部交易流水号 -->
+            </OUTER_TRADE_ID>
+            <OUTER_TRADE_TIME constraint="1" length="F17" mappedName="outerTradeTime"><!--总部交易时间，到微秒。 -->
+            </OUTER_TRADE_TIME>
+            <PAY_TYPE constraint="1" length="F1" mappedName="payType"><!--缴费方式, 1：按服务号码+电信业务网别+长途区号缴费, 2：按账户ID缴费, 3：按USER_ID缴费 -->
+            </PAY_TYPE>
+            <ACCT_ID constraint="?" length="V16" mappedName="acctId"><!--账户标识 -->
+            </ACCT_ID>
+            <USER_ID constraint="?" length="V16" mappedName="userId"><!--用户标识 -->
+            </USER_ID>
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode"><!--电信业务网别，取值参见附录； -->
+            </SERVICE_CLASS_CODE>
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode"><!--长途区号 -->
+            </AREA_CODE>
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"><!--服务号码 -->
+            </SERIAL_NUMBER>
+            <RECV_FEE constraint="1" length="V11" mappedName="recvFee"><!--收费金额 -->
+            </RECV_FEE>
+            <PRINT_TAG constraint="1" length="F1" mappedName="printTag"><!--是否打印发票, 0：不打印；, 1：打印 -->
+            </PRINT_TAG>
+            <IS_TAX constraint="1" length="F1" mappedName="isTax"><!--预存款是否分月打发票, 0：不分月打, 1：分月打, -->
+            </IS_TAX>
+            <NOTE_SOURCE_INFO constraint="?" mappedName="noteSourceInfo"><!--发票资源信息 -->
+                <NOTE_BATCH_NO constraint="1" length="V30" mappedName="noteBatchNo"><!--发票批次号 -->
+                </NOTE_BATCH_NO>
+                <NOTE_NO constraint="1" length="V20" mappedName="noteNo"><!--票据号 -->
+                </NOTE_NO>
+            </NOTE_SOURCE_INFO>
+            <ACTION_CODE constraint="1" length="V20" mappedName="actionCode"><!--活动项目编码 -->
+            </ACTION_CODE>
+            <PAY_INFO constraint="1" mappedName="payInfo"><!--支付信息 -->
+                <PAY_FEE_MODE constraint="1" length="F2" mappedName="payFeeMode"><!--支付方式, 10：现金, 11：现金支票, 12：转账支票, 13：信用卡, 
+                        14：缴费卡, 15：银行卡, 16：代收, 17：银行代扣, 18，托收, 19，非现金优惠, 20：银行卡代扣, 现金，不填写支付机构和支付账号 -->
+                </PAY_FEE_MODE>
+                <PAY_ORG constraint="?" length="V200" mappedName="payOrg"><!--支付机构名称 -->
+                </PAY_ORG>
+                <PAY_NUM constraint="?" length="V30" mappedName="payNum"><!--支付账号 -->
+                </PAY_NUM>
+            </PAY_INFO>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+        </ACTION_RECV_FEE_REQ>
+  </UNI_BSS_BODY> 
+   <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</ACTION_RECV_FEE_INPUT>

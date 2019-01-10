@@ -1,0 +1,2 @@
+#eSIM资源取消接口接口
+ecaop.trade.template.rioEsimSer.canSimData={"serviceName":"RioEsimSer","operateName":"canSimData","content":"CAN_SIM_DATA_REQ"}

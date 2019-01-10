@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TERMINAL_ORDER_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <TERMINAL_ORDER_REQ>
+             <!-- 电信业务网别-->
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+            <!-- 服务号码-->
+            <SERIAL_NUMBER length="V40" mappedName="numId"/>
+            <!-- 终端串码-->
+            <IMEI length="V40" mappedName="imei"/>
+            <!-- 资源编码 -->
+            <RESOURCECODE length="V4" defaultValue="4001"/>
+            <!-- 激活码 -->
+            <ACTIVATION_CODE length="V8" mappedName="activCode"/>
+            <!-- 资源编码 -->
+            <PACKAGECODE length="V4" mappedName="packageCode"/>
+            <!-- 用户订购时间-->
+            <ORDER_TIME length="V14" mappedName="orderTime"/>
+            <Para mappedOut="true" constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </TERMINAL_ORDER_REQ>
+    </UNI_BSS_BODY>
+     <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</TERMINAL_ORDER_INPUT>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SELECTED_NUM_INPUT>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+    <UNI_BSS_BODY mappedOut="true">
+        <SELECTED_NUM_REQ>
+            <STAFF_ID length="V20" mappedName="operatorId"/>
+            <PROVINCE_CODE length="F2" mappedName="province"/>
+            <CITY_CODE length="V4" mappedName="city"/>
+            <DISTRICT_CODE constraint="?" length="V10" mappedName="district"/>
+            <CHANNEL_ID length="V20" mappedName="channelId"/>
+            <CHANNEL_TYPE length="F7" mappedName="channelType"/>
+            <SYS_CODE length="F4" mappedName="sysCode"/>
+            <SERIAL_NUMBER constraint="?" length="V20" mappedName="serialNumber"/>
+            <!--业务分类 01：公众 02：集团-->
+            <BUSINESS_TYPE length="F2" mappedName="businessType"/>
+            <PRO_KEY constraint="?" length="V128" mappedName="proKey"/>
+            <CERT_TYPE_CODE constraint="?" length="V2" mappedName="certType"/>
+            <CERT_CODE constraint="?" length="V50" mappedName="certNum"/>
+            <CUST_NAME constraint="?" length="V100" mappedName="custName"/>
+            <CONTACT_PHONE constraint="?" length="V20" mappedName="contactNum"/>
+            <!--选占保留时间，单位分钟，默认30分钟，最长不超过****分钟-->
+            <SELECTION_TIME constraint="?" length="V5" defaultValue="30" mappedName="occupiedTime"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V60" mappedName="paraValue"/>
+            </PARA>
+        </SELECTED_NUM_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+    </UNI_BSS_ATTACHED>
+</SELECTED_NUM_INPUT>

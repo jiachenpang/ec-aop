@@ -1,0 +1,4 @@
+#浙江bss
+ecaop.core.app.map.zjbss.pre=zjbpr
+ecaop.core.app.zjbpr.def={"code":"zjbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.zjbpr.allow={appkey:"zjbpr",allow:"qrtb,qcfc,qcaq", deny:null}

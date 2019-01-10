@@ -1,0 +1,10 @@
+#上海预受理开户
+ecaop.core.app.map.shpre.sub=shpre
+ecaop.core.app.shpre.def={"code":"shpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.shpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.shpre.allow={appkey:"shpre",allow:"cack,ccic,cdqy,cdnt,opap,opsb,cdsn,nboc,snqy,qrtc,oolq,cmck,cumd,sccc,\
+crck,smnp,mpsb,ppoq,2324,234o,sc4s,23t4,234s,234t,mofc,ofcs,kdwy,baoa,fasb,sfso,sfss,ofpc,psoa,psos,bypc,byps,scac,sbaos,\
+bsoa,sbso,bsop,odsb,sbcs,ofps,orta,modr,scmc,cuck,csaq,qcsp,qcacq,qcar,qcpq,qcpa,spfs,smno,tzcx,smcc,smosa,smoss,ipry,qctc,\
+faoa,scaf,codc,oata,mold,mvoa,trao,oupc,grcr,grar,qceq,qrtb,smct,qcbl,qofq,qrsr,tsrc,qcsc,scpm,qopq,scam,qctq,qrtac,qcsq,\
+mcoa,scccs,msoa,sctr,cchs,chph,mvoa,qcmd,qcmd,smct,tsos,scsr,scss,qcfc,qcfd,scob,grar,seft,scgq,mccr,qcaq,mmvc,cmuq,sony,\
+qcrq,qcfq,quuq,qcpc,,smeca,mecs,tqauq", deny:null}

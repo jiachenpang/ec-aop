@@ -1,0 +1,40 @@
+#员工信息校验接口
+ecaop.core.method.map.ecaop.trades.check.staff.check=sfck
+ecaop.core.method.sfck.def={"mothod":"sfck","remark":"员工信息校验接口"}
+
+ecaop.core.method.sfck.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.param.msg.schema.sfck)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(30)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.param.msg.schema.sfck={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:false,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:false,encrypted:false,validators:"@FixedLen(7)" },\
+    checkMode:{type:"String(1)",required:false,encrypted:false,validators:null}\
+}
+
+#请求参数
+ecaop.param.mapping.sfck=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00008",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"StaffCheckReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.template.3g.staffcheck@3GE"}\
+]
+
+ecaop.template.3g.staffcheck=com/ailk/ecaop/biz/template/staff/StaffCheck
+
+#定义processors
+ecaop.core.method.sfck.processors=@ParametersMapper(ecaop.param.mapping.sfck)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.template.3g.staffcheck)

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WRITE_CARD_PRE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <WRITE_CARD_PRE_REQ>
+            <PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="provOrderId">
+                <!-- 省份订单ID -->
+            </PROVINCE_ORDER_ID>
+            <ORDER_ID constraint="1" length="V30" mappedName="ordersId">
+                <!-- 外围订单ID -->
+            </ORDER_ID>
+            <SUB_ORDERSUB_INFO constraint="*"  mappedName="subOrdersubInfo">
+                <!-- 子订单信息 -->
+                <SUB_PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="subProvOrderId">
+                    <!-- 省份子订单Id -->
+                </SUB_PROVINCE_ORDER_ID>
+                <SUB_ORDER_ID constraint="?" length="V30" mappedName="subOrderId">
+                    <!-- 总部子订单Id -->
+                </SUB_ORDER_ID>
+                <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode">
+                    <!-- 电信业务网别-->
+                </SERVICE_CLASS_CODE>
+                <CITY constraint="?" length="V6" mappedName="city">
+                    <!-- 地市 -->
+                </CITY>
+                <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+                    <!-- 区号 -->
+                </AREA_CODE>
+                <SERIAL_NUMBER length="V40" constraint="1" mappedName="numId">
+                    <!-- 服务号码 -->
+                </SERIAL_NUMBER>
+                <SIM_ID length="V30"  mappedName="simId">
+                    <!-- 卡号 -->
+                </SIM_ID>
+                <IMSI length="V15" constraint="?" mappedName="imsi">
+                    <!-- 新IMSI号 -->
+                </IMSI>
+                <CARD_TYPE length="V30" constraint="?" mappedName="cardType">
+                    <!-- 白卡类型 -->
+                </CARD_TYPE>
+                <BUSI_TYPE length="V30" constraint="?" mappedName="busiType">
+                    <!-- 白卡业务类型 -->
+                </BUSI_TYPE>
+                <CARD_DATA_PROC_ID length="V16" constraint="?" mappedName="cardDataProcId">
+                    <!-- 写卡数据业务流水 -->
+                </CARD_DATA_PROC_ID>
+                <CARD_DATA length="V1024" constraint="?" mappedName="cardData">
+                    <!-- 白卡数据 -->
+                </CARD_DATA>
+            </SUB_ORDERSUB_INFO>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                    <!-- 保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+                    <!-- 保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </WRITE_CARD_PRE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</WRITE_CARD_PRE_INPUT>

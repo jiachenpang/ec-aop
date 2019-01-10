@@ -1,0 +1,4 @@
+#用户已订购产品查询
+ecaop.trade.template.usrSer.qryUserProInfo={"serviceName":"UsrSer","operateName":"qryUserProInfo","content":"QRY_USER_PRO_INFO_REQ"}
+#报文模版路径
+ecaop.trade.cbpq.qryUserProInfo.template=com/ailk/ecaop/biz/template/usrSer/QryUserProInfo

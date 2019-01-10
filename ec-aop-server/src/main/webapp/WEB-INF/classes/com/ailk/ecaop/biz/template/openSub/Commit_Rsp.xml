@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommitRsp mappedOut="true">
+    <!-- 应答编码0000 成功 0006 业务预收理异常 0007 业务正式受理异常 9999 其它错误 -->
+    <RespCode length="F4" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V2000" mappedName="detail" />
+    <!-- ESS订单ID 为正式提交时使用 -->
+    <ProvOrderID length="V30" mappedName="provOrderId" />
+    <BssOrderID length="V30" constraint="?" mappedName="bssOrderId"/>
+    <EssOrderID length="V30" constraint="?" mappedName="essOrderId"/>
+    <!-- 税控码 -->
+    <TaxNo length="V30" constraint="?" mappedName="taxNo" />
+    <!-- 受理单模板编码 -->
+    <AcceptanceTp length="V20" constraint="?" mappedName="acceptanceTp" />
+    <!-- 0：套打；1：白打 -->
+    <AcceptanceMode length="F1" range="0,1" constraint="?" mappedName="acceptanceMode" />
+    <!-- 受理单打印内容 -->
+    <AcceptanceForm length="V4000" constraint="?" mappedName="acceptanceForm" />
+    <!-- 保留字段 -->
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" type="String" mappedName="paraId" />
+        <ParaValue length="V20" type="String" mappedName="paraValue" />
+    </Para>
+</CommitRsp>

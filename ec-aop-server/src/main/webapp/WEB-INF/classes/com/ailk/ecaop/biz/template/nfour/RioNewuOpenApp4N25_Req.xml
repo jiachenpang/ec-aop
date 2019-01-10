@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ORDER_TRADE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <ORDER_TRADE_REQ>
+            <ORDER_ID constraint="1" length="V40" mappedName="orderId">
+                <!-- 外围订单ID -->
+            </ORDER_ID>
+            <TRADE_TYPE_CODE constraint="1" length="V40" mappedName="tradeTypeCode">
+                <!-- 业务类型：0160：开通 -->
+            </TRADE_TYPE_CODE>
+            <MSISDN_A constraint="1" length="V20" mappedName="msisdnA">
+                <!-- 主卡号码 -->
+            </MSISDN_A>
+            <MSISDN_B constraint="1" length="V20" mappedName="msisdnB">
+                <!-- 附卡号码 -->
+            </MSISDN_B>
+            <MSISDN_NAME constraint="1" length="V100" mappedName="msisdnName">
+                <!-- 附卡别名 -->
+            </MSISDN_NAME>
+            <IMEI constraint="?" length="V40" mappedName="imei">
+                <!-- 附属终端串号 -->
+            </IMEI>
+            <TERMINAL_TYPE constraint="1" length="V40" mappedName="terminalType">
+                <!-- 附属终端类型 -->
+            </TERMINAL_TYPE>
+            <CARD_TYPE length="V4" constraint="1" mappedName="cardType">
+                <!-- 卡类型 0：SIM白卡 1：eSIM成卡 -->
+            </CARD_TYPE>
+            <SIM_CARD_DATA constraint="?" mappedName="simCardData">
+                <ICCID length="V40" mappedName="iccid">
+                    <!-- 附卡ICCID -->
+                </ICCID>
+                <IMSI length="V40" constraint="?" mappedName="imsi">
+                    <!-- 附卡IMSI -->
+                </IMSI>
+                <EID length="V40" constraint="?" mappedName="eid">
+                    <!-- 附卡EID -->
+                </EID>
+                <KI length="V4000" constraint="?" mappedName="ki">
+                    <!-- KI值(加密) -->
+                </KI>
+                <MATERIAL_CODE length="V16" constraint="?" mappedName="materialCode">
+                    <!-- 物料编码 -->
+                </MATERIAL_CODE>
+                <CARD_BIG_TYPE length="V20" constraint="?" mappedName="cardBigType">
+                    <!-- 卡大类 -->
+                </CARD_BIG_TYPE>
+                <CARD_TYPE length="V20" constraint="?" mappedName="cardType">
+                    <!-- 卡小类 -->
+                </CARD_TYPE>
+                <CARD_NAME length="V500" constraint="?" mappedName="cardName">
+                    <!-- 卡名称 -->
+                </CARD_NAME>
+            </SIM_CARD_DATA>
+            <PROVINCE_CODE constraint="1" length="V8" mappedName="provinceCode">
+                <!-- 归属省分 -->
+            </PROVINCE_CODE>
+            <EPARCHY_CODE constraint="1" length="V8" mappedName="eparchyCode">
+                <!-- 归属地市 -->
+            </EPARCHY_CODE>
+            <DEVELOP_INFO constraint="*" mappedName="developInfo">
+                <DEVELOP_ID constraint="1" length="V40" mappedName="developId">
+                    <!-- 发展人ID -->
+                </DEVELOP_ID>
+                <DEVELOP_NAME constraint="?" length="V40" mappedName="developName">
+                    <!-- 发展人名称 -->
+                </DEVELOP_NAME>
+                <DEVELOP_DEPART constraint="1" length="V40" mappedName="developDepart">
+                    <!-- 发展人渠道 -->
+                </DEVELOP_DEPART>
+                <DEVELOP_CITY constraint="?" length="V40" mappedName="developCity">
+                    <!-- 发展人地市 -->
+                </DEVELOP_CITY>
+            </DEVELOP_INFO>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                    <!-- 保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+                    <!-- 保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </ORDER_TRADE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</ORDER_TRADE_INPUT>

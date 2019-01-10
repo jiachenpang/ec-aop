@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <AcctRationalReq>
+            <!-- 号码网别 -->
+            <NetType length="F2" mappedName="netType" defaultValue="07"/>
+            <!-- 服务号码归属省分编码 -->
+            <UserProvince constraint="?" length="F2" mappedName="province"/>
+            <!-- 服务号码归属地市编码 -->
+            <UserCity constraint="?" length="F3" mappedName="city"/>
+            <!-- 服务号码归属区号编码 -->
+            <UserCode constraint="?" length="V4" />
+            <!-- 服务号码 -->
+            <UserNumber constraint="?" length="V30" mappedName="numId"/>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V125" mappedName="paraId" />
+                <ParaValue length="V256" mappedName="paraValue" />
+            </Para>
+        </AcctRationalReq>
+    </SvcCont>
+</UniBSS>

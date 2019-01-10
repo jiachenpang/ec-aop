@@ -1,0 +1,5 @@
+#四川BSS国政通测试
+ecaop.core.app.map.scbc.sub=scsb
+ecaop.core.app.scsb.def={"code":"scsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.scsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.scsb.allow={appkey:"scsb",allow:"crck", deny:null}

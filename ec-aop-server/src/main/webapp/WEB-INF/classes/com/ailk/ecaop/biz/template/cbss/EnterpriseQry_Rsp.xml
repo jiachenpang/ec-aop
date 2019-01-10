@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 组织机构查询 -->
+<UNI_BSS_BODY>
+    <qryEnterpriseInfo_RSP mappedOut="true">
+        <!--0000 00001 供应商名称、组织机构代码、注册号，都为空 00002 接收供应商名称、注册号或组织机构代码有误 00003 
+            接收该组织机构未核查到 00004 访问超时 00005 组织代码中心返回错误 -->
+        <RESP_CODE constraint="1" length="F4"
+            range="0000,0001,0002,0003,0004,0005,8888,9999" mappedName="code" />
+        <!--应答描述 -->
+        <RESP_DESC constraint="1" length="V512" mappedName="detail" />
+        <!--组织机构信息查询结果 -->
+        <RSP_DETAIL constraint="?" length="V512"/>
+        <!-- 组织机构信息集合 -->
+        <ENTERPRISE_INFOS mappedOut="true">
+            <!-- 组织机构信息 -->
+            <ENTERPRISE_INFO constraint="?" mappedName="respInfo">
+                <!-- 组织机构代码 -->
+                <ORG_CODE constraint="1" length="V50"
+                    mappedName="orgCode" />
+                <!-- 组织机构名称 -->
+                <VENDOR_NAME constraint="1" length="V240"
+                    mappedName="vendorName" />
+                <!-- 注册号 -->
+                <ENROLL_CODE constraint="?" length="V300"
+                    mappedName="enrollCode" />
+                <!-- 法人代表 -->
+                <LEGAL_REPRESENTATIVE constraint="?"
+                    length="V100" mappedName="legalName" />
+                <!-- 代码证办证日期 -->
+                <ORGCODE_START_DATE constraint="?"
+                    length="F14" mappedName="orgStartDate" />
+                <!-- 代码证作废日期 -->
+                <ORGCODE_END_DATE constraint="?"
+                    length="F14" mappedName="orgtEndDate" />
+                <!-- 机构类型 -->
+                <ORG_TYPE constraint="?" length="V100"
+                    mappedName="orgType" />
+                <!-- 职工人数 -->
+                <EE_COUNT constraint="?" length="V10"
+                    mappedName="eeCount" />
+                <!-- 注册资金 -->
+                <ENROLL_FUND constraint="?" length="V20"
+                    mappedName="enrollFund" />
+                <!-- 货币种类 -->
+                <CURRENCY_TYPE constraint="?" length="V100"
+                    mappedName="currencyType" />
+                <!-- 经营范围 -->
+                <BUSS_SCOPE constraint="?" length="V3000"
+                    mappedName="busiArea" />
+                <!-- 注册日期 -->
+                <ENROLL_DATE constraint="?" length="F14"
+                    mappedName="enrollDate" />
+                <!-- 经济类型 -->
+                <BUSS_TYPE constraint="?" length="V100"
+                    mappedName="bussType" />
+                <!-- 经济行业 -->
+                <BUSS_TRADE constraint="?" length="V100"
+                    mappedName="bussTrade" />
+                <!-- 机构地址 -->
+                <ADDRESS constraint="?" length="V500"
+                    mappedName="address" />
+                <!-- 质疑标志 1 是 0否 -->
+                <QUS_FLAG constraint="1" length="V100"
+                    mappedName="qusFlag" />
+                <!-- 行政区划 -->
+                <REGION constraint="?" length="V100" mappedName="region" />
+                <!-- 省份编码 -->
+                <PROVINCE_CODE constraint="?" length="V10"
+                    mappedName="province" />
+                <!-- 城市名称 -->
+                <CITY_NAME constraint="?" length="V300"
+                    mappedName="cityName" />
+                <!-- 电话号码 -->
+                <TELEHPONE constraint="?" length="V100"
+                    mappedName="telehpone" />
+                <!-- 主管机构名称 -->
+                <ADMIN_ORG constraint="?" length="V100"
+                    mappedName="adminOrg" />
+                <!-- 主管机构代码 -->
+                <ADMIN_ORG_CODE constraint="?" length="V30"
+                    mappedName="adminOrgCode" />
+                <!-- 是否涉密 1 是 0否 -->
+                <PRIVATE_FLAG constraint="1" length="F1"
+                    mappedName="privateFlag" />
+                <!-- 是否从缓存库查询 1 是 0否 -->
+                <CACHE_FLAG constraint="1" length="F1"
+                    mappedName="cacheFlag" />
+                <!-- 最后更新日期 -->
+                <LAST_UPDATE_DATE constraint="1"
+                    length="F14" mappedName="lastUpdateDate" />
+            </ENTERPRISE_INFO>
+        </ENTERPRISE_INFOS>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </qryEnterpriseInfo_RSP>
+</UNI_BSS_BODY>

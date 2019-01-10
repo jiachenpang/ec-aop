@@ -1,0 +1,2 @@
+#电子券支付
+ecaop.trade.template.ticketBuySer.ticketPayment={"serviceName":"TicketBuySer","operateName":"ticketPayment","content":"TICKET_PAYMENT_REQ"}

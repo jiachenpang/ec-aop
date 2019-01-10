@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_CP_TRADEID_AND_NUMBER_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true">
+      <QRY_CP_TRADEID_AND_NUMBER_REQ>
+          <PROVINCE_CODE constraint="1" length="F2" mappedName="provinceCode"/>
+              <!--34-江苏-->
+              <SERIAL_NUMBER constraint="1" length="V20" mappedName="serialNumber">
+                <!--手机号码-->
+              </SERIAL_NUMBER>
+              <CREATE_DATE constraint="?" length="V20" mappedName="createDate">
+              <!--  团单 -->
+              </CREATE_DATE>
+              <Para constraint="*" mappedName="para">
+                  <paraId constraint="1" length="V20" mappedName="paraId"/>
+                  <paraValue constraint="1" length="V60" mappedName="paraValue"/>
+              </Para>
+        </QRY_CP_TRADEID_AND_NUMBER_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_CP_TRADEID_AND_NUMBER_INPUT>

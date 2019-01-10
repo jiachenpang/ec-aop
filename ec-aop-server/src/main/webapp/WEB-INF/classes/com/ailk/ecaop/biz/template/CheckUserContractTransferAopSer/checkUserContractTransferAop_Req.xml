@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECK_USERCONTRCT_TRANSFER_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECK_USERCONTRCT_TRANSFER_REQ>
+            <CONTRACT_INFO constraint="*" mappedName="contractInfo">
+                <ORIGINAL_COMBO_FEE length="V20" mappedName="originalComboFee" />
+                <COMBO_FEE constraint="1" length="V20" mappedName="comboFee"><!--套餐费用(单位：分) -->
+                </COMBO_FEE>
+                <PRODUCT_TYPE constraint="1" length="F1" mappedName="productType"><!--合约计划类型, 1 存费送机, 2 购机送费, 3存费送费, 存费送业务（6，7，8，分别对应流量业务、语音业务、短信业务） -->
+                </PRODUCT_TYPE>
+                <PRESENT_NUM constraint="?" length="V10" mappedName="presentNum"><!--赠送业务量, (合约计划类型为6,7,8时，此字段必填。合约计划类型为6时，单位：MB；合约计划类型为7时，单位：分钟；合约计划类型为8时，单位：条) -->
+                </PRESENT_NUM>
+                <ASSURE_TYPE_CODE constraint="?" length="F1" mappedName="assureTypeCode"><!--担保类型, （E.在网固话担保, 0.预存担保, 1 担保人担保, 
+                        2.担保金担保, 3 零信用度担保, 4 无担保, 5 社保卡担保, 6.单位担保, 7.银行信贷担保, 8.银行保险公司担保, 9 银行存款担保, A 内部职工担保, B 政府担保, C 信用卡担保, D 银行存单担保, K.宽带预存担保, 
+                        W.企业固网担保, R.专业担保公司担保, M.集客银行存款担保, N.基于新险种的保险公司担保） -->
+                </ASSURE_TYPE_CODE>
+                <ASSURE_ID constraint="?" length="V500" mappedName="assureId"><!--担保协议ID -->
+                </ASSURE_ID>
+                <ASSURER_NAME constraint="?" length="V100" mappedName="assureName"><!--担保单位名称（或担保协议名称） -->
+                </ASSURER_NAME>
+                <ASSURE_DESCRIBE constraint="?" length="V500" mappedName="assureDescribe"><!--在网固网号码 -->
+                </ASSURE_DESCRIBE>
+                <START_TIME constraint="1" length="F14" mappedName="startTime"><!--原合约开始时间YYYYMMDDHH24MISS（必须为某个月份1号的00:00:00） -->
+                </START_TIME>
+                <END_TIME constraint="1" length="F14" mappedName="endTime"><!--原合约结束时间YYYYMMDDHH24MISS（必须为某个月份最后一天的23:59:59） -->
+                </END_TIME>
+                <CONTRACT_DESCRIBE constraint="1" length="V500" mappedName="contractDescribe"><!--原省分合约名称 -->
+                </CONTRACT_DESCRIBE>
+                <ORIGINAL_COMBO_FEE constraint="1" length="V20" mappedName="originalComboFee"><!--原始套餐值(单位：分) -->
+                </ORIGINAL_COMBO_FEE>
+                <CONVERT_INFO constraint="?" mappedName="convertInfo"><!--转兑包信息 -->
+                    <START_PAYMENT_TIME constraint="1" length="V6" mappedName="startPaymentTime"><!--开始账期YYYYMM -->
+                    </START_PAYMENT_TIME>
+                    <END_PAYMENT_TIME constraint="1" length="V6" mappedName="endPaymentTime"><!--结束账期YYYYMM -->
+                    </END_PAYMENT_TIME>
+                    <FREEZE_TOTAL_FEE constraint="1" length="V20" mappedName="freezeTotalFee"><!--总冻结金额(单位：分) -->
+                    </FREEZE_TOTAL_FEE>
+                    <FREEZE_SURPLUS_FEE constraint="1" length="V20" mappedName="freezeSurplusFee"><!--剩余冻结金额(只包含次月以及次月以后的剩余冻结金额,单位：分) -->
+                    </FREEZE_SURPLUS_FEE>
+                    <SURPLUS_MONTHS constraint="1" length="V2" mappedName="surplusMonths"><!--剩余月数 -->
+                    </SURPLUS_MONTHS>
+                    <SURPLUS_BILL_FEE constraint="1" length="V20" mappedName="surplusBillFee"><!--剩余发票可打金额(单位：分) -->
+                    </SURPLUS_BILL_FEE>
+                    <COMPAR_MONTHS constraint="1" length="V2" mappedName="comparMonths"><!--机卡比对剩余月数（购机送费只比对6个月，存费送机比对全部合约期，存费送费、存费送业务此字段传0） -->
+                    </COMPAR_MONTHS>
+                </CONVERT_INFO>
+                <EQUIPMENT_INFO constraint="?" mappedName="equipmentInfo"><!--设备信息 -->
+                    <BUY_EQUIPMENT_FEE constraint="1" length="V20" mappedName="buyEquipmentFee"><!--实缴购机款（单位：分） -->
+                    </BUY_EQUIPMENT_FEE>
+                    <EQUIPMENT_MODEL constraint="?" length="V30" mappedName="equipmentModel"><!--终端型号 -->
+                    </EQUIPMENT_MODEL>
+                    <EQUIPMENT_PRICE constraint="1" length="V20" mappedName="equipmentPrice"><!--终端成本价（单位：分）省份没有的填“-1” -->
+                    </EQUIPMENT_PRICE>
+                    <EQUIPMENT_NAME constraint="?" length="V100" mappedName="equipmentName"><!--终端型号名称 -->
+                    </EQUIPMENT_NAME>
+                    <EQUIPMENT_BRAND constraint="?" length="V30" mappedName="equipmentBrand"><!--终端品牌 -->
+                    </EQUIPMENT_BRAND>
+                    <IMEI constraint="1" length="V30" mappedName="imei"><!--IMEI(终端串号) -->
+                    </IMEI>
+                </EQUIPMENT_INFO>
+                <CONTRACT_DEVELOPER_INFO constraint="?" mappedName="contractDeveloperInfo"><!--合约发展人信息 -->
+                    <DEVELOPER_CODE constraint="1" length="V20" mappedName="developCode"><!--发展人编码 -->
+                    </DEVELOPER_CODE>
+                    <DEVELOPER_NAME constraint="1" length="V128" mappedName="developName"><!--发展人名称 -->
+                    </DEVELOPER_NAME>
+                    <DEVELOP_TIME constraint="1" length="F14" mappedName="developTime"><!--发展时间YYYYMMDDHH24MISS -->
+                    </DEVELOP_TIME>
+                    <DEVELOP_CHANNEL_CODE constraint="1" length="V20" mappedName="developChannelCode"><!--发展渠道编码 -->
+                    </DEVELOP_CHANNEL_CODE>
+                    <DEVELOPER_CONTACT_WAY constraint="1" length="V100" mappedName="developerContractWay"><!--发展人联系方式 -->
+                    </DEVELOPER_CONTACT_WAY>
+                </CONTRACT_DEVELOPER_INFO>
+            </CONTRACT_INFO>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CHECK_USERCONTRCT_TRANSFER_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECK_USERCONTRCT_TRANSFER_INPUT>

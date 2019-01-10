@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY> 
+  <MOD_REAL_NAME_CUST_INFO_RSP mappedOut="true">
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!--应答编码, 0000 成功, 1001无客户信息, 1015 当前客户资料不允许变更, 1022客户资料输入不合规, 1028  客户姓名输入不合规, 1029  证件类型输入不合规, 1030  证件号码输入不合规, 1031  证件地址输入不合规, 1023 客户下用户超过数量限制, 1027 系统中存在对应的15位身份证号码, 1527 返档/补登在途不允许办理, 1528 该证件下存在多个客户, 1529 返档/补登客户为集团客户, 8888其他错误-->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!--应答描述-->
+    </RESP_DESC>
+    <PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="provinceOrderId">
+      <!--省分订单号-->
+    </PROVINCE_ORDER_ID>
+    <CUST_INFO constraint="*" mappedName="custInfo">
+      <!--客户信息-->
+      <CUST_ID constraint="?" length="V16" mappedName="custId">
+        <!--客户标识-->
+      </CUST_ID>
+      <CUST_NAME constraint="1" length="V100" mappedName="custName">
+        <!--客户名称-->
+      </CUST_NAME>
+      <CERT_ADDR constraint="1" length="V256" mappedName="certAddr">
+        <!--证件地址-->
+      </CERT_ADDR>
+      <CERT_TYPE_CODE constraint="1" length="V2" mappedName="certTypeCode">
+        <!--证件类别编码，见附录-->
+      </CERT_TYPE_CODE>
+      <CERT_CODE constraint="1" length="V50" mappedName="certCode">
+        <!--证件号码-->
+      </CERT_CODE>
+      <POST_ADDRESS constraint="?" length="V256" mappedName="postAddress">
+        <!--通信地址-->
+      </POST_ADDRESS>
+      <CONTACT constraint="?" length="V60" mappedName="contactName">
+        <!--联系人姓名-->
+      </CONTACT>
+      <CONTACT_PHONE constraint="?" length="V40" mappedName="contactPhone">
+        <!--联系人电话-->
+      </CONTACT_PHONE>
+      <CUST_CERT_PICTURE_URL constraint="?" length="V512" mappedName="custCertPictureUrl">
+        <!--客户证件电子图片链接(绝对地址)-->
+      </CUST_CERT_PICTURE_URL>
+      <CUST_CERT_PICTURE_NAME constraint="?" length="V256" mappedName="custCertPictureName">
+        <!--客户证件电子图片名称  :, 证件类型(证件类别编码，见附录)_证件号码_服务号码_YYYYMMDDHHMISS.XXX（后缀名）-->
+      </CUST_CERT_PICTURE_NAME>
+    </CUST_INFO>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+  </MOD_REAL_NAME_CUST_INFO_RSP> 
+</UNI_BSS_BODY>
+

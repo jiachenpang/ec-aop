@@ -1,0 +1,110 @@
+#用户资料校验三户返回
+ecaop.core.method.map.ecaop.trades.query.comm.user.threepart.check=qctc
+ecaop.core.method.qctc.def={"mothod":"qctc","remark":"用户资料校验三户返回"}
+ecaop.core.method.qctc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qctc.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.qctc.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    tradeTypeCode:{type:"String(4)",required:true,encrypted:false,validators:"@FixedLen(4)"},\
+    serviceClassCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    infoList:{type:"String(40)",required:true,encrypted:false,validators:null}\
+}
+
+#准备参数,调用北六三户查询校验--暂时不动,原因-第38行
+ecaop.trade.n6.checkUserParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"UsrForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"checkUserInfo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0002",temp:true},\
+    {paramterName:"hsnDuns",extractor:"msgReceiver",extractorConfig:"",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ECIP",temp:true},\
+    {paramterName:"msgReceiver",extractor:"msgReceiver",extractorConfig:"",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0002",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECK_USER_INFO_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cbss.threePart.template@FBS@CHECK_USER_INFO_INPUT@n-1469109129@CHECK_USER_INFO_REQ"}\
+]
+#准备参数,调用辽宁三户查询校验 add by tanzb--暂时不动,原因-第63行
+ecaop.trade.n6.checkUserParametersMapping.91=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"UsrForNorthSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"checkUserInfo",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0002",temp:true},\
+    {paramterName:"hsnDuns",extractor:"msgReceiver",extractorConfig:"",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ECIP",temp:true},\
+    {paramterName:"msgReceiver",extractor:"msgReceiver",extractorConfig:"",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0002",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECK_USER_INFO_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.n6.threePart.template@FBS@CHECK_USER_INFO_INPUT@n-1469109129@CHECK_USER_INFO_REQ"}\
+]
+#CBSS三户校验
+ecaop.trade.cbss.checkUserParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.usrForNorthSer.checkUserInfo,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cbss.threePart.template@FBS@CHECK_USER_INFO_INPUT@n-1469109129@CHECK_USER_INFO_REQ"}\
+]
+#定义流程跳转
+ecaop.core.method.qctc.processors=@checkUserInfo()
+ecaop.soap.bodyns.qctc=chec
+ecaop.trades.cbss.threePart.template=com/ailk/ecaop/biz/template/cbss/CheckUserInfo
+ecaop.trades.n6.threePart.template=com/ailk/ecaop/biz/template/n6ess/CheckUserInfoN6
+
+#准备参数,调用cBSS黑名单查询接口
+ecaop.trade.cbss.qryBlackParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"BlackLstSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"checkBlackCust",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CHECK_BLACK_CUST_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cbss.blackHis.template@FBS@CHECK_BLACK_CUST_INPUT@chec@CHECK_BLACK_CUST_REQ"}\
+]
+ecaop.trades.cbss.blackHis.template=com/ailk/ecaop/biz/template/cbss/ChkBlackCust

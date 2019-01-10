@@ -1,0 +1,60 @@
+#用于进行客户资料的操作，当客户资料查询不存在时，自动触发客户资料创建
+ecaop.core.method.map.ecaop.trades.serv.curt.custinfo.ope=scco
+ecaop.core.method.scco.def={"mothod":"scco"}
+ecaop.core.method.scco.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.scco.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.trades.scco.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:null},\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     customerName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     customerType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     isAssure:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+     chkBlcTag:{type:"String(1)",required:false,encrypted:false,validators:"@FixedLen(1)"},\
+     certExpireDate:{type:"String(8)",required:true,encrypted:false,validators:"@FixedLen(8)"},\
+     certAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certNum:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     postAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     phone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     contactPerson:{type:"String(60)",required:true,encrypted:false,validators:null},\
+     contactPhone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.core.method.scco.processors=@qryCrtCustInfo()
+#CBSS客户资料创建接口
+ecaop.trades.scco.crtCustInfo.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"CustSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"crtCustInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CRT_CUSTINFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.scco.crtCustInfo.template@FBS@CRT_CUSTINFO_INPUT@n1529397156@CRT_CUSTINFO_REQ"}\
+]
+ecaop.trades.scco.crtCustInfo.template=com/ailk/ecaop/biz/template/cbss/CrtCustInfo
+

@@ -1,0 +1,82 @@
+#融合套餐变更处理申请 create by zhaok Date 18/8/1
+ecaop.core.method.map.ecaop.trades.sell.mob.mix.product.chg.app=mbmg
+ecaop.core.method.mbmg.def={"mothod":"mbmg","remark":"融合套餐变更处理申请"}
+
+ecaop.core.method.mbmg.params=[\
+     {"param":"msg",type:"JSON",required:false, validators:"@JSONSchema(ecaop.trade.mbmg.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trade.mbmg.param.msg={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    serialNumber:{type:"String(20)",required:true},\
+    mixSerialNumber:{type:"String(20)",required:true},\
+    viceNumberInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trade.mbmg.param.viceNumberInfo)"},\
+    areaCode:{type:"String(6)",required:false},\
+    brandNumber:{type:"String(40)",required:false},\
+    kdNumber:{type:"String(40)",required:false},\
+    authAcctId:{type:"String(60)",required:false},\
+    custInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trade.mbmg.param.custInfo)"},\
+    productInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trade.mbmg.param.productInfo)"},\
+    activityInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trade.mbmg.param.activityInfo)"},\
+    acctId:{type:"String(60)",required:false},\
+    contactPerson:{type:"String(20)",required:true},\
+    contactPhone:{type:"String(20)",required:true},\
+    contactAddress:{type:"String(200)",required:false},\
+    recomPersonId:{type:"String(30)",required:false},\
+    recomPersonName:{type:"String(30)",required:false},\
+    recomPersonCityCode:{type:"String(6)",required:false},\
+    recomPersonDistrict:{type:"String(20)",required:false},\
+    recomPersonChannelId:{type:"String(20)",required:false},\
+    orderRemarks:{type:"String(1000)",required:false},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+#产品下附加包及包元素（资费，服务）
+ecaop.trades.mbmg.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}\
+    modType:{type:"String(1)",required:true,validators:null}\
+    itemInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mbmg.itemInfo)"}\
+    subItemInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mbmg.subItemInfo)"}\
+}
+
+ecaop.trade.mbmg.param.productInfo={\
+    productType:{type:"String(1)",required:true},\
+    speedLevel:{type:"String(10)",required:false}\
+    oldProductId:{type:"String(20)",required:true},\
+    productMode:{type:"Number(1)",required:false},\
+    optType:{type:"String(2)",required:true},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mbmg.packageElement)"}\
+}
+
+ecaop.trades.mbmg.subItemInfo={\
+    subItemCode:{type:"String(40)",required:true},\
+    subItemValue:{type:"String(200)",required:true}\
+}
+
+ecaop.trades.mbmg.itemInfo={\
+    itemCode:{type:"String(40)",required:true},\
+    ItemValue:{type:"String(200)",required:true}\
+}
+
+ecaop.trade.mbmg.param.custInfo={\
+    certName:{type:"String(100)",required:true},\
+    certType:{type:"String(2)",required:true},\
+    certNum:{type:"String(20)",required:true},\
+}
+
+ecaop.trade.mbmg.param.viceNumberInfo={\
+    viceNumber:{type:"String(20)",required:true}\
+}
+
+ecaop.core.method.mbmg.processors=mixProductChgApp()
+
+

@@ -1,0 +1,35 @@
+#责任人使用人变更补录
+ecaop.core.method.map.ecaop.trades.syn.usecust.chg.app=ucca
+ecaop.core.method.ucca.def={"mothod":"ucca"}
+ecaop.core.method.ucca.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.ucca.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.trades.ucca.msg.schema={\
+      operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:null},\
+     opeSysType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     serialNumber:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     custId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certNum:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     certAdress:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     useCustName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+     useCustPsptType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     useCustPsptCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     useCustPsptAddress:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     itmPrdGroupType:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     itmPrdRespobsible:{type:"String(1)",required:false,encrypted:false,validators:null},\
+      para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.core.method.ucca.processors=@TransReqParamsMapper()\  
+                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)

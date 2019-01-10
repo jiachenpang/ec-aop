@@ -1,0 +1,62 @@
+#ECS将用户真实身份信息上传cBSS做客户资料变更或过户操作
+ecaop.core.method.map.ecaop.trades.syn.cert.sub=tscs
+ecaop.core.method.tscs.def={"mothod":"tscs"}
+ecaop.core.method.tscs.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.tscs.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.trades.tscs.msg.schema={\
+     operatorId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:false,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:false,encrypted:false,validators:"@FixedLen(3)" },\
+     channelId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:false,encrypted:false,validators:"@FixedLen(7)"},\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     number:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     customerName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     psptAddr:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     certNum:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     sex:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     startDate:{type:"String(8)",required:false,encrypted:false,validators:null},\
+     endDate:{type:"String(8)",required:false,encrypted:false,validators:null},\
+     wordName:{type:"String(60)",required:false,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+
+ecaop.core.method.tscs.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.tscs.flowConfig)
+
+ecaop.core.method.tscs.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 2->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.trades.n6.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.trades.cbss.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.comm.trades.n6.processors=@certSub2NESS()
+ecaop.comm.trades.cbss.processors=@certSub2CB()
+
+ecaop.trades.tscs.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"route",extractor:"addParamExtractor",extractorConfig:"msg.province",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,0000000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.unit,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.validTimeUnit,0"},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mpsb.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]

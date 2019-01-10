@@ -1,0 +1,5 @@
+#河北订单中心
+ecaop.core.app.map.huord.sub=hosb
+ecaop.core.app.hosb.def={"code":"hosb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hosb.timeslimit=max 100 per 1 minute
+ecaop.core.app.hosb.allow={appkey:"hosb",allow:"bsop,odsb,bsoa,sbso,baoa,sbaos,sfck,isoa,opsb,smno,smnp,mpsb,opap,mpdsb,qosq,oolq", deny:null}

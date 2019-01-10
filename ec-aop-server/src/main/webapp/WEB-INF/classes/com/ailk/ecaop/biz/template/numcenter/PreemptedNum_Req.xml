@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--号卡中心预占接口 -->
+<PREEMPTED_NUM_INPUT>
+    <_include
+        src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <PREEMPTED_NUM_REQ>
+            <STAFF_ID length="V20" mappedName="operatorId" />
+            <PROVINCE_CODE length="F2" mappedName="province" />
+            <CITY_CODE length="V4" mappedName="city" />
+            <DISTRICT_CODE constraint="?" length="V10"
+                mappedName="district" />
+            <CHANNEL_ID length="V20" mappedName="channelId" />
+            <CHANNEL_TYPE length="F7" mappedName="channelType" />
+            <SYS_CODE length="F4" mappedName="sysCode" />
+            <SERIAL_NUMBER length="V20" mappedName="serialNumber" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </PREEMPTED_NUM_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</PREEMPTED_NUM_INPUT>

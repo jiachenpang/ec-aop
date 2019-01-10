@@ -1,0 +1,3 @@
+#产品查询变更校验 by wangmc
+ecaop.trade.template.checkProduct.checkProduct=\
+{"serviceName":"ProductChgSer","operateName":"qryProductInfo","osnDuns":"0002","origDomain":"ECIP","content":"QRY_PRODUCT_INFO_REQ"}

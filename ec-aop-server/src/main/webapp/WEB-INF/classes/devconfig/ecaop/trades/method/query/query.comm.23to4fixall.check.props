@@ -1,0 +1,28 @@
+ecaop.core.method.map.ecaop.trades.query.comm.23to4fixall.check=23l4
+ecaop.core.method.23l4.def={"mothod":"23l4","remark":"23转4固网校验(all)"}
+ecaop.core.method.23l4.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg 校验器 
+ecaop.trades.23l4.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    serviceClassCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    numId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    userPasswd:{type:"String(30)",required:flase,encrypted:false,validators:null}}
+
+#请求参数
+ecaop.params.23l4.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.UserTransferSer.checkUserTransFixedfer,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.cbss.23To4.template@FBS@CHECK_USER_TRANSFER_FIXED_INPUT@chec@CHECK_USER_TRANSFER_FIXED_REQ"}\
+]
+#定义流程
+ecaop.core.method.23l4.processors=@checkUserTransferFixedAll()

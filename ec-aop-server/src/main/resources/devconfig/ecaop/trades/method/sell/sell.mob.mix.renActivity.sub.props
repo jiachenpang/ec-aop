@@ -1,0 +1,52 @@
+#融合共享续约申请
+ecaop.core.method.map.ecaop.trades.sell.mob.mix.renActivity.sub=mmrs
+ecaop.core.method.mmrs.def={"mothod":"mmrs","remark":"融合共享续约提交"}
+ecaop.core.method.mmrs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.mmrs.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#参数校验
+ecaop.mmrs.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    serialNumber:{type:"String(20)",required:true,validators:null},\
+    ordersId:{type:"String(30)",required:true,validators:null},\
+    essSubscribeId:{type:"String(30)",required:false,validators:null},\
+    origTotalFee:{type:"String(10)",required:true,validators:null},\
+    acceptanceReqTag:{type:"String(1)",required:true,validators:null},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.mmrs.payInfoTemplate)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#支付信息
+ecaop.trades.mmrs.payInfoTemplate={\
+    payType:{type:"String(2)",required:true,validators:null},\
+    paymentInfoSyncReq:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mmrs.misposTemplate)"}}
+ 
+#mispos支付信息
+ecaop.trades.mmrs.misposTemplate={\
+    tradeType:{type:"String(2)",required:true,validators:null},\
+    tradeId:{type:"String(20)",required:true,validators:null},\
+    mposValueCode:{type:"String(4)",required:true,validators:null},\
+    tradeAmt:{type:"String(20)",required:true,validators:null},\
+    originalTransType:{type:"String(2)",required:true,validators:null},\
+    busiOrderId:{type:"String(50)",required:true,validators:null},\
+    busiTransType:{type:"String(2)",required:true,validators:null},\
+    modifyTag:{type:"String(2)",required:true,validators:null},\
+    transPoint:{type:"String(50)",required:true,validators:null},\
+    transMerchant:{type:"String(50)",required:true,validators:null},\
+    transTrace:{type:"String(50)",required:true,validators:null},\
+    transBatch:{type:"String(50)",required:true,validators:null},\
+    transRetrieval:{type:"String(50)",required:true,validators:null},\
+    transTime:{type:"String(14)",required:true,validators:null},\
+    transStatus:{type:"String(2)",required:true,validators:null}}
+    
+
+#定义processors
+ecaop.core.method.mmrs.processors=@ChangeFeeType()\
+                                                             @mixRenActivitySub()                              

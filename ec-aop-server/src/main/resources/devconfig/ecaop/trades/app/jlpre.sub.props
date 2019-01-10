@@ -1,0 +1,10 @@
+#吉林预受理
+ecaop.core.app.map.jlpre.sub=jlpr
+ecaop.core.app.jlpr.def={"code":"jlpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jlpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.jlpr.allow={appkey:"jlpr",allow:"mofc,csaq,qrtc,sack,snqy,nboc,smnp,cack,qmoq,scmc,mpsb,cuck,\
+qrsq,qrsc,cdsn,cdqy,cdnt,opap,opsb,bypc,byps,2324,23t4,234o,234s,234t,23l4,bsop,tzcx,qrtac,fasb,scac,qcsc,\
+pipu,smno,qctc,qcsp,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,qcacq,qcar,qcpq,smcc,kdwy,smosa,smoss,\
+sfss,sbaos,sbso,qcpa,mcoa,oupc,orta,sgfs,modr,scaf,spfs,ofcs,sc4s,mvoa,oata,mold,smoca,occs,ccic,qrtb,qcbl,\
+qofq,qcrq,mccr,mccn,spff,mnca,qcua,cuss,qcop,cumd,smct,msoa,qcbl,mmra,mmrs,qcfc,qcfd,mxcg,qubq,qctq,trao,\
+mixk,qcsq,mpdsb", deny:null}

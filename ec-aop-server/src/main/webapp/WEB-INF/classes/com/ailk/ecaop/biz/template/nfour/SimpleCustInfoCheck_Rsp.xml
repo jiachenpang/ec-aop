@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+<QRY_SIMPLE_CUST_INFO_RSP mappedOut="true">
+    <RESP_CODE length="F4" mappedName="code" />
+    <RESP_DESC length="V500" mappedName="detail" />
+    <CUST_INFO constraint="*" mappedOut="true">
+        <CUST_NAME length="V100" mappedName="customerName"/>
+        <CUST_TYPE length="V20"  mappedName="customerType"/>
+        <CERT_END_DATE length="F14" constraint="?" mappedName="certExpireDate"/>
+        <CERT_ADDR length="V256" constraint="?"  mappedName="certAdress"/>
+        <CERT_TYPE_CODE length="V2" mappedName="certType" />
+        <CERT_CODE length="V50" mappedName="certNum" />
+    </CUST_INFO>
+</QRY_SIMPLE_CUST_INFO_RSP>
+</UNI_BSS_BODY>

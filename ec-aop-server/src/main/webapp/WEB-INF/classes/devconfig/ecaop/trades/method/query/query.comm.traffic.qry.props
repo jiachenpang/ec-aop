@@ -1,0 +1,61 @@
+#流量包余量查询
+ecaop.core.method.map.ecaop.trades.query.comm.traffic.qry=qctq
+ecaop.core.method.qctq.def={"mothod":"qctq","remark":"流量包余量查询"}
+ecaop.core.method.qctq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qctq.msgschema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg校验
+ecaop.ecsb.qctq.msgschema={\
+operatorId:{type:"String(20)",required:true,validators:null},\
+province:{type:"Number(2)",required:true,validator:"@FixedLen(2)"},\
+city:{type:"Number(3)",required:true,validator:"@FixedLen(3)"},\
+district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+channelId:{type:"String(20)",required:true,validators:null},\
+channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+numId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+opeSysType:{type:"Number(1)",required:true,encrypted:false,validators:null},\
+serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+para:{type:"JSON",required:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.qctq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.qctq.flowConfig)
+
+ecaop.core.method.qctq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->03 1->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->05 N25->04"},\
+{id:"03", processor:"AopHandler(ecaop.cbss.qctq.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.masb.qctq.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#定义处理器
+ecaop.masb.qctq.processors=@ParametersMapper(ecaop.masb.qctq.ParametersMapping)\
+                                 @WsCall(ecaop.comm.conf.url.osn.services.ResourcePurchaseSer)\
+                                 @Xml2JsonMapper4Fbs(ecaop.masb.qctp.template)#定义处理器
+ecaop.cbss.qctq.processors=@ParametersMapper(ecaop.cbss.qctq.ParametersMapping)\
+                                 @WsCall(ecaop.comm.conf.url.cbss.services.ResourcePurchaseSer)\
+                                 @Xml2JsonMapper4Fbs(ecaop.cbss.qctp.template)
+
+
+#CBSS返销预提交
+ecaop.cbss.qctq.ParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ResourcePurchaseSer.qryResourceRemain,50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.cbss.qctp.template@FBS@QRY_RESOURCE_REMAIN_INPUT@n1529397156@QRY_RESOURCE_REMAIN_REQ"}\
+]
+ecaop.cbss.qctp.template=com/ailk/ecaop/biz/template/qywpt/ResourceRemainQry
+#给freeMarker中变量复制，一遍生成报文
+ecaop.masb.qctq.ParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ResourcePurchaseSer.qryResourceRemain",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.qctp.template@FBS@QRY_RESOURCE_REMAIN_INPUT"}\
+] 
+
+#请求和返回报文模版路径
+ecaop.masb.qctp.template=com/ailk/ecaop/biz/template/qywpt/ResourceRemainQry
+
+#key命名规则：ecaop.soap.bodyns.appCode  value:wsdl约定的值
+ecaop.soap.bodyns.qctq=qry

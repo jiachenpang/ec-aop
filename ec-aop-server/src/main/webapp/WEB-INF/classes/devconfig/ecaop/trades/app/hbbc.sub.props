@@ -1,0 +1,5 @@
+#湖北BSS国政通测试
+ecaop.core.app.map.hbbc.sub=hbbc
+ecaop.core.app.hbbc.def={"code":"hbbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hbbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.hbbc.allow={appkey:"hbbc",allow:"crck,seft", deny:null}

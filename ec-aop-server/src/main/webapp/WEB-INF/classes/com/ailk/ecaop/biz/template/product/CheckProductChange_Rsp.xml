@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UNI_BSS_BODY>
+  <QRY_PRODUCT_INFO_RSP mappedOut="true">
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!-- 应答描述  -->
+    </RESP_DESC>
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!-- 应答编码0000 成功8888 其他失败原因（见应答描述） -->
+    </RESP_CODE>
+    <RESP_INFO constraint="*" mappedName="respInfo">
+      <PACKAGE_PRICE constraint="?" length="V20" mappedName="packagePrice">
+        <!-- 套餐资费单位：分 -->
+      </PACKAGE_PRICE>
+      <PRODUCT_ID constraint="1" length="V40" mappedName="productId">
+        <!-- 产品编码 -->
+      </PRODUCT_ID>
+      <PRODUCT_NAME constraint="1" length="V200" mappedName="productName">
+        <!-- 产品名称 -->
+      </PRODUCT_NAME>
+      <IS_CONTRACT constraint="?" length="F1" mappedName="isContract">
+        <!-- 是否合约:0:否1:是 -->
+      </IS_CONTRACT>
+      <END_DATE constraint="1" length="F14" mappedName="endDate">
+        <!-- 失效时间格式：YYYYMMDDhhmmss -->
+      </END_DATE>
+      <LOWLIMIT_FEE constraint="?" length="V20" mappedName="lowlimitFee">
+        <!-- 最低消费值单位：分 -->
+      </LOWLIMIT_FEE>
+      <IS_TRANSRESOURCESTYPE constraint="?" length="F1" mappedName="isTransresourcestype">
+        <!-- 是否允许转付费类型：0:否1:是 -->
+      </IS_TRANSRESOURCESTYPE>
+      <CHANGED_PRODUCT_ID constraint="?" length="V40" mappedName="changedProductId">
+        <!-- 已变更的产品编码 -->
+      </CHANGED_PRODUCT_ID>
+      <CHANGED_PRODUCT_NAME constraint="?" length="V200" mappedName="changedProductName">
+        <!-- 已变更的产品名称 -->
+      </CHANGED_PRODUCT_NAME>
+      <START_DATE constraint="1" length="F14" mappedName="startDate">
+        <!-- 生效时间格式：YYYYMMDDhhmmss -->
+      </START_DATE>
+      <IS_NICENUM constraint="?" length="F1" mappedName="isNicenum">
+        <!-- 是否靓号:0:否1:是 -->
+      </IS_NICENUM>
+      <IS_TRANSNET constraint="?" length="F1" mappedName="isTransnet">
+        <!-- 是否允许转网别:0:否1:是 -->
+      </IS_TRANSNET>
+      <CHANGED_ORDER_NUM constraint="?" length="V60" mappedName="changedOrderNum">
+        <!-- 已变更产品省分订单号 -->
+      </CHANGED_ORDER_NUM>
+      <IS_EXISTPRODUCT constraint="?" length="F1" mappedName="isExistproduct">
+        <!-- 是否存在未生效产品：0:否1:是 -->
+      </IS_EXISTPRODUCT>
+      <PACKAGE_INFO constraint="*" mappedName="packageInfo">
+        <START_DATE constraint="?" length="F14" mappedName="startDate">
+          <!-- 生效时间格式：YYYYMMDDhhmmss -->
+        </START_DATE>
+        <PACKAGE_TYPE constraint="?" length="F2" mappedName="packageType">
+          <!-- 包（构成）类型：01、语音；02、流量；03、短信；04、来电显示 -->
+        </PACKAGE_TYPE>
+        <IS_DEFAULT constraint="?" length="F1" mappedName="isDefault">
+          <!-- 是否默认:0：否1：是 -->
+        </IS_DEFAULT>
+        <END_DATE constraint="?" length="F14" mappedName="endDate">
+          <!-- 失效时间格式：YYYYMMDDhhmmss -->
+        </END_DATE>
+        <PACKAGE_ID constraint="?" length="V40" mappedName="packageId">
+          <!-- 包（构成）编码 -->
+        </PACKAGE_ID>
+        <IS_REQUIRED constraint="?" length="F1" mappedName="isRequired">
+          <!-- 是否必选:0：否1：是 -->
+        </IS_REQUIRED>
+        <PACKAGE_NAME constraint="?" length="V200" mappedName="packageName">
+          <!-- 包（构成）名称 -->
+        </PACKAGE_NAME>
+        <ELEMENT_INFO constraint="*" mappedName="elementInfo">
+          <START_DATE constraint="?" length="F14" mappedName="startDate">
+            <!-- 生效时间格式：YYYYMMDDhhmmss -->
+          </START_DATE>
+          <IS_DEFAULT constraint="?" length="F1" mappedName="isDefault">
+            <!-- 是否默认:0：否1：是 -->
+          </IS_DEFAULT>
+          <ELEMENT_CODE constraint="?" length="V40" mappedName="elementCode">
+            <!-- 元素编码 -->
+          </ELEMENT_CODE>
+          <END_DATE constraint="?" length="F14" mappedName="endDate">
+            <!-- 失效时间格式：YYYYMMDDhhmmss -->
+          </END_DATE>
+          <ELEMENT_NAME constraint="?" length="V200" mappedName="elementName">
+            <!-- 元素名称 -->
+          </ELEMENT_NAME>
+          <ELEMENT_TYPE constraint="?" length="V10" mappedName="elementType">
+            <!-- 元素类型00:服务01:资费02:特服 -->
+          </ELEMENT_TYPE>
+          <IS_REQUIRED constraint="?" length="F1" mappedName="isRequired">
+            <!-- 是否必选:0：否1：是 -->
+          </IS_REQUIRED>
+        </ELEMENT_INFO>
+      </PACKAGE_INFO>
+      <SUBPRODUCT_INFO constraint="*" mappedName="subproductInfo">
+        <START_DATE constraint="?" length="F14" mappedName="startDate">
+          <!-- 生效时间格式：YYYYMMDDhhmmss -->
+        </START_DATE>
+        <PACKAGE_TYPE constraint="?" length="F2" mappedName="packageType">
+          <!-- 包类型：01、语音；02、流量；03、短信；04、来电显示 -->
+        </PACKAGE_TYPE>
+        <END_DATE constraint="?" length="F14" mappedName="endDate">
+          <!-- 失效时间格式：YYYYMMDDhhmmss -->
+        </END_DATE>
+        <PACKAGE_ID constraint="?" length="V40" mappedName="packageId">
+          <!-- 包编码 -->
+        </PACKAGE_ID>
+        <PACKAGE_NAME constraint="?" length="V200" mappedName="packageName">
+          <!-- 包名称 -->
+        </PACKAGE_NAME>
+        <FEE_INFO constraint="*" mappedName="feeInfo">
+          <START_DATE constraint="?" length="F14" mappedName="startDate">
+            <!-- 生效时间格式：YYYYMMDDhhmmss -->
+          </START_DATE>
+          <FEE_CODE constraint="?" length="V40" mappedName="feeCode">
+            <!-- 资费编码 -->
+          </FEE_CODE>
+          <FEE_NAME constraint="?" length="V200" mappedName="feeName">
+            <!-- 资费名称 -->
+          </FEE_NAME>
+          <END_DATE constraint="?" length="F14" mappedName="endDate">
+            <!-- 失效时间格式：YYYYMMDDhhmmss -->
+          </END_DATE>
+        </FEE_INFO>
+      </SUBPRODUCT_INFO>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </RESP_INFO>
+  </QRY_PRODUCT_INFO_RSP>
+</UNI_BSS_BODY>

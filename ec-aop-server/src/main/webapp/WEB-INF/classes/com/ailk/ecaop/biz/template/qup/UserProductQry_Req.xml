@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<QRY_USER_PRODUCT_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <QRY_USER_PRODUCT_REQ>
+            <EPARCHY_CODE length="V6" mappedName="city" >
+            <!-- 地市编码 -->
+            </EPARCHY_CODE>
+            <PROVINCE_CODE length="V2" mappedName="province" >
+            <!-- 省分编码 -->
+            </PROVINCE_CODE>
+            <CITY_CODE length="V8" constraint="?" mappedName="district" >
+            <!-- 客户归属业务区 -->
+            </CITY_CODE>
+            <USER_ID length="V100" mappedName="userId" >
+            <!-- 用户标识 -->
+            </USER_ID>
+            <SERIAL_NUMBER length="V15" mappedName="serialNumber" >
+            <!-- 用户号码 -->
+            </SERIAL_NUMBER>
+            <PROPERTY_TYPE length="F1" constraint="?" mappedName="propertyType" >
+            <!-- 元素类型    0：产品 1：服务2：资费 3：SP-->
+            </PROPERTY_TYPE>
+            <PROPERTY_ID length="V15" constraint="?" mappedName="propertyId" >
+            <!-- 元素ID，PROPERTY_TYPE填入时必填 -->
+            </PROPERTY_ID>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </QRY_USER_PRODUCT_REQ>
+  </UNI_BSS_BODY> 
+   <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_USER_PRODUCT_INPUT>

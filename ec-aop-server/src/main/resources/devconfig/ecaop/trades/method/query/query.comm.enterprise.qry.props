@@ -1,0 +1,50 @@
+#用于进行集团账户资料的创建,集客的 账户 资料创建接口
+ecaop.core.method.map.ecaop.trades.query.comm.enterprise.qry=qceq
+ecaop.core.method.qceq.def={"mothod":"qceq"}
+ecaop.core.method.qceq.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.query.qceq.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+#msg 校验器 渠道类型，改成非必填
+ecaop.query.qceq.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:false,encrypted:false,validators:"@FixedLen(7)" },\
+     orgCode:{type:"String(50)",required:false,encrypted:false,validators:null},\
+     vendorName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     enrollCode:{type:"String(50)",required:false,encrypted:false,validators:null},\
+     searchFlag:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     para:{ type:"JSON",required:false,encrypted:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.core.method.qceq.processors=@EnterpriseQry()
+#@ParametersMapper(ecaop.query.qceq.ParametersMapping)\
+#                           @WsCall(ecaop.comm.conf.url.osn.services.inquiryEnterpriseInfoSer)\
+#                           @Xml2JsonMapper4Fbs(ecaop.fbs.qceq.template)
+#请求参数crtGrpCustInfo
+ecaop.query.qceq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"InquiryEnterpriseInfoSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryEnterpriseInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"qryEnterpriseInfo_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.fbs.qceq.template@FBS@qryEnterpriseInfo_INPUT"}\
+]
+#报文模版路径
+ecaop.fbs.qceq.template=com/ailk/ecaop/biz/template/cbss/EnterpriseQry
+ecaop.soap.bodyns.qceq=grp

@@ -1,0 +1,49 @@
+#终端流量包订购
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.tertraffic.order=coto
+ecaop.core.method.coto.def={"mothod":"coto","remark":"用户激活码校验"}
+ecaop.core.method.coto.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false,"validators":"@JSONSchema(ecaop.masb.coto.MsgSchema)"},\
+    {"param":"timestamp","type":"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey","type":"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx","type":"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.masb.coto.MsgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:null},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:null},\
+    numId:{type:"String(20)",required:true,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,validators:null},\
+    imei:{type:"String(40)",required:true,validators:null},\
+    packageCode:{type:"String(4)",required:true,validators:null},\
+    activCode:{type:"String(8)",required:true,validators:null},\
+    orderTime:{type:"String(14)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#定义processors
+ecaop.core.method.coto.processors= @ParametersMapper(ecaop.masb.coto.ParametersMapping)\
+                                   @WsCall(ecaop.comm.conf.url.cbss.services.terminalOrderCheckSer)\
+                                   @Xml2JsonMapper4Fbs(ecaop.masb.coto.template)
+                                  
+ecaop.masb.coto.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"TerminalOrderCheckSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"terminalOrder",temp:true},\
+    {paramterName:"numId",extractor:"propertyGet",extractorConfig:"msg.numId",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"TERMINAL_ORDER_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.masb.coto.template@FBS2@TERMINAL_ORDER_INPUT@ter@TERMINAL_ORDER_REQ"}\
+]
+
+ecaop.masb.coto.template=com/ailk/ecaop/biz/template/terminal/TerminalOrderCheck

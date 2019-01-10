@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FeeQueryRsp mappedOut="true">
+    <RespCode  length="F2"  mappedName="code" />
+    <UserNumber  length="V30"  mappedName="number" />
+    <RespDesc length="V256"  constraint="?" mappedName="detail" />
+        <Para constraint="*" mappedName="para">
+            <ParaId mappedName="paraId" />
+            <ParaValue mappedName="paraValue" />
+        </Para>
+</FeeQueryRsp>

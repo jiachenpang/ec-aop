@@ -1,0 +1,62 @@
+#实人认证 by lzg
+ecaop.core.method.map.ecaop.trades.syn.curt.realperson.authen.sub=scrat
+ecaop.core.method.scrat.def={"mothod":"scrat","remark":"实人认证"}
+ecaop.core.method.scrat.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.scrat.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.trades.scrat.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)"},\
+     opeSysType:{type:"Number(1)",required:true,validators:"@FixedLen(1)"},\
+     orderId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+     number:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     photoTag:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     realPersonTag:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     onlineRealPersonTag:{type:"String(30)",required:false,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+
+ecaop.core.method.scrat.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.scrat.flowConfig)
+
+ecaop.core.method.scrat.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 2->05"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->03 N25->04"},\
+{id:"03", processor:"AopHandler(ecaop.comm.trades.scrat.n6.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.comm.trades.scrat.n25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.trades.scrat.cbss.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#N6
+ecaop.comm.trades.scrat.n6.processors=@RealpersonSub2Ness()
+#Cb
+ecaop.comm.trades.scrat.cbss.processors=@RealpersonSub2Cb()
+#N25
+#定义processors
+ecaop.comm.trades.scrat.n25.processors=@ParametersMapper(ecaop.ecsb.scrat.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.osn.services.RealPersonSer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.scrat.template)
+ #正式提交
+ecaop.trades.scrat.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordSer.orderSub",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.scrat.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.scrat.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+#报文头参数
+ecaop.ecsb.scrat.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.RealPersonSer.RealPersonAuthen",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.scrat.ecsb.template@FBS@REAL_PERSON_AUTHEN_INPUT@n1529397155@REAL_PERSON_AUTHEN_REQ"}\
+]
+
+ecaop.trades.scrat.ecsb.template=com/ailk/ecaop/biz/template/curt/RealPersonAuthen
+
+

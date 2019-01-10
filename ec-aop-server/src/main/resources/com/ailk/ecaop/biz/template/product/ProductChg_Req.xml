@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <ProductChgReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <SerialNumber length="V20" mappedName="serialNumber" />
+            <ProductInfo constraint="*" mappedName="productInfo">
+                <ProductID length="V20" mappedName="productId" />
+                <ProductMode length="F1" mappedName="productMode" range="0,1" />
+                <OptType length="F2" constraint="?" mappedName="optType" range="00,01,02" />
+            </ProductInfo>
+            <RecomPersonID length="V30" constraint="?" mappedName="recomPersonId" />
+            <RecomPersonName length="V30" constraint="?" mappedName="recomPersonName" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </ProductChgReq>
+    </SvcCont>
+</UniBSS>

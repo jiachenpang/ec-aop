@@ -1,0 +1,129 @@
+[selectSubscribeId]
+SELECT F_SYS_GETSEQID('SEQ_SUBSCRIBE_ID',#province#) FROM DUAL
+
+[selNumInfoFromOccupy]
+SELECT RELEASE_TIME,PRO_KEY,OCCUPY_STAFF_ID,SYS_CODE 
+  FROM TF_R_PHCODE_OCCUPY
+ WHERE SERIAL_NUMBER=#serialNumber#
+ 
+ 
+[selNumInfoFromIDLE]
+SELECT  D.SERIAL_NUMBER,D.CODE_STATE,D.SYS_CODE,D.UPDATE_STAFF,D.PROC_KEY,B.CHECK_TYPE,B.CKVALUE1,B.CKVALUE2 
+  FROM  TF_R_PHCODE_IDLE D   
+  JOIN  TF_R_PHCODE_BOOK B 
+  ON    D.SERIAL_NUMBER=B.SERIAL_NUMBER
+  WHERE D.SERIAL_NUMBER=#serialNumber#
+  AND   D.CODE_STATE IN ('7','8')
+  
+
+[qrySubscribeInfo]
+SELECT A.SERIAL_NUMBER, A.BIP_CODE
+  FROM TF_B_SUBSCRIBE A
+ WHERE A.BSS_SUBSCRIBE_ID = #orderId#
+       AND A.SERIAL_NUMBER=#serialNumber#
+
+
+[IntoSubscribeInfo]
+INSERT INTO TL_B_E2E_STEP
+          (SUBSCRIBE_ID,
+           ORDERS_ID,
+           TRADE_TYPE_CODE,
+           TRADE_SUBTYPE_CODE,
+           SUBSCRIBE_STAFF,
+           SUBSCRIBE_DEPART,
+           CHANNEL_ID,
+           CHANNEL_TYPE_CODE,
+           SUBSCRIBE_CITY,
+           SUBSCRIBE_EPARCHY,
+           SUBSCRIBE_PROVINCE,
+           UPDATE_TIME,
+           IN_MODE,
+           SUCCESS_FLAG,
+           OPER_STEP,
+           OPER_COUNT,
+           PROVORDER_ID,
+           ISBACKLOGORDER)
+        VALUES
+          (#ordersId#,
+           #ordersId#,
+           #TRADE_TYPE_CODE#,
+           #TRADE_SUBTYPE_CODE#,
+           #operatorId#,
+           #departId#,
+           #channelId#,
+           #channelType#,
+           #district#,
+           #city#,
+           #province#,
+           SYSDATE,
+           #AccessType#,
+           #SUCCESS_FLAG#,
+           '000',
+           '1',
+           #ordersId#,
+           #IsBacklogOrder#)
+           
+           
+[updateE2EStepInfo]
+UPDATE TL_B_E2E_STEP
+           SET UPDATE_TIME  = SYSDATE,
+               SUCCESS_FLAG = #SUCCESS_FLAG#,
+               OPER_STEP    = #OPER_STEP#,
+               OPER_COUNT   = NVL(OPER_COUNT, 0) + 1,
+               SUBSCRIBE_ID = #OrdersID#,
+               CACHE_PARAM  = #CACHE_PARAM#
+         WHERE ORDERS_ID = #MallOrdersID#
+         AND PROVORDER_ID = #MallProvOrderID#
+         
+         
+[insertSubscribe]
+INSERT INTO TF_B_SUBSCRIBE
+          (SUBSCRIBE_ID,
+           PARTITION_ID,
+           ACCEPT_MONTH,
+           SERIAL_NUMBER,
+           TRADE_TYPE_CODE,
+           SUBSCRIBE_TYPE_CODE,
+           SUBSCRIBE_STATE,
+           BIP_CODE,
+           SUBSCRIBE_STAFF,
+           CHANNEL_TYPE_ID,
+           SUBSCRIBE_DEPART,
+           SUBSCRIBE_CITY,
+           SUBSCRIBE_EPARCHY,
+           SUBSCRIBE_PROVINCE,
+           IN_MODE,
+           PROVINCE_CODE,
+           EPARCHY_CODE,
+           CITY_CODE,
+           OPER_FEE,
+           FOREGIFT,
+           ADVANCE_PAY,
+           PAY_MONEY_CODE,
+           UPDATE_TIME,
+           ACCEPT_DATE)
+        VALUES
+          (#orderId#,
+           MOD(#orderId#, 100),
+           #accessMonth#,
+           #serialNumB#,
+           '10',
+           '1',
+           '6',
+           'BIP2F001',
+           #operatorId#,
+           #channelType#,
+           #departId#,
+           #city#,
+           #city#,
+           #province#,
+           '01',
+           #province#,
+           #city#,
+           #district#,
+           '0',
+           '0',
+           '0',
+           '10',
+           SYSDATE,
+           SYSDATE)

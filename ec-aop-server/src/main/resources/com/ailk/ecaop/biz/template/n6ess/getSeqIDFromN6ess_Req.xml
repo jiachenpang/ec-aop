@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GET_SEQID_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <GET_SEQID_REQ>
+            <!-- 默认TRADE_ID 值存在类型USER_ID、ACCT_ID、CUST_ID、ITEM_ID-->
+            <SEQ_TYPE constraint="?" defaultValue="TRADE_ID" length="V20" mappedName="seqType"/>
+            <EPARCHY_CODE length="V6" mappedName="eparchyCode"/>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </GET_SEQID_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</GET_SEQID_INPUT>

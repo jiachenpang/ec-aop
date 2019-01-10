@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECK_BLACK_CUST_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECK_BLACK_CUST_REQ>
+            <PSPT_TYPE_CODE length="V2"  mappedName="psptTypeCode"/>
+            <PSPT_ID length="V50"  mappedName="psptId"/>
+            <PROVINCE_CODE length="V8" mappedName="province"/>
+            <EPARCHY_CODE length="V6" mappedName="areaCode"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CHECK_BLACK_CUST_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECK_BLACK_CUST_INPUT>

@@ -1,0 +1,25 @@
+#融合信息校验
+ecaop.core.method.map.ecaop.trades.check.mix.check=mixk
+
+ecaop.core.method.mixk.def={"mothod":"mixk","remark":"融合信息校验"}
+
+ecaop.core.method.mixk.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.param.msg.schema.mixk)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+ecaop.param.msg.schema.mixk={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    numId:{type:"String(20)",required:true}\
+}
+
+#定义processors
+ecaop.core.method.mixk.processors=@TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ec-aop.rest)

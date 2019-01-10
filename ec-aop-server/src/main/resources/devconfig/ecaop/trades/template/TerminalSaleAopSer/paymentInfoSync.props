@@ -1,0 +1,2 @@
+#支付信息同步  用于北京卖场系统MISPOS支付成功后同步MISPOS支付信息。北分卖场->AOP->cBSS
+ecaop.trade.template.TerminalSaleAopSer.paymentInfoSync={"serviceName":"TerminalSaleAopSer","operateName":"paymentInfoSync","content":"PAYMENT_INFO_SYNC_REQ"}

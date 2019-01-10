@@ -1,0 +1,7 @@
+#内蒙预受理
+ecaop.core.app.map.nmpre.sub=nmpr
+ecaop.core.app.nmpr.def={"code":"nmpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.nmpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.nmpr.allow={appkey:"nmpr",allow:"2324,234o,opsb,sc4s,cmck,snqy,nboc,qrtc,opap,opsb,cdsn,cdqy,\
+cdnt,sccc,cumd,ucca,cuck,ccic,qrta,qcsc,mpsb,smnp,syps,cack,qcacq,spfs,qcsp,dvqy,qcsq,oupc,csaq,qrtac,smct,\
+msoa,qcaq,sjxs,qcbl,jffx,spec,spes,cbpq,mccr,mccn,orta,modr,mmra,mmrs,sctr,quuq,mcoa,seft,mvoa,mmvc,23l4", deny:null}

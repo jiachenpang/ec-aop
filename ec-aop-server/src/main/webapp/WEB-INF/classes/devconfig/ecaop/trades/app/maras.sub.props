@@ -1,0 +1,8 @@
+#北京营销助手国政通测试
+ecaop.core.app.map.maras.sub=mabc
+ecaop.core.app.mabc.def={"code":"mabc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.mabc.timeslimit=max 100 per 1 minute
+ecaop.core.app.mabc.allow={appkey:"mabc",allow:"crck,qctc,qcsp,snqy,ccic,nboc,qrtac,cdqy,cdnt,opap,opsb,cdsn,oata,\
+                           2324,sccc,234o,mold,cuck,mnca,mofc,ofcs,orta,modr,sjxs,sctr,csaq,qrtc,tsrc,qcua,paid,kdwy,\
+                           ucck,smcc,bypc,byps,ucca,cmck,23l4,tzcx,cack,\
+                           oupc,smno,smmc", deny:null}

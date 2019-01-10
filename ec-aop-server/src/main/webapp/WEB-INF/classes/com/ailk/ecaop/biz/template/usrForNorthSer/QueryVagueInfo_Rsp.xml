@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QUERY_INFO_BY_VAGUE_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+        </RESP_DESC>
+        <QUERY_INFO_BY_VAGUE_INFO_RSP constraint="*" mappedName="queryInfoByVagueInfoRsp">
+            <EPARCHY_CODE constraint="?" length="V8" mappedName="eparchyCode" />
+            <CITY_CODE constraint="?" length="V8" mappedName="cityCode" />
+            <CUST_NAME constraint="?" length="V100" mappedName="custName" />
+            <PSPT_TYPE_CODE constraint="?" length="V1" mappedName="psptTypeCode" />
+            <PSPT_ID constraint="?" length="V100" mappedName="psptId" />
+            <CUST_ID constraint="?" length="V20" mappedName="custId" />
+            <USER_ID constraint="?" length="V20" mappedName="userId" />
+            <ACCT_ID constraint="?" length="V20" mappedName="acctId" />
+            <NET_TYPE_CODE constraint="?" length="V4" mappedName="netTypeCode" />
+            <BRAND_CODE constraint="?" length="F4" mappedName="brandCode" />
+            <PRODUCT_ID constraint="?" length="V8" mappedName="productId" />
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber" />
+            <FIX_NUMBER constraint="?" length="V40" mappedName="fixNumber" />
+            <ACCT_NBR constraint="?" length="V40" mappedName="acctNbr" />
+            <DETAIL_INSTALL_ADDRESS constraint="?" length="V1000" mappedName="detailInstallAddress" />
+            <MOFFICE_ID constraint="?" length="V50" mappedName="mofficeId" />
+            <ADDRESS_ID constraint="?" length="V50" mappedName="addressId" />
+            <COMMUNIT_ID constraint="?" length="V50" mappedName="communitId" />
+            <COMMUNIT_NAME constraint="?" length="V100" mappedName="communitName" />
+            <CUST_MANAGER_ID constraint="?" length="V50" mappedName="custManagerId" />
+            <CUST_MANAGER_NAME constraint="?" length="V100" mappedName="custManagerName" />
+            <LINK_NAME constraint="?" length="V100" mappedName="linkName" />
+            <LINK_PHONE constraint="?" length="V40" mappedName="linkPhone" />
+            <BILL_NUM constraint="?" length="V50" mappedName="billNum" />
+            <CIRCUIT_NUM constraint="?" length="V50" mappedName="circuitNum" />
+            <PIM_NUM constraint="?" length="V50" mappedName="pimNum" />
+            <ICCID constraint="?" length="V50" mappedName="iccid" />
+            <PARENT_TYPE_CODE constraint="?" length="F1" mappedName="parentTypeCode" />
+            <EPARCHY_NAME constraint="?" length="V100" mappedName="eparchyName" />
+            <CITY_NAME constraint="?" length="V100" mappedName="cityName" />
+            <NET_TYPE_NAME constraint="?" length="V100" mappedName="netTypeName" />
+            <BRAND_NAME constraint="?" length="V100" mappedName="BrandName" />
+            <MOFFICE_NAME constraint="?" length="V100" mappedName="mofficeName" />
+            <PRODUCT_NAME constraint="?" length="V100" mappedName="productName" />
+            <BALANCE constraint="?" length="V40" mappedName="balance" />
+            <ACNTBALANCE constraint="?" length="V40" mappedName="acntbalance" />
+            <RSRV_STR1 constraint="?" length="V1000" mappedName="rsrvStr1" />
+            <RSRV_STR2 constraint="?" length="V1000" mappedName="rsrvStr2" />
+            <RSRV_STR3 constraint="?" length="V1000" mappedName="rsrvStr3" />
+            <RSRV_STR4 constraint="?" length="V1000" mappedName="rsrvStr4" />
+            <RSRV_STR5 constraint="?" length="V1000" mappedName="rsrvStr5" />
+            <RSRV_STR6 constraint="?" length="V1000" mappedName="rsrvStr6" />
+            <RSRV_STR7 constraint="?" length="V1000" mappedName="rsrvStr7" />
+            <RSRV_STR8 constraint="?" length="V1000" mappedName="rsrvStr8" />
+            <RSRV_STR9 constraint="?" length="V1000" mappedName="rsrvStr9" />
+            <RSRV_STR10 constraint="?" length="V1000" mappedName="rsrvStr10" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId">
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue">
+                </PARA_VALUE>
+            </PARA>
+        </QUERY_INFO_BY_VAGUE_INFO_RSP>
+    </QUERY_INFO_BY_VAGUE_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <BssCheckResReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" constraint="?" mappedName="operatorId" />
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province" />
+            <!-- 地市 -->
+            <City constraint="?" length="F3" mappedName="city" />
+            <!-- 区县 -->
+            <District constraint="?" length="V10" mappedName="district" />
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId" />
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType" />
+            <!-- 接入类型 01 WEB； 02 短信； 03 WAP； 99 其他 -->
+            <AccessType length="F2" mappedName="accessType" defaultValue="01" />
+            <!-- 系统编码 -->
+            <SysCode length="F4" mappedName="sysCode" defaultValue="EAOP" />
+            <!-- 资源信息 -->
+            <ResourcesInfo constraint="+" mappedName="resourcesInfo">
+                <!-- 业务流水，后续稽核对帐用 -->
+                <TradeId length="V30" mappedName="tradeId" />
+                <!-- 资源类型：01-移动电话 IMEI,02-上网卡 ICCID,03-上网本 IMEI -->
+                <ResourcesTypeCode  length="V2" mappedName="resourcesType" />
+                <!-- 合约类型 01 预存话费送手机 02 购手机送话费03 合约惠机 04 无合约 -->
+                <ActiveType constraint="1" length="F2" mappedName="activeType"/>
+                <!-- 资源唯一标识 -->
+                <ResourcesCode length="V30" mappedName="resourcesCode" />
+                <!-- 预占标识 0 不预占 1 预占 2 预订 3 释放 4.损坏改空闲5.换机6.退机-->
+                <OccupiedFlag length="F1" range="0,1,2,3,4,5,6" mappedName="occupiedFlag" />
+                <!-- 调拨标识 -->
+                <AllocationFlag length="F1" range="0,1" mappedName="allocationFlag" defaultValue="0" />
+                <!-- 是否自备 1：否 2：是 -->
+                <IsSelf constraint="1" length="F1" mappedName="isSelf"/>
+                <!-- 产品标识，合约类销售必传 -->
+                <ProductId constraint="?" length="V8" mappedName="productId"/>
+                <!-- 活动ID，合约类销售必传 -->
+                <ActPlanId constraint="?" length="V20" mappedName="actPlanId"/>
+                <!-- 旧资源标识（串号），换机时必填 -->
+                <OldResourcesCode constraint="?" length="V30" mappedName="oldResourcesCode"/>
+                <!-- 手机号码，合约类销售，换机时必填 -->
+                <Number constraint="?" length="V12" mappedName="number"/>
+                <!-- 故障单号，换机时填写 -->
+                <CheckId constraint="?" length="V30" mappedName="checkId"/>
+                <!-- 故障原因，换机时填写 -->
+                <BrokenRe constraint="?" length="V30" mappedName="brokenRe"/>
+                <!-- 预占有效期 yyyymmddhh24miss OccupiedFlag:1的时候必填 -->
+                <OccupiedTime constraint="?" length="V20" mappedName="occupiedTime" />
+                <CertType constraint="?" length="F2" mappedName="certType" />
+                <!-- 证件号码OccupiedFlag:2的时候必填 -->
+                <CertNum constraint="?" length="V30" mappedName="certNum" />
+                <!-- 客户名称 -->
+                <CustName constraint="?" length="V20" mappedName="custName" />
+                <!-- 发展人标识，销售业务时下发 -->
+                <RecomPersonId constraint="?" length="V30" mappedName="recomPersonId" />
+                <!-- 发展人名称，销售业务时下发 -->
+                <RecomPersonName constraint="?" length="V30" mappedName="recomPersonName" />
+                <!-- 发展人地市，销售业务时下发 -->
+                <RecomPersonCityCode constraint="?" length="V6" mappedName="recomPersonCityCode" />
+                <!-- 发展人渠道，销售业务时下发 -->
+                <RecomPersonChannelId constraint="?" length="V20" mappedName="recomPersonChannelId" />
+            </ResourcesInfo>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </BssCheckResReq>
+    </SvcCont>
+</UniBSS>

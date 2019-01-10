@@ -1,0 +1,56 @@
+#空中写卡结果通知
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.otacardres.notify=scon
+ecaop.core.method.scon.def={"mothod":"cdnt","remark":"空中结果通知"}
+ecaop.core.method.scon.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.scon.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.scon.msg={\
+    operatorId:{type:"String(20)",required:true},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    cardUseType:{type:"String(1)",required:true},\
+    opeSysType:{type:"String(1)",required:false},\
+    errorIccid:{type:"String(22)",required:false},\
+    iccid:{type:"String(22)",required:true},\
+    imsi:{type:"String(22)",required:true},\
+    procId:{type:"String(30)",required:false},\
+    activeId:{type:"String(30)",required:true},\
+    reasonId:{type:"String(30)",required:true},\
+    capacityTypeCode:{type:"String(20)",required:false},\
+    resKindCode:{type:"String(20)",required:false},\
+    errorComments:{type:"String(256)",required:false},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#定义processors
+ecaop.core.method.scon.processors=@route\
+                           @FlowProcessor(ecaop.core.method.scon.flowConfig)
+ecaop.core.method.scon.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.trades.scon.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#空中入网写卡结果通知
+ecaop.trades.scon.processors=\
+                @ParametersMapper(ecaop.trades.scon.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonNobody(ecaop.scon.trades.template)
+
+ecaop.trades.scon.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00031",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"WriteCardReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.scon.template@3GE"}\
+]
+ecaop.trades.scon.template=com/ailk/ecaop/biz/template/simcard/OtaCardResNotify

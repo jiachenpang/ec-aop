@@ -1,0 +1,77 @@
+#订单查询
+ecaop.core.method.map.ecaop.trades.query.ordi.pre.qry=oopq
+ecaop.core.method.oopq.def={"mothod":"oopq","remark":"订单查询"}
+ecaop.core.method.oopq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.oopq.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.oopq.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     opeSysType:{type:"String(1)",required:false,validators:null },\
+     orderList:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.oopq.orderslist)"},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+ecaop.trades.oopq.orderslist={\
+    orderId:{type:"String(20)",required:true}\
+    }
+#定义processors
+ecaop.core.method.oopq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.oopq.masb.flowConfig)
+
+ecaop.core.method.oopq.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 2->03"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->04 N6->05"},\
+{id:"03", processor:"AopHandler(ecaop.core.method.oopq.masb.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.oopq.preorder.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.core.method.oopq.masb.processors=\
+                      @ChangeCodeParam()\
+                      @ParametersMapper(ecaop.masb.oopq.ParametersMapping)\
+                      @WsCall(ecaop.comm.conf.url.cbss.services.ExhibitionSer)\
+                      @Xml2JsonMapper4Fbs(ecaop.mall.oopq.template)
+
+ecaop.masb.oopq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"ExhibitionSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"preOrderQuery",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"PRE_ORDER_QUERY_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.mall.oopq.template@FBS@PRE_ORDER_QUERY_INPUT@pre"}\
+]
+#请求和返回报文模版路径
+ecaop.mall.oopq.template=com/ailk/ecaop/biz/template/order/OrderPreQry
+
+ecaop.oopq.preorder.processors=\
+                      @ParametersMapper(ecaop.oopq.preorder.ParametersMapping)\
+                      @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                      @Xml2JsonMapper(ecaop.trades.oopq.template)
+
+ecaop.oopq.preorder.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00045",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"OrderPreQryReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.oopq.template@3GE"}\
+]
+ecaop.trades.oopq.template=com/ailk/ecaop/biz/template/order/G3OrderPreQry

@@ -1,0 +1,58 @@
+#使用人责任人查询
+ecaop.core.method.map.ecaop.trades.query.comn.cust.useres=cues
+ecaop.core.method.cues.def={"mothod":"cues","remark":"使用人责任人查询"}
+ecaop.core.method.cues.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.core.cues.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#入参校验
+ecaop.core.cues.msgSchema={\
+    operatorId:{ type:"String(20)", required:true },\
+    province:{ type:"String(2)", required:true,validators:"@FixedLen(2)" },\
+    city:{ type:"String(3)", required:true },\
+    district:{ type:"String(10)", required:true },\
+    channelId:{ type:"String(20)", required:true },\
+    channelType:{ type:"String(7)", required:true,validators:"@FixedLen(7)" },\
+    serialNumber:{ type:"String(40)", required:true },\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+
+ecaop.core.cues.SimCardNoSchema={\
+    cardDataProcId:{ type:"String(30)", required:false },\
+    simId:{ type:"String(20)", required:true },\
+    imsi:{ type:"String(15)", required:false },\
+    cardType:{ type:"String(30)", required:false },\
+    cardData:{ type:"String(1024)", required:false },\
+    cardFee:{ type:"String(10)", required:false }\
+}
+
+#定义method别名为cues的processors
+ecaop.core.method.cues.processors=@route\
+                           @FlowProcessor(ecaop.core.method.cues.route.flowConfig)
+#根据省份路由 走北六还是南25(南25与广东集客处理方法一致)
+ecaop.core.method.cues.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.core.cues.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#广东集团客户开户卡数据同步
+ecaop.core.cues.processors=@ParametersMapper(ecaop.core.cues.ParametersMapping)\
+                           @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                           @Xml2JsonMapper(ecaop.core.cues.template)
+
+#请求参数
+ecaop.core.cues.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00044",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CustUseresReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.core.cues.template@3GE"}\
+]
+#请求和返回报文模版路径
+ecaop.core.cues.template=com/ailk/ecaop/biz/template/custCheck/CustUseres

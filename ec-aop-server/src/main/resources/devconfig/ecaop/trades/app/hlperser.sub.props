@@ -1,0 +1,5 @@
+#黑龙江电商-流量包
+ecaop.core.app.map.hlperser.sub=hlps
+ecaop.core.app.hlps.def={"code":"hlps", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hlps.timeslimit=max 100 per 1 minute
+ecaop.core.app.hlps.allow={appkey:"hlps",allow:"trao,qctc,qubq,sjgs,smct,oupc,opsb,ccpk,crck", deny:null}

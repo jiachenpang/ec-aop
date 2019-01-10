@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 集团客户管理系统;用于集团 账户 资料的创建GrpAccountAOPSer -->
+<CHECK_ASSURE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqIncludeNoChannel_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHECK_ASSURE_REQ>
+            <ASSURE_ID_TYPE length="F1" mappedName="assureIdType" />
+            <ASSURE_PSPT_TYPE_CODE length="V2" mappedName="assurePsptTypeCode" />
+            <ASSURE_PSPT_ID length="V100" mappedName="assurePsptId" />
+            <ASSURE_CUST_TYPE length="F1" mappedName="assureCustType" />
+            <ACTIVITY_TYPE length="F1" mappedName="activityType" />
+            <PROVINCE_CODE length="V8" mappedName="province" />
+            <EPARCHY_CODE length="V8" mappedName="city" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CHECK_ASSURE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECK_ASSURE_INPUT>

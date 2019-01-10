@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SGL_PRODUCT_CHG_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <SGL_PRODUCT_CHG_REQ>
+            <ORDER_ID length="V30" mappedName="orderId" />
+            <TRADE_TYPE_CODE length="F4" mappedName="tradeTypeCode" />
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+            <USER_ID length="V16" mappedName="userId" />
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode" />
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <PRODUCT constraint="+" mappedName="product">
+                <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                <PRODUCT_ID length="V8" mappedName="productId" />
+                <DEFAULT_TAG length="F1" mappedName="defaultTag" />
+                <MKT_CAMP_ID constraint="?" length="V20" mappedName="mktCampId" />
+                <PRODUCT_MODE constraint="?" length="F2" mappedName="productMode" />
+                <START_ENABLE length="F1" mappedName="startEnable" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE constraint="?" length="F14" mappedName="endDate" />
+                <PRODUCT_PACKAGE constraint="*" mappedName="productPackage">
+                    <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                    <PACKAGE_ID length="V20" mappedName="packageId" />
+                    <DEFAULT_TAG length="F1" mappedName="defaultTag" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                    <SERVICE constraint="*" mappedName="service">
+                        <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                        <SERVICE_ID length="V8" mappedName="serviceId" />
+                        <SVC_TYPE length="F1" mappedName="svcYype" />
+                        <START_ENABLE length="F1" mappedName="startEnable" />
+                        <START_DATE length="F14" mappedName="startDate" />
+                        <END_DATE length="F14" mappedName="endDate" />
+                        <SERVICE_ITEM constraint="*" mappedName="serviceItem">
+                            <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                            <ATTR_CODE length="V30" mappedName="attrCode" />
+                            <ATTR_VALUE constraint="?" length="V2000" mappedName="attrValue" />
+                            <START_DATE length="F14" mappedName="startDate" />
+                            <END_DATE length="F14" mappedName="endDate" />
+                        </SERVICE_ITEM>
+                    </SERVICE>
+                    <CUST_DISCNT constraint="*" mappedName="custDiscnt">
+                        <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                        <DISCNT_CODE length="V8" mappedName="discntCode" />
+                        <START_ENABLE length="F1" mappedName="startEnable" />
+                        <START_DATE length="F14" mappedName="startDate" />
+                        <END_DATE length="F14" mappedName="endDate" />
+                        <CUST_DISCNT_ITEM constraint="*" mappedName="custDiscntItem">
+                            <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                            <ATTR_CODE length="V30" mappedName="attrCode" />
+                            <ATTR_VALUE constraint="?" length="V2000" mappedName="attrValue" />
+                            <START_DATE length="F14" mappedName="startDate" />
+                            <END_DATE length="F14" mappedName="endDate" />
+                        </CUST_DISCNT_ITEM>
+                    </CUST_DISCNT>
+                </PRODUCT_PACKAGE>
+                <PRODUCT_ITEM constraint="*" mappedName="productItem">
+                    <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                    <ATTR_CODE length="V30" mappedName="attrCode" />
+                    <ATTR_VALUE constraint="?" length="V2000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </PRODUCT_ITEM>
+            </PRODUCT>
+            <DISCNT_NUMBER_INFO constraint="*" mappedName="discntNumberInfo">
+                <MODIFY_TAG length="V1" mappedName="modifyTag" />
+                <RELATION_TYPE_CODE length="V4" mappedName="relationTypeCode" />
+                <DISCNT_TYPE constraint="?" length="V4" mappedName="discntType" />
+                <DISCNT_PATH length="V4" mappedName="discntPath" />
+                <SERVICE_CLASS_CODE constraint="?" length="V4" mappedName="serviceClassCode" />
+                <AREA_CODE constraint="?" length="V6" mappedName="areaCode" />
+                <DISCNT_NUMBER length="V40" mappedName="discntNumber" />
+                <NETWORK length="F2" mappedName="network" />
+                <IMPORTANT_TYPE constraint="?" length="V4" mappedName="importantType" />
+                <START_ENABLE length="F1" mappedName="startEnable" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </DISCNT_NUMBER_INFO>
+            <USER_MKT_CAMP constraint="*" mappedName="userMktCamp">
+                <MKT_CAMP_ID length="V40" mappedName="mktCampId" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <DEVELOP_DEPART_ID constraint="?" length="V20" mappedName="developDepartId" />
+                <DEVELOP_STAFF_ID constraint="?" length="V20" mappedName="developStaffId" />
+            </USER_MKT_CAMP>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </SGL_PRODUCT_CHG_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</SGL_PRODUCT_CHG_INPUT>

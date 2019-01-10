@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TerminalCheckRsp mappedOut="true">
+    <RespCode length="F4" range="0000,0001,0100,0200,0300,9999" mappedName="code" />
+    <RespDesc length="V500" mappedName="detail"/>
+    <!-- BSS订单ID -->
+	<BssOrderId length="V30" mappedName="bssOrderId"></BssOrderId>
+	<!-- ESS总部订单ID -->
+	<EssOrderId length="V30" mappedName="essOrderId"></EssOrderId>
+	
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</TerminalCheckRsp>

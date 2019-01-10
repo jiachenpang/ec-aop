@@ -1,0 +1,114 @@
+[selCommodityAccessMod]
+    SELECT DISTINCT TP.COMMODITY_ID,
+           TP.COMMODITY_NAME,
+           TP.BAND_WIDTH,
+           TA.OSS_ACCWAY_CODE,
+           TA.OSS_ACCWAY_DESC,
+           TP.BAND_WIDTH
+      FROM TF_P_COMMODITY TP, TF_P_COMMODITY_ACCWAY_ATTR TA
+     WHERE TA.COMMODITY_ID = TP.COMMODITY_ID
+       AND TA.PROVINCE_CODE = TP.PROVINCE_CODE
+       AND (TP.EPARCHY_CODE = #city# OR TP.EPARCHY_CODE = '000')
+       AND TP.COMMODITY_ID in (''
+            <#list productCodes as x>, 
+                #productCodes[${x_index}]# 
+            </#list>)
+       AND TP.PROVINCE_CODE = #province#
+       AND TA.OSS_ACCWAY_CODE = #addressType#
+
+[selAllCommodityAccessMod]
+    SELECT DISTINCT TP.COMMODITY_ID,
+           TP.COMMODITY_NAME,
+           TP.BAND_WIDTH,
+           TA.OSS_ACCWAY_CODE,
+           TA.OSS_ACCWAY_DESC,
+           TP.BAND_WIDTH
+      FROM TF_P_COMMODITY TP, TF_P_COMMODITY_ACCWAY_ATTR TA
+     WHERE TA.COMMODITY_ID = TP.COMMODITY_ID
+       AND TA.PROVINCE_CODE = TP.PROVINCE_CODE
+       AND (TP.EPARCHY_CODE = #city# OR TP.EPARCHY_CODE = '000')
+       AND TA.OSS_ACCWAY_CODE in(''
+            <#list accList as acctype>,
+                '${acctype}'
+            </#list>
+       )
+       AND TP.COMMODITY_ID in (''
+            <#list pros as p>, 
+                '${p}' 
+            </#list>)
+       AND TP.PROVINCE_CODE = #province#
+       
+[selAllCommodityInfo]
+SELECT DISTINCT TP.COMMODITY_ID,
+           TP.COMMODITY_NAME,
+           TP.BAND_WIDTH
+      FROM TF_P_COMMODITY TP, TF_P_COMMODITY_ACCWAY_ATTR TA
+     WHERE TA.COMMODITY_ID = TP.COMMODITY_ID
+       AND TA.PROVINCE_CODE = TP.PROVINCE_CODE
+       AND (TP.EPARCHY_CODE = #city# OR TP.EPARCHY_CODE = '000')
+       AND TP.COMMODITY_ID in (''
+            <#list pros as p>, 
+                '${p}' 
+            </#list>)
+       AND TP.PROVINCE_CODE = #province#
+[qryMainProductInfo]
+    SELECT C.PRODUCT_CODE "productId",
+           C.ACTIVITY_CODE "mktCampId",
+           C.PRODUCT_TYPE "productMode",
+           '0' AS "startEnable",
+           C.BRAND_CODE "brandCode",
+           C.PREPAY_FLAG "prePayTag"
+      FROM TF_P_COMMODITY A, TF_P_COMMPRODITEMREF B, TF_P_PRODUCT C
+     WHERE A.COMMODITY_ID = B.COMMODITY_ID
+       AND B.PRODUCT_ID = C.PRODUCT_ID
+       AND A.COMMODITY_ID = #product#
+       AND A.PROVINCE_CODE IN (#province#,'98')
+       AND A.EPARCHY_CODE IN (#eparchy#,'000')
+       AND NOW() BETWEEN B.START_DATE AND B.END_DATE
+[qryProcuctAttr]
+    SELECT
+        T1.COMMODITY_ID "commodity",
+        T2.PRODUCT_CODE "productId",
+        T1.PACKAGE_ID "packageId",
+        T1.ITEM_ID "elementId",
+        T1.ITEM_TYPE "elementType",
+        T3.ATTR_KEY "attrCode",
+        T3.ATTR_VALUE "attrValue",
+        T2.PRODUCT_TYPE "productMode",
+        T2.ACTIVITY_CODE "mktCampId"
+    FROM
+        TF_P_COMMPRODITEMREF T1
+    LEFT JOIN TF_P_COMMODITY_ATTRIBUTE T3 ON (
+        T1.COMMODITY_ID = T3.COMMODITY_ID
+        AND T3.RELATE_TYPE = 'A'
+        AND T1.ITEM_ID = T3.RELATE_ID
+        AND T3.VALID_FLAG = '1'
+    )
+    INNER JOIN TF_P_PRODUCT T2 ON T1.PRODUCT_ID = T2.PRODUCT_ID
+    WHERE
+        T1.COMMODITY_ID = #product#
+    AND T1.PROVINCE_CODE IN (#province#, '98')
+    AND T1.EPARCHY_CODE IN (#eparchy#, '000')
+    AND NOW() BETWEEN T1.START_DATE
+    AND T1.END_DATE
+[qryUserAttr]
+     SELECT PCA.ATTR_KEY "attrCode",
+           PCA.ATTR_VALUE "attrValue",
+           DATE_FORMAT(now(),'%Y%m%d%H%i%s') "startDate",
+           '20491231235959' AS "endDate"
+      FROM TF_P_COMMODITY_ATTRIBUTE PCA
+     WHERE PCA.RELATE_TYPE = 'B'
+       AND PCA.COMMODITY_ID = #product#
+       AND PCA.PROVINCE_CODE IN (#province#,'98')
+       AND PCA.EPARCHY_CODE IN (#eparchy#,'000')
+       AND PCA.VALID_FLAG = '1'
+    UNION
+    SELECT CAA.BSS_KEY "attrCode",
+           CAA.BSS_ACCWAY_CODE "attrValue",
+           DATE_FORMAT(now(),'%Y%m%d%H%i%s') "startDate",
+           '20491231235959' AS "endDate"
+      FROM TF_P_COMMODITY_ACCWAY_ATTR CAA
+     WHERE CAA.COMMODITY_ID = #product#
+       AND CAA.OSS_ACCWAY_CODE = #accessMode#
+       AND CAA.PROVINCE_CODE IN (#province#,'98')
+       AND CAA.EPARCHY_CODE IN (#eparchy#,'000')

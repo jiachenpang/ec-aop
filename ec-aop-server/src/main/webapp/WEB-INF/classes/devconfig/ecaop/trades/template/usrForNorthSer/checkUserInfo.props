@@ -1,0 +1,2 @@
+#CBSS三户校验
+ecaop.trade.template.usrForNorthSer.checkUserInfo={"serviceName":"UsrForNorthSer","operateName":"checkUserInfo","content":"CHECK_USER_INFO_REQ"}

@@ -1,0 +1,56 @@
+#固网单产品撤单
+#定义method
+ecaop.core.method.map.ecaop.trades.serv.curt.fixcannel.sub=scac
+ecaop.core.method.scac.def={"mothod":"scac","remark":"固网单产品撤单"}
+
+ecaop.core.method.scac.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":"@JSONSchema(ecaop.trade.scac.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trade.scac.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:"@FixedLen(1)"},\
+    broadBandType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    oldProvOrderId:{type:"String(30)",required:true,validators:null},\
+    oldBssOrderId:{type:"String(30)",required:true,validators:null},\
+    cancelType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    payMode:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    cancelReason:{type:"String(500)",required:true,validators:null},\
+    refundTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    feeInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scac.feeinfo.msg)"},\
+    origTotalFee:{type:"String(10)",required:true,validators:"null"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+    }
+
+#收费信息
+ecaop.ecsb.scac.feeinfo.msg={\
+    feeId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    feeCategory:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    feeDes:{type:"String(120)",required:true,encrypted:false,validators:null},\
+    origFee:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    realFee:{type:"String(10)",required:true,encrypted:false,validators:null}\
+}
+
+#定义Processor
+ecaop.core.method.scac.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.scac.flowConfig)
+
+#配置跳转
+ecaop.core.method.scac.flowConfig=[\
+    {id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+    {id:"02", processor:"AopHandler(ecaop.core.method.scacCB.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+    {id:"04", processor:"AopHandler(ecaop.core.method.scacN6.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"05", processor:"AopHandler(ecaop.core.method.scacCB.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.core.method.scacCB.processors=@fixcancel()
+ecaop.core.method.scacN6.processors=@fixcancelN6()

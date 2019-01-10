@@ -1,0 +1,4 @@
+#贵州安讯
+ecaop.core.app.map.gzref.sub=gzref
+ecaop.core.app.gzref.def={"code":"gzref", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.gzref.allow={appkey:"gzref",allow:"qctc,qcbl,qcfq,smct,trao,msoa,qcop", deny:null}

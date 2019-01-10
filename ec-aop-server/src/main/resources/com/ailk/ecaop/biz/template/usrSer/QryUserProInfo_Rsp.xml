@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_USER_PRO_INFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+        </RESP_DESC>
+        <USER_INFO constraint="*" mappedName="userInfo">
+            <USER_ID constraint="?" length="V16" mappedName="userId" />
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+            <USER_STATE length="V2" mappedName="userState" />
+            <BRAND_INFO constraint="?" mappedName="brandInfo">
+                <BRAND_NUMBER length="V4" mappedName="brandNumber" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <BRAND_TYPE length="F1" mappedName="brandType" />
+                <MKT_CAMP_ID length="V20" constraint="?" mappedName="mktCampId" />
+                <PRODUCT_INFO constraint="*" mappedName="productInfo">
+                    <PRODUCT_ID length="V8" mappedName="productId" />
+                    <PACKAGE_ID length="V20" constraint="?" mappedName="packageId" />
+                    <DISCNT_CODE length="V8" constraint="?" mappedName="discntCode" />
+                </PRODUCT_INFO>
+            </BRAND_INFO>
+            <USER_MKT_CAMP constraint="*" mappedName="userMktCamp">
+                <MKT_CAMP_ID length="V20" mappedName="mktCampId" />
+                <MKT_CAMP_NAME length="V100" mappedName="mktCampName" />
+                <MKT_CAMP_DESP length="V500" mappedName="mktCampDesp" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <DEVELOP_DEPART_ID length="V60" constraint="?" mappedName="developDepartId" />
+                <DEVELOP_STAFF_ID length="V60" constraint="?" mappedName="developStaffId" />
+            </USER_MKT_CAMP>
+            <PRODUCT_INFO constraint="*" mappedName="productInfo">
+                <PRODUCT_MODE length="F2" constraint="?" mappedName="productMode" />
+                <PRODUCT_ID length="V8" mappedName="productId" />
+                <MKT_CAMP_ID length="V20" constraint="?" mappedName="mktCampId" />
+                <PRODUCT_NAME length="V100" mappedName="productName" />
+                <PRODUCT_DESC length="V500" mappedName="productDesc" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <ACCESS_TYPE length="F2" constraint="?" mappedName="accessType" />
+                <OPER_DEPT length="V40" constraint="?" mappedName="operDept" />
+                <OPER_NO length="V20" constraint="?" mappedName="operNo" />
+                <OPER_DATE length="F14" constraint="?" mappedName="operDate" />
+                <BRAND_SPEED length="V2" constraint="?" mappedName="brandSpeed" />
+                <BRAND_UPLINK_SPEED length="V2" constraint="?" mappedName="brandUplinkSpeed" />
+                <PRODUCT_ITEM constraint="*" mappedName="productItem">
+                    <ATTR_CODE length="V30" mappedName="attrCode" />
+                    <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </PRODUCT_ITEM>
+                <PRODUCT_PACKAGE constraint="*" mappedName="productPackage">
+                    <PACKAGE_ID length="V20" mappedName="packageId" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                    <SERVICE constraint="*" mappedName="service">
+                        <SERVICE_ID length="V8" mappedName="serviceId" />
+                        <SVC_TYPE length="F1" mappedName="svcType" />
+                        <START_DATE length="F14" mappedName="startDate" />
+                        <END_DATE length="F14" mappedName="endDate" />
+                        <SERVICE_ITEM constraint="*" mappedName="serviceItem">
+                            <ATTR_CODE length="V30" mappedName="attrCode" />
+                            <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                            <START_DATE length="F14" mappedName="startDate" />
+                            <END_DATE length="F14" mappedName="endDate" />
+                        </SERVICE_ITEM>
+                    </SERVICE>
+                    <CUST_DISCNT constraint="*" mappedName="custDiscnt">
+                        <DISCNT_CODE length="V8" mappedName="discntCode" />
+                        <START_DATE length="F14" mappedName="startDate" />
+                        <END_DATE length="F14" mappedName="endDate" />
+                        <CUST_DISCNT_ITEM constraint="*" mappedName="custDiscntInfo">
+                            <ATTR_CODE length="V30" mappedName="attrCode" />
+                            <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                            <START_DATE length="F14" mappedName="startDate" />
+                            <END_DATE length="F14" mappedName="endDate" />
+                        </CUST_DISCNT_ITEM>
+                    </CUST_DISCNT>
+                    <SP_INFO constraint="*" mappedName="spInfo">
+                        <SP_INFO_ID length="V30" mappedName="spInfoId" />
+                        <SP_INFO_NAME length="V100" mappedName="spInfoName" />
+                        <COPARTNER_ID length="V20" constraint="?" mappedName="copartnerId" />
+                        <PRODUCT_ID length="V8" mappedName="productId" />
+                        <PACKAGE_ID length="V20" constraint="?" mappedName="packageId" />
+                        <SP_SERVICE_ID length="V8" mappedName="spServiceId" />
+                        <FIRST_BUY_TIME length="F14" constraint="?" mappedName="firstBuyTime" />
+                        <START_DATE length="F14" mappedName="startDate" />
+                        <END_DATE length="F14" constraint="?" mappedName="endDate" />
+                        <PAY_SERIAL_NUMBER length="V40" constraint="?" mappedName="paySerialNumber" />
+                        <SP_INFO_ITEM constraint="*" mappedName="spInfoItem">
+                            <ATTR_CODE length="V30" mappedName="attrCode" />
+                            <ATTR_VALUE length="V2000" mappedName="attrValue" />
+                            <START_DATE length="F14" mappedName="startDate" />
+                            <END_DATE length="F14" mappedName="endDate" />
+                        </SP_INFO_ITEM>
+                    </SP_INFO>
+                </PRODUCT_PACKAGE>
+            </PRODUCT_INFO>
+            <DISCNT_NUMBER_INFO constraint="*" mappedName="discntNumberInfo">
+                <RELATION_TYPE_CODE length="V4" mappedName="relationTypeCode" />
+                <DISCNT_TYPE length="F2" constraint="?" mappedName="discntType" />
+                <DISCNT_PATH length="F2" constraint="?" mappedName="discntPath" />
+                <SERVICE_CLASS_CODE length="F4" constraint="?" mappedName="serviceClassCode" />
+                <AREA_CODE length="V6" constraint="?" mappedName="areaCode" />
+                <DISCNT_NUMBER length="V40" constraint="?" mappedName="discntNumber" />
+                <NETWORK length="F2" constraint="?" mappedName="network" />
+                <IMPORTANT_TYPE length="F2" constraint="?" mappedName="importantType" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+                <GROUP_INFO constraint="*" mappedName="groupInfo">
+                    <GROUP_ID length="V40" mappedName="groupId" />
+                    <CIRCLE_ID constraint="?" length="V6" mappedName="circleId" />
+                    <SHORT_NUMBER constraint="?" length="V40" mappedName="shortNumber" />
+                    <START_DATE length="F14" mappedName="startDate" />
+                    <END_DATE length="F14" mappedName="endDate" />
+                </GROUP_INFO>
+            </DISCNT_NUMBER_INFO>
+        </USER_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </QRY_USER_PRO_INFO_RSP>
+</UNI_BSS_BODY>

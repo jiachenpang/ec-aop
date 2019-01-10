@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <ResetNotifyReq>
+            <ICCID length="V22" mappedName="iccid" />
+            <Result length="V20" mappedName="result" />
+            <ErrorCode length="V20" constraint="?" mappedName="errorCode" />
+            <Comments length="V20" constraint="?" mappedName="errorComments"/>
+            <ReservPara length="V60" constraint="?" mappedName="reservPara" defaultValue="无"/>
+        </ResetNotifyReq>
+    </SvcCont>
+</UniBSS>

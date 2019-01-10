@@ -1,0 +1,6 @@
+#北京沃易售
+ecaop.core.app.map.wosabj.sub=wosj
+ecaop.core.app.wosj.def={"code":"wosj", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.wosj.allow={appkey:"wosj",allow:"qctc,oupc,opsb,ucck,bsop,cdqy,snqy,nboc,opap,ucca,tsrc,paid,sccc,modr,\
+                           orta,ofcs,mofc,smcc,mold,oata,cdsn,234o,sjxs,sctr,cdnt,byps,bypc,tzcx,qrtac,qrsq,csaq,\
+                           cmck,cuck,crck,23l4,2324,cack,ccic,qcsp,mvoa", deny:null}

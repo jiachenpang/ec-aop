@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProductQueryRsp mappedOut="true">
+    <!-- 应答编码:0000 成功 ,1001 业务预收理异常 ,9999 其它错误 -->
+    <RespCode length="F4" range="0000,1001,9999" mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+    <ProductInfo constraint="*" mappedName="productInfo">
+        <ProductId length="V20" mappedName="productId" />
+        <!-- 发票号码 -->
+        <ProductName length="V200" constraint="?" mappedName="productName" />
+        <ProductDetail length="V1000" constraint="?" mappedName="productDetail" />
+        <!-- 产品大类：0：主产品1：可选产品 -->
+        <ProductType length="F1" mappedName="productType" />
+        <ProductFee length="V10" constraint="?" mappedName="productFee" />
+        <ItmPrdRespobsible length="V1" constraint="?" mappedName="itmPrdRespobsible" />
+    </ProductInfo>
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</ProductQueryRsp>

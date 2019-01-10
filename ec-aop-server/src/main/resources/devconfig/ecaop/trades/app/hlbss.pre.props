@@ -1,0 +1,4 @@
+#黑龙江bss
+ecaop.core.app.map.hlbss.pre=hlbpr
+ecaop.core.app.hlbpr.def={"code":"hlbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.hlbpr.allow={appkey:"hlbpr",allow:"tsos", deny:null}

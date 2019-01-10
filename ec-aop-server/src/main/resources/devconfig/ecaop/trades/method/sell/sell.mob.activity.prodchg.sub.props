@@ -1,0 +1,106 @@
+#套餐变更及合约续约提交接口 by zhaok
+ecaop.core.method.map.ecaop.trades.sell.mob.activity.prodchg.sub=mags
+ecaop.core.method.mags.def={"mothod":"mags","remark":"套餐变更及合约续约提交接口"}
+ecaop.core.method.mags.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.mags.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器
+ecaop.trades.mags.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    ordersId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    opeSysType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    serialNumber:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    userInfo:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mags.userInfo.param)"},\
+    activityInfo:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mags.activityInfo.param)"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.trades.mags.userInfo.param{\
+    transresourcesType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    isTransystem:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    productInfo:{ type:"JSON", required:true, validator:"@JSONSchema(ecaop.trades.mags.productInfo.param)"}\
+}
+
+ecaop.trades.mags.productInfo.param{\
+    priproductId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    pricompanyId:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    priproductNameX:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    tarproductId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    tarcompanyId:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    tarproductNameX:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    packageInfo:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mags.packageInfo.param)"}\
+}
+
+ecaop.trades.mags.activityInfo.param{\
+    activityType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    activityId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    activityName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+    orderTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    startDate:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    endDate:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    orderMethod:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    serviceInfo:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mags.serviceInfo.param)"}\
+    packageElement:{type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mags.packageElement.param)"}\
+}
+
+ecaop.trades.mags.packageElement.param{\
+    packageId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    elementId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    elementType:{type:"String(20)",required:true,encrypted:false,validators:null},\
+}
+
+ecaop.trades.mags.serviceInfo.param{\
+    serviceType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    serviceId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+}
+
+ecaop.trades.mags.packageInfo.param{\
+    packageId:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    packageName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+    packageType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    startDate:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    endDate:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    elementInfo:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.trades.mags.elementInfo.param)"}\
+}
+
+ecaop.trades.mags.elementInfo.param{\
+    elementCode:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    elementName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+    startDate:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    endDate:{type:"String(14)",required:true,encrypted:false,validators:null}\
+}
+
+#定义流程跳转
+ecaop.core.method.mags.processors=@productChangeRoute\
+                                  @FlowProcessor(ecaop.core.method.mags.flowConfig)
+#跳转流程
+ecaop.core.method.mags.flowConfig=[\
+    {id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->03 *->02"},\
+    {id:"02", processor:"AopHandler(ecaop.mags.toBss.processors)", selector:"Noop", transitions:"*->STOP"},\
+    {id:"03", processor:"AopHandler(ecaop.mags.chgProduct.processors)", selector:"Noop", transitions:"*->STOP"},\
+]
+
+#bss透传全业务
+ecaop.mags.toBss.processors=@activityProductToBssProcessor()
+
+#调用aop的套餐变更流程
+ecaop.mags.chgProduct.processors=@preDateToChgProductProcessor()\
+                                 @newChangeProduct4CBProcessor()\
+                                 @preDataForCBSSProcessor()
+
+#报文头参数
+ecaop.ecsb.mags.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.depositGiveFeeSer.refPreDepositeGiveFee",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mags.template@FBS@REF_PREDEPOSITE_GIVEFEE_INPUT@n1529397156@REF_PREDEPOSITE_GIVEFEE_REQ"}\
+]
+
+ecaop.trades.mags.template=com/ailk/ecaop/biz/template/product/RefPreDepositeGiveFee

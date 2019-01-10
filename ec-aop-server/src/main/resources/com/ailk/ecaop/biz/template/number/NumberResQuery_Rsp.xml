@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 发展人信息查询返回报文 -->
+<NumberResQueryRsp mappedOut="true">
+    <!-- 0000 成功1001无发展人信息，9999 其他错误（错误原因） -->
+    <RespCode length="F4" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V2000" mappedName="detail" />
+    <!-- 号码列表（最多返回200条记录） -->
+    <NumInfo constraint="*" mappedName="numInfo">
+        <!-- 号码 -->
+        <NumID length="V20" mappedName="numId" />
+        <!-- 号码说明 -->
+        <NumMemo constraint="?" length="V200" mappedName="numMemo" />
+        <!-- 预存话费金额 -->
+        <AdvancePay length="V11" mappedName="advancePay" />
+        <!-- 号码等级 -->
+        <ClassId length="F1" mappedName="classId" />
+        <!-- 协议期最低消费 -->
+        <LowCostPro constraint="?" length="V11" mappedName="lowCostPro" />
+        <!-- 协议时长 -->
+        <TimeDurPro constraint="?" length="V5" mappedName="timeDurPro" />
+    </NumInfo>
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</NumberResQueryRsp>

@@ -1,0 +1,59 @@
+#标准地址局向查询
+ecaop.core.method.map.ecaop.trades.sell.brd.addrexec.qry=sbaq
+ecaop.core.method.sbaq.def={"mothod":"sbaq","remark":"标准地址局向查询"}
+ecaop.core.method.sbaq.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.sbaq.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器
+ecaop.trades.sbaq.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+     qryType:{type:"Number(1)",required:true,encrypted:false,validators:null},\
+     parentAddressCode:{type:"Number(1)",required:false,encrypted:false,validators:null},\
+     installAddress:{type:"String(30)",required:false,encrypted:false,validators:null},\
+     neighborNum:{type:"String(300)",required:false,encrypted:false,validators:null},\
+     areaCode:{type:"String(200)",required:false,encrypted:false,validators:null},\
+     returnExecCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.sbaq.processors=\
+          @ParametersMapper(ecaop.core.method.sbaq.ParametersMapping)\
+                @WsCall(ecaop.comm.conf.url.cbss.services.Number4GSer)\
+                @Xml2JsonMapper4Fbs(ecaop.trades.sbaq.qryAddrexecInfo4G.template)
+#请求参数
+ecaop.core.method.sbaq.ParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"Number4GSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"qryAddrexecInfo4G",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+    {paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+    {paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"QRY_ADDREXEC_INFO4G_REQ",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sbaq.qryAddrexecInfo4G.template@FBS@QRY_ADDREXEC_INFO4G_INPUT@n720382109@QRY_ADDREXEC_INFO4G_REQ"}\
+]
+
+
+ecaop.trades.sbaq.qryAddrexecInfo4G.template=com/ailk/ecaop/biz/template/number4gser/qryAddrexecInfo4G

@@ -1,0 +1,85 @@
+#method定义  该业务目前使用的接入方：广东集客系统gdjk  上海易售宝esal
+ecaop.core.method.map.ecaop.trades.query.comm.simpsnres.chg=nboc
+ecaop.core.method.nboc.def={"mothod":"nboc","remark":"号码预占简单版"}
+ecaop.core.method.nboc.params=[\
+{"param":"msg",type:"JSON","required":true, "encrypted":false,"validators":"@JSONSchema(ecaop.trades.nboc.param.msg)"},\
+{"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+{"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#入参的校验
+ecaop.trades.nboc.param.msg={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+serType:{type:"Number(1)",required:false},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+resourcesInfo:{type:"JSON",required:true, validator:"@JSONSchema(ecaop.trades.nboc.param.resourcesInfo)"},\
+para:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trades.nboc.param.resourcesInfo={\
+resourcesType:{type:"String(2)",required:true},\
+resourcesCode:{type:"String(30)",required:true},\
+occupiedFlag:{type:"Number(1)",required:true},\
+occupiedTime:{type:"String(20)",required:false}\
+}
+#流程控制
+ecaop.core.method.nboc.processors=@NumRoute\
+                           @route\
+                           @FlowProcessor(ecaop.core.method.nboc.flowConfig)
+#北六和南25的不同处理 numSwitch 0 号卡中心流程 1原有流程
+ecaop.core.method.nboc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(numSwitch)", transitions:"0->05 1->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->03 N6->04"},\
+{id:"03", processor:"AopHandler(ecaop.trades.nboc4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.trades.nboc4N6.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.trades.nboc.numCenter.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#号卡中心逻辑
+ecaop.trades.nboc.numCenter.processors=@changeNumStateToNumCenter()
+
+#北六省的处理
+ecaop.trades.nboc4N6.processors=@simpleCheckUserInfo()\
+                                @TransReqParamsMapper()\
+                                @AopCall(ecaop.comm.conf.url.ec-aop.rest)
+#南25省的处理
+ecaop.trades.nboc4N25.processors=\
+                            @ParametersMapper(ecaop.trades.nboc.ParametersMapping)\
+                            @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                            @Xml2JsonMapper(ecaop.trades.nboc.template)
+ecaop.trades.nboc.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00024",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CheckNumReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.nboc.template@3GE"}\
+]
+
+ecaop.trades.nboc.template=com/ailk/ecaop/biz/template/number/NumOccupySimple
+
+#号卡中心-不选占
+ecaop.trades.nboc.numCenter.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.qryNumInfo.numberCenter",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.nboc.numCenter.template@FBS@QRY_NUM_INFO_INPUT@n-1469109129@QRY_NUM_INFO_REQ"}\
+]
+ecaop.trades.nboc.numCenter.template=com/ailk/ecaop/biz/template/numcenter/QryNumInfo
+#号卡中心-选占
+ecaop.trades.nboc.numCenter.occupy.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.nboc.numCenter.template.selectedNum.numberCenter",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.nboc.numCenter.occupy.template@FBS@SELECTED_NUM_INPUT@n-1469109129@SELECTED_NUM_REQ"}\
+]
+ecaop.trades.nboc.numCenter.occupy.template=com/ailk/ecaop/biz/template/numcenter/SelectedNum
+
+#号卡中心-预占
+ecaop.trades.nboc.numCenter.preemptedNum.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.preemptedNum.numberCenter",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.nboc.numCenter.preemptedNum.template@FBS@PREEMPTED _NUM_INPUT@n-1469109129@PREEMPTED _NUM_REQ"}\
+]
+ecaop.trades.nboc.numCenter.preemptedNum.template=com/ailk/ecaop/biz/template/numcenter/PreemptedNum

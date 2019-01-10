@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--号卡中心选占号码手工释放接口 -->
+<UNI_BSS_BODY>
+    <REL_SELECTION_NUM_RSP mappedOut="true">
+        <!-- 应答编码 0000 成功 9999 其他错误 -->
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC constraint="?" length="V500" mappedName="detail" />
+        <SELNUM_LIST constraint="*" mappedName="numId">
+            <!-- 号码 -->
+            <SERIAL_NUMBER length="V20" mappedName="serialNumber" />
+            <!-- 释放结果： 0000 成功8888释放失败 -->
+            <RESP_CODE length="F4" mappedName="code" />
+            <!--错误描述 -->
+            <RESP_DESC constraint="?" length="V500"
+                mappedName="detail" />
+        </SELNUM_LIST>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </REL_SELECTION_NUM_RSP>
+</UNI_BSS_BODY>

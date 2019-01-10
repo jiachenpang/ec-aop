@@ -1,0 +1,83 @@
+#用于进行集团账户资料的创建,集客的 账户 资料创建接口
+ecaop.core.method.map.ecaop.serv.curt.grpaccinfo.create=grar
+ecaop.core.method.grar.def={"mothod":"grar"}
+ecaop.core.method.grar.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.serv.grar.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+#msg 校验器 渠道类型，改成非必填
+ecaop.serv.grar.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     depId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:false,encrypted:false,validators:"@FixedLen(7)" },\
+     accInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grar.accInfo)"},\
+     conSignInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grar.conSignInfo)"},\
+     mailInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grar.mailInfo)"},\
+     para:{ type:"JSON",required:false,encrypted:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.serv.grar.accInfo={\
+     custId:{type:"String(16)",required:true,encrypted:false,validators:null},\
+     payName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     payModeCode:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     accCycle:{type:"String(2)",required:false,encrypted:false,validators:null},\
+     remark:{type:"String(200)",required:false,encrypted:false,validators:null},\
+     payCycle:{type:"String(2)",required:false,encrypted:false,validators:null},\
+     accContactPerson:{type:"String(60)",required:true,encrypted:false,validators:null},\
+     accContactPhone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     accContactAddr:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     accContactEmail:{type:"String(40)",required:true,encrypted:false,validators:null},\
+}
+#下面还没开始弄
+ecaop.serv.grar.conSignInfo={\
+     bankAccName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+     bankAccNo:{type:"String(30)",required:true,encrypted:false,validators:null},\
+     agreementNo:{type:"String(44)",required:false,encrypted:false,validators:null},\
+     bankCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     superBankCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     startCycleId:{type:"String(6)",required:true,encrypted:false,validators:null},\
+     endCycleId:{type:"String(6)",required:true,encrypted:false,validators:null},\
+     limitMode:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     limitMoney:{type:"String(11)",required:false,encrypted:false,validators:null},\
+     remark:{type:"String(200)",required:false,encrypted:false,validators:null},\
+}
+ecaop.serv.grar.mailInfo={\
+     postName:{type:"String(120)",required:false,encrypted:false,validators:null},\
+     postTag:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     postContent:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     postCyc:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     postAddr:{type:"String(80)",required:false,encrypted:false,validators:null},\
+     postCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+     email:{type:"String(50)",required:false,encrypted:false,validators:null},\
+     faxNbr:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     emailMethodId:{type:"String(3)",required:true,encrypted:false,validators:null},\
+}
+
+ecaop.core.method.grar.processors=@GrpAccountInfoCreate()
+
+#请求参数crtGrpCustInfo
+ecaop.curt.grar.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"GrpAccountAOPSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"crtGrpAccountInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CRTGRPACCOUNTINFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.fbs.grar.template@FBS@CRTGRPACCOUNTINFO_INPUT"}\
+]
+#报文模版路径
+ecaop.fbs.grar.template=com/ailk/ecaop/biz/template/curt/GrpAccountInfoCreate
+ecaop.soap.bodyns.grar=grp

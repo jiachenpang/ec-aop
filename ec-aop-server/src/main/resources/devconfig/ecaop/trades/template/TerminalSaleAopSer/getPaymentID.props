@@ -1,0 +1,2 @@
+#获取cBSS支付流水号
+ecaop.trade.template.TerminalSaleAopSer.getPaymentID={"serviceName":"TerminalSaleAopSer","operateName":"getPaymentID","content":"GET_PAYMENT_ID_REQ"}

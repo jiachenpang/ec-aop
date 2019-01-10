@@ -1,0 +1,106 @@
+#用于进行集团客户资料的创建,集客的客户资料创建接口
+ecaop.core.method.map.ecaop.serv.curt.grpcustinfo.create=grcr
+ecaop.core.method.grcr.def={"mothod":"grcr"}
+ecaop.core.method.grcr.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.serv.grcr.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+#msg 校验器 
+ecaop.serv.grcr.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+     district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+     custInfo:{type:"JSON",required:true,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.custInfo)"},\
+     custCertInfo:{type:"JSON",required:true,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.custCertInfo)"},\
+     attnInfo:{type:"JSON",required:true,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.attnInfo)"},\
+     para:{ type:"JSON",required:false,encrypted:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.serv.grcr.custInfo={\
+     customerName:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     customerType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     createStaffId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     createDate:{type:"String(14)",required:true,encrypted:false,validators:null},\
+     certAddress:{type:"String(256)",required:true,encrypted:false,validators:null},\
+     contactEmail:{type:"String(40)",required:false,encrypted:false,validators:null},\
+     contactPerson:{type:"String(60)",required:true,encrypted:false,validators:null},\
+     contactPhone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     postCode:{type:"String(6)",required:true,encrypted:false,validators:null},\
+     callingTypeCode:{type:"String(6)",required:true,encrypted:false,validators:null},\
+     remark:{type:"String(200)",required:false,encrypted:false,validators:null},\
+}
+
+ecaop.serv.grcr.custCertInfo={\
+     certTypeCode:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     mainCertFlag:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     certName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+     certCode:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     sendDept:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     addr:{type:"String(255)",required:true,encrypted:false,validators:null},\
+     certEndDate:{type:"String(14)",required:false,encrypted:false,validators:null},\
+     busiLicenseInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.busiLicenseInfo)"},\
+     legalIdInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.legalIdInfo)"},\
+     orgIdInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.orgIdInfo)"},\
+     privateNInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.serv.grcr.privateNInfo)"},\
+}
+ecaop.serv.grcr.busiLicenseInfo={\
+     licenseType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     legalName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+     busiArea:{type:"String(255)",required:false,encrypted:false,validators:null},\
+     issueDate:{type:"String(14)",required:false,encrypted:false,validators:null},\
+}
+ecaop.serv.grcr.legalIdInfo={\
+     legalType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     legalName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+     fundingSource:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     busiArea:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     startFunds:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     holdDept:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     manageDept:{type:"String(100)",required:false,encrypted:false,validators:null},\
+}
+ecaop.serv.grcr.orgIdInfo={\
+     legalName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+     deptType:{type:"String(50)",required:false,encrypted:false,validators:null},\
+}
+ecaop.serv.grcr.privateNInfo={\
+     privateType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     legalName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+     busiArea:{type:"String(100)",required:false,encrypted:false,validators:null},\
+}
+ecaop.serv.grcr.attnInfo={\
+     attnName:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     attnPhone:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     attnEmail:{type:"String(50)",required:false,encrypted:false,validators:null},\
+     attnCertTypeCode:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     attnCertCode:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     attnCertAddr:{type:"String(200)",required:true,encrypted:false,validators:null},\
+}
+
+ecaop.core.method.grcr.processors=@crpcustinfoCreate()
+
+#请求参数crtGrpCustInfo
+ecaop.curt.grcr.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"GrpCustInfoAOPSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"crtGrpCustInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"CRTGRPCUSTINFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.fbs.grcr.template@FBS@CRTGRPCUSTINFO_INPUT"}\
+]
+#报文模版路径
+ecaop.fbs.grcr.template=com/ailk/ecaop/biz/template/curt/GrpcustinfoCreate
+ecaop.soap.bodyns.grcr=grp

@@ -1,0 +1,5 @@
+#海南BSS国政通测试
+ecaop.core.app.map.hibc.sub=hibc
+ecaop.core.app.hibc.def={"code":"hibc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.hibc.timeslimit=max 100 per 1 minute
+ecaop.core.app.hibc.allow={appkey:"hibc",allow:"crck,qrtb", deny:null}

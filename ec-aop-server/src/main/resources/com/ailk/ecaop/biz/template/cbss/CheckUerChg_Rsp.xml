@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <CHECKUERCHG_RSP mappedOut="true">
+    <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V500" mappedName="detail"/>
+       <CHECKUERCHG_RSP_BODY constraint="?">
+            <GROUP_ID length="V40"  constraint="?"  mappedName="groupId"/>
+            <CBSS_CUST_ID length="V40"  constraint="?"  mappedName="cbssCustId"/>
+            <GRPUSER_LIST  constraint="*" >
+                <GRPUSER_ID length="V16" mappedName="grpUserId" />
+                <PROVINCE_GRPUSER_ID length="V30" mappedName="provinceGrpUserId" />
+                <START_DATE length="F14" mappedName="startDate" />
+                <END_DATE length="F14" mappedName="endDate" />
+            </GRPUSER_LIST>
+            <USER_TAG >
+                <INNETTAG length="F1" mappedName="innettag" />
+                <START_DATE_INNETTAG length="F14" mappedName="startDateInnettag" />
+                <END_DATE_INNETTAG length="F14" mappedName="endDateInnettag" />
+                <REVTAG length="F1" mappedName="revtag" />
+                <START_DATE_REVTAG length="F14" mappedName="startDateRevtag" />
+                <END_DATE_REVTAG length="F14" mappedName="endDateRevtag" />
+                <USERGRPTAG length="F1" mappedName="userGrptag" />
+                <START_DATE_USERGRPTAG length="F14" mappedName="startDateUserGrptag" />
+                <END_DATE_USERGRPTAG length="F14" mappedName="endDateUserGrptag" />
+                <SMLENTERTAG length="F1" constraint="?" mappedName="smlentertag" />
+                <START_DAT length="F14" constraint="?" mappedName="startDat" />
+                <END_DATE_SMLENTERTAG length="F14" constraint="?" mappedName="endDateSmlentertag" />                
+            </USER_TAG>         
+       </CHECKUERCHG_RSP_BODY>
+        
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </CHECKUERCHG_RSP>
+</UNI_BSS_BODY>

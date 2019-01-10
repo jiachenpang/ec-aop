@@ -1,0 +1,6 @@
+#广东AOP
+ecaop.core.app.map.gdaop.sub=gdaop
+ecaop.core.app.gdaop.def={"code":"gdaop", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gdaop.timeslimit=max 100 per 1 minute
+ecaop.core.app.gdaop.allow={appkey:"gdaop",allow:"qcsp,smct,spfs,crck,mofc,ofcs,qctc,orta,modr,qrtac,cmck,snqy,nboc,qcsc,\
+                            oupc,opsb,cwal,qofq,quuq,qcbl", deny:null}

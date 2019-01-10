@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <RollBackReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" mappedName="operatorId" />
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province" />
+            <!-- 地市 -->
+            <City length="F3" mappedName="city" />
+            <!-- 区县 -->
+            <District length="V10" mappedName="district" />
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId" />
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType" />
+            <!-- 旧资源串号 -->
+            <ResourcesCode length="V30" mappedName="oldResourcesCode"/>
+            <!-- 外围系统订单Id -->
+            <OrdersID length="V20" mappedName="ordersId"/>
+            <!-- 故障单号 -->
+            <CheckID constraint="?" length="V30" mappedName="checkId"/>
+            <!-- 故障原因 -->
+            <BrokenRe constraint="?" length="V256" mappedName="brokenRe"/>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </RollBackReq>
+    </SvcCont>
+</UniBSS>

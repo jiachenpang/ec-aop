@@ -1,0 +1,4 @@
+#福建bss
+ecaop.core.app.map.fjbss.pre=fjbpr
+ecaop.core.app.fjbpr.def={"code":"fjbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.fjbpr.allow={appkey:"fjbpr",allow:"qrtb", deny:null}

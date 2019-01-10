@@ -1,0 +1,39 @@
+#用于北分卖场系统销售裸机或合约使用MISPOS支付方式时，获取cBSS支付流水号。
+ecaop.core.method.map.ecaop.trades.serv.payment.getid=paid
+ecaop.core.method.paid.def={"mothod":"paid","remark":"获取cBSS支付流水号"}
+ecaop.core.method.paid.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.paid.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.paid.param.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    tradeType:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.paid.processors=@ParametersMapper(ecaop.param.paid.ParametersMapping)\
+                                  @WsCall(ecaop.comm.conf.url.cbss.services.other.TerminalSaleAopSer)\
+                                  @Xml2JsonMapper4Fbs(ecaop.param.paid.template)
+
+
+ecaop.param.paid.Parametersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.TerminalSaleAopSer.getPaymentID,50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.param.paid.template@FBS@GET_PAYMENT_ID_INPUT@nb2@GET_PAYMENT_ID_REQ"}\
+]
+#定义模板
+ecaop.param.paid.template=com/ailk/ecaop/biz/template/terminal/GetPaymentID
+
+#支付信息同步接口使用的参数
+ecaop.param.paid.paymentInfoSync.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.TerminalSaleAopSer.paymentInfoSync,50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.param.paid.paymentInfoSync.template@FBS@PAYMENT_INFO_SYNC_INPUT@nb2@PAYMENT_INFO_SYNC_REQ"}\
+]
+#支付信息同步接口使用的模板
+ecaop.param.paid.paymentInfoSync.template=com/ailk/ecaop/biz/template/terminal/PaymentInfoSync

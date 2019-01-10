@@ -1,0 +1,80 @@
+#融合关系变更接口 by wangmc
+ecaop.core.method.map.ecaop.trades.sell.mix.member.chg.app=smmc
+ecaop.core.method.smmc.def={"mothod":"smmc","remark":"融合关系变更"}
+#请求数据校验
+ecaop.core.method.smmc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smmc.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#请求msg数据
+ecaop.trades.smmc.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    eModeCode:{type:"String(2)",required:true,validators:null},\
+    bssOrderId:{type:"String(30)",required:false,validators:null},\
+    mixNetType:{type:"String(4)",required:true,validators:null},\
+    memberNo:{type:"String(2)",required:true,validators:null},\
+    installMode:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    serialNumberCP:{type:"String(30)",required:true,validators:null},\
+    serialNumber:{type:"String(20)",required:false,validators:null},\
+    isLastMember:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    memberType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smmc.productInfo)"},\
+    speedLevel:{type:"String(10)",required:false,validators:null},\
+    recomInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smmc.recomInfo)"},\
+    actorInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smmc.actorInfo)"},\
+    contactPerson:{type:"String(20)",required:true,validators:null},\
+    contactPhone:{type:"String(20)",required:true,validators:null},\
+    subAttrInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smmc.subAttrInfo)"},\
+    tradeAttrInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smmc.tradeAttrInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#产品信息
+ecaop.trades.smmc.productInfo={\
+    productId:{type:"String(20)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:"@Enum(0,1)"},\
+    firstMonBillMode:{type:"String(2)",required:false,validators:"@Enum(01,02,03)"},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.smmc.packageElement)"}\
+}
+#包元素信息
+ecaop.trades.smmc.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}\
+}
+#发展人信息
+ecaop.trades.smmc.recomInfo={\
+    recomPersonId:{type:"String(30)",required:true,validators:null},\
+    recomPersonName:{type:"String(128)",required:true,validators:null},\
+    recomDepartId:{type:"String(128)",required:false,validators:null},\
+    recomCity:{type:"String(3)",required:false,validators:null}\
+}
+#代办人信息
+ecaop.trades.smmc.actorInfo={\
+    actorCertTypeId:{type:"String(2)",required:true,validators:null},\
+    actorCertNum:{type:"String(20)",required:true,validators:null},\
+    actorPhone:{type:"String(15)",required:true,validators:null},\
+    actorName:{type:"String(20)",required:true,validators:null},\
+    actorAddress:{type:"String(200)",required:true,validators:null}\
+}
+#自定义属性
+ecaop.trades.smmc.subAttrInfo={\
+    attrTypeCode:{type:"String(1)",required:true,validators:"@Enum(0,1,2,3)"},\
+    attrCode:{type:"String(100)",required:true,validators:null},\
+    attrValue:{type:"String(200)",required:true,validators:null}\
+}
+#订单属性
+ecaop.trades.smmc.tradeAttrInfo={\
+    attrCode:{type:"String(100)",required:true,validators:null},\
+    attrValue:{type:"String(200)",required:true,validators:null}\
+}
+
+#配置流程跳转
+ecaop.core.method.smmc.processors=@mixMemberChgAppprocessor

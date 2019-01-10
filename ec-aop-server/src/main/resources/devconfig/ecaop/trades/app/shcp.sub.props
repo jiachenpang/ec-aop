@@ -1,0 +1,5 @@
+#上海便利型平台
+ecaop.core.app.map.shcp.sub=shcp
+ecaop.core.app.shcp.def={"code":"shcp", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.shcp.timeslimit=max 100 per 1 minute
+ecaop.core.app.shcp.allow={appkey:"shcp",allow:"cmck,crck,snqy,nboc,opap,opsb,cdqy,cdnt,cdsn,qcfc,crck,mcoa", deny:null}

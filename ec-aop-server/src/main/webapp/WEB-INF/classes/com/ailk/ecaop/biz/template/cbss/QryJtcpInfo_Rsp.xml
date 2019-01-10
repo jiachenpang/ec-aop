@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_JTCP_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--应答编码, 0000成功,8888 其他错误 -->
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <USER_LIST constraint="*" mappedName="useList">
+        <SERIAL_NUMBER length="V40" mappedName="serialNumber">
+        </SERIAL_NUMBER>
+        <USER_ID length="V40" mappedName="userId">
+        </USER_ID>
+        </USER_LIST>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE length="V60" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+
+    </QRY_JTCP_RSP>
+</UNI_BSS_BODY>

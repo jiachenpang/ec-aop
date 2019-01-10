@@ -1,0 +1,13 @@
+#商城
+ecaop.core.app.map.mall.sub=masb
+ecaop.core.app.masb.def={"code":"masb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.masb.allow=\
+     {appkey:"masb",\
+    allow:"cack,qrsc,qrsq,scob,coto,qopq,qcsp,qcus,mixk,crdk,qauq,qcbq,opsb,qcsc,qcsq,qcbs,opap,mold,quaq,cuck,adnu,bsop,sack,bson,odsb,crck,sbcs,qosq,cfsb,cdnt,\
+            cdqy,cdsn,qctc,qrtc,sfck,qrta,dvck,codc,2324,sooq,scon,snos,otck,cmck,cdaq,sccc,qctq,oata,trao,chph,syts,stss,hdjf,oolq,cchs,smcc,mvoa,mofc,scaf,psoa,\
+            psos,sbso,bsoa,dvqy,sfss,sfso,23t4,23l4,snqy,spfs,ucca,qrtac,scccs,mcoa,sgfs,cwps,cwac,tsos,srne,rnma,sros,tsos,rnoa,mmra,rned,cumd,cgqe,qcmc,sjgs,svcs,\
+            nboc", deny:null}
+ecaop.core.app.masb.biz={"bizs":"DS-001,DS-002,DS-003,CS-019,CS-001,CS-002,CS-011,CS-012,CS-007,CS-017,CS-004,CS-010,QS-007,TS-KD-001,TS-KD-002,TS-KD-003,\
+                            TS-3G-005,TS-4G-004,TS-3G-007,TS-3G-011,TS-4G-001,TS-KD-010,TS-KD-006,TS-KD-007,TEST-01,TS-4G-006,TS-4G-007,DS-022,SS-CC-005"}
+ecaop.core.app.masb.CS-017.provinceInBizAllow={allow:"34",deny:"11"}
+ecaop.core.app.masb.bizAllow={allow:"CS-017",deny:null}

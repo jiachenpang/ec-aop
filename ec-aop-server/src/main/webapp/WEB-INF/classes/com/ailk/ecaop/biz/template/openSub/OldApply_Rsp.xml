@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OldApplyRsp mappedOut="true">
+    <!-- 应答编码0000 成功0001 单个资源处理失败9999 其他错误 -->
+    <RespCode length="F4" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V2000" mappedName="detail" />
+    <!-- ESS订单ID 为正式提交时使用 -->
+    <EssSubscribeId length="V30" mappedName="essSubscribeId" />
+    <!-- 收费信息*（ESS从BSS获取到的） -->
+    <FeeInfo constraint="*" mappedName="feeInfo">
+        <!-- 收费项编码，以省分现有编码为准 -->
+        <FeeId length="V20" mappedName="feeId" />
+        <!-- 收费项科目 -->
+        <FeeCategory length="F1" mappedName="feeCategory" />
+        <!-- 收费项描述 -->
+        <FeeDes length="V120" mappedName="feeDes" />
+        <!-- 最大减免金额正整数单位：厘 -->
+        <MaxRelief length="V10" constraint="?" mappedName="maxRelief" />
+        <!-- 应收费用正整数单位：厘 -->
+        <OrigFee length="V10" mappedName="origFee" />
+    </FeeInfo>
+    <!-- 总费用正整数单位：厘 -->
+    <TotalFee length="V10" mappedName="totalFee" />
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</OldApplyRsp>

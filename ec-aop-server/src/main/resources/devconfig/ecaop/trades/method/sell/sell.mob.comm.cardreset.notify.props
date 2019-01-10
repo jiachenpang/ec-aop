@@ -1,0 +1,47 @@
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.cardreset.notify=mccn
+ecaop.core.method.mccn.def={"mothod":"mccn","remark":"总部ESS调用总部CRM的获取废卡重置脚本接口，总部CRM对接口信息进行校验，校验通过之后，给总部ESS返回废卡重置脚本"}
+ecaop.core.method.mccn.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.mccn.param.schemaMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.mccn.param.schemaMsg={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    province:{type:"String(2)",required:true},\
+    procId:{type:"String(30)",required:true},\
+    iccid:{type:"String(22)",required:true,validators:null},\
+    result:{type:"String(1)",required:true},\
+    errorCode:{type:"String(256)",required:false},\
+    errorComments:{type:"String(256)",required:false},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+ecaop.core.method.mccn.processors=ParametersMapper(ecaop.trades.mccn.ParametersMapping)\
+                           @AopCall(ecaop.comm.conf.url.osn.syncreceive.0400)\
+                           @Xml2JsonNobody(ecaop.trades.mccn.template)
+ecaop.trades.mccn.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP2G021",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T2000621",temp:true},\
+{paramterName:"procId",extractor:"propertyGet",extractorConfig:"msg.procId",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"route",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.numId,msg.serialNumber"},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ResetNotifyReq",temp:true},\
+{paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.mccn.template@ONS"}\
+]
+ecaop.trades.mccn.template=com/ailk/ecaop/biz/template/simcard/ResetNotify

@@ -1,0 +1,4 @@
+#北京BSS
+ecaop.core.app.map.bjbss.pre=bjbpr
+ecaop.core.app.bjbpr.def={"code":"bjbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.bjbpr.allow={appkey:"bjbpr",allow:"tsos", deny:null}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BssCheckResRsp mappedOut="true">
+    <!-- 应答编码0000 成功0001 单个资源处理失败9999 其他错误 -->
+    <RespCode length="F4" range="0000,0001,9999" mappedName="code" />
+    <ResourcesRsp constraint="+" mappedName="resourcesRsp">
+        <!-- 资源类型01 USIM卡02 手机号码03 移动电话 -->
+        <ResourcesType length="F2" range="01~05" mappedName="resourcesType" />
+        <!-- 资源唯一标识 -->
+        <ResourcesCode length="V30" mappedName="resourcesCode" />
+        <!-- 资源状态编码：0000 资源可用0001 资源已被占0002 无此资源信息0003 资源不可售 0004 资源状态是非可用0005 资源归属渠道错误9999 其它失败原因 -->
+        <RscStateCode range="0000,0001,0002,0003,0004,0005,9999,0006,0007" mappedName="rscStateCode"/>
+        <!-- 资源校验结果描述 -->
+        <RscStateDesc length="V100" mappedName="rscStateDesc" defaultValue="0"/>
+        <!-- 终端归属渠道编码，做预占操作，资源变更结果编码为0005时必须返回 -->
+        <ChannelId length="V100" mappedName="channelId" defaultValue="0"/>
+        <!-- 终端归属渠道名称，做预占操作，资源变更结果编码为0005时必须返回 -->
+        <ChannelName length="V100" mappedName="channelName" defaultValue="0"/>
+        <SalePrice constraint="?" length="V10" mappedName="salePrice" />
+        <!-- 成本价格 （单位：厘） -->
+        <Cost constraint="?" length="V11" mappedName="cost" defaultValue="0" />
+        <!-- 卡费（单位：厘） -->
+        <CardPrice constraint="?" length="V10" mappedName="cardPrice" />
+        <!-- 预存话费金额（单位：厘） -->
+        <ReservaPrice constraint="?" length="V10" mappedName="reservaPrice" />
+        <!-- 套包对应产品活动信息 -->
+        <ProductActivityInfo constraint="*" mappedName="productActivityInfo">
+            <!-- 资源可选产品ID -->
+            <ProductID length="V20" mappedName="productId" />
+            <!-- 已打包终端套餐对应活动编码 -->
+            <ResourcesActivityCode constraint="?" length="V20" mappedName="resourcesActivityCode" />
+            <!-- 活动协议期限，单位：月，正整数 -->
+            <ResourcesActivityPer constraint="?" length="V2" mappedName="resourcesActivityPer" />
+        </ProductActivityInfo>
+        <!-- 品牌 -->
+        <ResourcesBrandCode constraint="?" length="V20" mappedName="resourcesBrandCode" />
+        <!-- 3GESS维护品牌，当iphone时品牌与上面的一致 -->
+        <OrgDeviceBrandCode constraint="?" length="V20" mappedName="orgDeviceBrandCode" />
+        <!-- 终端品牌名称 -->
+        <ResourcesBrandName constraint="?" length="V50" mappedName="resourcesBrandName" />
+        <!-- 型号 -->
+        <ResourcesModelCode constraint="?" length="V20" mappedName="resourcesModelCode" />
+        <!-- 终端型号名称 -->
+        <ResourcesModelName constraint="?" length="V100" mappedName="resourcesModelName" />
+        <!-- 终端来源编码 -->
+        <ResourcesSrcCode constraint="?" length="V4" mappedName="resourcesSrcCode" />
+        <!-- 终端来源名称 -->
+        <ResourcesSrcName constraint="?" length="V50" mappedName="resourcesSrcName" />
+        <!-- 终端供货商名称 -->
+        <ResourcesSupplyCorp constraint="?" length="V100" mappedName="resourcesSupplyCorp" />
+        <!-- 终端服务商名称 -->
+        <ResourcesServiceCorp constraint="?" length="V100" mappedName="rsourcesServiceCorp" />
+        <!-- 终端颜色 -->
+        <ResourcesColor constraint="?" length="V20" mappedName="resourcesColor" />
+        <!-- 终端机型编码 -->
+        <MachineTypeCode constraint="?" length="V20" mappedName="machineTypeCode" />
+        <!-- 终端机型名称 -->
+        <MachineTypeName constraint="?" length="V100" mappedName="MachineTypeName" />
+        <!-- 铺货标志 0非铺货终端 1铺货终端 -->
+        <DistributionTag constraint="?" length="F1" mappedName="distributionTag" />
+        <!-- 资源归属 01 总部管理资源02 省分管理资源03：全部资源04 社会渠道 -->
+        <ResRele constraint="?" length="F2" mappedName="resRele" />
+        <!-- 终端类别编码：Iphone：IP乐phone：LP智能终端：PP普通定制终端：01上网卡：04上网本：05 -->
+        <TerminalType constraint="?" length="V2" mappedName="terminalType" />
+        <!-- 当终端类别为智能终端时，该字段必填，终端子类别编码：入门级：04普及型：03中高端：02明星：01 -->
+        <TerminalTSubType constraint="?" length="V2" mappedName="termialTSubType" />
+        <!-- 终端绑定的服务号码，当终端为打包的预付费产品时必传，如上网卡套包等 -->
+        <ServiceNumber constraint="?" length="V40" mappedName="serviceNumber" />
+    </ResourcesRsp>
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</BssCheckResRsp>

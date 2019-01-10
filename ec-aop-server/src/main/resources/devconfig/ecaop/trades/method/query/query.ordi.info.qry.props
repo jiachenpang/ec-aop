@@ -1,0 +1,50 @@
+#订单查询
+ecaop.core.method.map.ecaop.trades.query.ordi.info.qry=qoiq
+ecaop.core.method.qoiq.def={"mothod":"qoiq","remark":"订单信息查询"}
+ecaop.core.method.qoiq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.qoiq.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.qoiq.param.msg={\
+     operatorId:{type:"String(20)",required:true,validators:null},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true,validators:null},\
+     channelId:{type:"String(20)",required:true,validators:null},\
+     channelType:{type:"String(7)",required:true,validators:null},\
+     infoTagSet:{type:"String(50)",required:true,validators:null},\
+     subscribeId:{type:"String(30)",required:false,validators:null},\
+     tradeId:{type:"String(30)",required:false,validators:null},\
+     serviceClassCode:{type:"String(4)",required:false,validators:null},\
+     areaCode:{type:"String(6)",required:false,validators:null},\
+     serialNumber:{type:"String(40)",required:false,validators:null},\
+     custId:{type:"String(16)",required:false,validators:null},\
+     departId:{type:"String(20)",required:false,validators:null},\
+     staffId:{type:"String(20)",required:false,validators:null},\
+     startDate:{type:"String(14)",required:false,validators:null},\
+     endDate:{type:"String(14)",required:false,validators:null},\
+     tradeTypeCode:{type:"String(4)",required:false,validators:null},\
+     rsrvValueCode:{type:"String(10)",required:false,validators:null},\
+     startSerialNumber:{type:"String(40)",required:false,validators:null},\
+     endSerialNumber:{type:"String(40)",required:false,validators:null},\
+     simStartNo:{type:"String(30)",required:false,validators:null},\
+     simEndNo:{type:"String(30)",required:false,validators:null},\
+     subscribeState:{type:"String(1)",required:false,validators:null},\
+     nextDealTag:{type:"String(1)",required:false,validators:null},\
+     rowsPrePage:{type:"String(6)",required:false,validators:null},\
+     batchOperType:{type:"String(40)",required:false,validators:null},\
+     processTag:{type:"String(2)",required:false,validators:null},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+
+ecaop.core.method.qoiq.processors=@QueryOrderInfo
+                                 
+#CB统一预提交
+ecaop.qoiq.preSub.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.qryTrade,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.cbss.qoiq.template@FBS@QRYTRADE_INPUT@qry@QRYTRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.cbss.qoiq.template=com/ailk/ecaop/biz/template/order/QryTrade

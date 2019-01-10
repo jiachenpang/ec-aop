@@ -1,0 +1,34 @@
+[qryPhoneNumberAttr]
+   SELECT A.PROVINCE "province",
+       A.EPARCHY "city"
+  FROM TAB_NUMBER_INFO A
+ WHERE A.SERIAL_NUMBER = #number#
+
+[qrySimpleCheckUserInfoTag]
+    SELECT PARAM_CODE FROM TD_B_COMMPARA WHERE PROVINCE_CODE = #province# AND PARAM_ATTR='1000'
+[qryCbSimpleCheckUserInfoTag]
+    SELECT PARA_CODE2 FROM TD_B_COMMPARA WHERE PROVINCE_CODE = #province# AND PARAM_ATTR='1000'
+
+[insertTradeInfo]
+INSERT INTO TF_B_TRADE_SOP (
+	PROVINCE,
+	SYS_CODE,
+	STAFF_ID,
+	SERIAL_NUMBER,
+	SUBSCRIBE_ID,
+	NUMBER_STATE,
+	UPDATE_TIME,
+	REMARK
+)
+VALUES
+  (#province#,
+   #sysCode#,
+   #operatorId#,
+   #serialNumber#,
+   #ordersId#,
+   #numState#,
+   SYSDATE(),
+   #remark#)
+   
+[qryNumSwitchByProvOrderId]
+    SELECT count(1) FROM TF_B_TRADE_SOP WHERE SUBSCRIBE_ID=#SUBSCRIBE_ID#

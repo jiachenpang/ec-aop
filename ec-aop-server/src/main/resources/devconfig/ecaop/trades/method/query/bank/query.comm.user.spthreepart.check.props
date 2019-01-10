@@ -1,0 +1,11 @@
+#用户资料校验三户返回
+ecaop.core.method.map.ecaop.trades.query.comm.user.spthreepart.check=qcsp
+ecaop.core.method.qcsp.def={"mothod":"qcsp","remark":"用户资料校验三户返回"}
+ecaop.core.method.qcsp.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qctc.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#定义流程跳转
+ecaop.core.method.qcsp.processors=@checkUserInfo()

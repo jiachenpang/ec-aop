@@ -1,0 +1,5 @@
+#统一挂号平台国政通测试
+ecaop.core.app.map.bopl.sub=bopl
+ecaop.core.app.bopl.def={"code":"bopl", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.fjbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.bopl.allow={appkey:"bopl",allow:"crck", deny:null}

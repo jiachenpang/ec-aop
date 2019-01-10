@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <OrderListQryReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province"/>
+            <CertNum length="V18" constraint="?" mappedName="certNum"/>
+            <OrdersID length="V20" constraint="?" mappedName="ordersId" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </OrderListQryReq>
+    </SvcCont>
+</UniBSS>

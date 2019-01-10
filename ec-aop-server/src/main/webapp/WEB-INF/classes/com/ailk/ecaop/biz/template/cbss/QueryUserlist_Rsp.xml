@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AcctRationalRsp mappedOut="true">
+    <!-- 应答编码 00：成功、01：设备数超过限制、02：用户不存在、03：用户状态不正常、99：其他错误 -->
+    <RspCode length="F2" range="00,01,02,03,99" mappedName="code" />
+    <RspDesc length="V256" constraint="?" mappedName="detail" />
+    <AcctRationalInfo constraint="?" mappedName="acctRationalInfo">
+        <!-- 账户ID -->
+        <AccID length="V40" mappedName="accId" />
+        <!-- 账户名称 -->
+        <AccName length="V120" constraint="?" mappedName="accName" />
+        <UserInfo constraint="*" mappedName="userInfo">
+            <NetType length="F2" mappedName="netType" />
+            <!-- 服务号码归属省分编码 -->
+            <AccProvince constraint="?" length="F2" mappedName="accProvince" />
+            <!-- 服务号码归属地市编码 -->
+            <AccCity constraint="?" length="F3" mappedName="accCity" />
+            <!-- 服务号码归属区号编码 -->
+            <Code constraint="?" length="V4" mappedName="code" />
+            <!-- 服务号码 -->
+            <UserNumber length="V30" mappedName="userNumber" /> 
+            <ProductId length="V60" mappedName="productId" />
+            <ProductName length="V256" mappedName="productName" />
+            <!-- 群组类型 -->
+            <GroupType constraint="?" length="F2" mappedName="groupType" />
+            <!-- 群组标识 -->
+            <GroupID constraint="?" length="V20" mappedName="groupId" />
+            <!-- 主号码标识 -->
+            <MainUserNum constraint="?" length="F1" mappedName="mainUserNum" />
+            <UseIntegral length="V10" mappedName="userIntegral" />
+        </UserInfo>
+    </AcctRationalInfo>
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V128" mappedName="paraId" />
+        <ParaValue length="V256" mappedName="paraValue" />
+    </Para>
+</AcctRationalRsp>

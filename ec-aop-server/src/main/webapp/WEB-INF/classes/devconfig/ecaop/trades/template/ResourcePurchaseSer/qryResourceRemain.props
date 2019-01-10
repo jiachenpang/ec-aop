@@ -1,0 +1,2 @@
+#流量余额查询接口
+ecaop.trade.template.ResourcePurchaseSer.qryResourceRemain={"serviceName":"ResourcePurchaseSer","operateName":"qryResourceRemain","content":"QRY_RESOURCE_REMAIN_REQ"}

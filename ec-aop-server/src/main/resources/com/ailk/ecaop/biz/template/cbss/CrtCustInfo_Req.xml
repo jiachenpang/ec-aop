@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CRT_CUSTINFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CRT_CUSTINFO_REQ>
+            <ORDER_ID length="V30" mappedName="orderId" />
+            <CUST_INFO mappedName="custInfo">
+                <CUST_NAME length="V100" mappedName="customerName"/>
+                <CUST_TYPE length="F1" mappedName="certType" />
+                <IS_ASSURE length="F1" mappedName="isAssure" />
+                <CERT_END_DATE length="F8" constraint="?" mappedName="certExpiretDate" />
+                <CERT_ADDR length="V256" constraint="?" mappedName="certAddress" />
+                <CERT_TYPE_CODE length="V2"  mappedName="certType" />
+                <CERT_CODE length="V50" mappedName="certNum"/>
+                <PROVINCE_CODE length="F2"  mappedName="province" />
+                <EPARCHY_CODE length="V6"  mappedName="city" />
+                <CITY_CODE length="V6"  constraint="?" mappedName="district" />
+                <CUST_PASSWD length="V10"  constraint="?" mappedName="custPasswd" />
+                <CREDIT_CLASS length="V8"  constraint="?" mappedName="creditClass" />
+                <SIMPLE_SPELL length="V100"  constraint="?" mappedName="simpleSpell" />
+                <DEVELOP_DEPART_ID length="V20"  constraint="?" mappedName="developDepartId" />
+                <RELE_OFFICE_ID length="V20"  constraint="?" mappedName="releOfficeId" />
+                <DEVELOP_STAFF_ID length="V20"  constraint="?" mappedName="developStaffId" />
+                <INDIVIDUAL_BRAND_ID length="V20"  constraint="?" mappedName="individualBrandId" />
+                <GROUP_BRAND_ID length="V20"  constraint="?" mappedName="groupBrandId" />
+                <CUST_CLASS_TYPE length="V3"  constraint="?" mappedName="custClassType" />
+                <CUSTOMER_LEVEL length="V3"  constraint="?" mappedName="customerLevel" />
+                <CERT_VERIFIED length="F1"  constraint="?" mappedName="certVerified" />
+                <CUSTOMER_LOC length="F1"  constraint="?" mappedName="customerLoc" />
+                <SEX length="F1"  constraint="?" mappedName="sex" />
+                <BIRTHDAY length="F8"  constraint="?" mappedName="birthday" />
+                <BIRTHDAY_LUNAR length="V50"  constraint="?" mappedName="birthdayLunar" />
+                <BIRTHDAY_FLAG length="F1"  constraint="?" mappedName="birthdayFlag" />
+                <POST_ADDRESS length="V256"  constraint="?" mappedName="postAddress" />
+                <POST_CODE length="F6"  constraint="?" mappedName="postCode" />
+                <POST_PERSON length="V50"  constraint="?" mappedName="postPerson" />
+                <PHONE length="V40"  constraint="?" mappedName="phone" />
+                <FAX_NBR length="V40"  constraint="?" mappedName="faxNbr" />
+                <EMAIL length="V50"  constraint="?" mappedName="email" />
+                <HOME_ADDRESS length="V256"  constraint="?" mappedName="homeAddress" />
+                <HOME_PHONE length="V40"  constraint="?" mappedName="homePhone" />
+                <WORK_NAME length="V80"  constraint="?" mappedName="workName" />
+                <WORK_KIND length="F2"  constraint="?" mappedName="workKind" />
+                <WORK_ADDRESS length="V256"  constraint="?" mappedName="workAddress" />
+                <WORK_PHONE length="V40"  constraint="?" mappedName="workPhone" />
+                <WORK_POST_CODE length="F6"  constraint="?" mappedName="workPostCode" />
+                <INDUSTRY_TYPE_CODE length="F6"  constraint="?" mappedName="industryTypeCode" />
+                <WORK_DEPART length="V50"  constraint="?" mappedName="workDepart" />
+                <JOB length="V20"  constraint="?" mappedName="job" />
+                <CONTACT length="V60" mappedName="contactPerson" />
+                <CONTACT_PHONE length="V40" mappedName="contactPhone" />
+                <CONTACT_TYPE_CODE length="F1"  constraint="?" mappedName="contactTypeCode" />
+                <CONTACT_FREQ length="F1"  constraint="?" mappedName="contactFreq" />
+                <CONTACT_EMAIL length="V30"  constraint="?" mappedName="contactEmail" />
+                <NATIONALITY_CODE length="V4"  constraint="?" mappedName="nationalityCode" />
+                <LOCAL_NATIVE_CODE length="V4"  constraint="?" mappedName="localNativeCode" />
+                <POPULATION length="V4"  constraint="?" mappedName="population" />
+                <LANGUAGE_CODE length="F1"  constraint="?" mappedName="languageCode" />
+                <FOLK_CODE length="V2"  constraint="?" mappedName="folkCode" />
+                <RELIGION_CODE length="F1"  constraint="?" mappedName="religionCode" />
+                <JOB_TYPE_CODE length="F1"  constraint="?" mappedName="jobTypeCode" />
+                <REVENUE_LEVEL_CODE length="F1"  constraint="?" mappedName="revenueLevelCode" />
+                <EDUCATE_DEGREE_CODE length="F1"  constraint="?" mappedName="educateDegreeCode" />
+                <GRADUATE_SCHOOL length="V100"  constraint="?" mappedName="graduateSchool" />
+                <SPECIALITY length="V50"  constraint="?" mappedName="speciality" />
+                <CHARACTER_TYPE_CODE length="F1"  constraint="?" mappedName="characterTypeCode" />
+                <HEALTH_STATE_CODE length="F1"  constraint="?" mappedName="healthStateCode" />
+                <MARRIAGE length="F1"  constraint="?" mappedName="marriage" />
+                <WEBUSER_ID length="V20"  constraint="?" mappedName="webuserId" />
+                <WEB_PASSWD length="V10"  constraint="?" mappedName="webPasswd" />
+                <COMMUNITY_ID length="V30"  constraint="?" mappedName="communityId" />
+                <ORG_ID length="V20"  constraint="?" mappedName="orgId" />
+                <ORG_LEGAL_REP length="V20"  constraint="?" mappedName="orgLegalRep" />
+                <REMOVE_TAG length="F1"  constraint="?" mappedName="removeTag" />
+            </CUST_INFO>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </CRT_CUSTINFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CRT_CUSTINFO_INPUT>

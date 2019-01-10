@@ -1,0 +1,52 @@
+#营销活动返销处理提交
+ecaop.core.method.map.ecaop.trades.serv.curt.activity.cancle.sub=scacs
+ecaop.core.method.scacs.def={"mothod":"scacs","remark":"营销活动返销处理提交"}
+ecaop.core.method.scacs.params=[\
+    {"param":"msg","type":"JSON","required":true,"encrypted":false,"validators":"@JSONSchema(ecaop.trades.scacs.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg主体校验
+ecaop.trades.scacs.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    ordersId:{type:"String(20)",required:true,validators:null},\
+    serviceNumber:{type:"String(20)",required:false,validators:null},\
+    tradeId:{type:"String(20)",required:true,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.scacs.productInfo)"},\
+    cancleFeeInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.scacs.cancleFeeInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+    }
+#产品节点
+ecaop.trades.scacs.productInfo={\
+    productId:{type:"String(8)",required:false,validators:null},\
+    productName:{type:"String(100)",required:false,validators:null},\
+    productMode:{type:"String(2)",required:false,validators:null},\
+    productActiveTime:{type:"String(14)",required:false,validators:null},\
+    productInactiveTime:{type:"String(14)",required:false,validators:null},\
+    activityId:{type:"String(28)",required:true,validators:null},\
+    activityName:{type:"String(128)",required:false,validators:null},\
+    activityActiveTime:{type:"String(14)",required:true,validators:null},\
+    activityInactiveTime:{type:"String(14)",required:false,validators:null},\
+    discntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.scacs.discntInfo)"}\
+    }
+#可返销金额
+ecaop.trades.scacs.cancleFeeInfo={\
+    cancleFeeType:{type:"String(2)",required:true,validators:null},\
+    cancleFee:{type:"String(30)",required:true,validators:null}\
+    }
+#资费信息
+ecaop.trades.scacs.discntInfo={\
+    packageId:{type:"String(8)",required:true,validators:null},\
+    discntCode:{type:"String(8)",required:true,validators:null},\
+    discntName:{type:"String(1000)",required:false,validators:null},\
+    startDate:{type:"String(14)",required:true,validators:null},\
+    endDate:{type:"String(14)",required:false,validators:null},\
+    itemId:{type:"String(16)",required:false,validators:null}\
+    }
+#定义processors
+ecaop.core.method.scacs.processors=@MarketingActivity()

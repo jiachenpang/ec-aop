@@ -1,0 +1,37 @@
+#电子券支付
+ecaop.core.method.map.ecaop.trades.serv.payment.ticket.sub=spts
+ecaop.core.method.spts.def={"mothod":"spts","remark":"电子券支付"}
+ecaop.core.method.spts.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.spts.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.trades.spts.msg.schema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    orderNo:{type:"String(20)",required:true},\
+    barCode:{type:"String(30)",required:true},\
+    merchantId:{type:"String(20)",required:true},\
+    ticketType:{type:"String(20)",required:false},\
+    orderBalance:{type:"String(12)",required:true},\
+    departId:{type:"String(20)",required:true},\
+    businessCode:{type:"String(6)",required:true},\
+    orderTime:{type:"String(14)",required:true},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.spts.processors=@ParametersMapper(ecaop.trades.spts.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.osn.services.TicketBuySer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.spts.template)
+                              
+ecaop.trades.spts.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ticketBuySer.ticketPayment,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.spts.template@OSN@TICKET_PAYMENT_INPUT@n-1469109131@TICKET_PAYMENT_REQ"}\
+]
+
+ecaop.trades.spts.template=com/alik/ecaop/biz/template/ticketBuySer

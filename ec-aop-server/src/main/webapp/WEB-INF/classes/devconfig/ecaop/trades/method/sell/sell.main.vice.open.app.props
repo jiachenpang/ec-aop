@@ -1,0 +1,96 @@
+#主副卡开户处理申请
+ecaop.core.method.map.ecaop.trades.sell.main.vice.open.app=mvoa
+ecaop.core.method.mvoa.def={"mothod":"mvoa","remark":"主副卡开户处理申请"}
+ecaop.core.method.mvoa.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.mvoa.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg主体校验
+ecaop.trades.mvoa.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    eModeCode:{type:"String(2)",required:false,validators:null},\
+    ordersId:{type:"String(20)",required:true,validators:null},\
+    mainNumberTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    serialNumber:{type:"String(11)",required:true,validators:null},\
+    mainNumber:{type:"String(11)",required:false,validators:null},\
+    bipType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    serType:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    phoneSpeedLevel:{type:"String(10)",required:false,validators:null},\
+    custInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.mvoa.custInfo)"},\
+    niceNumberInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mvoa.niceNumberInfo)"},\
+    productInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.mvoa.productInfo)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mvoa.activityInfo)"},\
+    acctInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mvoa.acctInfo)"},\
+    recomInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mvoa.recomInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#帐户信息
+ecaop.trades.mvoa.acctInfo={\
+    createOrExtendsAcct:{type:"String(1)",required:true,validators:null},\
+    accountPayType:{type:"String(2)",required:true,validators:null},\
+    debutySn:{type:"String(20)",required:false,validators:null}}
+#产品下附加包及包元素（资费，服务）
+ecaop.trades.mvoa.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}}
+#发展人信息
+ecaop.trades.mvoa.recomInfo={\
+    recomPersonId:{type:"String(30)",required:true,validators:null},\
+    recomPersonName:{type:"String(128)",required:true,validators:null},\
+    recomDepartId:{type:"String(128)",required:false,validators:null},\
+    recomCity:{type:"String(10)",required:false,validators:null}}
+#客户信息
+ecaop.trades.mvoa.custInfo={\
+    sex:{type:"String(1)",required:false,validators:null},\
+    custId:{type:"String(20)",required:false,validators:null},\
+    certType:{type:"String(2)",required:false,validators:null},\
+    certNum:{type:"String(20)",required:false,validators:null},\
+    certAdress:{type:"String(100)",required:false,validators:null},\
+    customerName:{type:"String(128)",required:false,validators:null},\
+    certExpireDate:{type:"String(8)",required:false,validators:null},\
+    contactPerson:{type:"String(20)",required:false,validators:null},\
+    contactPhone:{type:"String(20)",required:false,validators:null},\
+    contactAddress:{type:"String(256)",required:false,validators:null},\
+    checkType:{type:"String(2)",required:true,validators:null}}
+#靓号信息
+ecaop.trades.mvoa.niceNumberInfo={\
+    classId:{type:"String(1)",required:true,validators:null},\
+    advancePay:{type:"String(11)",required:true,validators:null},\
+    lowFee:{type:"String(11)",required:false,validators:null},\
+    protocolTime:{type:"String(5)",required:false,validators:null}}
+#开户时选择的产品信息
+ecaop.trades.mvoa.productInfo={\
+    productId:{type:"String(8)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    firstMonBillMode:{type:"String(2)",required:false,validators:null},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mvoa.packageElement)"}}
+#开户时活动信息
+ecaop.trades.mvoa.activityInfo={\
+    actPlanId:{type:"String(20)",required:true,validators:null},\
+    resourcesFee:{type:"String(20)",required:false,validators:null},\
+    activityFee:{type:"String(20)",required:false,validators:null},\
+    resourcesCode:{type:"String(30)",required:false,validators:null}}
+#CB统一预提交
+ecaop.mvoa.preSub.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mvoa.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.mvoa.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+#定义processors
+ecaop.core.method.mvoa.processors=@NumRoute()\
+                                  @mainViceOpenProcessor()\
+                                  @RecodeResourceInfo()
+#OH压单查询
+ecaop.mvoa.queryMainAndVice.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.VoyungoForAopSer.qryMainAndViceState,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.mvoa.queryMainAndVice.template@FBS@QRY_MAIN_AND_VICE_STATE_INPUT@n152939715@QRY_MAIN_AND_VICE_STATE_REQ"}\
+   ] 
+ecaop.trades.mvoa.queryMainAndVice.template=com/ailk/ecaop/biz/template/cbss/QryMainAndViceState                             

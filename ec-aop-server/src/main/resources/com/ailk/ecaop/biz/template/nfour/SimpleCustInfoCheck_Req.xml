@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_SIMPLE_CUST_INFO_INPUT mappedOut="true">
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_SIMPLE_CUST_INFO_REQ>
+            <OPERATE_TYPE length="V2" defaultValue="1" range="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" mappedName="operateType"/>
+            <CUST_TYPE length="F1" constraint="?" range="0,1" />
+            <CUST_NAME length="V100" constraint="?" mappedName="customerName"/>
+            <TRADE_ID length="V30" constraint="?" />
+            <GROUP_ID length="V40" constraint="?" />
+            <CUST_CHECK_TYPE length="F1" defaultValue="1" />
+            <CERT_TYPE_CODE length="V2" constraint="?" mappedName="certType" />
+            <CERT_CODE length="V50" constraint="?" mappedName="certNum" />
+            <SERVICE_CLASS_CODE length="F4" constraint="?" />
+            <AREA_CODE length="V6" constraint="?" />
+            <SERIAL_NUMBER length="V40" constraint="?" mappedName="serialNumber"/>
+            <USER_PASSWD length="V30" constraint="?" />
+            <VIP_CARD_TYPE length="F1" constraint="?" />
+            <VIP_CARD_NO length="V20" constraint="?" />
+            <SIM_CARD_NO length="V30" constraint="?" />
+            <CONTRACT_NO length="V40" constraint="?" />
+            <BANK_ACCT_NO length="V30" constraint="?" />
+            <CUST_ID length="V16" constraint="?" />
+            <PARA constraint="*">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </QRY_SIMPLE_CUST_INFO_REQ>
+    </UNI_BSS_BODY>
+            <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_SIMPLE_CUST_INFO_INPUT>

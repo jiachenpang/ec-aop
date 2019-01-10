@@ -1,0 +1,57 @@
+#欠费查询
+ecaop.core.method.map.ecaop.trades.query.comm.owefee.qry=qofq
+ecaop.core.method.qofq.def={"mothod":"qofq","remark":"欠费查询"}
+ecaop.core.method.qofq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.qofq.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.qofq.param.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    qryType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    operateType:{type:"String(1)",required:false,encrypted:false,validators:"@FixedLen(1)"},\
+    acctid:{type:"String(16)",required:false,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    badDebtTag:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    chargeType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+
+#定义processors
+ecaop.core.method.qofq.processors=\
+                      @changeIptvToNet()\
+                      @ParametersMapper(ecaop.trade.qofq.ParametersMapping)\
+                      @WsCall(ecaop.comm.conf.url.cbss.services.PaymentSer)\
+                      @Xml2JsonMapper4Fbs(ecaop.trade.qofq.template)\
+                      @DealRetOweFee()
+                      
+ecaop.trade.qofq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"PaymentSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryOweFeeInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.queryType,msg.qryType"},\
+{paramterName:"msg",extractor:"propParamInto",extractorConfig:"msg.acctId,msg.acctid"},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_OWE_FEE_INFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.qofq.template@FBS@QRY_OWE_FEE_INFO_INPUT@qry@QRY_OWE_FEE_INFO_REQ"}\
+]
+
+ecaop.trade.qofq.template=com/ailk/ecaop/biz/template/cbss/QryOweFeeInfo

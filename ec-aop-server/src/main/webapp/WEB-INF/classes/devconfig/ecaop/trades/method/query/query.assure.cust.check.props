@@ -1,0 +1,33 @@
+#被担保信息校验
+ecaop.core.method.map.ecaop.trades.query.assure.cust.check=qacc
+ecaop.core.method.qacc.def={"mothod":"qacc","remark":"支持收入归集集团编码、集团客户证件+证件号、集中集客客户编码"}
+ecaop.core.method.qacc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.qacc.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.trades.qacc.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    assureIdType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    assurePsptTypeCode:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    assurePsptId:{type:"String(100)",required:true,encrypted:false,validators:null},\
+    assureCustType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    activityType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    certType:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    certNum:{type:"String(30)",required:true,encrypted:false,validators:"@FixedLen(7)" }\
+}
+#流程控制
+ecaop.core.method.qacc.processors=@AssureCheckProcessor()
+
+ecaop.trades.qacc.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.cheAssureCustAOPSer.checkAssureCustAOPSer,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.qacc.template@FBS@CHECK_ASSURE_INPUT@n-234794184@CHECK_ASSURE_REQ"}\
+]
+ecaop.trades.qacc.template=com/ailk/ecaop/biz/template/cheAssureCustAOPSer/CheckAssureCustAOPSer

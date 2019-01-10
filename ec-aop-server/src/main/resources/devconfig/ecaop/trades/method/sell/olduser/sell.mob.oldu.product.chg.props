@@ -1,0 +1,71 @@
+#广东集客套餐变更
+#method定义
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.product.chg=oupc
+ecaop.core.method.oupc.def={"mothod":"oupc","remark":"广东集客套餐变更"}
+
+ecaop.core.method.oupc.params=[\
+     {"param":"msg",type:"JSON",required:true, validator:"@JSONSchema(ecaop.gdjk.oupc.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\]
+ecaop.gdjk.oupc.param.productInfo={\
+productId:{type:"String(20)",required:true},\
+productMode:{type:"String(1)",required:true},\
+optType:{type:"String(2)",required:false}\
+}
+ecaop.gdjk.oupc.param.msg={\
+operatorId:{type:"String(20)",required:true},\
+province:{type:"String(2)",required:true},\
+city:{type:"String(3)",required:true},\
+district:{type:"String(10)",required:true},\
+channelId:{type:"String(20)",required:true},\
+channelType:{type:"String(7)",required:true},\
+serialNumber:{type:"String(20)",required:true},\
+opeSysType:{type:"String(1)",required:false},\
+productInfo:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.gdjk.oupc.param.productInfo)"},\
+recomPersonId:{type:"String(30)",required:false},\
+recomPersonName:{type:"String(30)",required:false},\
+para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.oupc.processors=@route\
+                                  @GateToNewAndOldProductDatabase\
+                                  @FlowProcessor(ecaop.core.method.oupc.flowConfig)
+#配置跳转（原2->02 *->03）04是老N6流程 ,proGate 1是老库，2是新库
+ecaop.core.method.oupc.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->04"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(proGate)", transitions:"2->03 *->05"},\
+{id:"03", processor:"AopHandler(ecaop.4G.sub.oupc.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->06"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"06", processor:"AopHandler(ecaop.ecs.sub.oupc.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#4G一键开户开户处理申请
+ecaop.4G.sub.oupc.processors=@newChangeProduct4CBProcessor()
+                 
+
+#定义处理器
+ecaop.ecs.sub.oupc.processors=@ParametersMapper(ecaop.gdjk.oupc.ParametersMapping)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.gdjk.oupc.template)
+                                 
+ecaop.gdjk.oupc.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00025",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ProductChgReq",temp:true},\   
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.gdjk.oupc.template@3GE"}\
+]
+#请求和返回报文模版路径
+ecaop.gdjk.oupc.template=com/ailk/ecaop/biz/template/product/ProductChg
+
+#调用CB的工号校验
+ecaop.ecsb.oupc.ParametersMapping=[\
+    {paramterName:"simCardSwitch",extractor:"fix",extractorConfig:"A1",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.qryStaffInfo.qryStaffInfoByCB",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.oupc.template@FBS@QRY_STAFF_INFO_INPUT@n1529397156@QRY_STAFF_INFO_REQ"}\
+]
+ecaop.ecsb.oupc.template=com/ailk/ecaop/biz/template/staff/QryStaffInfoByCB

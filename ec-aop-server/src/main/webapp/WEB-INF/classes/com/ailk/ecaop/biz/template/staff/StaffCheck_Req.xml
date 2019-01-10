@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--客户资料验证接口 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <StaffCheckReq>
+            <!--  操作员ID-->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" constraint="?" mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3" constraint="?" mappedName="city"/>
+            <!-- 区县 -->
+            <District length="V10" constraint="?" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" constraint="?" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" constraint="?" mappedName="channelType"/>
+
+            <CheckMode constraint="?" length="F1" range="0,1,2" mappedName="checkMode"/>
+
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </StaffCheckReq>
+    </SvcCont>
+</UniBSS>

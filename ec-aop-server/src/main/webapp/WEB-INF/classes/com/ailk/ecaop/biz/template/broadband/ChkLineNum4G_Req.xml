@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHK_LINE_NUM4G_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <CHK_LINE_NUM4G_REQ >
+            <AREA_CODE length="V6" mappedName="areaCode"/>
+            <MULTI_NUMBER constraint="+" mappedName="multiNumber">
+                <OPER_TYPE length="F2" range="01,02,03,04,05" mappedName="operType" />
+                <NBR_INFO constraint="+" mappedName="nbrInfo">
+                    <SERIAL_NUMBER length="V40" mappedName="serialNumber"/>
+                    <OLD_SERIAL_NUMBER length="V40" constraint="?" mappedName="oldSerialNumber"/>
+                </NBR_INFO>
+            </MULTI_NUMBER>
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode"/>
+            <BRAND_CODE length="F4" constraint="?" mappedName="brandCode"/>
+            <PROVINCE_BRAND_CODE length="V30" constraint="?" mappedName="provinceBrandCode"/>
+            <PRODUCT_ID length="V20" constraint="?" mappedName="productId"/>
+            <USER_ID length="V16" constraint="?" mappedName="userId"/>
+            <TRADE_ID length="V30" constraint="?" mappedName="tradeId"/>
+        </CHK_LINE_NUM4G_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHK_LINE_NUM4G_INPUT>

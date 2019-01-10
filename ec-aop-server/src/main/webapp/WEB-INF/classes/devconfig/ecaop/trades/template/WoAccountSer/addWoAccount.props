@@ -1,0 +1,2 @@
+#沃账户创建接口
+ecaop.trade.template.woAccountSer.addWoAccount={"serviceName":"WoAccountSer","operateName":"addWoAccount","content":"ADD_WO_ACCOUNT_REQ"}

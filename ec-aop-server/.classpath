@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/antlr-runtime-3.4.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.connector-factory-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.core-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.pageant-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.sshagent-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.svnkit-trilead-ssh2-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.usocket-jna-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/jsch.agentproxy.usocket-nc-0.0.7.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/sequence-library-1.0.3.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/sqljet-1.1.10.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/svnkit-1.8.12.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/svnkit-cli-1.8.12.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/svnkit-javahl16-1.8.12.jar"/>
+	<classpathentry kind="lib" path="D:/Java/svnkit-1.8.12/lib/trilead-ssh2-1.0.0-build220.jar"/>
+	<classpathentry kind="lib" path="D:/Java/POI/poi.jar/poi-3.8-20120326.jar"/>
+	<classpathentry kind="lib" path="D:/Java/POI/poi.jar/poi-ooxml-3.8-20120326.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

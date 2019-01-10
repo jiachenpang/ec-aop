@@ -1,0 +1,5 @@
+#河南BSS国政通测试
+ecaop.core.app.map.habc.sub=habc
+ecaop.core.app.habc.def={"code":"habc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.habc.timeslimit=max 100 per 1 minute
+ecaop.core.app.habc.allow={appkey:"habc",allow:"crck", deny:null}

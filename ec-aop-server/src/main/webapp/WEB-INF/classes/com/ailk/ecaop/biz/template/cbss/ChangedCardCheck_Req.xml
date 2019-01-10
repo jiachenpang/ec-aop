@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHECK_CARD_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+<CHECK_CARD_INFO_REQ>
+	<PROVINCE_CODE constraint="1" length="V4" mappedName="province"><!--省分编码 -->
+	</PROVINCE_CODE>
+	<EPARCHY_CODE constraint="1" length="V6" mappedName="city"><!--地市编码 -->
+	</EPARCHY_CODE>
+	<CHANNEL_TYPE constraint="1" length="F7" mappedName="channelType"><!--渠道类型 -->
+	</CHANNEL_TYPE>
+	<CHANNEL_ID constraint="1" length="V20" mappedName="channelId"><!--渠道编码 -->
+	</CHANNEL_ID>
+	<DEPART_ID constraint="1" length="V20" mappedName="channelId"><!--操作部门编码 -->
+	</DEPART_ID>
+	<STAFF_ID constraint="1" length="V20" mappedName="operatorId"><!--操作员工工号 -->
+	</STAFF_ID>
+	<TRADE_TYPE constraint="1" length="F1" mappedName="tradeType"><!--业务类型标识1单卡开户2预配卡批量开户 -->
+	</TRADE_TYPE>
+	<CARD_NUMBER_INFO constraint="+" mappedName="cardNumberInfo"><!--号卡信息 -->
+		<SIM_CARD_NO constraint="?" length="V22" mappedName="simCardNo"><!--SIM/USIM卡号 (业务类型标识为1时填写) -->
+		</SIM_CARD_NO>
+		<SERIAL_NUMBER constraint="1" length="V30" mappedName="serialNumber"><!--服务号码 -->
+		</SERIAL_NUMBER>
+	</CARD_NUMBER_INFO>
+	<PARA constraint="*" mappedName="para"><!--保留字段 -->
+		<PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+		</PARA_ID>
+		<PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+		</PARA_VALUE>
+	</PARA>
+</CHECK_CARD_INFO_REQ>
+ </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</CHECK_CARD_INFO_INPUT>

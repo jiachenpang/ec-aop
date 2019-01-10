@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <UPLOAD_CUST_INFO_RSP mappedOut="true">
+        <RESP_CODE constraint="1" length="F4" mappedName="code">
+            <!--资源预判结果编码, 0000：存在可用资源 8888：其它错误 -->
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+            <!--资源预判描述信息或预判失败原因等 -->
+        </RESP_DESC>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </UPLOAD_CUST_INFO_RSP>
+</UNI_BSS_BODY>

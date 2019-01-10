@@ -1,0 +1,12 @@
+#助销预受理订单查询
+ecaop.core.method.map.ecaop.trades.query.ordi.prezx.qry=qacq
+ecaop.core.method.qacq.def={"mothod":"qacq","remark":"助销预受理订单查询"}
+ecaop.core.method.qacq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.core.method.qacq.processors=\
+                @TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ec-aop.rest)

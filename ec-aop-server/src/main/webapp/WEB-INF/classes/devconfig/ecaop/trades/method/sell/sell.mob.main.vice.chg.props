@@ -1,0 +1,73 @@
+ecaop.core.method.map.ecaop.trades.sell.mob.main.vice.chg=mmvc
+ecaop.core.method.mmvc.def={"mothod":"mmvc","remark":"老用户加入主副卡"}
+ecaop.core.method.mmvc.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.mmvc.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg 校验器 
+
+ecaop.ecsb.mmvc.MsgSchema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    ordersId:{type:"String(30)",required:true},\
+    serialNumber:{type:"String(20)",required:true},\
+    mainNumber:{type:"String(11)",required:false},\
+    serType:{type:"String(1)",required:true},\
+    orderType:{type:"String(1)",required:true},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.mmvc.productInfo)"},\
+    recomPersonId:{type:"String(30)",required:false},\
+    recomPersonName:{type:"String(30)",required:false},\
+    contactPerson:{type:"String(60)",required:false},\
+    contactPhone:{type:"String(40)",required:false},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trade.mmvc.productInfo={\
+    productId:{type:"String(20)",required:true},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.mmvc.packageElement)"}\
+}
+ecaop.trade.mmvc.packageElement={\
+    packageId:{type:"String(20)",required:true},\
+    elementId:{type:"String(20)",required:true},\
+    elementType:{type:"String(2)",required:true},\
+}
+
+#定义processor
+ecaop.core.method.mmvc.processors=@OldUserJoinMainSub()
+
+
+#CB预提交
+ecaop.trade.mmvc.sUniTradeParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sUniTrade",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_UNI_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.baoa.sUniTrade.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+]
+
+
+ecaop.trades.mmvc.sUniTrade.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+ecaop.mmvc.params.config.termIp=132.35.81.217
+

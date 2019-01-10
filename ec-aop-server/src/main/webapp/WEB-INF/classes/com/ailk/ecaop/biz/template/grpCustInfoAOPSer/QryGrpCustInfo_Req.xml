@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_GRPCUST_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_GRPCUST_REQ>
+            <OPT_TYPE constraint="1" length="V1" mappedName="optType" />
+            <GROUP_ID constraint="1" length="V100" mappedName="groupId" />
+            <PROVINCE_CODE constraint="1" length="V8" mappedName="provinceCode" />
+            <EPARCHY_CODE constraint="1" length="V8" mappedName="eparchyCode" />
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </QRY_GRPCUST_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="?"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_GRPCUST_INPUT>

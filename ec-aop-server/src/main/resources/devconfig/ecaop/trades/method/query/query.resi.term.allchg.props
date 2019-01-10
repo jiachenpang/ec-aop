@@ -1,0 +1,36 @@
+ecaop.core.method.map.ecaop.trades.query.resi.term.allchg=qrtac
+ecaop.core.method.qrtac.def={"mothod":"qrtac","remark":"终端状态查询变更-全终端业务"}
+ecaop.core.method.qrtac.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.masb.qrtac.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(50)","required":false, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null}\
+    ]
+    
+#参数校验
+ecaop.masb.qrtac.Msg={\
+    operatorId:{type:"String(20)",required:false,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:false,validators:null},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    resourcesInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.masb.qrtac.resourceInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.masb.qrtac.resourceInfo={\
+    resourcesType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    resCodeType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    resourcesCode:{type:"String(30)",required:true,validators:null},\
+    occupiedFlag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    allocationFlag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    occupiedTime:{type:"String(20)",required:false,validators:null},\
+    custName:{type:"String(20)",required:false,validators:null},\
+    certType:{type:"String(2)",required:false,validators:"@FixedLen(2)"},\
+    activeType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    isSelf:{type:"String(2)",required:true,validators:"@FixedLen(1)"},\
+    certNum:{type:"String(30)",required:false,validators:null}\
+}
+
+ecaop.core.method.qrtac.processors=@CheckResProcessor()

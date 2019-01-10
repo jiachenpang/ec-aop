@@ -1,0 +1,5 @@
+#时科沃闪购测试
+ecaop.core.app.map.wsg.sub=wssb
+ecaop.core.app.wssb.def={"code":"wssb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+
+ecaop.core.app.wssb.allow={appkey:"wssb",allow:"cmck,opap,opsb,cdqy,cdnt,cdsn,mnca,oolq,mcoa,sccc", deny:null}

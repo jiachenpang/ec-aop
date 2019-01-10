@@ -1,0 +1,53 @@
+#宽带装通收费接口 by zsq
+ecaop.core.method.map.ecaop.trades.sell.brd.comm.charges.sub=bccs
+ecaop.core.method.bccs.def={"mothod":"smcom","remark":"宽带装通收费"}
+ecaop.core.method.bccs.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.bccs.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.bccs.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    oldtradeId:{type:"String(20)",required:true,validators:null},\
+    oldFee:{type:"String(20)",required:true,validators:null},\
+    sendType:{type:"String(1)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+ecaop.core.method.bccs.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.bccs.flowConfig)
+
+ecaop.core.method.bccs.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.trades.bccs.cbss.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.trades.bccs.n6.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.comm.trades.bccs.n6.processors=@N6brdOpenSubCommit()
+ecaop.comm.trades.bccs.cbss.processors=@CBbrdOpenSubCommit()
+
+
+#CB统一预提交
+ecaop.bccs.preSub.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordForNorthSer.sUniTrade,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.bccs.preSub.template@FBS@SGL_UNI_TRADE_INPUT@n1529397156@SGL_UNI_TRADE_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.bccs.preSub.template=com/ailk/ecaop/biz/template/terminal/CancelPreSub4G
+
+#CBSS正式提交
+ecaop.trades.bccs.cancel.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ordSer.orderSub,@50",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.bccs.cancel.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+ecaop.trades.bccs.cancel.template=com/ailk/ecaop/biz/template/nfour/OrderSub
+
+#北六E预提交
+ecaop.masb.bccs.sProductChgParametersMapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.n6EOrdForNorthSer.sUniTrade",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.bccs.template@FBS@SGL_UNI_TRADE_INPUT@suni@SGL_UNI_TRADE_REQ"}]
+ecaop.trades.bccs.template=com/ailk/ecaop/biz/template/n6ess/SUniTradeN6

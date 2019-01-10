@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GET_BROADBAND_ACCT_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <GET_BROADBAND_ACCT_INFO_REQ>
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+            <!-- 查询类型：0：根据宽带编码查询帐号；1：根据宽带查询宽带编码；2：获取自动生成的宽带账号/编码             -->
+            <QRY_TYPE length="F1" mappedName="qryType" />
+            <SERIAL_NUMBER length="V40" constraint="?" mappedName="serialNumber" />
+            <AUTH_ACCT_ID length="V60" constraint="?" mappedName="authAcctId" />
+            <PARA_LIST constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V20" mappedName="paraValue" />
+            </PARA_LIST>
+        </GET_BROADBAND_ACCT_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</GET_BROADBAND_ACCT_INFO_INPUT>

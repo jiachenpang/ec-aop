@@ -1,0 +1,5 @@
+#李小龙个人测试，请不要上传
+ecaop.core.app.map.lxltest.sub=llsb
+ecaop.core.app.llsb.def={"code":"llsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.llsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.llsb.allow={appkey:"llsb",allow:"syps,qrtb,bacq,qcfq,cuck,cmck,qubq,mytest,tqauq", deny:null}

@@ -1,0 +1,143 @@
+#订单信息同步
+ecaop.core.method.map.ecaop.trades.syn.orderinfo.sub=tsos
+ecaop.core.method.tsos.def={"mothod":"tsos","remark":"订单信息同步"}
+ecaop.core.method.tsos.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.tsos.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+    
+#msg 校验器 
+ecaop.trades.tsos.msg.schema={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:null},\
+    eModeCode:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    ordersId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    opeSysType:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    orderTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    openTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+    numId:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.numId)"},\
+    simCardNo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.simCardNo)"},\
+    customerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.customerInfo)"},\
+    userInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.userInfo)"},\
+    resourcesInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.resourcesInfo)"},\
+    useCustInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.useCustInfo)"},\
+    recomDis:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.recomDis)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trades.tsos.numId={\
+    serialNumber:{type:"String(20)",required:true,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.simCardNo={\
+    iccid:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    cardType:{type:"String(1)",required:true,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.customerInfo={\
+    newCustomerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.newCustomerInfo)"}\
+}
+
+ecaop.trades.tsos.newCustomerInfo={\
+    certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    certNum:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    certAdress:{type:"String(200)",required:true,encrypted:false,validators:null},\
+    customerName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+    certExpireDate:{type:"String(28)",required:true,encrypted:false,validators:null},\
+    sex:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    contactPerson:{type:"String(80)",required:false,encrypted:false,validators:null},\
+    contactPhone:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    contactAddress:{type:"String(256)",required:false,encrypted:false,validators:null},\
+    custType:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    customerRemark:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.customerRemark)"}\
+}
+
+ecaop.trades.tsos.customerRemark={\
+    customerRemarkId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    customerRemarkValue:{type:"String(60)",required:true,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.userInfo={\
+    firstMonBillMode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    product:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.tsos.product)"},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.activityInfo)"},\
+    guarantorType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    guarantorID:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    guCertType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    guCertNum:{type:"String(50)",required:false,encrypted:false,validators:null},\
+    payInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.payInfo)"}\
+}
+
+ecaop.trades.tsos.product={\
+    productId:{type:"String(8)",required:true,encrypted:false,validators:null},\
+    productName:{type:"String(50)",required:true,encrypted:false,validators:null},\
+    productMode:{type:"String(1)",required:true,encrypted:false,validators:null},\
+    productCode:{type:"String(8)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.activityInfo={\
+    actPlanId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    actPlanName:{type:"String(50)",required:true,encrypted:false,validators:null},\
+    resourcesType:{type:"String(2)",required:false,encrypted:false,validators:null},\
+    resourcesFee:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    activityFee:{type:"String(20)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.payInfo={\
+    payType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    payOrg:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    payNum:{type:"String(20)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.resourcesInfo={\
+    salePrice:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    cardPrice:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    reservaPrice:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    productActivityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.tsos.productActivityInfo)"},\
+    resourcesBrandCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    orgDeviceBrandCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    resourcesBrandName:{type:"String(50)",required:false,encrypted:false,validators:null},\
+    resourcesModelCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    resourcesModelName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+    resourcesSrcCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    resourcesSrcName:{type:"String(50)",required:false,encrypted:false,validators:null},\
+    resourcesSupplyCorp:{type:"String(100)",required:false,encrypted:false,validators:null},\
+    resourcesServiceCorp:{type:"String(100)",required:false,encrypted:false,validators:null},\
+    resourcesColor:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    machineTypeCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    machineTypeName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+    serviceNumber:{type:"String(40)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.productActivityInfo={\
+    productId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    resourcesActivityCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    resourcesActivityPer:{type:"String(2)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.useCustInfo={\
+    useCustName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+    useCustPsptType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+    useCustPsptCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    useCustPsptAddress:{type:"String(200)",required:true,encrypted:false,validators:null},\
+    itmPrdGroupType:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    itmPrdRespobsible:{type:"String(1)",required:false,encrypted:false,validators:null},\
+    useCustMark:{type:"String(1)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.trades.tsos.recomDis={\
+    recomPersonName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+    recomPersonPhone:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    recomPersonId:{type:"String(20)",required:true,encrypted:false,validators:null}\
+
+}
+
+#定义processors
+ecaop.core.method.tsos.processors=@AopCall(ecaop.comm.conf.url.esshttp.mallsub)
+                                  

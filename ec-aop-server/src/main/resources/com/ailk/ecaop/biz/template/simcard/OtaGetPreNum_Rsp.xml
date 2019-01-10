@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetPreNumRsp mappedOut="true">
+    <!-- 0000：成功 0001 已写卡或已销售  9999 其它错误。 -->
+    <RespCode length="F4" mappedName="code" />
+    <!-- 错误描述 -->
+    <RespDesc length="V100" mappedName="detail" />
+    <!-- 大卡卡号 -->
+    <ICCID length="V22" mappedName="iccid" />
+    <!-- 大卡卡号 -->
+    <Puk length="V10" mappedName="puk" />
+    <!-- 预配手机号 -->
+    <PreNumID length="V20" constraint="?" mappedName="numId" />
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" type="String" mappedName="paraId" />
+        <ParaValue length="V20" type="String" mappedName="paraValue" />
+    </Para>
+</GetPreNumRsp>

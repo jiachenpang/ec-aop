@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <OldApplyReq>
+            <!-- 操作员ID -->
+            <OperatorID length="V20" constraint="?" mappedName="operatorId" />
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province" />
+            <!-- 地市 -->
+            <City constraint="?" length="F3" mappedName="city" />
+            <!-- 区县 -->
+            <District constraint="?" length="V10" mappedName="district" />
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId" />
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType" />
+            <!-- 业务受理类型 -->
+            <BIPCode length="F8" mappedName="BIPCode"/>
+            <!-- 接入类型 01 WEB； 02 短信； 03 WAP； 99 其他 -->
+            <AccessType length="F2" mappedName="accessType" defaultValue="01" />
+            <!-- 系统编码 -->
+            <OrderId length="V20" mappedName="ordersId" />
+            <!-- 手机号码 -->
+            <SerialNumber length="V20" mappedName="serialNumber" />
+            <!-- 产品信息 -->
+            <ProductInfo constraint="*" mappedName="productInfo">
+                <!-- 产品ID -->
+                <ProductId length="V20" mappedName="productId" />
+                <!-- 0：可选产品；1：主产品 -->
+                <ProductMode length="F1" range="0,1" mappedName="productMode" />
+                <!-- 产品操作标示（待用）。00：订购；01：退订；02：变更 -->
+                <OptType length="F2" constraint="?" range="00,01,02" mappedName="optType" />
+            </ProductInfo>
+            <!-- 活动信息 -->
+            <ActivityInfo constraint="*" mappedName="activityInfo">
+                <!-- 活动方案ID -->
+                <ActPlanId length="V20" constraint="?" mappedName="actPlanId" />
+                <!-- 资源类型 -->
+                <ResourcesType length="F2" constraint="?" mapped="resourcesType" />
+                <!-- 预占流水，保持前后多次资源操作的内容一致，保证多次操作是同一订单的前后关联 -->
+                <ResProcId length="V20" mapped="resProcId" />
+                <!-- 资源唯一标识 -->
+                <ResourcesCode length="V30" constraint="?" mappedName="resourcesCode" />
+                <!-- 资源费用 -->
+                <ResourcesFee length="V20" constraint="?" mappedName="resourcesFee" />
+                <!-- 活动扩展字段 -->
+                <ActPara constraint="*" mappedName="actPara">
+                    <!-- 活动扩展字段ID -->
+                    <ActParaId constraint="?" length="V20" mappedName="actParaId" />
+                    <!-- 活动扩展字段值 -->
+                    <ActParaValue constraint="?" length="V60" mappedName="actParaValue" />
+                </ActPara>
+            </ActivityInfo>
+            <!-- 发展人标识 -->
+            <RecomPersonId length="V30" constraint="?" mappedName="recomPersonId" />
+            <!-- 发展人名称 -->
+            <RecomPersonName length="V30" constraint="?" mappedName="recomPersonName" />
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </OldApplyReq>
+    </SvcCont>
+</UniBSS>

@@ -1,0 +1,37 @@
+#电子券余额查询
+ecaop.core.method.map.ecaop.trades.query.comm.ticket.balance.qry=qtbq
+ecaop.core.method.qtbq.def={"mothod":"qtbq","remark":"电子券余额查询"}
+ecaop.core.method.qtbq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.qtbq.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.trades.qtbq.msg.schema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    merchantId:{type:"String(20)",required:true},\
+    operType:{type:"String(2)",required:true},\
+    barCode:{type:"String(30)",required:false},\
+    serialNumber:{type:"String(30)",required:false},\
+    payPassword:{type:"String(20)",required:false},\
+    ticketType:{type:"String(12)",required:true},\
+    businessCode:{type:"String(6)",required:true},\
+    orderTime:{type:"String(14)",required:true},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.qtbq.processors=@ParametersMapper(ecaop.trades.qtbq.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.osn.services.TicketBuySer)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.qtbq.template)
+                              
+ecaop.trades.qtbq.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.ticketBuySer.qryBalanceInfo,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.qtbq.template@OSN@QRY_BALANCE_INFO_INPUT@n-1469109130@QRY_BALANCE_INFO_REQ"}\
+]
+
+ecaop.trades.qtbq.template=com/alik/ecaop/biz/template/ticketBuySer

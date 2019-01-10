@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UniBSS>
+   <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <OldChangeCardAopApp >
+            <!--  操作员ID-->
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" constraint="?" mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3" constraint="?" mappedName="city"/>
+            <!-- 区县 -->
+            <District length="V10" constraint="?" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" constraint="?" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" constraint="?" mappedName="channelType"/>
+            <OrdersID constraint="1" length="V20" mappedName="ordersID">
+                <!--发起方系统订单ID -->
+            </OrdersID>
+            <SerialNumber constraint="1" length="V20" mappedName="serialNumber">
+                <!--服务号码 -->
+            </SerialNumber>
+            <CertType constraint="1" length="F2" mappedName="certType">
+                <!--证件类别编码 -->
+            </CertType> 
+            <CertNum constraint="1" length="V50" mappedName="certNum">
+                <!--证件号码 -->
+            </CertNum>
+            <ICCID constraint="1" length="V20" mappedName="iccid">
+                <!--大卡卡号 -->
+            </ICCID>
+            <CardType constraint="1" length="V22" mappedName="cardType">
+                <!--白卡业务类型参考附录白卡业务类型说明 -->
+            </CardType>
+            <BusiType constraint="1" length="V22" mappedName="busiType">
+                <!--业务类型参考附录业务类型说明 -->
+            </BusiType>
+            <Imsi constraint="?" length="V15" mappedName="imsi">
+                <!--IMSI号(首次读卡必有) -->
+            </Imsi>
+            <CardData constraint="?" length="V1024" mappedName="cardData">
+                <!--cardData写卡数据脚本 -->
+            </CardData>
+            <ProcID constraint="1" length="V20" mappedName="procId">
+                <!--读卡序列 -->
+            </ProcID>
+            <PARA constraint="*" mappedName="para">
+                <!--保留字段 -->
+               <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                        <!--保留字段ID -->
+               </PARA_ID>
+               <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+                       <!--保留字段值 -->
+               </PARA_VALUE>
+           </PARA>
+        </OldChangeCardAopApp>
+    </SvcCont>
+    
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</UniBSS>

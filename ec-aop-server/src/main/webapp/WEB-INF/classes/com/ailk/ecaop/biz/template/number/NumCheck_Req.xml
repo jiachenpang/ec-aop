@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <CheckNumReq>
+            <!--  操作员ID-->
+            <OperatorID length="V20" constraint="?" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province"/>
+            <!-- 地市 -->
+            <City constraint="?" length="F3" mappedName="city"/>
+            <!-- 区县 -->
+            <District constraint="?" length="V10" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" mappedName="channelType"/>
+            <!-- 接入类型 01 WEB； 02 短信； 03 WAP； 99 其他-->
+            <AccessType length="F2" mappedName="accessType" defaultValue="01"/>
+            <!-- 系统编码 -->
+            <SysCode length="F4" mappedName="sysCode" defaultValue="EAOP"/>
+            <!-- 资源信息 -->
+            <ResourcesInfo constraint="+" mappedName="resourcesInfo">
+                <!-- 0-不修改  1-修改 -->
+                <KeyChangeTag length="F1" defaultValue="0" mappedName="keyChangeTag"/>
+                <!-- 原资源预占关键字(修改时必传) -->
+                <OldKey length="V20" constraint="?" mappedName="oldKey"/>
+                <!-- 资源预占关键字类型 -->
+                <ProKeyMode length="V20" defaultValue="0" mappedName="proKeyMode"/>
+                <!-- 资源预占关键字 -->
+                <ProKey length="V20" mappedName="proKey"/>
+                <!-- 组别编码 -->
+                <GroupKey length="V20" constraint="?" mappedName= "groupKey"/>
+                <!-- 资源类型 01 预付费号码 02 后付费号码-->
+                <ResourcesType length="F2" range="01,02" mappedName="resourcesType"/>
+                <!-- 套包销售标记 0－非套包销售 1－套包销售   MINI在预付费非185号码时必传-->
+                <PackageTag constraint="?" length="F1" range="0,1" mappedName="packageTag"/>
+                <!-- 资源唯一标识 -->
+                <ResourcesCode length="V30" mappedName="resourcesCode"/>
+                <!-- 原资源唯一标识（OccupiedFlag=5生效） -->
+                <OldResourcesCode length="V30" constraint="?" mappedName="oldResourcesCode"/>
+                <!-- 预占标识 0 不预占 1 预占 2 预订(未付费) 3 预订(付费) 4 释放资源-->
+                <OccupiedFlag length="F1" range="0,1,2,3,4" defaultValue="1" mappedName="occupiedFlag"/>
+                <!--  0 号码不变更 1 号码变更-->
+                <SnChangeTag length="F1" range="0,1" defaultValue="0" mappedName="snChangeTag"/>
+                <!-- 预占有效期 yyyymmddhh24miss OccupiedFlag:1的时候必填-->
+                <OccupiedTime constraint="?" length="V20" mappedName="occupiedTime"/>
+                <!-- 客户名称-->
+                <CustName constraint="?" length="V100" mappedName="custName"/>
+                <!--证件类型 01 15位身份证 02 18位身份证 03 驾驶证 04 军官证 05 教师证 06 学生证 07 营业执照 08 护照
+                            09 武警身份证 10 港澳居民来往内地通行证 11 台湾居民来往大陆通行证 12 户口本  13组织机构代码证
+                            99 其它 OccupiedFlag:2的时候必填 -->
+                <CertType constraint="?" length="F2" mappedName="certType"/>
+                <!-- 证件号码OccupiedFlag:2的时候必填-->
+                <CertNum constraint="?" length="V30" mappedName="certNum"/>
+                <!-- 联系电话[BSS一定要]-->
+                <ContactNum constraint="?" length="V20" mappedName="contactNum"/>
+                <!-- 0- 非预约1-  预约选号-->
+                <PreOrderTag constraint="?" length="F1" mappedName="preOrderTag"/>
+                <!-- 套餐编码-->
+                <ProductID constraint="?" length="V20" mappedName="productId"/>
+                <!-- 受理渠道标识0:ESS不判断受理渠道1:ESS判断受理渠道-->
+                <AcceptChannelTag constraint="?" length="F1" mappedName="acceptChannelTag"/>
+                <!-- 发展人判断标识0:ESS允许修改发展人1:ESS不允许修改发展人当该节点传1时，RecomPersonID和RecomDeparID必传-->
+                <DevelopPersonTag constraint="?" length="F1" mappedName="developPersonTag"/>
+                <!-- 发展人标识-->
+                <RecomPersonID constraint="?" length="V30" />
+                <!-- 发展人渠道标识-->
+                <RecomDeparID constraint="?" length="V30" />
+                <!-- 备注信息，预约营业厅，自助终端等提供。1－预约选号时必填-->
+                <Remark constraint="?" length="V200" />
+            </ResourcesInfo>
+             <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </CheckNumReq>
+    </SvcCont>
+</UniBSS>

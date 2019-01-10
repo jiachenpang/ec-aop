@@ -1,0 +1,84 @@
+#CBSS压单订单撤单
+ecaop.core.method.map.ecaop.trades.serv.curt.cbssso.cancle.sub=scccs
+ecaop.core.method.scccs.def={"mothod":"scccs","remark":"CBSS压单订单撤单"}
+ecaop.core.method.scccs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.scccs.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.scccs.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true},\
+     city:{type:"String(3)",required:true},\
+     district:{type:"String(10)",required:true},\
+     channelId:{type:"String(20)",required:true},\
+     channelType:{type:"String(7)",required:true},\
+     orderId:{type:"String(30)",required:true},\
+     serialNumber:{type:"String(20)",required:false},\
+     cardType:{type:"Number(1)",required:false},\
+     imei:{type:"String(30)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#流程控制
+ecaop.core.method.scccs.processors=@NumRoute\
+                                   @getOpeSysType\
+                                   @route\
+                           @FlowProcessor(ecaop.core.method.scccs.flowConfig)
+#北六和南25的不同处理 numSwitch 0 号卡中心流程 1原有流程
+ecaop.core.method.scccs.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(numSwitch)", transitions:"0->04 1->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->03 1->05"},\
+{id:"03", processor:"AopHandler(ecaop.core.method.scccs.cbss.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.core.method.scccs.numCenter.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.core.method.scccs.n25.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#4G流程
+ecaop.core.method.scccs.cbss.processors=@CbssPressureCancel()
+#掉号卡中心流程
+ecaop.core.method.scccs.numCenter.processors=@CbssPressureCancelToNumCenter()
+#N25流程
+ecaop.core.method.scccs.n25.processors=@N25PressureCancel()
+
+#北六E订单撤单激活接口
+ecaop.trades.scccs.orderActivateOrCancelForN6.ParametersMapping=[\
+     {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.scccs.FbsPressCancel",temp:true},\
+     {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.orderActivateOrCancel.template@FBS@ORDER_ACTIVATE_OR_CANCEL_INPUT@busi@ORDER_ACTIVATE_OR_CANCEL_REQ"}\
+]
+#全业务订单撤单激活接口
+ecaop.trades.scccs.orderActivateOrCancel.ParametersMapping=[\
+     {paramterName:"route",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+     {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.scccs.FbsPressCancel",temp:true},\
+     {paramterName:"orderType",extractor:"fix",extractorConfig:"00",temp:true},\
+     {paramterName:"origDomain",extractor:"fix",extractorConfig:"ECIP",temp:true},\
+     {paramterName:"osnDuns",extractor:"fix",extractorConfig:"0002",temp:true},\
+     {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.orderActivateOrCancel.template@FBS@ORDER_ACTIVATE_OR_CANCEL_INPUT@busi@ORDER_ACTIVATE_OR_CANCEL_REQ"}\
+]
+ecaop.trades.orderActivateOrCancel.template=com/ailk/ecaop/biz/template/order/OrderActiveOrCancel
+#CBSS压单订单撤单映射
+ecaop.trades.scccs.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.scccs.pressCancel",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.scccs.template@FBS@IS_CBSS_CLE_SO_INPUT@busi@IS_CBSS_CLE_SO_REQ"}\
+]
+ecaop.trades.scccs.template=com/ailk/ecaop/biz/template/terminal/CbssPressureCancel
+
+#总部crm白卡返销处理接口映射
+ecaop.trades.scccs.cancel.crm.paramtersmapping=[\
+    {paramterName:"route",extractor:"fix",extractorConfig:"00",temp:true},\
+    {paramterName:"simCardSwitch",extractor:"fix",extractorConfig:"A1",temp:true},\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.scccs.cancel.crm",temp:true},\
+    {paramterName:"iccid",extractor:"propertyGet",extractorConfig:"msg.iccid",temp:true},\
+    {paramterName:"numID",extractor:"propertyGet",extractorConfig:"msg.numID",temp:true},\
+    {paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+    {paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.sccc.cancel.crm.template@ONS"}\
+]
+
+#调用3GESS为cBSS提供的号码返销接口映射
+ecaop.trades.scccs.cancelNum.paramtersmapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trades.scccs.cancelNum",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.scccs.cancelNum.template@ONS"}\
+]
+ecaop.trades.scccs.cancelNum.template=com/ailk/ecaop/biz/template/number/NumCheck4G
+
+

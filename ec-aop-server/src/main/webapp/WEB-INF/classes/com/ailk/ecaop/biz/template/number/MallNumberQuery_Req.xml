@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--号码查询接口 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <NumQueryReq >
+            <!-- 接入类型 01 WEB； 02 短信； 03 WAP； 99 其他-->
+            <AccessType length="F2" defaultValue="01"/>
+            <!-- 操作员ID -->
+            <OperatorID constraint="?" length="V20" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" mappedName="province"/>
+            <!-- 地市 -->
+            <City constraint="?" length="F3" mappedName="city"/>
+            <!-- 区县 -->
+            <District constraint="?" length="V10" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID constraint="?" length="V20" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType constraint="?" length="F7" mappedName="channelType"/>
+            <!-- 接入系统编码 -->
+            <SubsysCode constraint="?" length="F4" mappedName="subsysCode"/>
+            <!-- 资源类型 01 预付费号码 02 后付费号码 -->
+            <ResourcesType length="F2" range="01,02" mappedName="resourcesType"/>
+            <!-- 套包销售标记0－非套包销售1－套包销售 -->
+            <PackageTag length="F1" range="0,1" mappedName="packageTag"/>
+            <!-- 0－交集，必须同时满足多个条件1－并集，满足条件之一-->
+            <ALLQueryMode length="F1" range="0,1" mappedName="allQueryMode"/>
+            <!-- 要求返回号码个数：<= 1000 -->
+            <BackNumber length="V10" mappedName="backNumber"/>
+            <!-- 排序(0-升序、1-降序) -->
+            <SortMode length="F1" range="0,1" mappedName="sortMode"/>
+            <!-- 186、185、156、155、130、131、132、000（不限） -->
+            <SegmentCode length="F3" mappedName="segmentCode"/>
+            <!-- 0－交集，必须同时满足多个条件,1－并集，满足条件之一 -->
+            <PreFeeMode constraint="?" length="F1" range="0,1" mappedName="preFeeMode"/>
+            <!-- 预存 -->
+            <PreFee constraint="*" mappedName="preFee">
+                <!-- 预存下线，实数，最小0，单位分 -->
+                <MinFee length="V10" mappedName="minFee"/>
+                <!-- 预存上线，实数，最大A，单位分 -->
+                <MaxFee length="V10" mappedName="maxFee"/>
+            </PreFee>
+            <!-- 0－交集，必须同时满足多个条件,1－并集，满足条件之一 -->
+            <KeyValueMode constraint="?" length="F1" range="0,1" mappedName="keyValueMode"/>
+            <!-- 数值 -->
+            <Key constraint="*" mappedName="key">
+                <!-- 可提供多种关键字查询如：130%、%520、%110%、%1%1%，满足查询条件即可。-->
+                <KeyValue length="V20" mappedName="keyValue"/>
+            </Key>
+            <!-- 0－交集，必须同时满足多个条件1－并集，满足条件之一 -->
+            <RoleValueMode constraint="?" length="F1" range="0,1" mappedName="roleValueMode"/>
+            <!-- 数值 -->
+            <SnRole constraint="*" mappedName="snRole">
+                <!-- 可提供多种关键字查询如:AABB、ABBA、ABCD、DCBA，满足查询条件即可 -->
+                <RoleValue length="V20" mappedName="roleValue"/>
+            </SnRole>
+            <!-- 0－交集，必须同时满足多个条件,1－并集，满足条件之一-->
+            <OtherMode constraint="?" length="F1" mappedName="otherMode"/>
+            <!-- 其它查询条件 -->
+            <Other constraint="*" mappedName="other">
+                <!-- 其它选号类型 -->
+                <OtherType length="V20" mappedName="otherType"/>
+                <!-- 其它选号参数1 -->
+                <OtherValue1 length="V20" mappedName="otherValue1"/>
+                <!-- 其它选号参数2 -->
+                <OtherValue2 constraint="?" length="V20" mappedName="otherValue2"/>
+            </Other>
+            <Para  constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </NumQueryReq>
+    </SvcCont>
+</UniBSS>

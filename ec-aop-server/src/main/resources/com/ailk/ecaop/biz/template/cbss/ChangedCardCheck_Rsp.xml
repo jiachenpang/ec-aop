@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<UNI_BSS_BODY>
+		<CHECK_CARD_INFO_RSP mappedOut="true">
+			<RESP_CODE constraint="1" length="F4" mappedName="code"><!--应答编码0000 
+					成功8888其它错误 -->
+			</RESP_CODE>
+			<RESP_DESC constraint="1" length="V500" mappedName="detail"><!--应答描述 -->
+			</RESP_DESC>
+			<CARD_NUMBER_INFO constraint="*" mappedName="cardNumberInfo"><!--号卡信息 -->
+				<RESULT_CODE constraint="1" length="F4" mappedName="resultCode"><!--校验结果： -->
+				</RESULT_CODE>
+				<RESULT_DESC constraint="1" length="V500" mappedName="resultDesc"><!--错误描述 -->
+				</RESULT_DESC>
+				<SIM_CARD_NO constraint="?" length="V22" mappedName="simCardNo"><!--SIM/USIM卡号  -->
+				</SIM_CARD_NO>
+				<SERIAL_NUMBER constraint="?" length="V30" mappedName="serialNumber"><!--服务号码 -->
+				</SERIAL_NUMBER>
+				<CARD_INFO constraint="?" mappedName="cardInfo"><!--卡信息（校验结果为1702时必须返回该节点） -->
+					<CARD_TYPE constraint="1" length="V20" mappedName="cardType"><!--卡类型（参照统一编码规范） -->
+					</CARD_TYPE>
+					<IMSI constraint="1" length="V20" mappedName="imsi"><!--IMSI码 -->
+					</IMSI>
+					<PIN constraint="?" length="V10" mappedName="pin"><!--PIN -->
+					</PIN>
+					<PUK constraint="?" length="V10" mappedName="puk"><!--PUK -->
+					</PUK>
+					<PIN2 constraint="?" length="V10" mappedName="pin2"><!--PIN2 -->
+					</PIN2>
+					<PUK2 constraint="?" length="V10" mappedName="puk2"><!--PUK2 -->
+					</PUK2>
+					<KI constraint="1" length="V2000" mappedName="ki"><!--KI值 -->
+					</KI>
+					<CARD_PRICE constraint="1" length="V6" mappedName="card_price"><!--卡费用（单位：分） -->
+					</CARD_PRICE>
+				</CARD_INFO>
+			</CARD_NUMBER_INFO>
+			<PARA constraint="*" mappedName="para"><!--保留字段 -->
+				<PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+				</PARA_ID>
+				<PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+				</PARA_VALUE>
+			</PARA>
+		</CHECK_CARD_INFO_RSP>
+
+	</UNI_BSS_BODY>

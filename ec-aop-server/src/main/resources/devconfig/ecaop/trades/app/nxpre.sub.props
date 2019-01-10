@@ -1,0 +1,7 @@
+#宁夏
+ecaop.core.app.map.nxpre.sub=nxpr
+ecaop.core.app.nxpr.def={"code":"nxpr", "signed":false,"mocked":true,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.nxpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.nxpr.allow={appkey:"nxpr",allow:"mpsb,smnp,cuck,opap,opsb,cdqy,cdnt,cdsn,qrtc,snqy,nboc,crck,dvqy,dvck,qcsp,cdaq,qcaq,spfs,23t4,kdwy,\
+ipry,tzcx,baoa,sbaos,bsoa,sbso,bsop,faoa,fasb,sfso,sfss,smno,234s,234t,scaf,scac,qcacq,qcar,qcpq,qcpa,qctc,smcc,smosa,smoss,\
+23l4,oupc,oata,mold,mofc,ofcs,orta,modr,cack,csaq,2324,jffx,ccic,qcfc,mcoa,scccs,cmck,cccc,ccqy,mccr,mccn,qcfd,sgfs,oolq,tscs", deny:null}

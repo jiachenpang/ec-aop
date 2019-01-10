@@ -1,0 +1,87 @@
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.23to4fixopen.app=234s
+ecaop.core.method.234s.def={"mothod":"234s","remark":"23转4开户处理申请—固网"}
+ecaop.core.method.234s.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.234s.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+#msg 校验器 
+
+ecaop.ecsb.234s.MsgSchema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:false},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    eModeCode:{type:"String(2)",required:false},\
+    ordersId:{type:"String(30)",required:true},\
+    opeSysType:{type:"String(1)",required:false},\
+    numId:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.numId)"},\
+    customerInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.customerInfo)"},\
+    accountPayType:{type:"String(2)",required:true},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.productInfo)"},\
+    exchCode:{type:"String(20)",required:false},\
+    exchInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.exchInfo)"},\
+    addressCode:{type:"String(30)",required:false},\
+    addressName:{type:"String(1000)",required:false},\
+    installAddress:{type:"String(200)",required:true},\
+    constructionTime:{type:"String(1)",required:true},\
+    hopeDate:{type:"String(10)",required:false},\
+    contactPerson:{type:"String(20)",required:true},\
+    contactPhone:{type:"String(20)",required:true},\
+    contactAddress:{type:"String(200)",required:false},\
+    recomPersonId:{type:"String(30)",required:false},\
+    recomPersonName:{type:"String(30)",required:false},\
+    recomPersonCityCode:{type:"String(10)",required:false},\
+    recomPersonDistrict:{type:"String(6)",required:false},\
+    recomPersonChannelId:{type:"String(20)",required:false},\
+    orderRemarks:{type:"String(1000)",required:false},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trade.234s.numId={\
+    serialNumber:{type:"String(20)",required:true},\
+    proKey:{type:"String(20)",required:false}\
+}
+ecaop.trade.234s.customerInfo={\
+    certType:{type:"String(2)",required:true},\
+    certNum:{type:"String(20)",required:true},\
+    certAdress:{type:"String(200)",required:true},\
+    customerName:{type:"String(128)",required:true},\
+    certExpireDate:{type:"String(8)",required:false},\
+    contactPerson:{type:"String(20)",required:true},\
+    contactPhone:{type:"String(20)",required:true},\
+    contactAddress:{type:"String(256)",required:true},\
+    custType:{type:"String(30)",required:false},\
+    customerRemark:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.customerRemark)"}\
+}
+ecaop.trade.234s.customerRemark={\
+    customerRemarkId:{type:"String(20)",required:true},\
+    customerRemarkValue:{type:"String(60)",required:true}\
+}
+ecaop.trade.234s.productInfo={\
+    productMode:{type:"String(1)",required:true},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.activityInfo)"}\
+}
+ecaop.trade.234s.activityInfo={\
+    actPlanId:{type:"String(20)",required:true},\
+    resProcId:{type:"String(20)",required:false},\
+    resourcesCode:{type:"String(30)",required:false},\
+    resourcesFee:{type:"String(20)",required:false},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trade.234s.actPara)"}\
+}
+
+ecaop.trade.234s.actPara={\
+actParaId:{type:"String(20)",required:true},\
+actParaValue:{type:"String(60)",required:true}\
+}
+
+ecaop.trade.234s.exchInfo={\
+key:{type:"String(30)",required:true},\
+value:{type:"String(30)",required:true}\
+}
+
+#定义processor
+ecaop.core.method.234s.processors=@FixOpenApp()

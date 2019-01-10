@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESOURCE_PURCHASE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <RESOURCE_PURCHASE_REQ>
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+            <SERIAL_NUMBER length="V40" mappedName="numId" />
+            <RESOURCE_TYPE length="F1" mappedName="resType" />
+            <MONEY length="V11" mappedName="money" />
+            <RESOURCE_COUNT length="V11" mappedName="count" />
+            <UNIT length="F1" mappedName="unit" />
+            <VALID_TIME length="V11" mappedName="validTime" />
+            <VALID_TIME_UNIT length="F1" mappedName="validTimeUnit" />
+            <VALID_CALCULATE_TYPE length="F1" mappedName="validCalculateType" />
+            <PAY_TYPE length="F1" mappedName="payType" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </RESOURCE_PURCHASE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</RESOURCE_PURCHASE_INPUT>

@@ -1,0 +1,27 @@
+#主号码创建群数组 by lzg
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.create.app=smca
+ecaop.core.method.smca.def={"mothod":"smca","remark":"主号码创建群数组"}
+ecaop.core.method.smca.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smca.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}
+    ]
+#msg 校验器
+ecaop.trades.smca.msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(20)",required:true,validators:"@FixedLen(7)"},\
+    developStaffId:{type:"String(20)",required:false,validators:null},\
+    developDepartId:{type:"String(20)",required:false,validators:null},\
+    serialNumberA:{type:"String(20)",required:true,validators:null},\
+    serialNumberB:{type:"String(20)",required:true,validators:null},\
+    relationTypeCode:{type:"String(10)",required:true,validators:null},\
+    userIdA:{type:"String(20)",required:true,validators:null},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\  
+   }
+#定义processors
+ecaop.core.method.smca.processors=@MainNumberCreate()

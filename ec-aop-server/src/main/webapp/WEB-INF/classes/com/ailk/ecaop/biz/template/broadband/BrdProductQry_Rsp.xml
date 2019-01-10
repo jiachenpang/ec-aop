@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+<QRY_CHANGE_PRODUCT_RSP mappedOut="true">
+    <RESP_CODE constraint="1" length="F4" mappedName="code"><!--应答编码 0000成功 8888其他错误原因 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V500" mappedName="detail"><!--错误描述 -->
+    </RESP_DESC>
+    <PRODUCT_INFO constraint="*" mappedName="productInfo"><!--可变更产品信息 -->
+        <PRODUCT_ID constraint="1" length="V8" mappedName="productId"><!--产品标识 -->
+        </PRODUCT_ID>
+        <PRODUCT_MODE constraint="?" length="V2" mappedName="productMode"><!--产品类型 -->
+        </PRODUCT_MODE>
+        <PRODUCT_NAME constraint="1" length="V50" mappedName="productName"><!--产品名称-->
+        </PRODUCT_NAME>
+        <PRODUCT_DESC constraint="1" length="V100" mappedName="productDesc"><!--产品描述 -->
+        </PRODUCT_DESC>
+        <DISCNT_INFO constraint="+" mappedName="chgDiscntInfo"><!--资费信息-->
+              <DISCNT_CODE constraint="1" length="V8" mappedName="discntCode"><!--资费编码-->
+              </DISCNT_CODE>
+              <DISCNT_NAME constraint="1" length="V50" mappedName="discntName"><!--资费名称（格式：产品速率+费用+期限； 例：4M宽带880元13个月） -->
+              </DISCNT_NAME>
+              <DISCNT_DESC constraint="1" length="V100" mappedName="discntDesc"><!--资费描述 -->
+              </DISCNT_DESC>
+              <DISCNT_FEE constraint="1" length="V11" mappedName="discntFee"><!--资费（为正整数，单位：分） -->
+              </DISCNT_FEE>
+              <START_ENABLE constraint="1" length="F1" mappedName="startEnable"><!--生效方式 0：次月生效  1：到期生效  2：立即生效-->
+              </START_ENABLE>
+              <ACCESS_TYPE constraint="?" length="V50" mappedName="accessType"><!--接入方式名称（ADSL、光纤、FTTH等） -->
+              </ACCESS_TYPE>
+              <BRAND_SPEED constraint="1" length="V10" mappedName="brandSpeed"><!--速率 -->
+              </BRAND_SPEED>
+              <BRAND_NUMBER constraint="1" length="V4" mappedName="brandNumber"><!--宽带包期的月份数，包半年时填6，包1年就填12 -->
+              </BRAND_NUMBER>
+              <EXP_MODE constraint="?" length="F1" mappedName="expMode"><!--到期后停机/转包月 0：停机 1：转包月-->
+              </EXP_MODE>
+              <DISCNT_CODE_MONTH constraint="?" length="V8" mappedName="discntCodeMonth"><!--到期后转包月资费编码 -->
+              </DISCNT_CODE_MONTH>
+              <DISCNT_NAME_MONTH constraint="?" length="V50" mappedName="discntNameMonth"><!--到期后转包月资费名称-->
+              </DISCNT_NAME_MONTH>
+              <DISCNT_FEE_MONTH constraint="?" length="V11" mappedName="discntFeeMonth"><!--到期后转包月资费（为正整数，单位：分） -->
+              </DISCNT_FEE_MONTH>
+        </DISCNT_INFO>
+        <PARA constraint="*"  mappedName="para"><!--保留字段 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </PRODUCT_INFO>
+</QRY_CHANGE_PRODUCT_RSP>
+</UNI_BSS_BODY>

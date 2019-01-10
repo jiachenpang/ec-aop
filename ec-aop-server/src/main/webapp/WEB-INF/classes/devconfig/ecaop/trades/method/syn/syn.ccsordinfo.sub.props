@@ -1,0 +1,94 @@
+#电子沃店订单信息同步其它系统
+ecaop.core.method.map.ecaop.trades.syn.ccsordinfo.sub=scis
+ecaop.core.method.scis.def={"mothod":"scis"}
+ecaop.core.method.scis.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.scis.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.ecsb.scis.msg.schema={\
+      ordersId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+      ccsOrderTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+      province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+      city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)"},\
+      connectChannel:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+      goodsName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+      goodsOriginalPri:{type:"String(20)",required:true,encrypted:false,validators:null},\
+      goodsPrePri:{type:"String(20)",required:false,encrypted:false,validators:null},\
+      goodsSaleWay:{type:"String(1)",required:false,encrypted:false,validators:null},\
+      userType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+      phoneNumber:{type:"String(14)",required:true,encrypted:false,validators:null},\
+      developerCode:{type:"String(30)",required:true,encrypted:false,validators:null},\
+      developerName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+      customerMess:{type:"String(500)",required:false,encrypted:false,validators:null},\
+      netinInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scis.netinInfo)"},\
+      deliveryInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scis.deliveryInfo)"},\
+      productInfo:{type:"JSON",required:true,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scis.productInfo)"},\
+      activityInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scis.activityInfo)"},\
+      para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#入网资料
+ecaop.ecsb.scis.netinInfo={\
+     customName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certNumber:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     certAddress:{type:"String(200)",required:false,encrypted:false,validators:null}\
+}
+
+#收货信息
+ecaop.ecsb.scis.deliveryInfo={\
+     deliveryName:{type:"String(128)",required:true,encrypted:false,validators:null},\
+     deliveryPhone:{type:"String(14)",required:true,encrypted:false,validators:null},\
+     deliveryAddress:{type:"String(200)",required:true,encrypted:false,validators:null},\
+     postNum:{type:"String(6)",required:true,encrypted:false,validators:null}\
+}
+
+#产品信息
+ecaop.ecsb.scis.productInfo={\
+     productCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     productName:{type:"String(128)",required:false,encrypted:false,validators:null},\
+     productSaleWay:{type:"String(1)",required:false,encrypted:false,validators:null},\
+     productSaleVal:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     packageInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scis.packageInfo)"},\
+     firstMonBillMode:{type:"String(1)",required:true,encrypted:false,validators:null}\
+}
+
+#合约信息
+ecaop.ecsb.scis.activityInfo={\
+     activityType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     activityCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     activityName:{type:"String(128)",required:false,encrypted:false,validators:null},\
+     actPackageCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     actPackageName:{type:"String(128)",required:false,encrypted:false,validators:null},\
+     actElementCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     actElementName:{type:"String(128)",required:false,encrypted:false,validators:null},\
+     activityPer:{type:"String(3)",required:true,encrypted:false,validators:null},\
+     activityStoreFee:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     activityResFee:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     terminalInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.ecsb.scis.terminalInfo)"}\
+}
+      
+#业务包信息
+ecaop.ecsb.scis.packageInfo={\
+     proPackageCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     proPackageName:{type:"String(128)",required:false,encrypted:false,validators:null},\
+     proElementCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     proElementName:{type:"String(128)",required:false,encrypted:false,validators:null}\
+}      
+
+#终端信息
+ecaop.ecsb.scis.terminalInfo={\
+     terBrandCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     terBrandName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     terModelCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     terModelName:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     terTypeCode:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     terColor:{type:"String(100)",required:false,encrypted:false,validators:null}\
+}
+
+ecaop.core.method.scis.processors=@TransReqParamsMapper()\  
+                                  @AopCall(ecaop.comm.conf.url.adapter.wyd)    

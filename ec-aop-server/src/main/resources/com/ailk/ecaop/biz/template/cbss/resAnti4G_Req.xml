@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RES_ANTI4G_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <RES_ANTI4G_REQ> 
+      <ANTI_TYPE constraint="1" length="F1" mappedName="queryMode"> 
+        <!--资源预判类型：, 0-按标准地址预判, 1-  按就近号码预判, 2-  按共线号码预判--> 
+      </ANTI_TYPE>  
+      <ANTI_MODE constraint="1" length="F1" mappedName="antiMode"> 
+        <!--资源预判方式：, 0-按产品目录预判, 1-按品牌(产品)预判--> 
+      </ANTI_MODE>  
+      <EPARCHY_CODE constraint="1" length="V6" mappedName="city"> 
+        <!--地市编码--> 
+      </EPARCHY_CODE>  
+      <CITY_CODE constraint="?" length="V20" mappedName="serviceCode"> 
+        <!--营业区编码--> 
+      </CITY_CODE>  
+      <EXCH_CODE constraint="?" length="V200" mappedName="exchCode"> 
+        <!--局向编码--> 
+      </EXCH_CODE>  
+      <ADDRESS_CODE constraint="?" length="V40" mappedName="addressCode"> 
+        <!--标准地址编码--> 
+      </ADDRESS_CODE>  
+      <SIMPLE_ADDRESS constraint="?" length="V40" mappedName="simpleAddress"> 
+        <!--地址简拼--> 
+      </SIMPLE_ADDRESS>  
+      <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode"> 
+        <!--电信业务网别, 参见附录说明--> 
+      </SERVICE_CLASS_CODE>  
+      <AREA_CODE constraint="?" length="V6" mappedName="areaCode"> 
+        <!--区号--> 
+      </AREA_CODE>  
+      <NEIGHBOR_NBR constraint="?" length="V40" mappedName="neighborNbr"> 
+        <!--就近号码--> 
+      </NEIGHBOR_NBR>  
+      <PROD_CAT_ID constraint="?" length="V20" mappedName="prodCatId"> 
+        <!--产品目录编码--> 
+      </PROD_CAT_ID>  
+      <BRAND_CODE constraint="?" length="F4" mappedName="brandCode"> 
+        <!--总部品牌, 参见附录取值--> 
+      </BRAND_CODE>  
+      <PROVINCE_BRAND_CODE constraint="?" length="V20" mappedName="provinceBrandCode"> 
+        <!--省分品牌，由省分手工配置到cBSS系统--> 
+      </PROVINCE_BRAND_CODE>  
+      <PRODUCT_ID constraint="?" length="V8" mappedName="productId"> 
+        <!--主产品标识--> 
+      </PRODUCT_ID>  
+      <SERVICE_ID constraint="?" length="V8" mappedName="serviceId"> 
+        <!--主服务标识--> 
+      </SERVICE_ID>  
+      <ACCESS_TYPE constraint="?" length="V20" mappedName="accessType"> 
+        <!--接入方式编码--> 
+      </ACCESS_TYPE>  
+      <BRAND_SPEED constraint="?" length="V2" mappedName="speedLevel"> 
+        <!--宽带速率, 编码：, 0     64k, 1     384k, 2     512k, 3     1M, 4     2M, 5     3M, 6     4M, 7     5M, 8     6M, 9     7M, 10   8M, 11   9M, 12   10M, 13   11M, 14   16M, 15   20M, 16   50M, 17   55M, 18   100M, 19   155M, 20   300M, 21   400M, 22   500M, 23   1000M, 24   不限速, 25   其他速率(暂时未在规范中体现的速率)--> 
+      </BRAND_SPEED>  
+      <TRADE_TYPE_CODE constraint="1" length="F4" mappedName="tradeTypeCode"> 
+        <!--业务受理类型--> 
+      </TRADE_TYPE_CODE>  
+      <SHARE_TYPE constraint="1" length="V20" mappedName="shareType"> 
+        <!--共线类型--> 
+      </SHARE_TYPE>  
+      <OLD_SERVICE_ID constraint="?" length="V8" mappedName="oldServiceId"> 
+        <!--旧服务实例标识，对移改类业务用于确定老局向，判断是否跨局--> 
+      </OLD_SERVICE_ID>  
+      <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"> 
+        <!--在用逻辑号:对于变更业务，传递在用逻辑号码，对于宽带做变更，则传宽带号（专线虚拟号码）--> 
+      </SERIAL_NUMBER>  
+      <PHY_NUMBER constraint="?" length="V40" mappedName="phyNumber"> 
+        <!--在用物理号:对于变更业务，传递在用物理号码，对于宽带做变更，则不需要传物理号--> 
+      </PHY_NUMBER>  
+      <NP_FLAG constraint="?" length="F1" mappedName="npFlag"> 
+        <!--NP标识, Y-NP N-非NP--> 
+      </NP_FLAG>  
+      <SHARE_NBR_INFO constraint="?" mappedName="shareNbrInfo"> 
+        <!--共线信息-->  
+        <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode"> 
+          <!--共线电信类型(网别)--> 
+        </SERVICE_CLASS_CODE>  
+        <BRAND_CODE constraint="1" length="F4" mappedName="brandCode"> 
+          <!--共线品牌--> 
+        </BRAND_CODE>  
+        <AREA_CODE constraint="?" length="V6" mappedName="areaCode"> 
+          <!--共线区号--> 
+        </AREA_CODE>  
+        <SHARE_NUMBER constraint="1" length="V40" mappedName="shareNumber"> 
+          <!--共线号码--> 
+        </SHARE_NUMBER> 
+      </SHARE_NBR_INFO>  
+      <VN_ID constraint="?" length="V20" mappedName="vnId"> 
+        <!--虚拟网编码--> 
+      </VN_ID>  
+      <DEPART_ID constraint="?" length="V20" mappedName="departId"> 
+        <!--受理部门:代理商/渠道/营业厅--> 
+      </DEPART_ID>  
+      <STAFF_ID constraint="?" length="V20" mappedName="staffId"> 
+        <!--受理员工工号--> 
+      </STAFF_ID>  
+      <USER_NAME constraint="?" length="V20" mappedName="userName"> 
+        <!--用户登录帐号--> 
+      </USER_NAME>  
+      <PARA constraint="*" mappedName="para"> 
+        <!--保留字段-->  
+        <PARA_ID constraint="1" length="V20" mappedName="paraId"> 
+          <!--保留字段ID--> 
+        </PARA_ID>  
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"> 
+          <!--保留字段值--> 
+        </PARA_VALUE> 
+      </PARA> 
+    </RES_ANTI4G_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED> 
+    <MEDIA_INFO length="V20" defaultValue="1GB"/> 
+  </UNI_BSS_ATTACHED> 
+</RES_ANTI4G_INPUT>

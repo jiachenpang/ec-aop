@@ -1,0 +1,5 @@
+#江苏BSS国政通测试
+ecaop.core.app.map.jsbc.sub=jssb
+ecaop.core.app.jssb.def={"code":"jssb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jssb.timeslimit=max 100 per 1 minute
+ecaop.core.app.jssb.allow={appkey:"jssb",allow:"crck", deny:null}

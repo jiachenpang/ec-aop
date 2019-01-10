@@ -1,0 +1,14 @@
+2018-10-23 16:38:02.292 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 16:38:02.457 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:
+2018-10-23 16:40:45.412 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 16:40:45.442 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:
+2018-10-23 16:42:14.547 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 16:42:14.577 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:
+2018-10-23 17:02:24.892 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 17:02:24.923 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:
+2018-10-23 17:03:10.769 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 17:03:10.799 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:
+2018-10-23 17:09:08.695 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 17:09:08.726 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:
+2018-10-23 17:10:37.181 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test1:null*****null
+2018-10-23 17:10:37.210 INFO  o.n.ecaop.core.log.elk.ELKAopLogger - monitor_test2:

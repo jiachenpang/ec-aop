@@ -1,0 +1,5 @@
+#山东web union
+ecaop.core.app.map.sdwu.sub=swsb
+ecaop.core.app.swsb.def={"code":"swsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.swsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.swsb.allow={appkey:"swsb",allow:"qcsc,cdqy,cdnt,opap,opsb,cdsn", deny:null}

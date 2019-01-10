@@ -1,0 +1,8 @@
+#云南预受理
+ecaop.core.app.map.ynpre.sub=ynpre
+ecaop.core.app.ynpre.def={"code":"ynpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.ynpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.ynpre.allow={appkey:"ynpre",allow:"mofc,csaq,qrtc,sack,snqy,nboc,smnp,cack,qmoq,scmc,mpsb,cuck,\
+qrsq,qrsc,cdsn,cdqy,cdnt,opap,opsb,bypc,byps,2324,23t4,234o,234s,234t,23l4,bsop,tzcx,qrtac,fasb,scac,\
+pipu,smno,qctc,qcsp,ofpc,ofps,ipry,faoa,sfso,odsb,bsoa,baoa,psoa,psos,qcacq,qcar,qcpq,smcc,kdwy,smosa,smoss,sfss,sbaos,sbso,qcpa,mcoa,oupc,orta,\
+modr,scaf,spfs,ofcs,cmck,qrtb,qrta,cumd,ccic,qofq,qcbl,qcfc,qcfd,cues,ucca,cucc,tsos,seft,sgfs", deny:null}

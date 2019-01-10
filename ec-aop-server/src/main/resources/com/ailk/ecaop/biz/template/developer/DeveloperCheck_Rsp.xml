@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecommendCheckRsp mappedOut="true">
+    <!-- 应答编码 0000：成功、0001：该员工不存在、0002：该员工已删除、9999：其他错误 -->
+    <RespCode length="F4" range="0000,0001,0002,9999" mappedName="code" />
+    <RespDesc length="V200" constraint="?" mappedName="detail" />
+    <!-- 操作员ID（ESS员工号） -->
+    <OperatorID length="V20" mappedName="operatorId" />
+    <!-- 省分 -->
+    <Province length="F2" mappedName="province" />
+    <!-- 地市 -->
+    <City constraint="?" length="F3" mappedName="city" />
+    <!-- 区县 -->
+    <District constraint="?" length="V10" mappedName="district" />
+    <!-- 渠道编码 -->
+    <ChannelID constraint="?" length="V20" mappedName="channelId" />
+    <!-- 渠道类型 -->
+    <ChannelType constraint="?" length="F7" mappedName="channelType" />
+    <!-- 渠道名称 -->
+    <ChannelName constraint="?" length="V240" mappedName="channelName" />
+    <!-- 推荐人/发展人部门标识 -->
+    <RecomDeparID constraint="?" length="V30" mappedName="recomDeparId" />
+    <!-- 推荐人姓名 -->
+    <RecommendName length="V60" constraint="?" mappedName="recommendName" />
+    <!-- 推荐人联系电话 -->
+    <RecommendNumber constraint="?" length="V20" mappedName="recommendNumber" />
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</RecommendCheckRsp>

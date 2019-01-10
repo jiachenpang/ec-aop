@@ -1,0 +1,74 @@
+#订单查询
+ecaop.core.method.map.ecaop.trades.query.ordi.ordilist.qry=oolq
+ecaop.core.method.oolq.def={"mothod":"oolq","remark":"订单状态查询"}
+ecaop.core.method.oolq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.oolq.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.oolq.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:false,validators:"@FixedLen(3)"},\
+     ordersId:{type:"String(20)",required:false},\
+     opeSysType:{type:"Number(1)",required:true},\
+     certNum:{type:"String(18)",required:false},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.oolq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.oolq.flowConfig)
+#配置跳转
+ecaop.core.method.oolq.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->05 *->02"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->04 N6->03"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.core.3g.oolq.flowConfig)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.core.4g.oolq.flowConfig)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.core.3g.oolq.flowConfig=@ParametersMapper(ecaop.mall.oolq.ParametersMapping)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.mall.oolq.template)
+                                 
+ecaop.mall.oolq.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00042",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"OrderListQryReq",temp:true},\   
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.mall.oolq.template@3GE"}\
+]
+#请求和返回报文模版路径
+ecaop.mall.oolq.template=com/ailk/ecaop/biz/template/order/OrderListQry
+
+#调用CBSS侧服务
+ecaop.core.4g.oolq.flowConfig=@quryCbssOrders()
+#CBSS终端返销提交
+ecaop.cbss.oolq.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdForNorthChSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryTradeToEcs",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_TRADE_TO_ECS_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.cbss.oolq.template@FBS@QRY_TRADE_TO_ECS_INPUT@qry@QRY_TRADE_TO_ECS_REQ"}\
+]
+#请求和返回报文模版路径
+ecaop.cbss.oolq.template=com/ailk/ecaop/biz/template/order/QryTradeToEcs

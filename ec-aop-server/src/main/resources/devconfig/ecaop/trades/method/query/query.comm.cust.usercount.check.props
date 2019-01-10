@@ -1,0 +1,61 @@
+#通过客户证件号码验证该证件号下使用人数
+ecaop.core.method.map.ecaop.trades.query.comm.cust.usercount.check=cucc
+ecaop.core.method.cucc.def={"mothod":"cucc","remark":"#通过客户证件号码验证该证件号下使用人数"}
+ecaop.core.method.cucc.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecmc.cucc.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器
+ecaop.ecmc.cucc.msg.schema={\
+     operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+     district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+     channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+     accessType:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+     certNum:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     custName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+     para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.cucc.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.cucc.masb.flowConfig)
+                                  
+ecaop.core.method.cucc.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.masb.cucc4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#调枢纽
+ecaop.masb.cucc4N25.processors=\
+                           @ParametersMapper(ecaop.masb.cucc.ParametersMapping)\
+                           @AopCall(ecaop.comm.conf.url.osn.syncreceive.0002)\
+                           @urlDecode()\
+                           @Xml2JsonMapper(ecaop.trades.cucc.userCountCheck.template)
+
+#请求参数
+ecaop.masb.cucc.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T2000554",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"UserCountCheckReq",temp:true},\
+{paramterName:"xmlmsg",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.cucc.userCountCheck.template@ONS"}\
+]
+
+ecaop.trades.cucc.userCountCheck.template=com/ailk/ecaop/biz/template/userCheck/UserCountCheck

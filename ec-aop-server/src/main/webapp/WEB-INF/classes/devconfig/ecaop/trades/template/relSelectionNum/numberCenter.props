@@ -1,0 +1,2 @@
+#号卡中心选占号码手工释放接口
+ecaop.trade.template.relSelectionNum.numberCenter={"serviceName":"relSelectionNum","operateName":"numberCenter","content":"REL_SELECTION_NUM_REQ"}

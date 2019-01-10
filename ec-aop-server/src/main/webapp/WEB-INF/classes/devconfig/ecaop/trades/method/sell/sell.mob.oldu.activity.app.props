@@ -1,0 +1,84 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.activity.app=oata
+ecaop.core.method.oata.def={"mothod":"oata","remark":"老用户优惠购机处理申请"}
+ecaop.core.method.oata.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.oata.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.oata.msgSchema={\
+province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+district:{type:"String(10)",required:false,validators:null},\
+bipCode:{type:"String(8)",required:true,validators:"@FixedLen(8)"},\
+operatorId:{type:"String(20)",required:true,validators:null},\
+channelId:{type:"String(20)",required:true,validators:null},\
+channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+ordersId:{type:"String(20)",required:true,validators:null},\
+serialNumber:{type:"String(20)",required:true,validators:null},\
+productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.oata.proSchema)"},\
+activityInfo:{type:"",required:false,validators:"@JSONSchema(ecaop.trades.oata.actSchema)"},\
+recomPersonId:{type:"String(30)",required:false,validators:null},\
+recomPersonName:{type:"String(30)",required:false,validators:null},\
+groupFlag:{type:"String(20)",required:false,validators:null},\
+groupId:{type:"String(40)",required:false,validators:null},\
+appType:{type:"String(1)",required:false,validators:null},\
+subAppType:{type:"String(2)",required:false,validators:null},\
+guarantorType:{type:"String(2)",required:false,validators:null},\
+guaratorID:{type:"String(200)",required:false,validators:null},\
+guCertType:{type:"String(2)",required:false,validators:null},\
+guCertNum:{type:"String(50)",required:false,validators:null},\
+resourcesInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.opap.resourcesInfoSchema)"},\
+para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.oata.proSchema={\
+productId:{type:"String(20)",required:true,validators:null},\
+productMode:{type:"String(1)",required:true,validators:null},\
+optType:{type:"String(2)",required:false,validators:null}\
+}
+ecaop.trades.oata.actSchema={\
+actPlanId:{type:"String(20)",required:true,validators:null},\
+resourcesType:{type:"String(2)",required:false,validators:null},\
+resProcId:{type:"String(20)",required:false,validators:null},\
+resourcesCode:{type:"String(30)",required:false,validators:null},\
+resourcesFee:{type:"String(20)",required:false,validators:null},\
+actPara:{type:"",required:false,validators:"@JSONSchema(ecaop.trades.oata.actPSchema)"}\
+}
+ecaop.trades.oata.actPSchema={\
+actParaId:{type:"String(20)",required:true,validators:null},\
+actParaValue:{type:"String(60)",required:true,validators:null}\
+}
+#定义processors
+ecaop.core.method.oata.processors=@route\ 
+                                  @FlowProcessor(ecaop.core.method.oata.flowConfig)
+
+ecaop.core.method.oata.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"1->02 2->05"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->03 N25->04"},\
+{id:"03", processor:"AopHandler(ecaop.trades.oata.processorsN6)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.trades.oata.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.trades.oata.processorsCbss)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.trades.oata.processorsCbss=@oldUserActivityCbss()
+
+ecaop.trades.oata.processorsN6=@oldUserActivityN6()
+
+#定义处理器
+ecaop.trades.oata.processors=@resStateChangeUtilsProcessor()
+                           #@ParametersMapper(ecaop.trades.oata.ParametersMapping)\
+                           #@AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                           #@Xml2JsonMapper(ecaop.trades.oata.template)
+                               
+ecaop.trades.oata.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00021",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"OldApplyReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.oata.template@3GE"}\
+]
+ecaop.trades.oata.template=com/ailk/ecaop/biz/template/opensub/OldCustApply

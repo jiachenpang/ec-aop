@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_OWE_FEE_INFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--应答编码, 0000成功,1111：账户ID不存在,1204：该号码不存在,8888 其他错误 -->
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <OWE_FEE_INFO constraint="*" mappedName="oweFeeInfo">
+            <PAY_NAME length="v100" mappedName="payName" />
+            <SERVICE_CLASS_CODE length="V6" mappedName="serviceClassCode" />
+            <AREA_CODE length="F4" constraint="?" mappedName="areaCode" />
+            <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+            <ACCT_ID length="V16" mappedName="acctId" />
+            <USER_ID length="V16" mappedName="userId" />
+            <PROVINCE_CODE length="F2" mappedName="provinceCode" />
+            <EPARCHY_CODE length="V6" mappedName="eparchyCode" />
+            <BALANCE_FEE length="V11" mappedName="balanceFee" />
+            <MIN_PAY_FEE length="V11" mappedName="minPayFee" />
+            <PAY_FEE length="V11" mappedName="payFee" />
+            <TOTAL_FEE length="V11" mappedName="totalFee" />
+            <REAL_FEE length="V11" mappedName="realFee" />
+            <MUST_PAY length="F1" mappedName="mustPay" />
+            <CYCLE_OWE_FEE_INFO constraint="*" mappedName="cycleOweFeeInfo">
+                <CYCLE_ID length="F6" mappedName="cycleId" />
+                <PAY_NAME length="V100" mappedName="payName" />
+                <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode" />
+                <AREA_CODE length="V6" constraint="?" mappedName="areaCode" />
+                <SERIAL_NUMBER length="V40" mappedName="serialNumber" />
+                <USER_ID length="V16" mappedName="userId" />
+                <PROVINCE_CODE length="F2" mappedName="provinceCode" />
+                <EPARCHY_CODE length="V6" mappedName="eparchyCode" />
+                <FEE length="V11" mappedName="fee" />
+                <RECEIVED_FEE length="V11" mappedName="receivedFee" />
+                <LATE_FEE length="V11" mappedName="lateFee" />
+                <RECEIVED_LATE_FEE length="V11" mappedName="receivedLateFee" />
+                <BALANCE length="V11" mappedName="balance" />
+                <BAD_DEBT_TAG length="F1" mappedName="badDebtTag" />
+                <BAD_DEBT_REMARK length="V10" mappedName="badDebtRemark" />
+                <CONSIGN_TAG length="F1" constraint="?" mappedName="consignTag" />
+                <CONSIGN_REMARK length="V10" constraint="?" mappedName="consignRemark" />
+
+                <ITEM_INFO constraint="+" mappedName="itemInfo">
+                    <INTEGRATE_ITEM_CODE length="V8" mappedName="integrateItemCode" />
+                    <INTEGRATE_ITEM length="V100" mappedName="integrateItem" />
+                    <UPPER_ACCTITEM_CODE length="V8" constraint="?" mappedName="upperAcctitemCode" />
+                    <INTEGRATE_ITEM_CODE_TYPE length="F1" mappedName="integrateItemCodeType" />
+                    <FEE length="V11" mappedName="fee" />
+                    <RECEIVED_FEE length="V11" mappedName="receivedFee" />
+                    <BALANCE length="V11" mappedName="balance" />
+                </ITEM_INFO>
+            </CYCLE_OWE_FEE_INFO>
+            <PARA constraint="*" mappedName="para">
+                <!--保留字段 -->
+                <PARA_ID length="V20" mappedName="paraId">
+                    <!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue">
+                    <!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </OWE_FEE_INFO>
+
+    </QRY_OWE_FEE_INFO_RSP>
+</UNI_BSS_BODY>

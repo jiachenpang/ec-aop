@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_CHANGE_PRODUCT_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_CHANGE_PRODUCT_REQ>
+            <USER_ID constraint="1" length="V40" mappedName="userId"><!-- 用户id -->
+            </USER_ID>
+            <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber"><!--宽带帐号/宽带统一编码 -->
+            </SERIAL_NUMBER>
+            <PRODUCT_ID constraint="+" length="V20" mappedName="productId"><!-- 产品编码(用户当前使用) -->
+            </PRODUCT_ID>
+            <DISCNT_INFO constraint="+" mappedName="discntInfo"><!--资费信息 -->
+                <DISCNT_CODE constraint="1" length="V20" mappedName="discntCode"><!--资费编码（用户当前使用） -->
+                </DISCNT_CODE>
+            </DISCNT_INFO>
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </QRY_CHANGE_PRODUCT_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+     <MEDIA_INFO length="V20" defaultValue="?"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_CHANGE_PRODUCT_INPUT>

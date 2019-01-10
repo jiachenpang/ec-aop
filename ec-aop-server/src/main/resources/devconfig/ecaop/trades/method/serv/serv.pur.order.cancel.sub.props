@@ -1,0 +1,34 @@
+#0Z在途订单撤单接口
+ecaop.core.method.map.ecaop.trades.serv.pur.order.cancel.sub=pocs
+ecaop.core.method.pocs.def={"mothod":"pocs","remark":"0Z在途订单撤单接口"}
+ecaop.core.method.pocs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.pocs.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.pocs.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    provinceCode:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    queryType:{type:"String(1)",required:true,encrypted:false,validators:null },\
+    queryValue:{type:"String(50)",required:true,encrypted:false,validators:null },\
+    tradeTypeCode:{type:"String(50)",required:false,encrypted:false,validators:null },\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+    
+#定义processors
+ecaop.core.method.pocs.processors=@ParametersMapper(ecaop.ecsb.pocs.ParametersMapping)\
+                              @WsCall(ecaop.comm.conf.url.cbss.services.OrderInfoForAop)\
+                              @Xml2JsonMapper4Fbs(ecaop.trades.pocs.template)
+#报文头参数
+ecaop.ecsb.pocs.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.OrderInfoForAop.orderStateInZForAop",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.pocs.template@FBS@ORDER_STATEIN_Z_FOR_AOP_INPUT@n15293971@ORDER_STATEIN_Z_FOR_AOP_REQ"}\
+]
+
+ecaop.trades.pocs.template=com/ailk/ecaop/biz/template/cbss/Order_Statein_Z_For_Aop

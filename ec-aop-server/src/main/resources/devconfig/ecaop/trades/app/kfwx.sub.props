@@ -1,0 +1,4 @@
+#客服微信
+ecaop.core.app.map.kfwx.sub=kfwx
+ecaop.core.app.kfwx.def={"code":"kfwx", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.kfwx.allow={appkey:"kfwx",allow:"smct", deny:null}

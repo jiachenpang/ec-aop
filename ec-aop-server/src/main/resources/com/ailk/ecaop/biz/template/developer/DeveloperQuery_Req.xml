@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <DeveloperQueryReq>
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <ChnlName length="V200" constraint="?" mappedName="chnlName" />
+            <ChannelId length="V20" constraint="?" mappedName="channelId" />
+            <DeveloperId length="V16" constraint="?" mappedName="developerId" />
+            <DeveloperName length="V128" constraint="?" mappedName="developerName" />
+            <DeveloperNumber length="V20" constraint="?" mappedName="developerNumber" />
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" mappedName="paraId" />
+                <ParaValue length="V60" mappedName="paraValue" />
+            </Para>
+        </DeveloperQueryReq>
+    </SvcCont>
+</UniBSS>

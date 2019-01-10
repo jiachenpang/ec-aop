@@ -1,0 +1,9 @@
+#融合业务开户处理申请-写卡前置
+ecaop.core.method.map.ecaop.trades.sell.mix.newu.opencarddata.app=smno
+ecaop.core.method.smno.def={"mothod":"smno","remark":"融合业务开户处理申请-写卡前置"}
+ecaop.core.method.smno.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.core.method.smno.processors=@mixOpenProcessor()

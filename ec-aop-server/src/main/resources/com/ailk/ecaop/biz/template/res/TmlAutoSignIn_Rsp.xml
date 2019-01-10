@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TmlAutoSignInRsp mappedOut="true">
+    <!-- 应答编码0000 成功0001 单个资源处理失败9999 其他错误 -->
+    <RespCode length="F4" type="String" range="0000,9999" mappedName="code" />
+    <!-- 错误描述，返回详细的错误信息 -->
+    <RespDesc length="V100" type="String" mappedName="detail" />
+    <ResInfo constraint="*" mappedName="resInfo">
+        <!-- 1 成功 2 失败 -->
+        <ResType length="F1" type="String" mappedName="resType" />
+        <!-- "失败原因：01：无发货单 02：终端已签收 03：其它原因" -->
+        <ErrCode length="F2" type="String" mappedName="errCode" constraint="?" />
+        <ResourcesCode length="V20" type="String" constraint="?" mappedName="resourcesCode" />
+        <ResourcesBrandCode length="V20" type="String" constraint="?" mappedName="resourcesBrandCode" />
+        <OrgDeviceBrandCode length="V20" type="String" constraint="?" mappedName="orgDeviceBrandCode" />
+        <ResourcesBrandName length="V50" type="String" constraint="?" mappedName="resourcesBrandName" />
+        <ResourcesModelCode length="V20" type="String" constraint="?" mappedName="resourcesModelCode" />
+        <ResourcesModelName length="V100" type="String" constraint="?" mappedName="resourcesModelName" />
+        <MachineTypeCode length="V20" type="String" constraint="?" mappedName="machineTypeCode" />
+        <MachineTypeName length="V100" type="String" constraint="?" mappedName="machineTypeName" />
+        <ColorCode length="V20" type="String" constraint="?" mappedName="colorCode" />
+        <ColorName length="V100" type="String" constraint="?" mappedName="colorName" />
+        <ErrDesc length="V256" type="String" constraint="?" mappedName="errDesc" />
+    </ResInfo>
+    <Para constraint="*" mappedName="para">
+        <ParaID length="V20" mappedName="paraId" />
+        <ParaValue length="V60" mappedName="paraValue" />
+    </Para>
+</TmlAutoSignInRsp>

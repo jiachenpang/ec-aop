@@ -1,0 +1,43 @@
+#融合共享续约申请
+ecaop.core.method.map.ecaop.trades.sell.mob.mix.renActivity.app=mmra
+ecaop.core.method.mmra.def={"mothod":"mmra","remark":"融合共享续约申请"}
+ecaop.core.method.mmra.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.mmra.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#参数校验
+ecaop.mmra.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    serialNumber:{type:"String(20)",required:true,validators:null},\
+    ordersId:{type:"String(30)",required:true,validators:null},\
+    recomPersonId:{type:"String(30)",required:false,validators:null},\
+    recomPersonName:{type:"String(30)",required:false,validators:null},\
+    activityInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mmra.activityTemplate)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#续约的活动信息
+ecaop.trades.mmra.activityTemplate={\
+    actPlanId:{type:"String(20)",required:true,validators:null},\
+    packageElement:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mmra.packageElement)"},\
+    actPara:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.mmra.actPara)"}}
+ 
+#附加包信息
+ecaop.trades.mmra.packageElement={\
+    packageId:{type:"String(20)",required:true,validators:null},\
+    elementId:{type:"String(20)",required:true,validators:null},\
+    elementType:{type:"String(2)",required:true,validators:null}}
+    
+#活动扩展字段
+ecaop.trades.mmra.actPara={\
+    actParaId:{type:"String(20)",required:true,validators:null},\
+    actParaValue:{type:"String(60)",required:true,validators:null}}
+
+#定义processors
+ecaop.core.method.mmra.processors=@mixRenActivityApp()                                                                                            

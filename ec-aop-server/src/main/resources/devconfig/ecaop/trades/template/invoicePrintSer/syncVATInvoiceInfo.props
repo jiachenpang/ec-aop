@@ -1,0 +1,2 @@
+#专票打印信息同步
+ecaop.trade.template.invoicePrintSer.syncVATInvoiceInfo={"serviceName":"InvoicePrintSer","operateName":"syncVATInvoiceInfo","content":"SYNC_VAT_INVOICE_INFO_REQ"}

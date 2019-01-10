@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+<ORDERSUB_RSP mappedOut="true">
+    <RESP_CODE constraint="1" length="F4" mappedName="code"><!--应答编码, 0000 成功, 1103 费用校验失败, 1109 保证金余额不足, 1208 产品校验错误, 
+            1701 资源校验错误, 1216 活动校验错误, 1217 特服校验错误, 1006 客户资料校验失败, 1101 账户资料校验失败, 1201 用户资料校验失败, 1105 发票校验错误, 1106 发票编码错误, 1107 发票与操作员归属不一致, 
+            1108 发票已打印过, 8888 其他原因错误 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V500" mappedName="detail"><!--错误描述 -->
+    </RESP_DESC>
+    <ORDERSUB_INFO constraint="?" mappedOut="true"><!--提交应答 -->
+        <TAX_INVOICENO constraint="?" length="V30" mappedName="taxNo"><!--发票税控号, 有税控编号的省分需返回此字段 -->
+        </TAX_INVOICENO>
+        <PARA constraint="*"  mappedName="para"><!--保留字段 -->
+            <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+    </ORDERSUB_INFO>
+</ORDERSUB_RSP>
+</UNI_BSS_BODY>

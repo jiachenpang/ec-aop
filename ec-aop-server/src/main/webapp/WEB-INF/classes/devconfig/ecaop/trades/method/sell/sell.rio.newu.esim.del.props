@@ -1,0 +1,40 @@
+ecaop.core.method.map.ecaop.trades.sell.rio.newu.esim.del=rned
+ecaop.core.method.rned.def={"mothod":"rned","remark":"eSIM资源取消"}
+ecaop.core.method.rned.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.rned.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":false, "encrypted":false, "validators":null}]
+ecaop.trades.rned.msgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    eiccid:{type:"String(40)",required:true,validators:null},\
+    eid:{type:"String(40)",required:false,validators:null},\
+    providerId:{type:"String(4)",required:true,validators:null},\
+    eSimMode:{type:"String(4)",required:true,validators:null},\
+    matchingId:{type:"String(4)",required:false,validators:null},\
+    finalStatus:{type:"String(4)",required:false,validators:null},\
+    simType:{type:"String(40)",required:true,validators:null},\
+    profileType:{type:"String(40)",required:true,validators:null},\
+    terminalType:{type:"String(40)",required:true,validators:null},\
+    serialNumA:{type:"String(40)",required:true,validators:null},\
+    serialNumB:{type:"String(40)",required:true,validators:null},\
+    imei:{type:"String(40)",required:true,validators:null},\
+    provinceCode:{type:"String(20)",required:true,validators:null},\
+    eparchyCode:{type:"String(20)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.rned.processors=@EsimDataDel()
+
+ecaop.trades.rned.paramtersmapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.rioEsimSer.canSimData,@50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.rned.template@FBS@CAN_SIM_DATA_INPUT@n1529397156@CAN_SIM_DATA_REQ"}\
+    ]
+
+ecaop.trades.rned.template=com/ailk/ecaop/biz/template/esim/CanSimData

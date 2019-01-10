@@ -1,0 +1,26 @@
+#各网别用户综合信息查询
+ecaop.core.method.map.ecaop.trades.query.all.user.qry=qauq
+ecaop.core.method.qauq.def={"mothod":"qauq","remark":"各网别用户综合信息查询"}
+ecaop.core.method.qauq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.qauq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.qauq.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null}\
+}
+
+#定义processors,未做优化原因,不通过省份和APP可以进行区分
+ecaop.core.method.qauq.processors=\
+                @TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ec-aop.rest)

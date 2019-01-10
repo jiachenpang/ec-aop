@@ -1,0 +1,5 @@
+#上海BSS国政通测试
+ecaop.core.app.map.shbc.sub=shsb
+ecaop.core.app.shsb.def={"code":"shsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.shsb.timeslimit=max 100 per 1 minute
+ecaop.core.app.shsb.allow={appkey:"shsb",allow:"crck", deny:null}

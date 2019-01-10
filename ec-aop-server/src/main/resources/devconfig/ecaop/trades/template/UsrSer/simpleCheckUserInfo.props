@@ -1,0 +1,2 @@
+#BSS简单用户查询接口
+ecaop.trade.template.UsrSer.simpleCheckUserInfo={"serviceName":"UsrSer","operateName":"simpleCheckUserInfo","content":"SIMPLE_CHECK_USER_INFO_REQ"}

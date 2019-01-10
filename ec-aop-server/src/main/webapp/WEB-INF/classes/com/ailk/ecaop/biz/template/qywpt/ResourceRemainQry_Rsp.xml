@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <QRY_RESOURCE_REMAIN_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <RESOURCE_INFO constraint="?" mappedOut="true">
+            <TOTAL_RESOURCE_INFO constraint="*" mappedName="totalInfo">
+                <TOTAL_REMAIN_RESOURCE_COUNT constraint="1" length="V11" mappedName="totalRemainCount" />
+                <!-- UNIT length="V11" mappedName="unit"/> aop对外规范中没有这个字段,暂时注释掉,不返回-->
+                <TOTAL_RESOURCE_INVALID_TIME constraint="1" length="F14" mappedName="validTime" />
+            </TOTAL_RESOURCE_INFO>
+            <DETAIL_RESOURCE_INFO constraint="*" mappedName="detailInfo">
+                 <RECEIVE_TIME constraint="1" length="F14" mappedName="receiveTime" />
+                 <ORIGINAL_MONEY constraint="1" length="V11" mappedName="originalMoney" />
+                 <ORIGINAL_RESOURCE_COUNT constraint="1" length="V11" mappedName="originalCount" />
+                 <USE_RESOURCE_COUNT constraint="1" length="V11" mappedName="useCount" />
+                 <REMAIN_RESOURCE_COUNT constraint="1" length="V11" mappedName="remainCount" />
+                 <!-- UNIT length="V11" mappedName="unit"/> aop对外规范中没有这个字段,暂时注释掉,不返回-->
+                 <INVALID_TIME constraint="1" length="F14" mappedName="validTime" />
+                 <RESOURCE_TYPE constraint="1" length="F1" mappedName="resourceType"/>
+            </DETAIL_RESOURCE_INFO>
+        </RESOURCE_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId"/>
+            <PARA_VALUE length="V60" mappedName="paraValue"/>
+       </PARA>
+    </QRY_RESOURCE_REMAIN_RSP>
+</UNI_BSS_BODY>

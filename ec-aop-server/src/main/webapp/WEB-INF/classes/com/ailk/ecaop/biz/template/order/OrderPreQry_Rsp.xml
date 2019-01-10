@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+<PRE_ORDER_QUERY_RSP mappedOut="true">
+    <RESP_CODE length="F4" mappedName="code" />
+    <RESP_DESC constraint="?" length="V500" mappedName="detail" />
+    <ORDER_LIST constraint="*" mappedName="orderInfo">
+        <ORDER_ID length="V20" constraint="?" mappedName="orderId"/>
+        <ORDER_STATE length="F1" constraint="?" mappedName="orderState"/>
+    </ORDER_LIST>
+    <EXHIBITION_PRE_ORDER_RSP constraint="?" mappedName="preordersp">
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </EXHIBITION_PRE_ORDER_RSP>
+</PRE_ORDER_QUERY_RSP>
+</UNI_BSS_BODY>

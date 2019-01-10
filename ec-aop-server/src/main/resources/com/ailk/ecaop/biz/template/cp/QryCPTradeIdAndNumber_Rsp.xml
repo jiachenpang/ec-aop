@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <UNI_BSS_BODY>
+      <QRY_CP_TRADEID_AND_NUMBER_RSP mappedOut="true">
+          <RESP_CODE constraint="1" length="F4" mappedName="respCode"/>
+          <RESP_DESC constraint="1" length="V500" mappedName="respDesc"/>
+          <TRADE_TYPE_CODE constraint="1" length="V4" mappedName="tradeTypeCode"/>
+          <SUBSCRIBE_ID constraint="1" length="F16" mappedName="subscribeId"/>
+          <ACCEPT_DATE constraint="1" length="F14" mappedName="acceptDate"/>
+          <FINISH_DATE constraint="1" length="F14" mappedName="finishDate"/>
+          <NUMBER constraint="*" mappedName="number">
+              <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber"/>
+              <USER_ID constraint="1" length="V50" mappedName="userId"/>
+          </NUMBER>
+          <PARA constraint="*" mappedName="para">
+              <PARA_ID constraint="1" length="V20" mappedName="paraID"/>
+              <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"/>
+          </PARA>
+      </QRY_CP_TRADEID_AND_NUMBER_RSP>
+  </UNI_BSS_BODY>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_FEE_INFO_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--应答编码, 0000成功,1111：账户ID不存在,1204：该号码不存在,8888 其他错误 -->
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <ACCT_MONEY_INFO constraint="?" mappedName="acctMoneyInfo">
+        <BALANCE length="V11" constraint="?" mappedName="balance"></BALANCE>
+        <ACCT_BALANCE length="V11" mappedName="acctBalance"></ACCT_BALANCE>
+        <ACCT_CURNT_BALANCE length="V11" constraint="?" mappedName="acctCurntBalance"> </ACCT_CURNT_BALANCE>
+        <SPECIAL_FEE length="V11" constraint="?" mappedName="specilFee"></SPECIAL_FEE>
+        <SPECIAL_CURNT_FEE length="V11" constraint="?" mappedName="specilCurntFee"></SPECIAL_CURNT_FEE>
+        <ACCT_BALANCE_UNAVAILABLE length="V11" constraint="?" mappedName="acctBalanceUnavailable"></ACCT_BALANCE_UNAVAILABLE>
+        <PREPAY_AVAILABLE length="V11" mappedName="prepayAvailable"></PREPAY_AVAILABLE>
+        <PROM_AVAILABLE length="V11" mappedName="promAvailable"></PROM_AVAILABLE>
+        <PREPAY_UNAVAILABLE length="V11" constraint="?" mappedName="prepayUnavailable"></PREPAY_UNAVAILABLE>
+        <PROM_UNAVAILABLE length="V11" constraint="?" mappedName="promUnavailable"></PROM_UNAVAILABLE>
+        <ACTION_TYPE_FLAG length="F1" constraint="?"  mappedName="actionTypeFlag">
+        <!-- 是否是合约惠机产品0 普通类型 1 合约惠机类型 -->
+        </ACTION_TYPE_FLAG>
+        <SUM_TRANS_FEE length="V11" constraint="?" mappedName="sumTransFee"></SUM_TRANS_FEE>
+        <TRANS_FEE_UNAVAILABLE length="V11" constraint="?" mappedName="TransFeeUnavailable"></TRANS_FEE_UNAVAILABLE>
+        </ACCT_MONEY_INFO>
+        <FEE_INFO constraint="*" mappedName="feeInfo">
+        <SERVICE_CLASS_CODE length="F4" constraint="?"  mappedName="serviceClassCode"></SERVICE_CLASS_CODE>
+        <AREA_CODE length="V6" constraint="?" mappedName="areaCode"></AREA_CODE>
+        <SERIAL_NUMBER length="V40" constraint="?" mappedName="serialNumber"></SERIAL_NUMBER>
+        <USER_ID length="V16"  mappedName="userId"></USER_ID>
+        <ACCT_ID length="V16"  mappedName="acctId"></ACCT_ID>
+        <USED_MONEY length="V11" constraint="?" mappedName="usedMoney"></USED_MONEY>
+        <CANUSE_MONEY length="V11" mappedName="canuseMoney"></CANUSE_MONEY>
+        <DEPOSIT_NAME length="V100" mappedName="depositName"></DEPOSIT_NAME>
+        <ACCT_BALANCE_ID length="V16" constraint="?" mappedName="acctBalanceId"></ACCT_BALANCE_ID>
+        <DEPOSIT_CODE length="V20" mappedName="depositCode"></DEPOSIT_CODE>
+        <DEPOSIT_MONEY length="V11" mappedName="depositMoney"></DEPOSIT_MONEY>
+        <RETURN_TAG length="F1" constraint="?" mappedName="returnTag">
+        <!-- 可清退标志0-不可清退，1-可清退 -->
+        </RETURN_TAG>
+        <DEPOSIT_TYPE_CODE length="F1" constraint="?" mappedName="depositTypeCode">
+        <!-- 科目类型0：可用预存款1：冻结预存款2：可用赠款3：冻结赠款 -->
+        </DEPOSIT_TYPE_CODE>
+        <FEE_KIND length="F1" constraint="?" mappedName="feeKind">
+        <!-- 款项类型标志0：普通款项1: 专项款项 -->
+        </FEE_KIND>
+        <CAN_TRAN_TAG length="F1" constraint="?" mappedName="canTranTag">
+        <!-- 能否转账0：不能转账1：可以转账 -->
+        </CAN_TRAN_TAG>
+        <PRIVATE_TAG length="F1" constraint="?" mappedName="privateTag">
+        <!-- 私有标志0:账户级1:用户级 -->
+        </PRIVATE_TAG>
+        <VALID_TAG length="F1" constraint="?" mappedName="validTag">
+        <!-- 有效标志0:正常1:冻结2:失效3:未激活状态 -->
+        </VALID_TAG>
+        <START_DATE length="F14" constraint="?" mappedName="startDate"></START_DATE>
+        <END_DATE length="F14" constraint="?" mappedName="endDate"></END_DATE>
+        <START_CYCLE_ID length="F6" constraint="?" mappedName="startCycleId"></START_CYCLE_ID>
+        <END_CYCLE_ID length="F6" constraint="?" mappedName="endCycleId"></END_CYCLE_ID>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE length="V60" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+        </FEE_INFO>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段 -->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID -->
+            </PARA_ID>
+            <PARA_VALUE length="V60" mappedName="paraValue">
+                <!--保留字段值 -->
+            </PARA_VALUE>
+        </PARA>
+
+    </QRY_FEE_INFO_RSP>
+</UNI_BSS_BODY>

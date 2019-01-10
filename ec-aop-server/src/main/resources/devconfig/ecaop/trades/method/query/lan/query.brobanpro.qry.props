@@ -1,0 +1,24 @@
+#宽带产品查询       method申明定义
+ecaop.core.method.map.ecaop.trades.query.comm.brobanpro.qry=qcbq
+ecaop.core.method.qcbq.def={"mothod":"qcbq","remark":"宽带产品查询"}
+ecaop.core.method.qcbq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.n6.mall.qcbq.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(50)","required":false, "encrypted":false, "validators":null}]
+
+#入参校验 
+ecaop.n6.mall.qcbq.Msg={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    orderId:{type:"String(20)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.qcbq.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.comm.province.flowConfig)

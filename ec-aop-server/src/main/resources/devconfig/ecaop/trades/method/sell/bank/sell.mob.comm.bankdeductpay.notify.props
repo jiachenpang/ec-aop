@@ -1,0 +1,70 @@
+#银行卡扣款通知
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.bankdeductpay.notify=cbpn
+ecaop.core.method.cbpn.def={"mothod":"cbpn","remark":"银行卡扣款通知"}
+ecaop.core.method.cbpn.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.cbpn.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.cbpn.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    orderId:{type:"String(30)",required:true,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:true,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:true,encrypted:false,validators:null},\
+    payFee:{type:"String(11)",required:true,encrypted:false,validators:null}\
+}
+
+#定义流程跳转
+ecaop.core.method.cbpn.processors=@route\
+                           @FlowProcessor(ecaop.core.method.cbpn.flowConfig)
+
+#配置跳转
+ecaop.core.method.cbpn.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->02 N6->03"},\
+{id:"02", processor:"AopHandler(ecaop.ecsb.cbpn4N25.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#南25
+ecaop.ecsb.cbpn4N25.processors=\
+                                @ParametersMapper(ecaop.ecsb.cbpn.ParametersMapping)\
+                                @WsCall(ecaop.comm.conf.url.osn.services.BankRealPaymentNotifySer)\
+                                @Xml2JsonMapper4Fbs(ecaop.ecsb.cbpn.template)\
+                                @dealReturnInfo(ecaop.ecsb.cbpn.returnParamsMapping)
+
+#给freeMarker中变量复制，一遍生成报文
+ecaop.ecsb.cbpn.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"BankRealPaymentNotifySer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sendCardPayNotify",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"ecaop",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SEND_CARD_PAY_NOTIFY_REQ",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.tradeType,0"},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.ecsb.cbpn.template@FBS@SEND_CARD_PAY_NOTIFY_INPUT@sen"}\
+] 
+
+#报文模版路径
+ecaop.ecsb.cbpn.template=com/ailk/ecaop/biz/template/bank/SendCardPayNotify
+
+#处理返回值
+ecaop.ecsb.cbpn.returnParamsMapping=[\
+{paramterName:"respDesc",extractor:"fix",extractorConfig:"SUCCESS"}\
+]

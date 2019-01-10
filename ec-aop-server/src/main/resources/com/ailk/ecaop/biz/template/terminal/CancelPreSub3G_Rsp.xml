@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TerminalRollBackRsp mappedOut="true">
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+    <Para constraint="*" mappedName="para">
+        <ParaID mappedName="paraId" />
+        <ParaValue mappedName="paraValue" />
+    </Para>
+</TerminalRollBackRsp>

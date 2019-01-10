@@ -1,0 +1,5 @@
+#沃联盟
+ecaop.core.app.map.wolm.sub=wolm
+ecaop.core.app.wolm.def={"code":"wolm", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow,timeslimit"}
+ecaop.core.app.wolm.timeslimit=max 10 per 1 second
+ecaop.core.app.wolm.allow={appkey:"wolm",allow:"qcsp", deny:null}

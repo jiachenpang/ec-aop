@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORDERSUB_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <ORDERSUB_REQ>
+            <PROVINCE_ORDER_ID constraint="1" length="V30" mappedName="provOrderId"><!--省分订单ID, 该订单ID为预提交接口返回的ID。 -->
+            </PROVINCE_ORDER_ID>
+            <ORDER_ID constraint="1" length="V30" mappedName="orderNo"><!--总部订单ID，与总部预提交接口交易流水必须一致。, 如果重复提交同一订单，如果订单已成功，则直接返回成功。 -->
+            </ORDER_ID>
+            <OPERATION_TYPE constraint="1" length="F2" defaultValue="01" mappedName="operationType"><!--操作类型, 01:订单提交, 02:订单取消, 03:收费订单, 04:改费订单, 当操作类型取值为03时表示该订单已经正式提交过，但是有未收费项目，后期再次使用原订单流水进行收费操作，但不能对费用项、金额进行修改；当操作类型取值为04时表示该订单已经正式提交过，未收费或已经收费后，其费用项有变化，此时使用原订单流水对费用项进行增加操作（不能修改、删除原费用项，新增费用项通过收费退费来判断是增加还是减少金额）。改费订单不收费，改费时全部费用项都要传。 -->
+            </OPERATION_TYPE>
+            <SEND_TYPE_CODE constraint="?" length="V1" mappedName="sendTypeCode"><!--收费类型：1：施工上门收费。当此字段存在时，代表该订单中所有费用项都未收费，费用项内的IS_PAY必须都是1，PAY_TAG也是1. -->
+            </SEND_TYPE_CODE>
+            <NOTE_BATCHNO constraint="?" length="V30" mappedName="noteBatchNo"><!--发票批次号码 -->
+            </NOTE_BATCHNO>
+            <NOTE_NO constraint="?" length="V20"  mappedName="noteNo"><!--发票号码, 省分收到此字段需要做下面的校验：, 1. 该发票号码是否是正确的发票号码, 2. 该发票是否已经被打印过, 3. 该发票是否归属在该营业员所在的营业厅, 验证通过后，在省分系统中记录该发票号码已被打印 -->
+            </NOTE_NO>
+            <NOTE_TYPE constraint="1" length="F1" defaultValue="1" mappedName="noteType"><!--发票打印标识, 0    打印发票, 1    不打发票, 注：如果需打印发票，则发票号码不能为空 -->
+            </NOTE_TYPE>
+            <NOTE_FLAG constraint="?" length="F1" mappedName="noteFlag"><!--发票类型（1：单联发票；2：两/三联发票） -->
+            </NOTE_FLAG>
+            <SUB_ORDERSUB_REQ constraint="*" mappedName="subOrderSubReq"><!--订单费用信息，当存在子订单时按子订单返回费用列表，否则直接返回费用 -->
+                <SUB_PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="subProvinceOrderId"><!--省分子订单ID, 该订单ID为预提交接口返回的ID，存在子订单时填写此字段。 -->
+                </SUB_PROVINCE_ORDER_ID>
+                <SUB_ORDER_ID constraint="?" length="V30" mappedName="subOrderId"><!--总部子订单ID，与总部预提交接口交易流水必须一致。存在子订单时填写此字段。, -->
+                </SUB_ORDER_ID>
+                <FEE_INFO constraint="*" mappedName="feeInfo"><!--费用 -->
+                    <FEE_MODE constraint="1" length="F1" mappedName="feeCategory"><!--费用种类, ESS提供，省分进行适配，见附录 -->
+                    </FEE_MODE>
+                    <FEE_TYPE_MODE constraint="1" length="V10" mappedName="feeId"><!--费用科目编码, 以省分编码为准 -->
+                    </FEE_TYPE_MODE>
+                    <FEE_TYPE_NAME constraint="1" length="V50" mappedName="feeDes"><!--费用科目名称 -->
+                    </FEE_TYPE_NAME>
+                    <OPERATE_TYPE constraint="1" length="F1" defaultValue="1" mappedName="operateType"><!--操作类型 1：收费；2：退费, -->
+                    </OPERATE_TYPE>
+                    <OLDFEE constraint="1" length="V11" mappedName="origFee" defaultValue="0"><!--金额（OPERATE_TYPE为1表示应收金额，；为2时表示应退金额），单位分，为正整数 -->
+                    </OLDFEE>
+                    <DERATE_FEE constraint="?" length="V11" mappedName="reliefFee"><!--减免金额（为正整数，单位：分） -->
+                    </DERATE_FEE>
+                    <DERATE_REMARK constraint="?" length="V100" mappedName="reliefResult"><!--减免原因 -->
+                    </DERATE_REMARK>
+                    <FEE constraint="?" length="V11" mappedName="realFee" defaultValue="0"><!--实收金额（OPERATE_TYPE为1时必填。为正整数，单位：分） -->
+                    </FEE>
+                    <IS_PAY constraint="?" length="F1" mappedName="isPay"><!--收费标志, 0－未收费，1－已收费, OPERATE_TYPE为2时此字段为空；为1时必填 -->
+                    </IS_PAY>
+                    <PAY_TAG constraint="?" length="F1" mappedName="payTag"><!--收费方式, 0－营业前台收费，1－施工上门收费2-营业费用转账务收费, OPERATE_TYPE为2时此字段为空；为1时必填 -->
+                    </PAY_TAG>
+                    <CALCULATE_TAG constraint="?" length="F1" mappedName="calculateTag"><!--手工算费标记, 自动算费－N，手工算费－Y -->
+                    </CALCULATE_TAG>
+                    <CALCULATE_ID constraint="?" length="V30" mappedName="calculateId"><!--算费流水号 -->
+                    </CALCULATE_ID>
+                    <CALCULATE_DATE constraint="?" length="F14" mappedName="calculateDate"><!--算费时间 -->
+                    </CALCULATE_DATE>
+                    <PAY_ID constraint="?" length="V30" mappedName="payId"><!--付费ID -->
+                    </PAY_ID>
+                    <CALCULATE_STAFF_ID constraint="?" length="V20" mappedName="calculateStaffId"><!--算费员工 -->
+                    </CALCULATE_STAFF_ID>
+                    <IS_TAX constraint="?" length="F1" mappedName="isTax"><!--预存款是否分月打发票, 0：不分月打, 1：分月打 -->
+                    </IS_TAX>
+                </FEE_INFO>
+            </SUB_ORDERSUB_REQ>
+            <TOTAL_FEE constraint="1" length="V11" mappedName="origTotalFee"><!--实收总金额（为正整数，单位：分） -->
+            </TOTAL_FEE>
+            <CANCLE_TOTAL_FEE constraint="1" length="V11" defaultValue="0" mappedName="cancleTotalFee"><!--实退总金额（为正整数，单位：分） -->
+            </CANCLE_TOTAL_FEE>
+            <PAY_INFO constraint="*" mappedName="payInfo"><!--支付信息，允许一条订单多种支付方式 -->
+                <SUB_PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="subProvinceOrderId"><!--省分子订单ID, 当子订单独立支付时使用。 -->
+                </SUB_PROVINCE_ORDER_ID>
+                <PAY_TYPE constraint="1" length="V2" mappedName="payType"><!--支付方式, 10：现金, 11：现金支票, 12：转账支票, 13：信用卡, 14：缴费卡, 15：银行卡, 16：代收, 
+                        17：银行代扣, 18：托收, 19：非现金优惠, 现金，不填写支付机构和支付账号 -->
+                </PAY_TYPE>
+                <PAY_MONEY constraint="?" length="V11" mappedName="payMoney"><!--付费金额（多种支付方式时需要提供） -->
+                </PAY_MONEY>
+                <CHECK_BANK_CODE constraint="?" length="V10" mappedName="checkBankCode"><!--支付机构编码 -->
+                </CHECK_BANK_CODE>
+                <PAY_ORG constraint="?" length="V200" mappedName="payOrg"><!--支付机构名称 -->
+                </PAY_ORG>
+                <PAY_NUM constraint="?" length="V20" mappedName="payNum"><!--支付账号 -->
+                </PAY_NUM>
+                <CHECK_CARD_NAME constraint="?" length="V40" mappedName="checkCardName"><!--支付账号名称 -->
+                </CHECK_CARD_NAME>
+                <CHECK_LIMIT constraint="?" length="V11" mappedName="checkLimit"><!--支付限额（支票方式支付时使用） -->
+                </CHECK_LIMIT>
+                <CUST_NAME constraint="?" length="V100" mappedName="custname"><!--支付联系人名称 -->
+                </CUST_NAME>
+                <CERT_TYPE_CODE constraint="?" length="V2" mappedName="certTypeCode"><!--支付联系人证件类型 -->
+                </CERT_TYPE_CODE>
+                <CERT_CODE constraint="?" length="V50" mappedName="certCode"><!--支付联系人证件号码 -->
+                </CERT_CODE>
+                <CERT_ADDR constraint="?" length="V256" mappedName="certAddr"><!--支付联系人证件地址 -->
+                </CERT_ADDR>
+                <CONTACT_PHONE constraint="?" length="V40" mappedName="contactPhone"><!--支付联系人电话 -->
+                </CONTACT_PHONE>
+                <REMARK constraint="?" length="V500" mappedName="remark"><!--支付备注信息 -->
+                </REMARK>
+            </PAY_INFO>
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID constraint="1" length="V20" mappedName="paraId"><!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue"><!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </ORDERSUB_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+     <MEDIA_INFO length="V20" defaultValue="?"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</ORDERSUB_INPUT>

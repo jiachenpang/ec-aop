@@ -1,0 +1,6 @@
+#宁夏bss
+ecaop.core.app.map.nxbss.sub=nxbss
+ecaop.core.app.nxbss.def={"code":"nxbss", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.nxbss.timeslimit=max 100 per 1 minute
+ecaop.core.app.nxbss.allow={appkey:"nxbss",allow:"qrtb,tsos", deny:null}
+

@@ -1,0 +1,4 @@
+#辽宁BSS
+ecaop.core.app.map.lnbss.pre=lnbpr
+ecaop.core.app.lnbpr.def={"code":"lnbpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.lnbpr.allow={appkey:"lnbpr",allow:"tsos", deny:null}

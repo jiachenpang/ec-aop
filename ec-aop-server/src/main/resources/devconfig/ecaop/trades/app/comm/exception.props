@@ -1,0 +1,26 @@
+#异常基本信息
+ecaop.core.exception.EcAopServerBizException.def={"excpCode":"EcAopServerBizException",remark:"业务异常",statusCode:"560"}
+
+ecaop.core.exception.EcAopServerSysException.def={"excpCode":"EcAopServerSysException",remark:"系统异常",statusCode:"600"}
+
+ecaop.core.exception.EcAopRequestException.def={"excpCode":"EcAopRequestException",remark:"请求异常",statusCode:"400"}
+
+ecaop.core.exception.EcAopRequestParamException.def={"excpCode":"EcAopRequestParamException",remark:"请求参数异常",statusCode:"440"}
+
+ecaop.core.exception.EcAopRequestBizException.def={"excpCode":"EcAopRequestBizException",remark:"请求业务异常",statusCode:"460"}
+ecaop.core.exception.EcAopRequestBizAllowException.def={"excpCode":"EcAopRequestBizAllowException",remark:"请求了禁止的业务",statusCode:"460"}
+ecaop.core.exception.EcAopRequestMethodAllowException.def={"excpCode":"EcAopRequestMethodAllowException",remark:"请求了禁止的接口",statusCode:"460"}
+ecaop.core.exception.EcAopRequestBizTimesLimitException.def={"excpCode":"EcAopRequestBizTimesLimitException",remark:"超出业务量阈值",statusCode:"460"}
+ecaop.core.exception.EcAopRequestProvinceAllowException.def={"excpCode":"EcAopRequestProvinceAllowException",remark:"请求了禁止的省份",statusCode:"460"}
+
+ecaop.core.exception.EcAopServerException.def={"excpCode":"EcAopServerException",remark:"服务异常",statusCode:"500"}
+ecaop.core.exception.EcAopConfigException.def={"excpCode":"EcAopConfigException",remark:"服务配置异常",statusCode:"500"}
+
+ecaop.core.excption.560=EcAopServerBizException
+ecaop.core.excption.600=EcAopServerSysException
+ecaop.core.excption.400=EcAopRequestException
+ecaop.core.excption.440=EcAopRequestParamException
+ecaop.core.excption.460=EcAopRequestBizException,EcAopRequestBizAllowException,\
+                        EcAopRequestMethodAllowException,EcAopRequestBizTimesLimitException,\
+                        EcAopRequestProvinceAllowException
+ecaop.core.excption.500=EcAopServerException,EcAopConfigException

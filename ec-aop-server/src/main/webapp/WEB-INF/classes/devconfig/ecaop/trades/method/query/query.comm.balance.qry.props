@@ -1,0 +1,52 @@
+ecaop.core.method.map.ecaop.trades.query.comm.balance.qry=qcbl
+ecaop.core.method.qcbl.def={"mothod":"qcbl","remark":"余额查询"}
+ecaop.core.method.qcbl.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.qcbl.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.qcbl.param.msg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    qryType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    operateType:{type:"String(1)",required:false,encrypted:false,validators:"@FixedLen(1)"},\
+    acctid:{type:"String(16)",required:false,encrypted:false,validators:null},\
+    serviceClassCode:{type:"String(4)",required:false,encrypted:false,validators:null},\
+    areaCode:{type:"String(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"String(40)",required:false,encrypted:false,validators:null},\
+    chargeType:{type:"String(1)",required:true,encrypted:false,validators:"@FixedLen(1)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+
+#定义processors
+ecaop.core.method.qcbl.processors=\
+                      @changeIptvToNet()\
+                      @ParametersMapper(ecaop.trade.qcbl.ParametersMapping)\
+                      @WsCall(ecaop.comm.conf.url.cbss.services.PaymentSer)\
+                      @Xml2JsonMapper4Fbs(ecaop.trade.qcbl.template)
+                      
+ecaop.trade.qcbl.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"PaymentSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"qryFeeInfo",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"QRY_FEE_INFO_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trade.qcbl.template@FBS@QRY_FEE_INFO_INPUT@qry@QRY_FEE_INFO_REQ"}\
+]
+
+ecaop.trade.qcbl.template=com/ailk/ecaop/biz/template/cbss/qryFeeInfo
+    

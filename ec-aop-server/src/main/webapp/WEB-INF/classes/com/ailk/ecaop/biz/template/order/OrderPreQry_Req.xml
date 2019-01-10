@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PRE_ORDER_QUERY_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+        <UNI_BSS_BODY mappedOut="true">
+	        <PRE_ORDER_QUERY_REQ>
+	            <PROVINCE_CODE length="F2" mappedName="province"/>
+	            <EPARCHY_CODE length="V6" mappedName="city"/>
+	            <STAFF_ID length="V20" mappedName="operatorId"/> 
+		        <ORDER_LIST constraint="+"  mappedName="orderList">
+		            <ORDER_ID length="V20"  mappedName="orderId" />
+		        </ORDER_LIST>
+		        <PARA constraint="*" mappedName="para">
+	                <PARA_ID length="V20" mappedName="paraId"></PARA_ID>
+	                <PARA_VALUE length="V60" mappedName="paraValue"></PARA_VALUE>
+                </PARA>
+	        </PRE_ORDER_QUERY_REQ>
+        </UNI_BSS_BODY>
+        <UNI_BSS_ATTACHED>
+            <MEDIA_INFO length="V204800" defaultValue="1GB" />
+        </UNI_BSS_ATTACHED>
+</PRE_ORDER_QUERY_INPUT>

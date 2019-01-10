@@ -1,0 +1,75 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.brd.same.open.sub=sbso
+ecaop.core.method.sbso.def={"mothod":"sbso","remark":"宽带同装正式提交"}
+ecaop.core.method.sbso.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.masb.sbso.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+
+ecaop.masb.sbso.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"Number(1)",required:false},\
+    orderNo:{type:"String(20)",required:false},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    feeInfo:{type:"JSON",required:false,validator:"@JSONSchema(ecaop.masb.sbso.feeInfoParameterMapping)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    payInfo:{type:"JSON", required:true, validator:"@JSONSchema(ecaop.masb.sbso.payInfoParameterMapping)"},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.masb.sbso.feeInfoParameterMapping={\
+    feeId:{type:"String(20)",required:true,validators:null},\
+    feeCategory:{type:"String(1)",required:true,validators:null},\
+    calculateTag:{type:"String(1)",required:true,validators:null},\
+    feeDes:{type:"String(120)",required:true,validators:null},\
+    origFee:{type:"String(10)",required:true,validators:null},\
+    reliefFee:{type:"String(10)",required:true,validators:null},\
+    reliefResult:{type:"String(60)",required:false,validators:null},\
+    realFee:{type:"String(10)",required:true,validators:null}\
+}
+
+ecaop.masb.sbso.payInfoParameterMapping={\
+    payMode:{type:"String(1)",required:true,validators:null},\
+    payType:{type:"String(2)",required:true,validators:null},\
+    payOrg:{type:"String(30)",required:false,validators:null},\
+    payNum:{type:"String(20)",required:false,validators:null}\
+}
+
+#定义processors
+ecaop.core.method.sbso.processors=@ChangeFeeType()\
+                                  @brdSameOpenSub()
+
+
+#请求参数
+ecaop.trades.sbso.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"UESS",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sbso.template@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}]
+
+
+ecaop.trades.sbso.template=com/ailk/ecaop/biz/template/nfour/OrderSub

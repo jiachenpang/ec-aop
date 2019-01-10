@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CancelSubRsp mappedOut="true">
+    <!-- 应答编码:0000 成功 ,1001 业务预收理异常 ,9999 其它错误 -->
+    <RespCode length="F4" mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+    <ProvOrderId length="V30" mappedName="provOrderId" />
+    <!-- 发票号码 -->
+    <BssOrderId length="V30" constraint="?" mappedName="bssOrderId" />
+    <!-- 保留字段 -->
+    <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+</CancelSubRsp>

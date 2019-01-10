@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <GET_SEQID_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V200" mappedName="detail"/>
+        <SEQ_ID length="V40" mappedName="id"/>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </GET_SEQID_RSP>
+</UNI_BSS_BODY>

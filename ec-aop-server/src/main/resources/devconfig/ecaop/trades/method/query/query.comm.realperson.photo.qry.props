@@ -1,0 +1,24 @@
+#实人认证照片查询  by lzg
+ecaop.core.method.map.ecaop.trades.query.comm.realperson.photo.qry=tqauq
+ecaop.core.method.tqauq.def={"mothod":"tqauq","remark":"实人认证照片查询"}
+ecaop.core.method.tqauq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.ecsb.tqauq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg 校验器 
+ecaop.ecsb.tqauq.MsgSchema={\
+   operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"String(2)",required:true,encrypted:false,validators:"@FixedLen(2)" },\
+    city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)" },\
+    district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:"@FixedLen(7)" },\
+    orderId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+    
+}
+#定义processors
+ecaop.core.method.tqauq.processors=@RealPersonPhotoQry()\
+                            @MallCall(ecaop.comm.conf.url.esshttp.mall)

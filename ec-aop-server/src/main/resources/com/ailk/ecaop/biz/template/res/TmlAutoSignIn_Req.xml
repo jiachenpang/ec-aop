@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <TmlAutoSignInReq>
+             <OperatorId length="V20" type="String" mappedName="operatorId"/>
+             <Province length="F2" type="String" mappedName="province"/>
+             <City length="F3" type="String" mappedName="city"/>
+             <StoId length="V20" type="String" mappedName="stoId"/>
+             <ResourcesInfo constraint="+" mappedName="resourcesInfo">
+                <ResourcesType length="F2" mappedName="resourcesType" defaultValue="01"/>
+                <ResCodeType length="F2" mappedName="resCodeType"/>
+                <ResourcesCode length="V30" mappedName="resourcesCode"/>
+             </ResourcesInfo>
+            <Para constraint="*" mappedName="para">
+                <ParaID length="V20" type="String" mappedName="paraId"/>
+                <ParaValue length="V60" type="String" mappedName="paraValue"/>
+            </Para>
+        </TmlAutoSignInReq>
+    </SvcCont>
+</UniBSS>

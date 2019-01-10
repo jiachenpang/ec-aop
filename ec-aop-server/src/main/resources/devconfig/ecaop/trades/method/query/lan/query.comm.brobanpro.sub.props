@@ -1,0 +1,26 @@
+#宽带产品确认       method申明定义
+ecaop.core.method.map.ecaop.trades.query.comm.brobanpro.sub=qcbs
+ecaop.core.method.qcbs.def={"mothod":"qcbs","remark":"宽带产品确认"}
+ecaop.core.method.qcbs.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.n6.mall.qcbs.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(50)","required":false, "encrypted":false, "validators":null}]
+
+#入参校验 
+ecaop.n6.mall.qcbs.Msg={\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    aopProductId:{type:"String(20)",required:true,validators:null},\
+    cancelTag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    delProductItemInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.n6.mall.qcbs.delProductItemInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.n6.mall.qcbs.delProductItemInfo={\
+    attr_code:{type:"String(50)",required:true,validators:null},\
+    attr_value:{type:"String(50)",required:true,validators:null},\
+}
+#processor
+#定义processors
+ecaop.core.method.qcbs.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.comm.province.flowConfig)

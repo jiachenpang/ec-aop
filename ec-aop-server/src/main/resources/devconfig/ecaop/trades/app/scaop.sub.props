@@ -1,0 +1,7 @@
+#四川能力开放平台
+ecaop.core.app.map.scaop.sub=scasb
+ecaop.core.app.scasb.def={"code":"scasb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.scasb.allow={appkey:"scasb",allow:"snqy,nboc,qctc,cmck,cdqy,cdnt,opap,opsb,sc4s,codc,cdsn,qrtac,2324,234o,\
+                            trao,crck,csaq,smno,mpsb,cack,adnu,ppoq,qmoq,spfs,qazq,smnp,ccic,cccc,sfso,sfss,mofc,ofcs,\
+                            oupc,orta,smosa,scac,23l4,ipry,qcsp,bsop,odsb,bypc,byps,ofps,qcbl,qofq,jffx,mvoa,\
+                            mold,scmc,spff,cdcq,cumd,oolq,qobq,qcfc,qcfd,tsos,qcop,smct,qcpa,qcfq,qcdq", deny:null}

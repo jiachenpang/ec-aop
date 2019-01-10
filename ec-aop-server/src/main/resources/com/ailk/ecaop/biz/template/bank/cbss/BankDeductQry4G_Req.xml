@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<QRY_SIGNING_STATE_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_SIGNING_STATE_REQ>
+            <!--操作员工工号 -->
+            <operatorId constraint="1" length="V20" mappedName="operatorId" />
+            <!--省分编码 -->
+            <province constraint="1" length="V2" mappedName="province" />
+            <!--地市编码 -->
+            <city constraint="1" length="V6" mappedName="city" />
+            <!--区县编码 -->
+            <district constraint="?" length="V10" mappedName="district" />
+            <!--渠道编码 -->
+            <channelId constraint="1" length="V20" mappedName="channelId" />
+            <!--渠道类型 -->
+            <channelType constraint="1" length="F7" mappedName="channelType" />
+            <!--电信业务类别 -->
+            <serviceClassCode constraint="1" length="F4" mappedName="serviceClassCode" />
+            <!--区号 -->
+            <areaCode constraint="?" length="V6" mappedName="areaCode" />
+            <!--服务号码 -->
+            <serialNumber constraint="1" length="V40" mappedName="serialNumber" />
+        </QRY_SIGNING_STATE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_SIGNING_STATE_INPUT>

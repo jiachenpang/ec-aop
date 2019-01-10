@@ -1,0 +1,30 @@
+#method定义
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.sinopen.app=mnsa
+ecaop.core.method.mnsa.def={"mothod":"mnsa","remark":"开户处理申请-无号码预占"}
+
+#params定义
+ecaop.core.method.mnsa.params=[\
+{"param":"msg",type:"JSON","required":true, "encrypted":false,"validators":null},\
+{"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+{"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.mnsa.param.Product={\
+productMode:{type:"String(1)",required:true}\
+}
+ecaop.trades.mnsa.param.activityInfo={\
+actPlanId:{type:"String(20)",required:true},\
+resourcesType:{type:"String(2)",required:false},\
+resProcId:{type:"String(20)",required:false},\
+resourcesCode:{type:"String(30)",required:false},\
+resourcesFee:{type:"String(20)",required:false},\
+actPara:{type:"JSON",required:false, validator:"@JSONSchema(ecaop.trades.mnsa.param.actPara)"}\
+}
+ecaop.trades.mnsa.param.actPara={\
+actParaId:{type:"String(20)",required:true},\
+actParaValue:{type:"String(60)",required:true}\
+}
+
+ecaop.trades.mnsa.productSchema={\
+productId:{type:"String(8)",required:true}\
+}
+ecaop.core.method.mnsa.processors=@OpenApplyProcessor()

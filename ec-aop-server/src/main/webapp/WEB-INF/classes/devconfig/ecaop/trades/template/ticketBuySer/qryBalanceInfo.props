@@ -1,0 +1,2 @@
+#电子券余额查询
+ecaop.trade.template.ticketBuySer.qryBalanceInfo={"serviceName":"TicketBuySer","operateName":"qryBalanceInfo","content":"QRY_BALANCE_INFO_REQ"}

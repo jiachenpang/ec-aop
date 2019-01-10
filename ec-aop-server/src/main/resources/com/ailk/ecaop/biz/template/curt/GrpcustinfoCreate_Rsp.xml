@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 集团客户管理系统;用于集团客户资料的创建 -->
+<UNI_BSS_BODY>
+    <CRTGRPCUSTINFO_RSP mappedOut="true">
+        <!--应答编码, 0000 成功,应答编码 0001: 客户资料实名制校验未通过 8888：其它错误 返回编码，固定长度4位，取值范围： 
+            0001：网络超时 0900：系统异常类 0901：数据库连接异常。 9999：其他错误（错误原因） -->
+        <RSP_CODE constraint="1" length="F4"
+            range="0000,0001,0002,0003,0004,0005,0006,8888,9999" mappedName="code" />
+        <!--应答描述 -->
+        <RSP_DESC constraint="1" length="V512" mappedName="detail" />
+        <!--应答细节 -->
+        <RSP_DETAIL constraint="?" length="V512" mappedName="moreDetail" />
+        <!-- 集团客户新增业务反馈 -->
+        <CRTGRPCUSTINFO_RSP_BODY mappedOut="true">
+            <!-- 客户 -->
+            <CUST_INFO constraint="?" mappedName="respInfo">
+                <!-- 客户标识 -->
+                <CUST_ID constraint="?" length="V16" mappedName="custId" />
+                <!-- 集团客户编号 -->
+                <GROUP_ID constraint="?" length="V40"
+                    mappedName="groupId" />
+                <!-- 省份客户标识 -->
+                <PROVINCE_CUST_ID constraint="?"
+                    length="V16" mappedName="provinceCustId" />
+                <!-- cBSS客户标识 -->
+                <CBSS_CUST_ID constraint="?" length="V16"
+                    mappedName="cBCustId" />
+            </CUST_INFO>
+        </CRTGRPCUSTINFO_RSP_BODY>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </CRTGRPCUSTINFO_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BODY mappedOut="true">
+    <RESP_CODE length="F4" range="0000,0001" mappedName="code" />
+    <TRADE_INFO constraint="*" mappedName="tradeInfo">
+        <TRANS_DATE length="F8" mappedName="transDate" />
+        <TRANS_NO length="V30" mappedName="transNo" />
+        <RESP_CODE length="F4" range="0000,1511,1512,1513,1514,1515,1516,1517,1518,1519,1520,1521,1522,1523,8888" mappedName="code" />
+        <RESP_DESC length="V50" constraint="?" mappedName="detail" />
+        <ORDER_ID length="V50" constraint="?" mappedName="orderId" />
+        <TRADE_TIME length="F8" mappedName="tradeTime" />
+        <PAY_FEE length="V11" mappedName="payFee" />
+        <TX_TYPE length="V2" range="01,02" mappedName="txType" />
+        <AGR_NO length="V30" mappedName="agrNo" />
+        <ACCESS_TYPE length="V2" constraint="?" range="01,02,03,04,05,06,07,08,09,99" mappedName="accessType" />
+        <PAY_MODE length="V2" constraint="?" range="01,02,03,04" mappedName="payMode" />
+    </TRADE_INFO>
+</BODY>

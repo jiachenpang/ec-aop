@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GET_BROADBAND_ACCT_INFO4G_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <GET_BROADBAND_ACCT_INFO4G_REQ>
+            <SERVICE_CLASS_CODE length="F4" defaultValue="0040" />
+            <PROVINCE_BRAND_CODE length="V20" constraint="?" mappedName="provinceBrandCode" />
+            <PRODUCT_ID length="V8" constraint="?" mappedName="productId" />
+            <CITY_CODE length="V20" constraint="?" mappedName="cityCode" />
+            <AREA_EXCH_ID length="V200" constraint="?" mappedName="areaExchId" />
+            <POINT_EXCH_ID length="V200" constraint="?" mappedName="pointExchId" />
+            <SWITCH_EXCH_ID length="V200" constraint="?" mappedName="switchExchId" />
+            <MODULE_EXCH_ID length="V200" constraint="?" mappedName="moduleExchId" />
+            <BRAND_CODE length="F4" constraint="?" mappedName="brandCode" />
+            <EXCH_CODE length="V200" constraint="?" mappedName="exchCode" />
+            <QRY_TYPE length="F1" mappedName="qryType" />
+            <ACCESS_TYPE length="F3" constraint="?"/>
+            <SERIAL_NUMBER length="V40" constraint="?" mappedName="serialNumber" />
+            <AUTH_ACCT_ID length="V60" constraint="?" mappedName="authAcctId" />
+            <PARA_LIST constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA_LIST>
+        </GET_BROADBAND_ACCT_INFO4G_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</GET_BROADBAND_ACCT_INFO4G_INPUT>

@@ -1,0 +1,68 @@
+#写卡结果通知
+ecaop.core.method.map.ecaop.trades.sell.mob.comm.cardres.notify=cdnt
+ecaop.core.method.cdnt.def={"mothod":"cdnt","remark":"写卡结果通知"}
+ecaop.core.method.cdnt.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.gdjk.cdnt.CdsbMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#写卡结果校验
+ecaop.gdjk.cdnt.CdsbMsg={\
+    operatorId:{type:"String(20)",required:true},\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    cardUseType:{type:"String(1)",required:true},\
+    errorIccid:{type:"String(22)",required:false},\
+    iccid:{type:"String(22)",required:true},\
+    imsi:{type:"String(22)",required:true},\
+    procId:{type:"String(30)",required:false},\
+    activeId:{type:"String(30)",required:true},\
+    reasonId:{type:"String(30)",required:true},\
+    capacityTypeCode:{type:"String(20)",required:false},\
+    resKindCode:{type:"String(20)",required:false},\
+    errorComments:{type:"String(256)",required:false},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义processors
+ecaop.core.method.cdnt.processors=@FlowProcessor(ecaop.core.method.cdnt.flowConfig)
+
+#配置跳转
+ecaop.core.method.cdnt.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(appkey)", transitions:"gdsb->03 *->04"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.gdjk.cdnt.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.masb.cdnt.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.masb.cdnt.processors=@route\
+                           @FlowProcessor(ecaop.core.method.cdnt.masb.flowConfig)
+
+ecaop.core.method.cdnt.masb.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.gdjk.cdnt.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#广东集客写卡结果通知
+ecaop.gdjk.cdnt.processors=\
+                @ParametersMapper(ecaop.gdjk.cdnt.ParametersMapping)\
+                @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                @Xml2JsonNobody(ecaop.gdjk.cdnt.template)
+
+ecaop.gdjk.cdnt.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00007",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"WriteCardReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.gdjk.cdnt.template@3GE"}\
+]
+ecaop.gdjk.cdnt.template=com/ailk/ecaop/biz/template/simcard/CardResNotify

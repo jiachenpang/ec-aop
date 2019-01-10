@@ -1,0 +1,28 @@
+#集团客户资料查询
+ecaop.core.method.map.ecaop.serv.curt.grpcustinfo.qry=scgq
+ecaop.core.method.scgq.def={"mothod":"scgq","remark":"集团客户资料查询"}
+ecaop.core.method.scgq.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.scgq.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.trades.scgq.msg={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:false},\
+    optType:{type:"String(1)",required:true},\
+    qryId:{type:"String(100)",required:true},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#定义流程跳转
+ecaop.core.method.scgq.processors=@grpCustInfoQry()
+
+ecaop.trades.scgq.qryGrpCustInfo.paramtersmapping=[\
+{paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.grpCustInfoAOPSer.qryGrpCustInfo",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.grpCustInfoAOPSer.qryGrpCustInfo.template@FBS@QRY_GRPCUST_INPUT@ns232"}\
+]

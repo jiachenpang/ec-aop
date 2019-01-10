@@ -1,0 +1,5 @@
+#广东BSS国政通测试
+ecaop.core.app.map.gdbc.sub=gdbc
+ecaop.core.app.gdbc.def={"code":"gdbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.gdbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.gdbc.allow={appkey:"gdbc",allow:"crck", deny:null}

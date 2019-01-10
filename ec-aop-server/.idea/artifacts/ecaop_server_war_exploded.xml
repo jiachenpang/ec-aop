@@ -1,0 +1,123 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ecaop-server:war exploded">
+    <output-path>$PROJECT_DIR$/src/main/webapp</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ecaop-server" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.axis2:axis2:1.5.1" />
+          <element id="library" level="project" name="Maven: org.n3r:ejson:1.1.31" />
+          <element id="library" level="project" name="Maven: org.apache.axis:axis:1.4" />
+          <element id="library" level="project" name="Maven: org.apache.axis:axis-jaxrpc:1.4" />
+          <element id="library" level="project" name="Maven: org.apache.ws.commons.axiom:axiom-api:1.2.8" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-activation_1.1_spec:1.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-javamail_1.4_spec:1.2" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+          <element id="library" level="project" name="Maven: jaxen:jaxen:1.1.1" />
+          <element id="library" level="project" name="Maven: xerces:xercesImpl:2.6.2" />
+          <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.3.04" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.ws.commons.axiom:axiom-impl:1.2.8" />
+          <element id="library" level="project" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.4" />
+          <element id="library" level="project" name="Maven: axis:axis-wsdl4j:1.5.1" />
+          <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.3.0" />
+          <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.axis2:axis2-transport-http:1.5" />
+          <element id="library" level="project" name="Maven: org.apache.axis2:axis2-kernel:1.5" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-ws-metadata_2.0_spec:1.1.2" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2" />
+          <element id="library" level="project" name="Maven: wsdl4j:wsdl4j:1.6.2" />
+          <element id="library" level="project" name="Maven: org.apache.ws.commons.schema:XmlSchema:1.4.3" />
+          <element id="library" level="project" name="Maven: org.apache.neethi:neethi:2.0.4" />
+          <element id="library" level="project" name="Maven: org.apache.woden:woden-api:1.0M8" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant:1.7.0" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.7.0" />
+          <element id="library" level="project" name="Maven: xerces:xmlParserAPIs:2.6.0" />
+          <element id="library" level="project" name="Maven: org.apache.woden:woden-impl-dom:1.0M8" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.0" />
+          <element id="library" level="project" name="Maven: org.apache.ws.commons.axiom:axiom-dom:1.2.8" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: xalan:xalan:2.7.0" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:1.4" />
+          <element id="library" level="project" name="Maven: org.apache.axis2:axis2-transport-local:1.5" />
+          <element id="library" level="project" name="Maven: org.n3r:ec-aop-core:0.0.1-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: net.sf.json-lib:json-lib:jdk15:2.3" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.4" />
+          <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
+          <element id="library" level="project" name="Maven: de.odysseus.staxon:staxon:1.2" />
+          <element id="library" level="project" name="Maven: org.n3r:ec-roc:0.0.1-SNAPSHOT" />
+          <element id="library" level="project" name="Maven: com.jcraft:jsch:0.1.50" />
+          <element id="library" level="project" name="Maven: ognl:ognl:3.0.6" />
+          <element id="library" level="project" name="Maven: javassist:javassist:3.11.0.GA" />
+          <element id="library" level="project" name="Maven: com.sleepycat:je:5.0.73" />
+          <element id="library" level="project" name="Maven: org.objenesis:objenesis:1.3" />
+          <element id="library" level="project" name="Maven: org.apache.ftpserver:ftpserver-core:1.0.6" />
+          <element id="library" level="project" name="Maven: org.apache.ftpserver:ftplet-api:1.0.6" />
+          <element id="library" level="project" name="Maven: org.apache.mina:mina-core:2.0.4" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:3.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:14.0.1" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.0.9" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.0.9" />
+          <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.2" />
+          <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.3.3" />
+          <element id="library" level="project" name="Maven: commons-net:commons-net:3.2" />
+          <element id="library" level="project" name="Maven: redis.clients:jedis:2.1.0" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.5" />
+          <element id="library" level="project" name="Maven: com.taobao.metamorphosis:metamorphosis-client:1.4.4" />
+          <element id="library" level="project" name="Maven: com.taobao.metamorphosis:metamorphosis-commons:1.4.4" />
+          <element id="library" level="project" name="Maven: com.github.sgroschupf:zkclient:0.1" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-lgpl:1.4.0" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-lgpl:1.4.0" />
+          <element id="library" level="project" name="Maven: com.caucho:hessian:3.1.5" />
+          <element id="library" level="project" name="Maven: com.taobao.gecko:gecko:1.1.2.M01" />
+          <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper:3.3.5" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-server:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-continuation:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-http:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-io:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlet:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-security:7.2.0.v20101020" />
+          <element id="library" level="project" name="Maven: com.jayway.jsonpath:json-path:0.8.1" />
+          <element id="library" level="project" name="Maven: net.minidev:json-smart:1.1.1" />
+          <element id="library" level="project" name="Maven: com.oracle:ojdbc14:10.2.0.4.0" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-all:4.1" />
+          <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
+          <element id="library" level="project" name="Maven: commons-discovery:commons-discovery:0.4" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.21" />
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.19" />
+          <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
+          <element id="library" level="project" name="Maven: xom:xom:1.2.10" />
+          <element id="library" level="project" name="Maven: org.apache.kafka:kafka_2.10:0.8.2.1" />
+          <element id="library" level="project" name="Maven: net.sf.jopt-simple:jopt-simple:3.2" />
+          <element id="library" level="project" name="Maven: com.101tec:zkclient:0.3" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.14" />
+          <element id="library" level="project" name="Maven: org.apache.kafka:kafka-clients:0.8.2.1" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.6" />
+          <element id="library" level="project" name="Maven: net.jpountz.lz4:lz4:1.2.0" />
+          <element id="library" level="project" name="Maven: org.xerial.snappy:snappy-java:1.1.1.6" />
+          <element id="library" level="project" name="Maven: com.yammer.metrics:metrics-core:2.2.0" />
+          <element id="library" level="project" name="Maven: org.scala-lang:scala-library:2.10.4" />
+          <element id="library" level="project" name="Maven: com.ailk.essaop:eop-client:0.0.1" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.8" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.5" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.8" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.8" />
+          <element id="library" level="project" name="Maven: commons-httpclient:commons-httpclient:3.0.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/webapp/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="ecaop-server/web/Web" />
+    </root>
+  </artifact>
+</component>

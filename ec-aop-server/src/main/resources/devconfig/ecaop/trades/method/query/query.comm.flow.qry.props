@@ -1,0 +1,23 @@
+#流量查询
+ecaop.core.method.map.ecaop.trades.query.comm.flow.qry=qcfq
+ecaop.core.method.qcfq.def={"mothod":"qcfq","remark":"流量查询"}
+ecaop.core.method.qcfq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.qcfq.msg.schema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+#msg 校验器 
+ecaop.trades.qcfq.msg.schema={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true},\
+    city:{type:"String(3)",required:true},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true},\
+    busiType:{type:"String(2)",required:true},\
+    qryMonth:{type:"String(6)",required:true},\
+    number:{type:"String(30)",required:true},\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.Para)" }\
+}
+
+ecaop.core.method.qcfq.processors=@QueryFlow(ecaop.comm.conf.url.flow-qry,ecaop.comm.conf.port.flow-qry)

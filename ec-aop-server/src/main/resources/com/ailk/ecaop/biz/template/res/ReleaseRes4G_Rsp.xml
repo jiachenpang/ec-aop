@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <RELEASE_RSC4G_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--处理结果编码：0000-成功 1766-资源实例不存在 8888-失败-->
+        </RESP_CODE>
+        <RESP_DESC constraint="?" length="V500" mappedName="detail">
+            <!--处理结果描述-->
+        </RESP_DESC>
+        <PARA constraint="*" mappedName="para">
+            <!--保留字段-->
+            <PARA_ID length="V20" mappedName="paraId">
+                <!--保留字段ID-->
+            </PARA_ID>
+            <PARA_VALUE length="V60" mappedName="paraValue">
+                <!--保留字段值-->
+            </PARA_VALUE>
+        </PARA>
+    </RELEASE_RSC4G_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,37 @@
+#活动查询
+ecaop.core.method.map.ecaop.trades.query.comm.acti.qry=qcaq
+ecaop.core.method.qcaq.def={"mothod":"qcaq","remark":"活动查询"}
+ecaop.core.method.qcaq.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.gdjk.qcaq.MsgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#msg校验
+ecaop.gdjk.qcaq.MsgSchema={\
+province:{type:"Number(2)",required:true,validator:"@FixedLen(2)"},\
+productId:{type:"String(20)",required:true},\
+activityType:{type:"String(1)",required:true,validator:"@Enum{0,1,2,3}"},\
+activityCont:{type:"String(2)",required:false,validator:"@Enum{01,02,03,04,05,06,07,08,09,10,11,12}"},\
+resourcesCode:{type:"String(30)",required:false},\
+groupId:{type:"String(20)",required:false},\
+para:{type:"JSON",required:false,validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+#广东集客活动查询
+ecaop.core.method.qcaq.processors=@ParametersMapper(ecaop.gdjk.qcaq.ActivityAryParametersMapping)\
+                                 @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                                 @Xml2JsonMapper(ecaop.gdjk.qcaq.template)
+#请求参数
+ecaop.gdjk.qcaq.ActivityAryParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00019",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ActivityQueryReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.gdjk.qcaq.template@3GE"}\
+]
+#报文模版路径
+ecaop.gdjk.qcaq.template=com/ailk/ecaop/biz/template/activity/ActivityQuery
+

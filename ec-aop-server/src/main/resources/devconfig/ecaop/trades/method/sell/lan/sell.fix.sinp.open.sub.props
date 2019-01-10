@@ -1,0 +1,92 @@
+# 方法定义
+ecaop.core.method.map.ecaop.trades.sell.fix.sinp.open.sub=sfss
+ecaop.core.method.sfss.def={"mothod":"sfss","remark":"固话单装正式提交"}
+ecaop.core.method.sfss.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.masb.sfss.PreCommitParameterMapping)"},\
+     {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+     #请求JSON的校验,msg主体
+ecaop.masb.sfss.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:true},\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    orderNo:{type:"String(20)",required:false},\
+    provOrderId:{type:"String(30)",required:true},\  
+    opeSysType:{type:"String(1)",required:false},\
+    feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.masb.sfss.feeInfoSchema)"},\
+    origTotalFee:{type:"String(10)",required:true},\
+    payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.masb.sfss.payInfoSchema)"}\
+}
+
+#收费信息
+ecaop.masb.sfss.feeInfoSchema={\
+    feeId:{type:"String(20)",required:true},\
+    feeCategory:{type:"String(1)",required:true},\
+    calculateTag:{type:"String(1)",required:true},\
+    feeDes:{type:"String(120)",required:true},\
+    origFee:{type:"String(10)",required:true},\
+    reliefFee:{type:"String(10)",required:true},\
+    reliefResult:{type:"String(60)",required:false},\
+    realFee:{type:"String(10)",required:false}\
+}
+
+#客户支付信息
+ecaop.masb.sfss.payInfoSchema={\
+    payMode:{type:"String(1)",required:true},\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+    
+}
+#定义processors
+ecaop.core.method.sfss.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.sfss.flowConfig)
+
+#配置跳转
+ecaop.core.method.sfss.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.mall.sub.CBsfss.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->05"},\
+{id:"04", processor:"AopHandler(ecaop.mall.sub.N6sfss.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.mall.sub.N6sfss.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+ecaop.mall.sub.CBsfss.processors=@ChangeFeeType()\
+                                 @CBfixSinpOpenSubProcessors()
+ecaop.mall.sub.N6sfss.processors=B6fixSinpOpenSubProcessors()
+
+
+#请求参数orderSub
+ecaop.masb.sfss.orderSubParametersMapping=[\
+    {paramterName:"serviceName",extractor:"fix",extractorConfig:"OrdSer",temp:true},\
+    {paramterName:"operateName",extractor:"fix",extractorConfig:"orderSub",temp:true},\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+    {paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"ORDERSUB_REQ",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.userInfo.serviceClassCode,0200"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.userInfo.userDiffCode,01"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.userInfo.firstMonBillMode,01"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.userInfo.basicCreditValue,0"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.userInfo.acctTag,0"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.userInfo.openMode,0"},\
+    {paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.writeCardFlag,1"},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.sfss.orderSubTemplate@FBS@ORDERSUB_INPUT@n-1665003197@ORDERSUB_REQ"}\
+]
+
+#指定模板路径
+ecaop.masb.sfss.orderSubTemplate=com/ailk/ecaop/biz/template/nfour/OrderSub

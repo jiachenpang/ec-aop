@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> 
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <OrderPreQryReq>
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <Province length="F2" mappedName="province"/>
+            <City length="F3" mappedName="city"/>
+            <OrderList constraint="+" mappedName="orderList">
+                 <OrderID length="V20" mappedName="orderId"/>
+            </OrderList>
+            <!-- 保留字段 -->
+            <Para constraint="*" mappedName="para">
+                 <ParaID length="V20" type="String" mappedName="paraId"/>
+                 <ParaValue length="V20" type="String" mappedName="paraValue"/>
+            </Para>
+        </OrderPreQryReq>
+    </SvcCont>
+</UniBSS>

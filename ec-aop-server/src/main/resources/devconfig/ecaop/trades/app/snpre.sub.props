@@ -1,0 +1,9 @@
+#陕西预受理
+ecaop.core.app.map.snpre.sub=snpre
+ecaop.core.app.snpre.def={"code":"snpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.snpre.timeslimit=max 100 per 1 minute
+ecaop.core.app.snpre.allow={appkey:"snpre",allow:"qcacq,qcar,qcpq,qcpa,spfs,qctc,cuck,ccic,syps,sack,cack,qrsq,qrsc,\
+                        qcsq,csaq,snqy,nboc,qcsc,smnp,mpsb,cdsn,cdqy,cdnt,ppoq,adnu,bsop,odsb,prqy,qrtc,opap,opsb,\
+                        cumd,oata,mold,oupc,2324,234o,trao,cmck,ipry,kdwy,tzcx,bsoa,sbso,baoa,sbaos,sfso,sfss,\
+                        scmc,scac,scaf,bypc,byps,ofpc,ofps,smcc,smosa,smoss,23l4,234s,234t,smno,mofc,ofcs,orta,modr,qmoq,23t4,23l4,jffx,sccc,\
+                        qcbl,qofq,qcsp,qrsr,tsrc,qrtb,faoa,spff,cuss,cdcq,tsos,qcfc,qcfd,seft,sgfs,grcr,scgq,grar,mccr,mccn", deny:null}

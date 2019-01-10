@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QRY_RELATION_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_RELATION_INFO_REQ>
+            <SERIAL_NUMBER_A constraint="?" length="V40" mappedName="serialNumberA" />
+            <SERIAL_NUMBER_B constraint="?" length="V40" mappedName="serialNumberB" />
+            <X_GETMODE length="V2" mappedName="xGetmode" />
+            <USER_ID_A constraint="?" length="V16" mappedName="userIdA" />
+            <USER_ID_B constraint="?" length="V16" mappedName="userIdB" />
+            <ROLE_CODE_B constraint="?" length="V2" mappedName="roleCodeB" />
+            <SHORT_CODE constraint="?" length="V20" mappedName="shortCode" />
+            <RELATION_TYPE_CODE constraint="?" length="V4" mappedName="relationTypeCode" />
+            <PRODUCT_ID constraint="?" length="V8" mappedName="productId" />
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId">
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue">
+                </PARA_VALUE>
+            </PARA>
+        </QRY_RELATION_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_RELATION_INFO_INPUT>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<SIGN_CONTRACT_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+   <SIGN_CONTRACT_REQ>
+  <TRADE_TYPE_CODE constraint="1" length="F4" mappedName="tradeTypeCode">
+    <!--业务受理类型, 0127 银行卡代扣签约, 0128 银行卡代扣解约-->
+  </TRADE_TYPE_CODE>
+  <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+    <!--总部订单ID-->
+  </ORDER_ID>
+  <SERVICE_CLASS_CODE constraint="1" length="F4" mappedName="serviceClassCode">
+    <!--电信业务网别，编码见附录-->
+  </SERVICE_CLASS_CODE>
+  <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+    <!--区号-->
+  </AREA_CODE>
+  <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber">
+    <!--服务号码-->
+  </SERIAL_NUMBER>
+  <ACCOUNT_INFO constraint="1" mappedName="accountInfo">
+    <!--账户信息-->
+    <ACCOUNT_NAME constraint="?" length="V100" mappedName="accountName">
+      <!--账户名称-->
+    </ACCOUNT_NAME>
+    <ACCOUNT_ID constraint="1" length="V30" mappedName="accountId">
+      <!--账户编号-->
+    </ACCOUNT_ID>
+    <CONTRACT_NUMBER constraint="1" length="V40" mappedName="contractNumber">
+      <!--签约协议号-->
+    </CONTRACT_NUMBER>
+    <SIGN_DATE constraint="?" length="F8" mappedName="appDate">
+      <!--签约日期YYYYMMDD-->
+    </SIGN_DATE>
+    <BANK_NAME constraint="1" length="V30" mappedName="bankName">
+      <!--银行名称-->
+    </BANK_NAME>
+    <BANK_ACCOUNT_NAME constraint="?" length="V256" mappedName="bankAccountName">
+      <!--银行账户户名-->
+    </BANK_ACCOUNT_NAME>
+    <BANK_CARD_TYPE constraint="1" length="F1" mappedName="bankCardType">
+      <!--银行帐号类型, 信用卡:0, 借记卡:1, 对公账号：2-->
+    </BANK_CARD_TYPE>
+    <ACCOUNT_LAST_FOUR constraint="1" length="F4" mappedName="accountLastFour">
+      <!--银行卡账号后4位-->
+    </ACCOUNT_LAST_FOUR>
+    <CONTRACT_CERT_TYPE_CODE constraint="?" length="V2" mappedName="contractCertTypeCode">
+      <!--持卡人证件类别编码，见附录-->
+    </CONTRACT_CERT_TYPE_CODE>
+    <CONTRACT_CERT_CODE constraint="?" length="V50" mappedName="contractCertCode">
+      <!--持卡人证件号码-->
+    </CONTRACT_CERT_CODE>
+    <CUST_NAME constraint="?" length="V100" mappedName="custName">
+      <!--客户名称-->
+    </CUST_NAME>
+    <ACTOR_NAME constraint="?" length="V100" mappedName="actorName">
+      <!--经办人名称-->
+    </ACTOR_NAME>
+    <ACTOR_CERTTYPEID constraint="?" length="V2" mappedName="actorCerttypeId">
+      <!--经办人证件类型-->
+    </ACTOR_CERTTYPEID>
+    <ACTOR_CERTNUM constraint="?" length="V50" mappedName="ActorCertnum">
+      <!--经办人证件号码-->
+    </ACTOR_CERTNUM>
+    <LEVEL_VALUE constraint="?" length="V11" mappedName="levelValue">
+      <!--代扣阀值（小于等于此阀值时，发起实时代扣请求）, 单位:分-->
+    </LEVEL_VALUE>
+    <EVERYTIME_VALUE constraint="?" length="V11" mappedName="everyValue">
+      <!--代扣次金额（每次发起代扣请求时的金额）, 单位：分-->
+    </EVERYTIME_VALUE>
+    <DEVELOPER_INFO constraint="?" mappedName="developerInfo">
+      <!--发展人信息-->
+      <RECOM_DEPAR_ID constraint="?" length="V30" mappedName="recomDeparId">
+        <!--推荐部门标识-->
+      </RECOM_DEPAR_ID>
+      <RECOM_DEPAR_NAME constraint="?" length="V256" mappedName="recomDeparName">
+        <!--推荐部门名称-->
+      </RECOM_DEPAR_NAME>
+      <RECOM_PERSON_ID constraint="?" length="V30" mappedName="recomPersonName">
+        <!--推荐人标识-->
+      </RECOM_PERSON_ID>
+      <RECOM_PERSON_NAME constraint="?" length="V128" mappedName="recomPersonName">
+        <!--推荐人名称-->
+      </RECOM_PERSON_NAME>
+    </DEVELOPER_INFO>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/>
+  </ACCOUNT_INFO>
+</SIGN_CONTRACT_REQ>
+  </UNI_BSS_BODY> 
+   <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</SIGN_CONTRACT_INPUT>

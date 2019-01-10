@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <QRY_SHARE_NBR_ORD_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+        </RESP_CODE>
+        <RESP_DESC length="V5000" mappedName="detail">
+            <!--应答描述 -->
+        </RESP_DESC>
+        <STAFF_ID length="V20"  constraint="1"  mappedName="staffId">
+        <!-- 操作员工 -->
+        </STAFF_ID>
+        <PRODUCT_ID length="F8"  constraint="?"  mappedName="productCode">
+        <!-- 产品ID，可加装时必须返回 -->
+        </PRODUCT_ID>
+        <INSTALL_ADDR length="V256"  constraint="?"  mappedName="installAddress">
+        <!-- 装机地址 -->
+        </INSTALL_ADDR>
+        <SERVICE_CODE length="V20"  constraint="?"  mappedName="serviceCode">
+        <!-- 业务区编码 -->
+        </SERVICE_CODE>
+        <EXCH_CODE length="V20"  constraint="?"  mappedName="exchCode">
+        <!-- 局向编码 -->
+        </EXCH_CODE>
+        <ADDRESS_CODE length="V30"  constraint="?"  mappedName="addressCode">
+        <!-- 标准地址编码 -->
+        </ADDRESS_CODE>
+        <AREA_EXCH_ID length="V200"  constraint="?"  mappedName="areaExchId">
+        </AREA_EXCH_ID>
+        <MODULE_EXCH_ID length="V200"  constraint="?"  mappedName="moduleExchId">
+        </MODULE_EXCH_ID>
+        <POINT_EXCH_ID length="V200"  constraint="?"  mappedName="pointExchId">
+        </POINT_EXCH_ID>
+        <CERT_NUM length="V20"  constraint="?"  mappedName="certNum">
+        <!-- 证件号码 -->
+        </CERT_NUM>
+        <CUSTOMER_NAME length="V128"  constraint="?"  mappedName="customerName">
+        <!-- 客户名称 -->
+        </CUSTOMER_NAME>
+        <CERT_ADDR length="V200"  constraint="?"  mappedName="certAdress">
+        <!-- 证件地址 -->
+        </CERT_ADDR>
+        <BRAND_CODE length="V4"  constraint="1"  mappedName="brandCode">
+        <!-- 品牌 -->
+        </BRAND_CODE>
+        <NET_TYPE_CODE length="V4"  constraint="1"  mappedName="netTypeCode">
+        <!-- 网别 -->
+        </NET_TYPE_CODE>
+        <PARA constraint="*"  mappedName="para">
+        <!-- 保留字段 -->
+        	<PARA_ID length="V20"  mappedName="paraId">
+        	<!-- 保留字段ID -->
+        </PARA_ID>
+        	<PARA_VALUE length="V60"   mappedName="paraValue">
+        	<!-- 保留字段值 -->
+        </PARA_VALUE>
+        </PARA>
+                
+    </QRY_SHARE_NBR_ORD_RSP>
+</UNI_BSS_BODY>

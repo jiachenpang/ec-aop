@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS> <!--客户资料验证接口 请求报文模板 -->
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <CheckProvinceReq>
+            <!-- 省份 -->
+            <Province length="F2" constraint="?" mappedName="province"/>
+        </CheckProvinceReq>
+    </SvcCont>
+</UniBSS>

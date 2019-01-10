@@ -1,0 +1,8 @@
+
+#合作方门户
+ecaop.core.app.map.partner.biz=ptbz
+ecaop.core.app.ptbz.def={"code":"ptbz", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.ptbz.timeslimit=max 100 per 1 minute
+ecaop.core.app.ptbz.allow={appkey:"ptbz",allow:"crck,qccm", deny:null}
+
+#新增mock增加数组元素

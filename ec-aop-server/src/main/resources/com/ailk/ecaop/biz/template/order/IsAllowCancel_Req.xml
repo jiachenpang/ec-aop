@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IS_ALLOW_CANCEL_SO_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <IS_ALLOW_CANCEL_SO_REQ>
+      <SO_NBR constraint="1" length="V16" mappedName="soNbr">
+        <!--服务定单编码-->
+      </SO_NBR>
+      <CANCEL_REASON constraint="?" length="V500" mappedName="cancelReason">
+        <!--撤单原因-->
+      </CANCEL_REASON>
+      <FORCE_LOCK constraint="?" length="V1" mappedName="forceLock">
+        <!--强制加锁标识, 可空非必传。, 1：强制加锁, 不传：非强制加锁-->
+      </FORCE_LOCK>
+      <PARA constraint="*" mappedName="para">
+        <!--保留字段-->
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!--保留字段ID-->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!--保留字段值-->
+        </PARA_VALUE>
+      </PARA>
+    </IS_ALLOW_CANCEL_SO_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED> 
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/> 
+  </UNI_BSS_ATTACHED> 
+</IS_ALLOW_CANCEL_SO_INPUT>

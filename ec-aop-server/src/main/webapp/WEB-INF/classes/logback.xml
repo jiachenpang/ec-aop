@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <appender name="EcAopFileAppender" class="ch.qos.logback.classic.sift.MultiKeysSiftingAppender">
+        <discriminator class="ch.qos.logback.classic.sift.MDCBasedMultiKeysDiscriminator">
+            <key>appCode,methodCode</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="EcAop-${appCode}-${methodCode}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <File>ecaoplog/${appCode}/${methodCode}.log</File>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <FileNamePattern>ecaoplog/${appkeyCode}/${methodCode}.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+                    <!-- keep 30 days' worth of history -->
+                    <maxHistory>30</maxHistory>
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <!-- or whenever the file size reaches 100MB -->
+                        <maxFileSize>512MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+    
+    <appender name="ELKAopFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>elklog/aop/aoplog.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>elklog/aop/aoplog.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>512MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ELKNumFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>elklog/num/numlog.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>elklog/num/numlog.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>512MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ELKCbFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>elklog/cbss/cblog.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>elklog/cbss/cblog.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>512MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ELKOsnFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>elklog/osn/osnlog.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>elklog/osn/osnlog.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>512MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="ELKOtherFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>elklog/other/otherlog.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>elklog/other/otherlog.%d{yyyy-MM-dd}.%i.log.gz</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>512MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    
+    <appender name="EcAopMetaQAppender" class="ch.qos.logback.classic.sift.MultiKeysSiftingAppender">
+        <discriminator class="ch.qos.logback.classic.sift.MDCBasedMultiKeysDiscriminator">
+            <key>topic</key>
+            <defaultValue>unknow</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="${topic}" class="org.n3r.metaq.logback.MetaQAppender">
+                <topic>${topic}</topic>
+                <zkConnect>132.35.81.214:2181</zkConnect>
+            </appender>
+        </sift>
+    </appender>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="Console" />
+    </root>
+
+    <logger name="org.n3r.ecaop.core.log.EcAopLogger" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="EcAopFileAppender" />
+        <!-- <appender-ref ref="EcAopMetaQAppender" />  -->
+    </logger>
+    
+    
+    <logger name="org.n3r.ecaop.core.log.elk.ELKAopLogger" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="ELKAopFileAppender" />
+    </logger>
+    
+    <logger name="org.n3r.ecaop.core.log.elk.ELKNumLogger" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="ELKNumFileAppender" />
+    </logger>
+    
+    <logger name="org.n3r.ecaop.core.log.elk.ELKCbLogger" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="ELKCbFileAppender" />
+    </logger>
+    
+    <logger name="org.n3r.ecaop.core.log.elk.ELKOsnLogger" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="ELKOsnFileAppender" />
+    </logger>
+    
+    <logger name="org.n3r.ecaop.core.log.elk.ELKOtherLogger" additivity="true">
+        <level value="INFO" />
+        <appender-ref ref="ELKOtherFileAppender" />
+    </logger>
+    
+</configuration>
+

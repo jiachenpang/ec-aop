@@ -1,0 +1,24 @@
+#订单回滚接口
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.cancel.sub=mnca
+ecaop.core.method.mnca.def={"mothod":"mnca","remark":"订单回滚接口"}
+ecaop.core.method.mnca.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, validators:"@JSONSchema(ecaop.trades.mnca.msgSchema)"},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+#msg 校验器 
+ecaop.trades.mnca.msgSchema={\
+    operatorId:{ type:"String(20)", required:true },\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{ type:"String(3)", required:true },\
+    district:{ type:"String(10)", required:true },\
+    channelId:{type:"String(20)",required:true},\
+    channelType:{ type:"String(7)", required:true,validators:"@FixedLen(7)" },\
+    provOrderId:{ type:"String(30)", required:true },\
+    ordersId:{ type:"String(30)", required:true },\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+
+#定义处理器
+ecaop.core.method.mnca.processors=@cancelSub()

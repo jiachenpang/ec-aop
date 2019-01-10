@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AGENCY_ACCT_PAY_NOTIFY_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true"> 
+        <AGENCY_ACCT_PAY_NOTIFY_REQ> 
+            <ORDER_ID constraint="1" length="V30" mappedName="orderId">
+                <!--总部订单流水cBSS系统填写，返销及对账时使用 -->
+            </ORDER_ID>
+            <MODULE_FLAG constraint="1" length="V2" mappedName="moduleFlag">
+                <!-- 未知表示 -->
+            </MODULE_FLAG>
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode">
+                <!-- 电信业务网别，编码4参考中国联通服务集统一编码规范2.1 网别编码 -->
+            </SERVICE_CLASS_CODE>
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode">
+                <!--区号 -->
+            </AREA_CODE>
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+                <!--服务号码 -->
+            </SERIAL_NUMBER>
+            <TRADE_TYPE constraint="1" length="F1" mappedName="tradeType">
+                <!-- 交易类型 :0：扣款, 1：返销, 2：押金清退 -->
+            </TRADE_TYPE>
+            <TRADE_DATE constraint="1" length="F8" mappedName="tradeDate">
+                <!-- 业务对账日期,格式：YYYYMMDD -->
+            </TRADE_DATE>
+            <TRADE_TIME constraint="1" length="F14" mappedName="tradeTime">
+                <!-- 业务交易时间 ,格式：YYYYMMDDHH24MISS -->
+            </TRADE_TIME>
+            <CHANNEL_ID constraint="1" length="V20" mappedName="channelId">
+                <!-- 渠道编码-->
+            </CHANNEL_ID>
+            <CHANNEL_NAME constraint="?" length="V200" mappedName="channelName">
+                <!-- 代理商渠道名称 -->
+            </CHANNEL_NAME>
+            <EPARCHY_CODE constraint="1" length="V6" mappedName="eparchyCode">
+                <!--代理商归属地市编码 -->
+            </EPARCHY_CODE>
+            <CITY_CODE constraint="1" length="V60" mappedName="cityCode">
+                <!-- 代理商归属区县 -->
+            </CITY_CODE>
+            <PAY_FEE constraint="1" length="V11" mappedName="payFee">
+                <!-- 单位：分。金额为正值，当返销时，金额与原业务金额一致。 -->
+            </PAY_FEE>
+            <ACTIVITY_TYPE constraint="1" length="F1" mappedName="activityType">
+                <!-- 营销活动类型：0 存费送机 ,1 其他 -->
+            </ACTIVITY_TYPE>
+            <ADVANCE_PRICE constraint="?" length="V20" mappedName="advncePrice">
+                <!-- 预存款（包括业务工单内的所有预存款之和） -->
+            </ADVANCE_PRICE>
+            <SHOP_GOODS_EQUIPMENT constraint="?" length="F1" mappedName="shopCoodsEquipment">
+                <!-- 是否为铺货终端：0 否 ,1 是 -->
+            </SHOP_GOODS_EQUIPMENT>
+            <CONTRACT_EQUIPMENT_PRICE constraint="?" length="V20" mappedName="contractEquipmentPrice">
+                <!-- 合约终端款 -->
+            </CONTRACT_EQUIPMENT_PRICE>
+            <EQUIPMENT_PRICE constraint="?" length="V20" mappedName="equipmentPrice">
+                <!-- 终端成本价 -->
+            </EQUIPMENT_PRICE>
+            <ACCT_REFUND_INFO constraint="?" mappedName="acctRefundInfo">
+                <!-- 返销操作时原订单信息 -->
+                <ORG_ORDER_ID constraint="1" length="V30" mappedName="orgOrderId">
+                    <!-- 总部原订单ID -->
+                </ORG_ORDER_ID>
+                <ORG_PROVINCE_ORDER_ID constraint="?" length="V30" mappedName="orgProvinceOrderId">
+                    <!-- 省分原订单ID -->
+                </ORG_PROVINCE_ORDER_ID>
+            </ACCT_REFUND_INFO>
+            <PARA constraint="*" mappedName="para">
+                <!--保留-->  
+                <PARA_ID constraint="1" length="V20" mappedName="paraId"> 
+                    <!--保留字段ID--> 
+                </PARA_ID>  
+                <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue"> 
+                    <!--保留字段值--> 
+                </PARA_VALUE> 
+            </PARA> 
+        </AGENCY_ACCT_PAY_NOTIFY_REQ> 
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</AGENCY_ACCT_PAY_NOTIFY_INPUT>
+

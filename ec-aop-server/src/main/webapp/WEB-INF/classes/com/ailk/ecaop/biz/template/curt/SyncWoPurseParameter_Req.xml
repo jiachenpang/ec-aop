@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SYNC_WO_PURSE_PARAMETER_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+    <SYNC_WO_PURSE_PARAMETER_REQ>
+      <ORDER_ID constraint="1" length="V40" mappedName="orderId">
+        <!--总部订单ID-->
+      </ORDER_ID>
+      <USER_ID constraint="?" length="V40" mappedName="userId">
+        <!--用户ID-->
+      </USER_ID>
+      <WO_ACCOUNT_ID constraint="1" length="V40" mappedName="woAccountId">
+        <!--沃账户ID-->
+      </WO_ACCOUNT_ID>
+      <SERIAL_NUMBER constraint="1" length="V40" mappedName="serialNumber">
+        <!--服务号码-->
+      </SERIAL_NUMBER>
+      <CERT_TYPE constraint="1" length="F2" mappedName="type">
+        <!--证件类型  01:18位身份证 -->
+      </CERT_TYPE>
+      <CERT_CODE constraint="1" length="V40" mappedName="certCode">
+        <!--证件号码-->
+      </CERT_CODE>
+      <CERT_NAME constraint="1" length="V40" mappedName="certName">
+        <!--证件姓名-->
+      </CERT_NAME>
+      <IS_BIND constraint="1" length="F1" mappedName="isBind">
+        <!--此交易是否落沃账户ID 0：否 1：是  -->
+      </IS_BIND>
+      <BUSINESS_INFO constraint="1" mappedName="businessInfo">
+        <!--业务信息-->
+        <BUSINESS_TYPE constraint="1" length="F1" mappedName="businessType">
+          <!--业务类型 0：月末话费代扣 1：定期充值 2：余额不足代扣 3：通信控不停机 -->
+        </BUSINESS_TYPE>
+        <OPER_TYPE constraint="1" length="F1" mappedName="operType">
+          <!--操作类型 0：开通业务 1：取消业务 2：变更参数 -->
+        </OPER_TYPE>
+        <BUS_PARAMETER_INFO constraint="1" mappedName="busParameterInfo">
+          <!--业务参数信息-->
+          <DATA constraint="?" length="F1" mappedName="data">
+            <!--日期 0: 5号 1:15号（默认） 2:25号 注：BUSINESS_TYPE=1时必填 -->
+          </DATA>
+          <THRESHOLD constraint="?" length="F1" mappedName="threshold">
+            <!--阀值 0:5元（默认） 1:10元 2:20元 注：BUSINESS_TYPE=2、3时必填 -->
+          </THRESHOLD>
+          <AMOUNT constraint="?" length="F1" mappedName="amount">
+            <!--金额（单位：元） 0：50 1：100（默认） 2：200 3：300 注：BUSINESS_TYPE=1、2、3时必填 -->
+          </AMOUNT>
+          <END_TIME constraint="1" length="F14" mappedName="endTime">
+            <!--订单完成时间 YYYYMMDDHH24MISS -->
+          </END_TIME>
+        </BUS_PARAMETER_INFO>   
+      </BUSINESS_INFO>
+    <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+    </SYNC_WO_PURSE_PARAMETER_REQ> 
+  </UNI_BSS_BODY>  
+  <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+  </UNI_BSS_ATTACHED>
+</SYNC_WO_PURSE_PARAMETER_INPUT>

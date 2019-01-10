@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UniBSS>
+   <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <OldChangeCardAopSub>
+            <!--  操作员ID-->
+            <OperatorID length="V20" constraint="1" mappedName="operatorId"/>
+            <!-- 省份 -->
+            <Province length="F2" constraint="1" mappedName="province"/>
+            <!-- 地市 -->
+            <City length="F3" constraint="1" mappedName="city"/>
+            <!-- 区县 -->
+            <District length="V10" constraint="1" mappedName="district"/>
+            <!-- 渠道编码 -->
+            <ChannelID length="V20" constraint="1" mappedName="channelId"/>
+            <!-- 渠道类型 -->
+            <ChannelType length="F7" constraint="1" mappedName="channelType"/>
+            <OpeSysType constraint="1" length="F1" mappedName="opeSysType">
+                <!--办理业务系统：1：ESS  2：CBSS -->
+            </OpeSysType>
+            <OrdersId constraint="1" length="V20" mappedName="ordersId">
+                <!--外围系统订单ID -->
+            </OrdersId>
+            <EssSubscribeId constraint="?" length="V20" mappedName="essSubscribeId">
+                <!--落地系统流水 -->
+            </EssSubscribeId>
+            <SerialNumber constraint="1" length="V20" mappedName="serialNumber">
+                <!--服务号码 -->
+            </SerialNumber>
+            <ICCID constraint="1" length="V22" mappedName="iccid">
+                <!--大卡卡号 -->
+            </ICCID>
+            <FeeInfo constraint="*" mappedName="feeInfo">
+                   <!--  收费信息*（ESS从BSS获取到的） -->
+                   <FeeID length="V20"  mappedName="feeId"></FeeID>
+                   <!--  收费项科目-->
+                   <FeeCategory length="F1"  mappedName="feeCategory"></FeeCategory>
+                   <!--  收费项描述-->
+                   <FeeDes length="V120"  mappedName="feeDes"></FeeDes>
+                   <!--  应收费用正整数，单位：厘-->
+                   <OrigFee  length="V10"  mappedName="origFee"></OrigFee>
+                   <!-- 减免金额，单位：厘-->
+                   <ReliefFee length="V10"  mappedName="reliefFee"></ReliefFee>
+                   <!-- 减免原因-->
+                   <ReliefResult length="V60"  mappedName="reliefResult"></ReliefResult>
+                   <!--实收金额，单位：厘-->
+                   <RealFee length="V10"  mappedName="realFee"></RealFee>
+            </FeeInfo>
+            <OrigTotalFee constraint="1" length="V10" mappedName="origTotalFee">
+                <!--总费用正整数，单位：厘 -->
+            </OrigTotalFee>
+            <!-- 支付信息-->
+            <PayInfo mappedName="payInfo">
+                   <!-- 支付方式-->
+                   <PayType constraint="1" length="F2"   mappedName="payType"></PayType>
+                   <!-- 支付机构名称-->
+                   <PayOrg  length="V30" constraint="?"  mappedName="payOrg"></PayOrg>
+                   <!-- 支付账号-->
+                   <PayNum  length="V20" constraint="?"  mappedName="payNum"></PayNum>
+            </PayInfo>
+            <InvoiceNo  length="V30" constraint="?" mappedName="invoiceNo">
+                <!--发票号码 -->
+            </InvoiceNo>
+            <PARA constraint="*" mappedName="para">
+                <!--保留字段 -->
+               <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                        <!--保留字段ID -->
+               </PARA_ID>
+               <PARA_VALUE constraint="1" length="V4000" mappedName="paraValue">
+                       <!--保留字段值 -->
+               </PARA_VALUE>
+           </PARA>
+        </OldChangeCardAopSub>
+    </SvcCont>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</UniBSS>

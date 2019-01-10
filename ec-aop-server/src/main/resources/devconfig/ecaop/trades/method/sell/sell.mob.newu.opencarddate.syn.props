@@ -1,0 +1,122 @@
+#卡数据同步
+ecaop.core.method.map.ecaop.trades.sell.mob.newu.opencarddate.syn=cdsn
+ecaop.core.method.cdsn.def={"mothod":"cdsn","remark":"数据同步"}
+ecaop.core.method.cdsn.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.gdjk.cdsn.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#入参校验
+ecaop.gdjk.cdsn.msgSchema={\
+    operatorId:{ type:"String(20)", required:true },\
+    opeSysType:{type:"Number(1)",required:false,validators:"@FixedLen(1)"},\
+    province:{ type:"String(2)", required:true,validators:"@FixedLen(2)" },\
+    city:{ type:"String(3)", required:true },\
+    district:{ type:"String(10)", required:true },\
+    channelId:{ type:"String(20)", required:true },\
+    channelType:{ type:"String(7)", required:true,validators:"@FixedLen(7)" },\
+    ordersId:{ type:"String(20)", required:true },\
+    provOrderId:{ type:"String(30)", required:true },\
+    numId:{ type:"String(20)", required:true },\
+    simCardNo:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.gdjk.cdsn.SimCardNoSchema)" },\
+    taxBatchNo:{ type:"String(30)", required:false },\
+    taxNo:{ type:"String(30)", required:false },\
+    taxType:{ type:"String(1)", required:true },\
+    para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)" }\
+}
+
+ecaop.gdjk.cdsn.SimCardNoSchema={\
+    cardDataProcId:{ type:"String(30)", required:false },\
+    simId:{ type:"String(20)", required:true },\
+    imsi:{ type:"String(15)", required:false },\
+    cardType:{ type:"String(30)", required:false },\
+    cardData:{ type:"String(1024)", required:false },\
+    cardFee:{ type:"String(10)", required:false }\
+}
+
+#定义method别名为cdsn的processors
+ecaop.core.method.cdsn.processors=@FlowProcessor(ecaop.core.method.cdsn.flowConfig)
+
+#配置跳转
+ecaop.core.method.cdsn.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(appkey)", transitions:"gdsb->03 *->04"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.gdjk.cdsn.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.masb.cdsn.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+ecaop.masb.cdsn.processors=@NumRoute\
+                           @route\
+                           @FlowProcessor(ecaop.core.method.cdsn.route.flowConfig)
+#根据省份路由 走北六还是南25(南25与广东集客处理方法一致)
+ecaop.core.method.cdsn.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02 N25->03"},\
+{id:"02", processor:"AopHandler(ecaop.trades.n6cb.cdsn.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"AopHandler(ecaop.gdjk.cdsn.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#北六CB开户卡数据同步
+ecaop.trades.n6cb.cdsn.processors=@TransReqParamsMapper()\
+                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)\
+                                  @cancelCbssResources()\
+                                  @openSubcallNotifyResultProcessor()
+#广东集团客户开户卡数据同步
+ecaop.gdjk.cdsn.processors=@ParametersMapper(ecaop.gdjk.cdsn.CardDateSyncParametersMapping)\
+                           @AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+                           @Xml2JsonMapper(ecaop.gdjk.cdsn.template)\
+                           @ResourceRealOccupyProcessor()
+
+#请求参数
+ecaop.gdjk.cdsn.CardDateSyncParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00015",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"OrderSubReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.gdjk.cdsn.template@3GE"}\
+]
+#请求和返回报文模版路径
+ecaop.gdjk.cdsn.template=com/ailk/ecaop/biz/template/simcard/OpenCardSync
+
+#号码状态变更请求参数准备
+ecaop.trades.T4000017.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000017",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"CheckNumReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.T4000017.template@ONS"}\
+]
+ecaop.trades.T4000017.template=com/ailk/ecaop/biz/template/terminal/T4000017
+#终端释放返销请求参数准备
+ecaop.trades.T4000003.ParametersMapping=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"bipCode",extractor:"fix",extractorConfig:"BIP4F001",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T4000003",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+    {paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+    {paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+    {paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+    {paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+    {paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"TerminalStateChgReq",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.trades.T4000003.template@ONS"}\
+]
+ecaop.trades.T4000003.template=com/ailk/ecaop/biz/template/terminal/T4000003

@@ -1,0 +1,11 @@
+#手机归属地查询
+ecaop.core.method.map.ecaop.trades.query.comm.attr.qry=sjgs
+ecaop.core.method.sjgs.def={"mothod":"cust","remark":"手机归属地查询"}
+ecaop.core.method.sjgs.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":null},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#定义processors,未做优化原因,不通过省份和APP可以进行区分
+ecaop.core.method.sjgs.processors=@qryPhoneNumberArrt(ecaop.comm.conf.url.attr-qry,ecaop.comm.conf.port.attr-qry)

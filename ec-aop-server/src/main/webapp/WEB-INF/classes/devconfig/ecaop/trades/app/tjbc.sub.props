@@ -1,0 +1,5 @@
+#天津BSS国政通测试
+ecaop.core.app.map.tjbc.sub=tjbc
+ecaop.core.app.tjbc.def={"code":"tjbc", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.tjbc.timeslimit=max 100 per 1 minute
+ecaop.core.app.tjbc.allow={appkey:"tjbc",allow:"crck", deny:null}

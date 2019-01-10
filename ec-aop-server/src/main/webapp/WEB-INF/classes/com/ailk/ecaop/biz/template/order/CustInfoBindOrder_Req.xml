@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 全业务客户资料与订单绑定 -->
+<BIND_CUST_AND_TRADE_INPUT>
+    <_include
+        src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <BIND_CUST_AND_TRADE_REQ>
+            <!-- 操作员ID -->
+            <OPERATOR_ID length="V20" mappedName="operatorId" />
+            <!-- 省份编码 -->
+            <PROVINCE_CODE length="F2" mappedName="province" />
+            <!-- 地市编码 -->
+            <EPARCHY_CODE length="F3" mappedName="city" />
+            <!-- 区县编码 -->
+            <CITY_CODE length="V20" constraint="?" mappedName="district" />
+            <!-- 商城订单ID -->
+            <ORDER_ID length="V30" mappedName="orderId" />
+            <!-- 是否压单 0:不压单 1：压单 （不传时默认不压单） -->
+            <DELAY_TAG length="V1" constraint="?" mappedName="delayTag"
+                defaultValue="0" />
+            <!--客户ID -->
+            <CUST_ID length="V16" constraint="?" mappedName="custId" />
+            <!-- 渠道编码 -->
+            <CHANNEL_ID length="V20" mappedName="channelId" />
+            <!-- 渠道标识 -->
+            <CHANNEL_TAG length="V2" constraint="?"
+                mappedName="eModeCode" />
+            <!-- 是否创建客户资料 0:创建 1：不创建 -->
+            <CUST_CREATE_FLAG length="F1" mappedName="custCreateFlag" />
+            <!-- 客户信息 -->
+            <CUST_INFO constraint="*" mappedName="custInfo">
+                <!--客户名称 -->
+                <CUST_NAME length="V100" mappedName="customerName" />
+                <!--客户类型编码，数据模型编码CUI_000012 -->
+                <CUST_TYPE length="F1" mappedName="customerType" />
+                <!--是否为担保人新建 0：否 1：是 -->
+                <IS_ASSURE length="F1" mappedName="isAssure" />
+                <!--证件有效期,格式YYYYMMDD -->
+                <CERT_END_DATE length="F8" constraint="?"
+                    mappedName="certExpireDate" />
+                <!--证件地址 -->
+                <CERT_ADDR length="V256" constraint="?"
+                    mappedName="certAddress" />
+                <!--证件类别编码，见附录 -->
+                <CERT_TYPE_CODE length="V2" mappedName="certType" />
+                <!--证件号码 -->
+                <CERT_CODE length="V50" mappedName="certNum" />
+                <!--客户性别编码，统一数据模型编码SHO_000020 -->
+                <SEX length="V1" constraint="?" mappedName="sex" />
+                <!--通信地址 -->
+                <POST_ADDRESS length="V256" constraint="?"
+                    mappedName="postAddress" />
+                <!--电话 -->
+                <PHONE length="V40" constraint="?" mappedName="phone" />
+                <!--联系人 -->
+                <CONTACT_PERSON length="V60" mappedName="contactPerson" />
+                <!--联系人电话 -->
+                <CONTACT_PHONE length="V40" mappedName="contactPhone" />
+                <!--认证类型 01：本地认证 02：公安认证 03：二代证读卡器 -->
+                <CHECK_TYPE length="V2" constraint="?"
+                    mappedName="checkType" />
+            </CUST_INFO>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </BIND_CUST_AND_TRADE_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</BIND_CUST_AND_TRADE_INPUT>

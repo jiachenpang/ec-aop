@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_CUST_INFO_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_CUST_INFO_REQ>
+            <OPERATE_TYPE constraint="1" defaultValue="1" length="V2" mappedName="operateType"><!--客户信息认证类型：, 1，证件类型+证件号码；, 2，用户号码+服务密码；, 3，卡类型（包括俱乐部会员卡、星级客户卡）、卡号；, 
+                    4，SIM卡号（预付费用户）+ 用户密码, 5，账户合同号, 6，银行托收账号, 7，客户编号, 8，用户号码, 9，证件类型+证件号码+服务号码, 10，集团编码+服务密码, 11，详单认证, 12，客户名称, 13，集团证件类型+集团证件方式, 
+                    14，集团编号(GROUP_ID), 15，集团编号(GROUP_ID)+密码方式, 16,集团客户编码(CUTS_ID) -->
+            </OPERATE_TYPE>
+            <CUST_CHECK_TYPE constraint="1" defaultValue="1" length="F1" mappedName="custCheckType"><!--验证客户类型:, 1，客户信息, 2，担保人信息 -->
+            </CUST_CHECK_TYPE>
+            <CERT_TYPE_CODE constraint="?" length="V2" mappedName="certTypeCode"><!--证件类别编码，见附录 -->
+            </CERT_TYPE_CODE>
+            <CERT_CODE constraint="?" length="V50" mappedName="certCode"><!--证件号码 -->
+            </CERT_CODE>
+            <SERVICE_CLASS_CODE constraint="?" length="F4" mappedName="serviceClassCode"><!--电信类型编码，编码见附录 -->
+            </SERVICE_CLASS_CODE>
+            <AREA_CODE constraint="?" length="V6" mappedName="areaCode"><!--区号 -->
+            </AREA_CODE>
+            <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber"><!--用户号码 -->
+            </SERIAL_NUMBER>
+            <OTHER_PARTY constraint="?" length="V40" mappedName="otherParty"><!--对方号码 -->
+            </OTHER_PARTY>
+            <START_DATE constraint="?" length="F14" mappedName="startDate"><!--开始时间 -->
+            </START_DATE>
+            <END_DATE constraint="?" length="F14" mappedName="endDate"><!--结束时间 -->
+            </END_DATE>
+            <USER_PASSWD constraint="?" length="V30" mappedName="userPasswd"><!--服务密码 -->
+            </USER_PASSWD>
+            <VIP_CARD_TYPE constraint="?" length="F1" mappedName="vipCardType"><!--VIP卡类型，统一数据模型编码CLB_000008 -->
+            </VIP_CARD_TYPE>
+            <VIP_CARD_NO constraint="?" length="V20" mappedName="vipCardNo"><!--会员卡号 -->
+            </VIP_CARD_NO>
+            <SIM_CARD_NO constraint="?" length="V30" mappedName="simCardNo"><!--预付费智能卡号码 -->
+            </SIM_CARD_NO>
+            <CONTRACT_NO constraint="?" length="V40" mappedName="contractNo"><!--账户合同号 -->
+            </CONTRACT_NO>
+            <BANK_ACCT_NO constraint="?" length="V30" mappedName="bankAcctNo"><!--银行托收账号 -->
+            </BANK_ACCT_NO>
+            <CUST_ID constraint="?" length="V16" mappedName="custId"><!--客户ID -->
+            </CUST_ID>
+            <GROUP_ID constraint="?" length="V40" mappedName="groupId"><!--集团编号 -->
+            </GROUP_ID>
+            <CUST_NAME constraint="?" length="V100" mappedName="custName"><!--客户名称 -->
+            </CUST_NAME>
+            <PARA constraint="*" mappedName="para"><!--保留字段 -->
+                <PARA_ID constraint="1" length="V20" mappedName="paraId">
+                </PARA_ID>
+                <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+                </PARA_VALUE>
+            </PARA>
+        </QRY_CUST_INFO_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V204800" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_CUST_INFO_INPUT>

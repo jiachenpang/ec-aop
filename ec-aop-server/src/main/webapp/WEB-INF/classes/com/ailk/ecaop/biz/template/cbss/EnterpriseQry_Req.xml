@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 组织机构查询 -->
+<qryEnterpriseInfo_INPUT>
+    <_include
+        src="com/ailk/ecaop/biz/template/include/HeaderReqIncludeNoChannel_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <qryEnterpriseInfo_REQ>
+            <!-- 查询条件 组织机构名称、组织机构代码、注册号不可同时为空 -->
+            <QRY_INFO  mappedOut="true">
+                <!-- 组织机构名称 -->
+                <VENDOR_NAME constraint="?" length="V100"
+                    mappedName="vendorName" />
+                <!-- 组织机构代码 -->
+                <ORG_CODE constraint="?" length="V50"
+                    mappedName="orgCode" />
+                <!-- 注册号 -->
+                <ENROLL_CODE constraint="?" length="V50"
+                    mappedName="enrollCode" />
+                <!-- 是否查询缓存表 1查询0 不查询 默认为1 -->
+                <SEARCH_FLAG constraint="1" length="V100" defaultValue="1"
+                    mappedName="searchFlag" />
+            </QRY_INFO>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId" />
+                <PARA_VALUE length="V60" mappedName="paraValue" />
+            </PARA>
+        </qryEnterpriseInfo_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</qryEnterpriseInfo_INPUT>

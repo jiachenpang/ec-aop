@@ -1,0 +1,220 @@
+[selZoneCodeByProvince]
+SELECT ZONE_CODE 
+  FROM TD_M_PROVINCE P
+ WHERE P.PROVINCE_CODE = #province#
+
+[selRouteInfoByProvince]
+SELECT P.PARA_CODE1, P.PARA_CODE2
+  FROM TD_B_COMMPARA P
+ WHERE P.PARAM_ATTR = '1200'
+   AND P.PARAM_CODE = #province#
+
+[selRouteInfoByNum]
+SELECT COUNT(1)
+  FROM TF_R_NUMCENTER_SEGMENT TD
+ WHERE TD.PROVINCE_CODE = #province#
+   AND TD.SEGMENT_ID = #serialNumber#
+   
+   
+[chkTranTagByChannCode]
+SELECT A.TRANSITION_TAG
+  FROM TF_C_CHANNEL A
+ WHERE A.CHANNEL_CODE = #channelId#
+ 
+[selNetTypeByNumOrOrdersId]
+SELECT   S.NET_TYPE netType
+ FROM TF_R_TRADE_SELF S
+ WHERE S.PRO_KEY = #proKey#
+ AND S.BILL_STATE = '1'
+
+  
+  
+[selIdleNumByMachCode]
+SELECT COUNT(1)
+           FROM TF_R_TML_ARCH_TRANSITION T, TD_R_TERMINAL_PROPTY P
+          WHERE T.PROPERTY_ID = P.PROPERTY_ID
+            AND T.TERMINAL_STATE = '1'
+            AND T.CHANNEL_CODE = #channelId#
+            AND P.PROPERTY_CODE = #machineTypeCode#
+            
+   
+[selLockNumByMachCode]
+SELECT L.LOCK_NUM
+           FROM TF_R_TRANSATION_LOCK L
+          WHERE L.CHANNEL_CODE = #channelId#
+            AND L.PROPERTY_CODE = #machineTypeCode#
+            
+[addLockNumInfoInTranLock]
+INSERT INTO TF_R_TRANSATION_LOCK
+    (CHANNEL_CODE,
+     PROPERTY_CODE,
+     PACKAGE_CODE,
+     PROVINCE_CODE,
+     LOCK_NUM)
+  VALUES
+    (#channelId#,
+     #machineTypeCode#,
+     '10',
+     #province#,
+     '0')
+            
+   
+[addLockNumInTranLock]
+UPDATE TF_R_TRANSATION_LOCK L
+   SET L.LOCK_NUM = L.LOCK_NUM + 1
+ WHERE L.CHANNEL_CODE = #channelId#
+   AND L.PROPERTY_CODE = #machineTypeCode#
+
+[decLockNumInTranLock]
+UPDATE TF_R_TRANSATION_LOCK L
+   SET L.LOCK_NUM = L.LOCK_NUM - 1
+ WHERE L.CHANNEL_CODE = #channelId#
+   AND L.PROPERTY_CODE = #machineTypeCode#
+
+[addLockOrderInfo]
+  INSERT INTO TF_R_TRADE_SELF
+    (PRO_KEY,
+     PROVINCE_CODE,
+     EPARCHY_CODE,
+     CITY_CODE,
+     CHANNEL_CODE,
+     PROPERTY_CODE,
+     CHANNEL_TYPE,
+     UPDATE_STAFF,
+     UPDATE_TIME,
+     BILL_STATE,
+     OPER_DATE,
+     PACKAGE_CODE,
+     PAY_TYPE,
+     PAY_NUM,
+     TOTAL_PRI,
+     PAY_PRI,
+     NET_TYPE)
+  VALUES
+    (#proKey#,
+     #province#,
+     #city#,
+     #district#,
+     #channelId#,
+     #machineTypeCode#,
+     #channelType#,
+     #staffId#,
+     sysdate,
+     '1',
+     sysdate,
+     '10',
+     #payType#,
+     #payNum#,
+     #totalPri#,
+     #payPri#,
+     #netType#)
+
+[updateLock2Release]
+UPDATE TF_R_TRADE_SELF S
+   SET S.BILL_STATE = '3'
+ WHERE S.PRO_KEY = #proKey#
+   AND S.PROPERTY_CODE = #machineTypeCode#
+   AND S.BILL_STATE = '1'
+ 
+[selLockOrderNum]
+ SELECT COUNT(1) "lockOrderNum"
+   FROM TF_R_TRADE_SELF S
+  WHERE S.PRO_KEY = #proKey#
+    AND S.PROPERTY_CODE = #machineTypeCode#
+    AND S.BILL_STATE = '1'
+   
+
+[insertLockInfoLog]
+INSERT INTO TL_R_TRANSATION_LOCK
+  (LOG_ID,
+   CHANNEL_CODE,
+   PRPERTY_CODE,
+   PACKAGE_CODE,
+   OPER_NUM,
+   NUM_BEFORE,
+   OPER_TYPE,
+   OPER_SYS,
+   OPER_TIME,
+   PROVINCE_CODE)
+VALUES
+  (#logId#,
+   #channelId#,
+   #machineTypeCode#,
+   '10',
+   '1',
+   #lockNum#,
+   #opeType#,
+   '1',
+   sysdate,
+   #province#)
+[insertResourceInfo]
+INSERT INTO TL_B_TRADE_RESOURCE
+  (PROVINCE_CODE,   SUBSCIBE_ID,   SYSCODE,   SERIAL_NUMBER,   TERMINAL_ID,
+   MEEHOD_CODE,   OPER_DATE,   PRO_KEY_MODE,   PRO_KEY   ,ACTIVITY_ID   ,DISCOUNT_FLAG)
+VALUES
+  (#province#,   #subscribeId#,   #sysCode#,   #serialNumber#,   #terminalId#,
+   #methodCode#,   SYSDATE,   #proKeyMode#,   #proKey#,   #activityId#,   #discountFlag#)
+   
+[qryNumberByProvOrderId]
+SELECT SERIAL_NUMBER
+FROM TL_B_TRADE_RESOURCE
+WHERE SUBSCIBE_ID=#subscribeId#
+
+[qryDiscountFlagByProvOrderId]
+SELECT DISCOUNT_FLAG
+FROM TL_B_TRADE_RESOURCE
+WHERE SUBSCIBE_ID=#subscribeId#
+  AND PROVINCE_CODE=#province#
+  AND MEEHOD_CODE IN ('opap','mvoa','smnp')
+
+[qryResourceInfo4RollBack]
+SELECT R.SERIAL_NUMBER, R.TERMINAL_ID, R.PRO_KEY_MODE, R.PRO_KEY,R.ACTIVITY_ID
+  FROM TL_B_TRADE_RESOURCE R
+ WHERE R.SUBSCIBE_ID = #provOrderId#
+   AND R.PROVINCE_CODE = #province#
+[qryResourceInfoFromSop]
+SELECT RESOURCE_CODE, SERIAL_NUMBER,PRO_KEY
+  FROM TF_B_TRADE_SOP
+ WHERE TRADE_ID = #provOrderId#
+ 
+[insertTerSaleRecord]
+ INSERT INTO TF_B_TERMSALE_RECORD
+ (TRADE_ID,
+  TERMINAL_ID,
+  MACHINE_TYPE_CODE,
+  RESOURCE_SRC_CODE,
+  TERMINAL_TYPE,
+  TERMINAL_SUB_TYPE,
+  SERIAL_NUMBER,
+  SUBSYS_CODE,
+  ORDER_SOURCE,
+  SALE_STAFF_ID,
+  SALE_DEPART_ID,
+  SALE_TIME
+)
+VALUES
+  (#tradeId#,
+  #terminalId#,
+  #machineTypeCode#, 
+  #resourceSrcCode#, 
+  #terminalType#,
+  #terminalSubType#, 
+  #serialNumber#, 
+  #subsysCode#, 
+  #orderSource#, 
+  #saleStaffId#, 
+  #saleDepartId#,
+  #saleTime#)
+  
+[qryTerSaleRecord]
+SELECT R.TERMINAL_ID,R.MACHINE_TYPE_CODE,R.RESOURCE_SRC_CODE,R.TERMINAL_TYPE,
+        R.TERMINAL_SUB_TYPE,R.SERIAL_NUMBER
+FROM TF_B_TERMSALE_RECORD R
+WHERE R.TRADE_ID=#tradeId#
+
+[qryOrderInfoByTerminalId]
+SELECT T.SUBSCIBE_ID,T.SERIAL_NUMBER
+FROM TL_B_TRADE_RESOURCE T
+WHERE T.TERMINAL_ID = #resourcesCode#
+  AND T.PROVINCE_CODE = #province#
+  AND T.SERIAL_NUMBER = #number#

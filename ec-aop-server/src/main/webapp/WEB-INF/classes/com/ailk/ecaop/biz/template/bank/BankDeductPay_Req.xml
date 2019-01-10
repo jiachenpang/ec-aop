@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<SIGN_REMOVE_TREATY_NOTIFY_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true"> 
+   <SIGN_REMOVE_TREATY_NOTIFY_REQ>
+  <TRADE_TYPE_CODE constraint="1" length="F4" mappedName="tradeTypeCode">
+    <!--业务受理类型, 0127 银行卡代扣签约, 0128 银行卡代扣解约-->
+  </TRADE_TYPE_CODE>
+  <EPARCHY_CODE constraint="1" length="V6" mappedName="eparchyCode">
+    <!--地市编码-->
+  </EPARCHY_CODE>
+  <CONTRACT_NUMBER constraint="1" length="V40" mappedName="contractNumber">
+    <!--签约协议号-->
+  </CONTRACT_NUMBER>
+  <DEAL_RESULT constraint="1" length="F2" mappedName="dealResult">
+    <!--处理结果, 01：成功, 02：失败-->
+  </DEAL_RESULT>
+  <DEAL_DATE constraint="1" length="F14" mappedName="dealDate">
+    <!--处理时间, YYYYMMDDHH24MISS-->
+  </DEAL_DATE>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml"/> 
+</SIGN_REMOVE_TREATY_NOTIFY_REQ>
+ </UNI_BSS_BODY> 
+   <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</SIGN_REMOVE_TREATY_NOTIFY_INPUT>

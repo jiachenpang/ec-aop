@@ -1,0 +1,87 @@
+#一号多卡主附卡开户处理申请
+ecaop.core.method.map.ecaop.trades.sell.rio.newu.open.app=rnoa
+ecaop.core.method.rnoa.def={"mothod":"rnoa","remark":"一号多卡主附卡开户处理申请"}
+ecaop.core.method.rnoa.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.rnoa.PreCommitParameterMapping)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+#参数校验
+ecaop.rnoa.PreCommitParameterMapping={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:null},\
+    district:{type:"String(10)",required:true,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"Number(1)",required:true,validators:"@FixedLen(1)"},\
+    ordersId:{type:"String(30)",required:true,validators:null},\
+    serialNumA:{type:"String(20)",required:true,validators:null},\
+    serialNumB:{type:"String(20)",required:true,validators:null},\
+    attachName:{type:"String(20)",required:true,validators:null},\
+    terminalType:{type:"String(40)",required:true,validators:null},\
+    flag:{type:"String(2)",required:true,validators:null},\
+    card_type:{type:"String(2)",required:true,validators:null},\
+    provinceCode:{type:"String(20)",required:true,validators:null},\
+    eparchyCode:{type:"String(20)",required:true,validators:null},\
+    simCardData:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.rnoa.simCardDataTemplate)"},\
+    recomInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.rnoa.recomInfoTemplate)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#附卡信息
+ecaop.trades.rnoa.simCardDataTemplate={\
+    eiccid:{type:"String(40)",required:true,validators:null},\
+    eimsi:{type:"String(40)",required:true,validators:null},\
+    eid:{type:"String(40)",required:false,validators:null},\
+    ki:{type:"String(4000)",required:true,validators:null},\
+    materialCode:{type:"String(16)",required:true,validators:null},\
+    cardBigType:{type:"String(20)",required:true,validators:null},\
+    cardType:{type:"String(20)",required:true,validators:null},\
+    cardName:{type:"String(500)",required:true,validators:null}}
+#发展人信息
+ecaop.trades.rnoa.recomInfoTemplate={\
+    recomPersonId:{type:"String(30)",required:true,validators:null},\
+    recomPersonName:{type:"String(128)",required:true,validators:null},\
+    recomDepartId:{type:"String(128)",required:true,validators:null},\
+    recomCity:{type:"String(3)",required:true,validators:null}}
+
+
+#定义processors
+ecaop.core.method.rnoa.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.rnoa.route.flowConfig)
+
+ecaop.core.method.rnoa.route.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"0->03 1->04 2->05"},\
+{id:"02", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->04 N25->03"},\
+{id:"03", processor:"AopHandler(ecaop.n25.rnoa.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"04", processor:"AopHandler(ecaop.n25.rnoa.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.n25.rnoa.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+                                  
+
+#定义processors
+ecaop.cbss.rnoa.processors=@rioNewuOpenApp4CBSS()
+ecaop.n6.rnoa.processors=@rioNewuOpenApp4N6()
+ecaop.n25.rnoa.processors=@rioNewuOpenApp4N25()
+
+ecaop.trades.rnoa.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"RioOrderSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"orderTrade",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district,00000000",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"ORDER_TRADE_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.rnoa.template@FBS@ORDER_TRADE_INPUT@n-1665003197@ORDER_TRADE_REQ"}\
+]
+ecaop.trades.rnoa.template=com/ailk/ecaop/biz/template/nfour/RioNewuOpenApp4N25
+
+

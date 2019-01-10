@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont mappedOut="true">
+        <CancelSubReq>
+            <OperatorID length="V20" mappedName="operatorId"/>
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city"/>
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId"/>
+            <ChannelType length="F7" mappedName="channelType" />
+            <OrdersID length="V20" mappedName="ordersId"/>
+            <NumSwitch length="F1" mappedName="numSwitch"  constraint="?" />
+            <OpeSysType length="F1" mappedName="opeSysType" constraint="?" />
+            <EssOrigOrderID length="V20" mappedName="essOrigOrderId" />
+            <IMEI length="V30" mappedName="imei" constraint="?" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </CancelSubReq>
+    </SvcCont>
+</UniBSS>

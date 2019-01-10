@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+  <ORDER_CARD_RSP  mappedOut="true">
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!-- 错误描述 -->
+    </RESP_DESC>
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!-- 应答编码0000    成功1105   发票校验错误1108  发票已打印过8888    其他原因错误 -->
+    </RESP_CODE>
+    <SUB_RSP_INFO constraint="*"  mappedName="subRspInfo">
+      <RESP_DESC constraint="1" length="V500" mappedName="detail">
+        <!-- 子订单错误描述 -->
+      </RESP_DESC>
+      <SUB_ORDER_ID constraint="1" length="V30" mappedName="subOrderId">
+        <!-- 总部子订单ID -->
+      </SUB_ORDER_ID>
+      <RESP_CODE constraint="1" length="F4" mappedName="code">
+        <!-- 子订单应答编码0000  成功1105    发票校验错误1108  发票已打印过8888  其他原因错误 -->
+      </RESP_CODE>
+    </SUB_RSP_INFO>
+    <ORDERSUB_INFO constraint="?" mappedName="ordersubInfo">
+      <TAX_INVOICENO constraint="?" length="V30" mappedName="taxInvoiceno">
+        <!-- 发票税控号有税控编号的省分需返回此字段 -->
+      </TAX_INVOICENO>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </ORDERSUB_INFO>
+  </ORDER_CARD_RSP>
+</UNI_BSS_BODY>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <EssNotifyResultReq>
+          <ICCID length="V22" mappedName="iccid"/> <!-- 大卡卡号 -->
+          <IMSI length="F15" mappedName="imsi"/> <!-- IMSI号 -->
+          <!-- 业务成功标志  1：提交成功 0：提交失败  总部ESS业务提交的成功或失败 -->
+          <Result length="F1" mappedName="result" defaultValue="1"/>
+          <Comments length="V100" mappedName="comments"  defaultValue=""/> <!-- 说明 -->
+          <ReservPara constraint="?" length="V60" mappedName="reservPara"/> <!-- 扩展字段 -->
+        </EssNotifyResultReq>
+  </SvcCont>
+</UniBSS>

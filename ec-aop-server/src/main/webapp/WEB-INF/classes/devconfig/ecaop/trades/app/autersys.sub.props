@@ -1,0 +1,5 @@
+#自助终端系统
+ecaop.core.app.map.autersys.sub=auto
+ecaop.core.app.auto.def={"code":"auto", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.auto.timeslimit=max 100 per 1 minute
+ecaop.core.app.auto.allow={appkey:"auto",allow:"qctc,smcc,sfck,cdqy,cdnt,qcfc,qcfd,sbaq", deny:null}

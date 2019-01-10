@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UniBSS>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_3G.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <OrderSubReq>
+            <OperatorID length="V20" mappedName="operatorId" />
+            <Province length="F2" mappedName="province" />
+            <City length="F3" mappedName="city" />
+            <District length="V10" mappedName="district" />
+            <ChannelID length="V20" mappedName="channelId" />
+            <ChannelType length="F7" mappedName="channelType" />
+            <AccessType length="F2" defaultValue="01" />
+            <OrdersID length="V20" mappedName="ordersId" />
+            <ProvOrderID length="V20" mappedName="provOrderId" />
+            <NumID length="V20" mappedName="numId"/>
+            <SimCardNo constraint="*" mappedName="simCardNo">
+                <CardDataProcID constraint="?" length="V30" mappedName="cardDataProcId" />
+                <SimID length="V20" mappedName="simId" />
+                <IMSI constraint="?" length="F15" mappedName="imsi" />
+                <CardType constraint="?" length="V30" mappedName="cardType" />
+                <CardData constraint="?" length="V1024" mappedName="cardData" />
+                <CardFee constraint="?" length="V10" mappedName="cardFee" />
+            </SimCardNo>
+            <TaxBatchNo length="V30" constraint="?" mappedName="taxBatchNo" />
+            <InvoiceNo length="V30" constraint="?" mappedName="taxNo" />
+            <!--发票打印标识 0 打印发票 1 重打发票 2 补打发票 3 不大发票 -->
+            <TaxType length="F1" mappedName="taxType" range="0,1,2,3" />
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_3G.xml" />
+        </OrderSubReq>
+    </SvcCont>
+</UniBSS>

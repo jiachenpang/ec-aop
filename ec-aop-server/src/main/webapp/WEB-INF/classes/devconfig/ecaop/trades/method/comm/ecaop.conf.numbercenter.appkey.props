@@ -1,0 +1,15 @@
+#各系统发往号卡中心的appid及密钥
+
+#测试环境
+ecaop.global.param.num.aop.appid=qJTRmWbwBi
+ecaop.global.param.num.aop.secret=SNhyhiEUoqsRGvzxbqfK0OKaJ46lQTCy
+#生产环境
+#ecaop.global.param.num.aop.appid=qJTRmWbwBi
+#ecaop.global.param.num.aop.secret=ZkuUSc2MAR75rkwv3zA3xobpHyvmKIWk
+
+
+
+ecaop.global.param.num.aop.province=51|70|75|81|85|86|88
+
+
+

@@ -1,0 +1,3 @@
+#收入归集集团查询
+ecaop.trade.template.grpCustInfoAOPSer.qryGrpCustInfo={"serviceName":"GrpCustInfoAOPSer","operateName":"qryGrpCustInfo","content":"QRY_GRPCUST_REQ"}
+ecaop.trades.grpCustInfoAOPSer.qryGrpCustInfo.template=com/ailk/ecaop/biz/template/grpCustInfoAOPSer/QryGrpCustInfo

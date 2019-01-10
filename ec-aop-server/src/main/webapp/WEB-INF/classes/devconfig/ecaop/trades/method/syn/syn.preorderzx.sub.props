@@ -1,0 +1,43 @@
+#接收助销业系统发起的预受理订单。包括新增、删除操作
+ecaop.core.method.map.ecaop.trades.syn.preorderzx.sub=tsps
+ecaop.core.method.tsps.def={"mothod":"tsps"}
+ecaop.core.method.tsps.params=[\
+      {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.tsps.msg.schema)"},\
+      {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+      {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+      {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}\
+]
+
+#msg 校验器 
+ecaop.trades.tsps.msg.schema={\
+      operatorId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+      province:{type:"String(2)",required:true,encrypted:false,validators:null},\
+      city:{type:"String(3)",required:true,encrypted:false,validators:"@FixedLen(3)"},\
+      channelId:{type:"String(20)",required:false,encrypted:false,validators:null},\
+      district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+      orderId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+      opeType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+      preOrderInfo:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.trades.tsps.preOrderInfo)"},\
+      para:{ type:"JSON", required:false, validator:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.trades.tsps.preOrderInfo={\
+     startTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+     endTime:{type:"String(14)",required:true,encrypted:false,validators:null},\
+     custName:{type:"String(100)",required:true,encrypted:false,validators:null},\
+     custType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+     certType:{type:"String(2)",required:true,encrypted:false,validators:null},\
+     certNum:{type:"String(50)",required:true,encrypted:false,validators:null},\
+     developChannelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     developStaffId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+     prePhone:{type:"String(40)",required:true,encrypted:false,validators:null},\
+     productId:{type:"String(8)",required:true,encrypted:false,validators:null},\
+     productTypeCode:{type:"String(16)",required:false,encrypted:false,validators:null},\
+     actionCode:{type:"String(8)",required:false,encrypted:false,validators:null},\
+     orderRemark:{type:"String(100)",required:false,encrypted:false,validators:null},\
+     machineTypeCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+     remark:{type:"String(500)",required:false,encrypted:false,validators:null}\
+}
+ecaop.core.method.tsps.processors=@NumberSrc()\
+                                  @TransReqParamsMapper()\  
+                                  @AopCall(ecaop.comm.conf.url.ec-aop.rest)    

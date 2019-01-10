@@ -1,0 +1,27 @@
+#透传时共用的processor
+ecaop.comm.conf.transparent.processors=\
+                @TransReqParamsMapper()\
+                @AopCall(ecaop.comm.conf.url.ec-aop.rest)
+                
+#跳转时共用的flowConfig,只有此方法完全不要AOP有业务逻辑时，才可使用,限于用省份路由
+ecaop.core.method.comm.province.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N6->02"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#跳转时共用的flowConfig,只有此方法完全不要AOP有业务逻辑时，才可使用，限于用系统路由
+ecaop.core.method.comm.appeky.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(appkey)", transitions:"ecsb->02"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+#跳转时共用的flowConfig,只有此方法完全不要AOP有业务逻辑时，才可使用，限于用系统路由
+ecaop.core.method.comm.appkey.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(appkey)", transitions:"ecsb->02 *->02"},\
+{id:"02", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#省份、cbss简单用户查询
+ecaop.trades.core.simpleCheckUserInfo.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.UsrSer.simpleCheckUserInfo",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.core.simpleCheckUserInfo.template@FBS@SIMPLE_CHECK_USER_INFO_INPUT@n-1469109129@SIMPLE_CHECK_USER_INFO_REQ"}\
+]
+ecaop.trades.core.simpleCheckUserInfo.template=com/ailk/ecaop/biz/template/numcenter/SimpleCheckUserInfo

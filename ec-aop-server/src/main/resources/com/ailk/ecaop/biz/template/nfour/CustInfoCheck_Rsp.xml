@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckCustRsp mappedOut="true">
+    <RespCode mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" />
+    <ExistedCustomer constraint="*" mappedName="existedCustomer">
+        <CustomerType range="01,02" mappedName="customerType" constraint="?" />
+        <!-- CustCheckProcessor.java代码有使用 CustomerID,请注意 -->
+        <CustomerID length="V20" mappedName="custId" constraint="?" />
+        <BlackListFlag length="F1" range="0,1" mappedName="blackListFlag" />
+        <MaxUserFlag length="F1" constraint="?" range="0,1" mappedName="maxUserFlag" />
+        <ArrearageFlag length="F1" constraint="?" range="0,1" mappedName="arrearageFlag" />
+        <ArrearageMess constraint="*" mappedName="arrearageMess">
+            <ArrearageNum length="V20" constraint="1" mappedName="serialNumber" />
+            <ArrearageFee length="V10" constraint="1" mappedName="arrearageFee" />
+        </ArrearageMess>
+        <CustomerLoc length="V20" mappedName="customerLoc" constraint="?" />
+        <CustomerName length="V128" mappedName="customerName" constraint="?" />
+        <ContactPerson length="V128" constraint="?" mappedName="contactPerson" />
+        <ContactPhone length="V20" constraint="?" mappedName="contactPhone" />
+        <CertType length="F2" constraint="?" mappedName="certType" />
+        <CertNum length="V20" constraint="?" mappedName="certNum" />
+        <CertAddr length="V256" constraint="?" mappedName="certAdress" />
+        <CertExpireDate length="F8" constraint="?" mappedName="certExpireDate" />
+    </ExistedCustomer>
+    <MainProductInfo constraint="*" mappedName="mainProductInfo">
+        <ProductID length="V20" mappedName="productId" />
+        <ProductName length="V128" mappedName="productName" />
+        <ActiveTime length="F14" mappedName="activeTime" />
+        <UnactiveTime length="F14" mappedName="unactiveTime" />
+    </MainProductInfo>
+    <Para constraint="*" mappedName="para">
+        <ParaID mappedName="paraId" />
+        <ParaValue mappedName="paraValue" />
+    </Para>
+</CheckCustRsp>

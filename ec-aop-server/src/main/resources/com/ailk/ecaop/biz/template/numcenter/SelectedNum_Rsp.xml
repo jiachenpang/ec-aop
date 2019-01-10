@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <SELECTED_NUM_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code"/>
+        <RESP_DESC length="V500" mappedName="detail"/>
+        <SERIAL_NUMBER length="V20" mappedName="resourcesCode"/>
+        <!--靓号等级-->
+        <GOOD_LEVEL constraint="?" length="V1" mappedName="goodLevel"/>
+        <!--预存款（分）-->
+        <ADVANCE_PAY constraint="?" length="V10" mappedName="ReservaPrice"/>
+        <!--低销（分）-->
+        <LOW_COST constraint="?" length="V10" mappedName="lowCost"/>
+        <!--协议期 9999永久协议-->
+        <ONLINE_LENGTH constraint="?" length="V8" mappedName="lowCost"/>
+        <!--业务分类 01：公众 02：集团-->
+        <BUSINESS_TYPE constraint="?" length="F2" mappedName="businessType"/>
+        <ICCID constraint="?" length="V20" mappedName="iccid"/>
+        <IMSI constraint="?" length="V20" mappedName="imsi"/>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId"/>
+            <PARA_VALUE length="V60" mappedName="paraValue"/>
+        </PARA>
+    </SELECTED_NUM_RSP>
+</UNI_BSS_BODY>

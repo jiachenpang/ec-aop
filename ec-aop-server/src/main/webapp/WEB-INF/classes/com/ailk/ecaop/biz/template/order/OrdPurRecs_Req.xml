@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_RESOURCE_PURCHASE_RECORD_INPUT>
+    <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml" />
+    <UNI_BSS_BODY mappedOut="true">
+        <QRY_RESOURCE_PURCHASE_RECORD_REQ>
+            <!--电信业务网别 -->
+            <SERVICE_CLASS_CODE length="F4" mappedName="serviceClassCode"></SERVICE_CLASS_CODE>
+            <!-- 服务号码 -->
+            <SERIAL_NUMBER length="V40" mappedName="numId"></SERIAL_NUMBER>
+            <!--查询起始日期，YYYYMMD -->
+            <QRY_START_DTAE length="F8" mappedName="qryStaDate"></QRY_START_DTAE>
+            <!--查询结束日期，YYYYMMD -->
+            <QRY_END_DTAE length="F8" mappedName="qryEndDate"></QRY_END_DTAE>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"></PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue"></PARA_VALUE>
+            </PARA>
+        </QRY_RESOURCE_PURCHASE_RECORD_REQ>
+    </UNI_BSS_BODY>
+    <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB"></MEDIA_INFO>
+    </UNI_BSS_ATTACHED>
+</QRY_RESOURCE_PURCHASE_RECORD_INPUT>

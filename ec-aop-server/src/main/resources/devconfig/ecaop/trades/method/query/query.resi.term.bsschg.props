@@ -1,0 +1,62 @@
+ecaop.core.method.map.ecaop.trades.query.resi.term.bsschg=qrtb
+ecaop.core.method.qrtb.def={"mothod":"qrtb","remark":"终端状态查询变更-BSS用"}
+ecaop.core.method.qrtb.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.masb.qrtb.Msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(50)","required":false, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null}\
+    ]
+    
+#参数校验
+ecaop.masb.qrtb.Msg={\
+    operatorId:{type:"String(20)",required:false,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:false,validators:null},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    resourcesInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.masb.qrtb.resourceInfo)"},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+
+ecaop.masb.qrtb.resourceInfo={\
+    tradeId:{type:"String(30)",required:true,validators:null},\
+    activeType:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    allocationFlag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    isSelf:{type:"String(2)",required:true,validators:"@FixedLen(1)"},\
+    resourcesCode:{type:"String(30)",required:true,validators:null},\
+    occupiedFlag:{type:"String(1)",required:true,validators:"@FixedLen(1)"},\
+    productId:{type:"String(8)",required:false,validators:null},\
+    actPlanId:{type:"String(20)",required:false,validators:null},\
+    oldResourcesCode:{type:"String(30)",required:false,validators:null},\
+    number:{type:"String(12)",required:false,validators:null},\
+    checkId:{type:"String(30)",required:false,validators:null},\
+    brokenRe:{type:"String(256)",required:false,validators:null},\
+    occupiedTime:{type:"String(20)",required:false,validators:null},\
+    custName:{type:"String(20)",required:false,validators:null},\
+    certType:{type:"String(2)",required:false,validators:"@FixedLen(2)"},\
+    certNum:{type:"String(30)",required:false,validators:null},\
+    recomPersonId:{type:"String(30)",required:false,validators:null},\
+    recomPersonName:{type:"String(30)",required:false,validators:null},\
+    recomPersonCityCode:{type:"String(6)",required:false,validators:null},\
+    recomPersonChannelId:{type:"String(20)",required:false,validators:null}\
+}
+
+ecaop.core.method.qrtb.processors=@resStateChangeUtilsProcessor()
+#@ParametersMapper(ecaop.bsschg.checkres.ParametersMapping)\
+#@AopCall(ecaop.comm.conf.url.esshttp.newsub)\
+#@Xml2Json4Res(ecaop.gdjk.checkres.template)
+                            
+ecaop.bsschg.checkres.ParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00053",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"BssCheckResReq",temp:true},\
+{paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.bsschg.checkres.template@3GE"}\
+]
+
+ecaop.bsschg.checkres.template=com/ailk/ecaop/biz/template/res/BssCheckRes

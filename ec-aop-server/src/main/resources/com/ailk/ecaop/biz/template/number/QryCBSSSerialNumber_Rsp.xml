@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <NUM_QUERY_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC length="V500" mappedName="detail" />
+        <RESOURCES_RSP constraint="*" mappedName="resourcesRsp">
+            <NUMBER length="V30" mappedName="number" />
+        </RESOURCES_RSP>
+    </NUM_QUERY_RSP>
+</UNI_BSS_BODY>

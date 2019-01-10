@@ -1,0 +1,75 @@
+#方法定义
+ecaop.core.method.map.ecaop.trades.sell.brd.yearly.pay.ecs.sub=spes
+ecaop.core.method.spes.def={"mothod":"spes","remark":"宽带包年续费提交"}
+ecaop.core.method.spes.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false,validators:"@JSONSchema(ecaop.trades.spes.msgSchema)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+ecaop.trades.spes.msgSchema={\
+    operatorId:{type:"String(20)",required:true,validators:null},\
+    province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+    city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,validators:null},\
+    channelId:{type:"String(20)",required:true,validators:null},\
+    channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+    opeSysType:{type:"String(1)",required:false,validators:null},\
+    accessType:{type:"String(2)",required:true,validators:null},\
+    orderNo:{type:"String(30)",required:true,validators:null},\
+    provOrderId:{type:"String(30)",required:true,validators:null},\
+    sendTypeCode:{type:"String(1)",required:false,validators:null},\
+    areaCode:{type:"String(46)",required:true,validators:null},\
+    queryType:{type:"String(1)",required:true,validators:null},\
+    serialNumber:{type:"String(40)",required:true,validators:null},\
+    changeTag:{type:"String(1)",required:false,validators:null},\
+    speedLevel:{type:"String(10)",required:false,validators:null},\
+    productInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.spes.productInfo)"},\
+    boradDiscntInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.spes.boradDiscntInfo)"},\
+    feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.trades.spes.feeInfo)"},\
+    totalFee:{type:"String(11)",required:true,validators:null},\
+    cancelTotalFee:{type:"String(11)",required:true,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+ecaop.trades.spes.boradDiscntInfo={\
+    boradDiscntId:{type:"String(20)",required:true,validators:null},\
+    boradDiscntAttr:{type:"String(20)",required:false,validators:null},\
+    delayType:{type:"String(20)",required:false,validators:null},\
+    delayDiscntId:{type:"String(20)",required:false,validators:null},\
+    delayDiscntType:{type:"String(20)",required:false,validators:null}\
+}
+ecaop.trades.spes.productInfo={\
+    oldProductId:{type:"String(20)",required:true,validators:null},\
+    productMode:{type:"String(1)",required:true,validators:null},\
+    optType:{type:"String(2)",required:true,validators:null}\
+}
+ecaop.trades.spes.feeInfo={\
+    operateType:{type:"String(1)",required:true,validators:null},\
+    feeMode:{type:"String(1)",required:true,validators:null},\
+    feeTypeCode:{type:"String(8)",required:true,validators:null},\
+    feeTypeName:{type:"String(200)",required:true,validators:null},\
+    oldFee:{type:"String(11)",required:true,validators:null},\
+    derateFee:{type:"String(11)",required:false,validators:null},\
+    derateRemark:{type:"String(100)",required:false,validators:null},\
+    fee:{type:"String(11)",required:false,validators:null},\
+    isPay:{type:"String(1)",required:false,validators:null},\
+    payTag:{type:"String(2)",required:false,validators:null}\
+}
+#定义processors
+ecaop.core.method.spes.processors=@yearPayEcsSub()
+ecaop.masb.spes.sProductChgParametersMapping=[\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"ProductChgSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"sProductChg",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propertyGet",extractorConfig:"msg.district",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"SGL_PRODUCT_CHG_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.spec.template@FBS@SGL_PRODUCT_CHG_INPUT@pro"}]

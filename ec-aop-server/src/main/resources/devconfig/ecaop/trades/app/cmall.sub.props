@@ -1,0 +1,6 @@
+#沃云商城
+ecaop.core.app.map.cmall.sub=cmsb
+ecaop.core.app.cmsb.def={"code":"cmsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.cmsb.allow={appkey:"cmsb",allow:"nboc,snqy,qcsc,qcsq,cmck,codc,oata,mold,2324,234o,sc4s,sccc,oupc,trao,qctc,chph,oolq,cdaq,\
+sfck,cdqy,qrtc,opap,opsb,cdnt,cdsn,dvqy,qcsp,qrta,spos,chph,smosa,smoss,sjxs,mofc,ofcs,qrtac,baoa,modr,orta,qrtb,grcr,mcoa,scccs,scob,sgfs,\
+crck,qcfc,smct,mvoa,mmvc,scgq", deny:null}

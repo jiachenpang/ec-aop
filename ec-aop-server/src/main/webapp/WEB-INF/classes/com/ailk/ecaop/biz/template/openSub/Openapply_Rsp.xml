@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!-- 开户提交申请返回报文模板 -->
+        <AccountRsp mappedOut="true">
+            <!-- 应答编码 0000 成功, 0001 客户验证异常, 0002 号码验证异常, 0003 卡信息验证异常 -->
+            <!-- 0004 资源验证异常 ,0005 业务验证与费用计算异常 ,0006 受理渠道非电子渠道, 9999 其它错误 -->
+            <RespCode length="F4" mappedName="code" />
+            <!-- 错误描述 -->
+            <RespDesc length="V2000" mappedName="detail" />
+            <!-- ESS订单ID 为正式提交时使用 -->
+            <ProvOrderID length="V30" mappedName="provOrderId" />
+            <!-- 新业务标记 -->
+            <NewTradeCon length="F1" range="0,1" />
+            <FeeInfo constraint="*" mappedName="feeInfo">
+                <!-- 收费项编码 -->
+                <FeeID length="V20" mappedName="feeId" />
+                <!-- 收费项科目 -->
+                <FeeCategory length="F1" mappedName="feeCategory" />
+                <!-- 收费项描述 -->
+                <FeeDes length="V120" mappedName="feeDes" />
+                <!-- 最大减免金额 正整数 单位：厘 -->
+                <MaxRelief length="V10" constraint="?" mappedName="maxRelief" />
+                <!-- 应收费用正整数 单位：厘 -->
+                <OrigFee length="V10" mappedName="origFee" />
+            </FeeInfo>
+            <!-- 总费用正整数 单位：厘 -->
+            <TotalFee length="V10" mappedName="totalFee" />
+            <!-- 保留字段 -->
+            <!-- 保留字段 -->
+            <_include src="com/ailk/ecaop/biz/template/include/ParaRspInclude_3G.xml" />
+        </AccountRsp>

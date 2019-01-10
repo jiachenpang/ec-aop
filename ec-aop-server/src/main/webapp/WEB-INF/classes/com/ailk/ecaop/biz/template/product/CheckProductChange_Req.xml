@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<QRY_PRODUCT_INFO_INPUT>
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>
+  <UNI_BSS_BODY mappedOut="true">
+    <QRY_PRODUCT_INFO_REQ>
+      <BUSINESS_TYPE constraint="1" length="F2" mappedName="businessType">
+        <!-- 操作:01、信息查询02、变更校验 -->
+      </BUSINESS_TYPE>
+      <PRODUCT_ID constraint="?" length="V40" mappedName="productId">
+        <!-- 产品ID -->
+      </PRODUCT_ID>
+      <NET_TYPE constraint="1" length="F2" mappedName="netType">
+        <!-- 网别01、2G02、3G03、4G -->
+      </NET_TYPE>
+      <PROVINCE_ID constraint="?" length="F2" mappedName="provinceId">
+        <!-- 省分编码 -->
+      </PROVINCE_ID>
+      <SERIAL_NUMBER constraint="?" length="V40" mappedName="serialNumber">
+        <!-- 服务号码 -->
+      </SERIAL_NUMBER>
+      <RESOURCES_TYPE constraint="?" length="F2" mappedName="resourcesType">
+        <!-- 付费类型:01:预付费02:后付费 -->
+      </RESOURCES_TYPE>
+      <PARA constraint="*" mappedName="para">
+        <PARA_ID constraint="1" length="V20" mappedName="paraId">
+          <!-- 保留字段ID -->
+        </PARA_ID>
+        <PARA_VALUE constraint="1" length="V60" mappedName="paraValue">
+          <!-- 保留字段值 -->
+        </PARA_VALUE>
+      </PARA>
+    </QRY_PRODUCT_INFO_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+    <MEDIA_INFO length="V204800" defaultValue="1GB"/>
+  </UNI_BSS_ATTACHED>
+</QRY_PRODUCT_INFO_INPUT>

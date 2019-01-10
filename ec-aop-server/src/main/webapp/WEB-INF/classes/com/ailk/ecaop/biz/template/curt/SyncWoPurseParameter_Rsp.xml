@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY> 
+  <ASYNC_WO_PURSE_PARAMETER_RSP mappedOut="true">
+    <RESP_CODE constraint="1" length="F4" mappedName="code">
+      <!--应答编码 0000 成功   8888 其它 -->
+    </RESP_CODE>
+    <RESP_DESC constraint="1" length="V500" mappedName="detail">
+      <!--应答描述-->
+    </RESP_DESC>
+    <RESP_INFO constraint="*" mappedName="respInfo">
+      <!--客户信息-->
+      <ORDER_ID constraint="?" length="V40" mappedName="serialNumber">
+        <!--订单号-->
+      </ORDER_ID>
+      <IS_BIND constraint="1" length="V40" mappedName="woAccountId">
+        <!--此交易是否落沃账户ID 0：否 1：是 -->
+      </IS_BIND>
+      <END_TIME constraint="1" length="F1" mappedName="woAccountLevel">
+        <!--订单完成时间 YYYYMMDDHH24MISS -->
+      </END_TIME>
+    </RESP_INFO>
+   <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+  </ASYNC_WO_PURSE_PARAMETER_RSP> 
+</UNI_BSS_BODY>
+

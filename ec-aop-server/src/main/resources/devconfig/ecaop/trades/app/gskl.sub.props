@@ -1,0 +1,4 @@
+#甘肃  酷蓝策略平台
+ecaop.core.app.map.gskl.sub=gssb
+ecaop.core.app.gssb.def={"code":"gssb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+ecaop.core.app.gssb.allow={appkey:"gssb",allow:"trao,smct,qcfq,qcop,qcrq,qcsp,quuq", deny:null}

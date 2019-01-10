@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 集团客户管理系统;用于集团客户资料的创建 -->
+<UNI_BSS_BODY>
+    <CHECK_ASSURE_RSP mappedOut="true">
+        <RSP_CODE constraint="1" length="F4" mappedName="code" />
+        <RSP_DESC constraint="1" length="V512" mappedName="detail" />
+        <ASSURE_INFO constraint="*" mappedName="assureInfo">
+            <ASSURE_ID length="V16" mappedName="assureId" />
+            <ACCT_ID constraint="?" length="V19" mappedName="assureDate" />
+            <ASSURE_DATE constraint="?" length="V16" mappedName="assureCustId" />
+            <ASSURE_CUST_ID constraint="?" length="V50" mappedName="assureNo" />
+            <ASSURE_NO />
+        </ASSURE_INFO>
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </CHECK_ASSURE_RSP>
+</UNI_BSS_BODY>

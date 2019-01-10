@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--号卡中心预占接口-->
+<UNI_BSS_BODY>
+    <PREEMPTED_NUM_RSP mappedOut="true">
+        <!-- 应答编码 0000 成功 9999号码同步失败 -->
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC constraint="?" length="V500" mappedName="detail" />
+        <!-- 号码 -->
+        <SERIAL_NUMBER length="V20" mappedName="serialNumber" />
+        <PARA constraint="*" mappedName="para">
+            <PARA_ID length="V20" mappedName="paraId" />
+            <PARA_VALUE length="V60" mappedName="paraValue" />
+        </PARA>
+    </PREEMPTED_NUM_RSP>
+</UNI_BSS_BODY>

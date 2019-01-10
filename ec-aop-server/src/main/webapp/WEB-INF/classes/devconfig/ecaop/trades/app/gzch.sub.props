@@ -1,0 +1,7 @@
+#贵州二级渠道成卡开户
+ecaop.core.app.map.gzch.sub=gcsb
+ecaop.core.app.gcsb.def={"code":"gcsb", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.jlpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.gcsb.allow={appkey:"gcsb",allow:"snqy,opsb,cmck,opap,nboc,cack,\
+qrtc,ppoq,syps,smnp,mpsb,cdqy,cdnt,ccic,syps,cdsn,234o,oata,trao,codc,\
+qctc,2324,qmoq,mold,oupc,sc4s,sccc,chph,cumd,scmc,ucca,qcfc", deny:null}

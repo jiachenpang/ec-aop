@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNIBSS>
+    <_include src="/com/ailk/ecaop/biz/template/include/HeaderReqInclude_OSN.xml" />
+    <SvcCont cdata="true" mappedOut="true">
+        <BODY>
+            <PROV_CD length="F2" mappedName="province" />
+            <CITY_CD length="F3" mappedName="city" />
+            <QRY_TYPE length="F2" range="01,02" mappedName="qryType" />
+            <AGR_NO length="V18" constraint="?" mappedName="contractNumber" />
+            <STA_DT length="F8" constraint="?" mappedName="startTime" />
+            <END_DT length="F8" constraint="?" mappedName="endTime" />
+            <AGR_DT length="F8" constraint="?" mappedName="agrDt" />
+            <EBS_JRN_NO length="V20" constraint="?" mappedName="ebsJrnNo" />
+        </BODY>
+    </SvcCont>
+</UNIBSS>

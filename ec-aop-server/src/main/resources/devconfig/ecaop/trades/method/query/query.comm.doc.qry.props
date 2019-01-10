@@ -1,0 +1,36 @@
+#免填单查询
+ecaop.core.method.map.ecaop.trades.query.comm.doc.qry=qcmd
+ecaop.core.method.qcmd.def={"mothod":"qcmd","remark":"免填单查询"}
+ecaop.core.method.qcmd.params=[\
+    {"param":"msg","type":"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.qcmd.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":false, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.qcmd.param.para={\
+	paraId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+	paraValue:{type:"String(60)",required:true,encrypted:false,validators:null}\
+}
+ecaop.trades.qcmd.param.msg={\
+	operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+	province:{type:"String(2)",required:true,encrypted:false,validators:null},\
+	city:{type:"String(3)",required:true,encrypted:false,validators:null},\
+	district:{type:"String(10)",required:true,encrypted:false,validators:null},\
+	channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+	channelType:{type:"String(7)",required:true,encrypted:false,validators:null},\
+	qrySysType:{type:"String(1)",required:true,encrypted:false,validators:null},\
+	tradeId:{type:"String(16)",required:true,encrypted:false,validators:null},\
+	templateKind:{type:"String(1)",required:true,encrypted:false,validators:null},\
+	para:{type:"JSON",required:false,encrypted:false,validators:"@JSONSchema(ecaop.trades.qcmd.param.para)"}\
+}
+
+#CB统一预提交
+ecaop.trades.qcmd.ParametersMapping=[\
+    {paramterName:"msg",extractor:"json2StringNew",extractorConfig:"msg,ecaop.trade.template.CommInfoForNorthSer.qryCommInfo,50",temp:true},\
+    {paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.qcmd.template@FBS@QRY_COMM_INFO_INPUT@n1889327204@QRY_COMM_INFO_REQ"}\
+    ]
+#请求和返回报文模版路径
+ecaop.trades.qcmd.template=com/ailk/ecaop/biz/template/cbss/NotFillList
+
+#定义processors
+ecaop.core.method.qcmd.processors=@QueryCommDoc()

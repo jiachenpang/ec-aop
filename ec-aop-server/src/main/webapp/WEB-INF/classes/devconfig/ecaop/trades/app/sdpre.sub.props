@@ -1,0 +1,10 @@
+#山东预受理
+ecaop.core.app.map.sdpre.sub=sdpr
+ecaop.core.app.sdpr.appName={"sdpr":"山东预受理"}
+ecaop.core.app.sdpr.def={"code":"sdpr", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.sdpr.timeslimit=max 100 per 1 minute
+ecaop.core.app.sdpr.allow={appkey:"sdpr",allow:"cuck,ccic,ppoq,qmoq,snqy,nboc,qrtc,smnp,mpsb,cdqy,cdnt,cdsn,cack,scmc,\
+codc,oata,mold,2324,234o,opsb,sc4s,oupc,trao,qctc,chph,cmck,opap,sccc,cumd,ucca,syps,csaq,qrtac,mvoa,spfs,23t4,kdwy,\
+ipry,tzcx,baoa,sbaos,bsoa,sbso,bsop,faoa,fasb,sfso,sfss,smno,234s,234t,scaf,scac,qcacq,qcar,qcpq,qcpa,spfs,psoa,psos,\
+23l4,odsb,bypc,byps,orta,modr,ofpc,mofc,ofcs,ofps,mmvc,qcbl,qcfq,qctq,isoa,msoa,crck,mcoa,qcdq,scgq,qcbl,smct,quuq,scccs,\
+qcsp,qcfc,qcfd,qcrq,sjgs,qcop,cdaq,qcmd", deny:null}

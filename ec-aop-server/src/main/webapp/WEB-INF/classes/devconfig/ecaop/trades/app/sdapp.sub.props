@@ -1,0 +1,8 @@
+#山东app预受�?
+ecaop.core.app.map.sdapp.sub=sdapp
+ecaop.core.app.sdapp.def={"code":"sdapp", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.sdapp.timeslimit=max 100 per 1 minute
+ecaop.core.app.sdapp.allow={appkey:"sdapp",allow:"cuck,ccic,ppoq,qmoq,snqy,nboc,qrtc,smnp,mpsb,cdqy,cdnt,cdsn,cack,scmc,\
+codc,oata,mold,2324,234o,opsb,sc4s,oupc,trao,qctc,chph,cmck,opap,sccc,cumd,ucca,syps,csaq,qrtac,mvoa,spfs,23t4,kdwy,\
+ipry,tzcx,baoa,sbaos,bsoa,sbso,bsop,faoa,fasb,sfso,sfss,smno,234s,234t,scaf,scac,qcacq,qcar,qcpq,qcpa,spfs,psoa,psos,23l4,\
+odsb,mofc,ofcs,qcgq,isoa,qcfc,qcfd,qcmd,spec,spes,bypc,byps,ccqy,ofpc,scss,cbpq,qcsc,qoiq,bccs", deny:null}

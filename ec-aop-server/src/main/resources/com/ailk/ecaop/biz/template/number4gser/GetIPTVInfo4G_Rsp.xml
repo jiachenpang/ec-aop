@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UNI_BSS_BODY>
+    <GET_IPTV_INFO4G_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code" />
+        <RESP_DESC constraint="?" length="V5000" mappedName="detail" />
+        <ACCT_INFO constraint="?" mappedName="acctInfo">
+            <ACCT_ID length="V40" mappedName="acctId"/>
+            <ACCT_NUMBER constraint="?" length="V60" mappedName="acctNumber"/>
+            <EXCLUSIVE_ACCT_ID constraint="?" length="V40" mappedName="exclusiveAcctId"/>
+            <EXTRA_INFO1 constraint="?" length="V60" mappedName="extraInfo1"/>
+            <EXTRA_INFO2 constraint="?" length="V60" mappedName="extraInfo2"/>
+            <EXTRA_INFO3 constraint="?" length="V60" mappedName="extraInfo3"/>
+            <PARA constraint="*" mappedName="para">
+                <PARA_ID length="V20" mappedName="paraId"/>
+                <PARA_VALUE length="V60" mappedName="paraValue"/>
+            </PARA>
+        </ACCT_INFO>
+    </GET_IPTV_INFO4G_RSP>
+</UNI_BSS_BODY>

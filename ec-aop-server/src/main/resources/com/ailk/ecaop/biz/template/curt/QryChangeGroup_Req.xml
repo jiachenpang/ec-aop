@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QRY_CHANGE_GROUP_INPUT> 
+  <_include src="com/ailk/ecaop/biz/template/include/HeaderReqInclude_Fbs.xml"/>  
+  <UNI_BSS_BODY mappedOut="true">
+      <QRY_CHANGE_GROUP_REQ> 
+              <SERIAL_NUMBER constraint="1" length="V20" mappedName="serialNumber">
+                <!--手机号码-->
+              </SERIAL_NUMBER>
+              <GROUP_PURCHASE_ID constraint="?" length="V20" mappedName="groupPurchaseId">
+              <!--  团单 -->
+              </GROUP_PURCHASE_ID>
+              <OPERATE_TYPE constraint="1" length="V4" mappedName="operateType">
+                <!--操作类型-->
+              </OPERATE_TYPE>
+              
+              <RSRV_STR1 constraint="?" length="V20" mappedName="rsrvStr1">
+                <!--备用字段1-->
+              </RSRV_STR1>
+              <RSRV_STR2 constraint="?" length="V20" mappedName="rsrvStr2">
+                <!--备用字段2-->
+              </RSRV_STR2>
+              <RSRV_STR3 constraint="?" length="V60" mappedName="rsrvStr3">
+                <!--备用字段3-->
+              </RSRV_STR3>
+              <RSRV_STR4 constraint="?" length="V60" mappedName="rsrvStr4">
+                <!--备用字段4-->
+              </RSRV_STR4>
+              <RSRV_STR5 constraint="?" length="V60" mappedName="rsrvStr5">
+                <!--备用字段5-->
+              </RSRV_STR5>
+            <_include src="com/ailk/ecaop/biz/template/include/ParaReqInclude_Fbs.xml" />
+        </QRY_CHANGE_GROUP_REQ>
+  </UNI_BSS_BODY>
+  <UNI_BSS_ATTACHED>
+        <MEDIA_INFO length="V20" defaultValue="1GB" />
+    </UNI_BSS_ATTACHED>
+</QRY_CHANGE_GROUP_INPUT>

@@ -1,0 +1,6 @@
+#上海bss
+ecaop.core.app.map.shbss.sub=shbss
+ecaop.core.app.shbss.def={"code":"shpre", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.shbss.timeslimit=max 100 per 1 minute
+ecaop.core.app.shbss.allow={appkey:"shbss",allow:"qrtb", deny:null}
+

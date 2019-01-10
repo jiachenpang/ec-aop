@@ -1,0 +1,65 @@
+#分步补换卡提交
+ecaop.core.method.map.ecaop.trades.sell.mob.oldu.stepchangecard.sub=smoss
+ecaop.core.method.smoss.def={"mothod":"smoss","remark":"分步补换卡提交"}
+ecaop.core.method.smoss.params=[\
+    {"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.trades.smoss.param.msg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+    
+ecaop.trades.smoss.param.msg={\
+     operatorId:{type:"String(20)",required:true},\
+     province:{type:"String(2)",required:true,validators:"@FixedLen(2)"},\
+     city:{type:"String(3)",required:true,validators:"@FixedLen(3)"},\
+     district:{type:"String(10)",required:true,validators:null},\
+     channelId:{type:"String(20)",required:true,validators:null},\
+     channelType:{type:"String(7)",required:true,validators:"@FixedLen(7)"},\
+     opeSysType:{type:"Number(1)",required:true,validators:null},\
+     ordersId:{type:"String(20)",required:true,validators:null},\
+     essSubscribeId:{type:"String(20)",required:false,validators:null},\
+     serialNumber:{type:"String(20)",required:true,validators:null},\
+     iccid:{type:"String(22)",required:true,validators:null},\
+     feeInfo:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.gdjk.smoss.ChkfeeInfoSchema)"},\
+     origTotalFee:{type:"String(10)",required:true,validators:null},\
+     payInfo:{type:"JSON",required:true,validators:"@JSONSchema(ecaop.trades.smoss.payInfo)"},\
+     invoiceNo:{type:"String(30)",required:false,validators:null},\
+     para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}}
+     
+     
+ecaop.gdjk.smoss.ChkfeeInfoSchema={\
+    feeId:{type:"String(20)", required:true,validators:null},\
+    feeCategory:{type:"String(1)", required:true, validators:null},\
+    feeDes:{type:"String(120)", required:true,validators:null},\
+    origFee:{type:"String(10)", required:true,validators:null},\
+    reliefFee:{type:"String(10)", required:true,validators:null},\
+    reliefResult:{type:"String(60)", required:true,validators:null},\
+    realFee:{type:"String(10)", required:true,validators:null}}
+#支付信息
+ecaop.trades.smoss.payInfo={\
+    payType:{type:"String(2)",required:true},\
+    payOrg:{type:"String(30)",required:false},\
+    payNum:{type:"String(20)",required:false}\
+}     
+#N25请求参数
+ecaop.param.mapping.smoss=[\
+    {paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+    {paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+    {paramterName:"activityCode",extractor:"fix",extractorConfig:"T3M00052",temp:true},\
+    {paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+    {paramterName:"msg",extractor:"SysCode",extractorConfig:"",temp:true},\
+    {paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+    {paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+    {paramterName:"content",extractor:"fix",extractorConfig:"OldChangeCardAopSub",temp:true},\
+    {paramterName:"REQ_XML",extractor:"json2Xml",extractorConfig:"json2xmlConfigKey:ecaop.template.3g.OldChangeCardAopSub@3GE"}\
+]   
+
+#aop模板路径
+ecaop.template.3g.OldChangeCardAopSub=com/ailk/ecaop/biz/template/simcard/OldChangeCardAopSub
+#定义processors
+#8/18增加checkAndSentMISPOSInfoToCB，为MISPOS支付时，AOP通过支付信息同步接口将MISPOS支付信息同步给cBSS后，再调用正式提交接口。17-2-27 by Zeng
+ecaop.core.method.smoss.processors=@checkAndSentMISPOSInfoToCB
+                                   
+#checkAndSentMISPOSInfoToCB类中调用固定格式"ecaop.trades.mispos." + exchange.getMethodCode() + ".processors"
+ecaop.trades.mispos.smoss.processors=@ChangeFeeType()\
+                                     @oldCardChangeSub()\
+                                     @callNotifyResultProcessor()

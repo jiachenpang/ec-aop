@@ -1,0 +1,6 @@
+#新疆互联网触点统一接入平台 
+ecaop.core.app.map.xjip.sub=xjip
+ecaop.core.app.xjip.def={"code":"xjip", "signed":false,"mocked":false,"locked":false,"eff":null,"exp":null,checkers:"allow"}
+#ecaop.core.app.xjip.timeslimit=max 100 per 1 minute
+ecaop.core.app.xjip.allow={appkey:"xjip",allow:"qctc,oupc,smct,opsb,msoa,qcbl,qofq,quuq,qctq,qopq,qcrq,qcop,qcfq,sjgs,qcua,mofc,ofcs,spfs,\
+                                   qcpa,qcpq,orta,modr", deny:null}

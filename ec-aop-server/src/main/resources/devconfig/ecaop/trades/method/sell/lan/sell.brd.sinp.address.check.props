@@ -1,0 +1,113 @@
+ecaop.core.method.map.ecaop.trades.sell.brd.sinp.address.check=sack
+ecaop.core.method.sack.def={"mothod":"sack","remark":"标准地址查询"}
+
+ecaop.core.method.sack.params=\
+    [{"param":"msg",type:"JSON","required":true, "encrypted":false, "validators":"@JSONSchema(ecaop.masb.sack.sackMsg)"},\
+    {"param":"timestamp",type:"Date","required":true, "encrypted":false, "validators":null},\
+    {"param":"bizkey",type:"String(10)","required":true, "encrypted":false, "validators":null},\
+    {"param":"apptx",type:"String(30)","required":true, "encrypted":false, "validators":null}]
+
+ecaop.masb.sack.sackMsg={\
+    operatorId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    province:{type:"Number(2)",required:true,encrypted:false,validators:"@FixedLen(2)"},\
+    city:{type:"Number(3)",required:true,encrypted:false,validators:"@FixedLen(3)"},\
+    district:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    channelId:{type:"String(20)",required:true,encrypted:false,validators:null},\
+    channelType:{type:"String(7)",required:true,encrypted:false,validators:null},\
+    queryMode:{type:"Number(1)",required:true,encrypted:false,validators:null},\
+    exchCode:{type:"String(30)",required:false,encrypted:false,validators:null},\
+    addressCode:{type:"String(300)",required:false,encrypted:false,validators:null},\
+    installAddress:{type:"String(200)",required:false,encrypted:false,validators:null},\
+    areaCode:{type:"Number(6)",required:false,encrypted:false,validators:null},\
+    serialNumber:{type:"Number(20)",required:false,encrypted:false,validators:null},\
+    serviceCode:{type:"String(20)",required:false,encrypted:false,validators:null},\
+    productCode:{type:"String[](20)",required:false,encrypted:false,validators:null},\
+    speedLevel:{type:"String(3)",required:false,encrypted:false,validators:null},\
+    accessMode:{type:"String(10)",required:false,encrypted:false,validators:null},\
+    para:{type:"JSON",required:false,validators:"@JSONSchema(ecaop.comm.conf.para.vali.para)"}\
+}
+#报文模版路径
+ecaop.masb.sack.template=com/ailk/ecaop/biz/template/res/ResAntiCheck
+
+#定义processors
+ecaop.core.method.sack.processors=@route\
+                                  @FlowProcessor(ecaop.core.method.sack.flowConfig)
+#配置跳转
+ecaop.core.method.sack.flowConfig=[\
+{id:"01", processor:"SimpleProcessor", selector:"GlobalParam(opeSysType)", transitions:"2->02 *->03"},\
+{id:"02", processor:"AopHandler(ecaop.cbss.sub.sack.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"03", processor:"SimpleProcessor", selector:"GlobalParam(routeCode)", transitions:"N25->04 N6->05"},\
+{id:"04", processor:"AopHandler(ecaop.mall.sub.sack.processors)", selector:"Noop", transitions:"*->STOP"},\
+{id:"05", processor:"AopHandler(ecaop.comm.conf.transparent.processors)", selector:"Noop", transitions:"*->STOP"}\
+]
+
+#cBSS调用资源预判接口的业务流程
+ecaop.cbss.sub.sack.processors=@StoreInParamProcessor(sackParamIn)\
+                               @dealProductCode()\
+                               @cbssAddressCheck()
+
+#南25非cb固网资源预判接口
+ecaop.mall.sub.sack.processors=@StoreInParamProcessor(sackParamIn)\
+                            @dealProductCode()\
+                            @ParametersMapper(ecaop.masb.sack.ParametersMapping)\
+                            @WsCall(ecaop.comm.conf.url.osn.services.resanticipationser)\
+                            @Xml2JsonMapper4Fbs(ecaop.masb.sack.template)\
+                            @addressCheckAfter()
+
+#请求参数
+ecaop.masb.sack.ParametersMapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"ResAnticipationSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"resAnticipation",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"09",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.antiType,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.antiMode,1"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.serviceClassCode,0200"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.brandCode,2000"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.tradeTypeCode,0009"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.shareType,N"},\
+{paramterName:"content",extractor:"fix",extractorConfig:"RES_ANTI_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xml",extractorConfig:"json2xmlConfigKey:ecaop.masb.sack.template@FBS@RES_ANTI_INPUT"}\
+]
+ecaop.soap.bodyns.sack=res
+
+
+#CBSS 资源预判判断接口
+ecaop.trades.sack.cbres.paramtersmapping=[\
+{paramterName:"serviceName",extractor:"fix",extractorConfig:"ResAnticipation4GSer",temp:true},\
+{paramterName:"operateName",extractor:"fix",extractorConfig:"resAnticipation4G",temp:true},\
+{paramterName:"transIDO",extractor:"TransIdFromRds",extractorConfig:"@50",temp:true},\
+{paramterName:"processTime",extractor:"currentTime",extractorConfig:"yyyyMMddHHmmss",temp:true},\
+{paramterName:"province",extractor:"propertyGet",extractorConfig:"msg.province",temp:true},\
+{paramterName:"operatorId",extractor:"propertyGet",extractorConfig:"msg.operatorId",temp:true},\
+{paramterName:"city",extractor:"propertyGet",extractorConfig:"msg.city",temp:true},\
+{paramterName:"district",extractor:"propGet2",extractorConfig:"msg.district, ",temp:true},\ 
+{paramterName:"channelId",extractor:"propertyGet",extractorConfig:"msg.channelId",temp:true},\
+{paramterName:"channelType",extractor:"propertyGet",extractorConfig:"msg.channelType",temp:true},\
+{paramterName:"osnDuns",extractor:"fix",extractorConfig:"9900",temp:true},\
+{paramterName:"origDomain",extractor:"fix",extractorConfig:"ULTE",temp:true},\
+{paramterName:"msgReceiver",extractor:"fix",extractorConfig:"1000",temp:true},\
+{paramterName:"msgSender",extractor:"fix",extractorConfig:"0400",temp:true},\
+{paramterName:"orderType",extractor:"fix",extractorConfig:"01",temp:true},\
+{paramterName:"accessType",extractor:"fix",extractorConfig:"00",temp:true},\
+{paramterName:"testFlag",extractor:"fix",extractorConfig:"0",temp:true},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.antiType,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.antiMode,0"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.tradeTypeCode,0010"},\
+{paramterName:"msg",extractor:"fixParamInto",extractorConfig:"msg.shareType,N"},\
+{paramterName:"cutOffDay",extractor:"currentTime",extractorConfig:"yyyyMMdd",temp:true},\
+{paramterName:"content",extractor:"fix",extractorConfig:"RES_ANTI4G_REQ",temp:true},\
+{paramterName:"msg",extractor:"json2String",extractorConfig:"msg",temp:true},\
+{paramterName:"soapMessage",extractor:"json2xmlcb",extractorConfig:"json2xmlConfigKey:ecaop.trades.sack.cbres.template@FBS@RES_ANTI4G_INPUT@n1778069128@RES_ANTI4G_REQ"}\
+]
+ecaop.trades.sack.cbres.template=com/ailk/ecaop/biz/template/cbss/resAnti4G

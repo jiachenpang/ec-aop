@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UNI_BSS_BODY>
+    <SOLE_BUSI_ACCNT_RSP mappedOut="true">
+        <RESP_CODE length="F4" mappedName="code">
+            <!--应答编码, 0000 成功, 1001此前无此客户信息, 1002证件格式不合法, 1003证件类型不合法, 1004证件号码不合法, 1005客户资料不合法, 1006客户资料校验失败, 1013客户标识错误, 
+                1111账户ID不存在, 1101账户资料校验失败, 1102保证金余额不足, 1104费用计算失败, 1201用户资料校验失败, 1208产品校验错误, 1210该宽带认证账号不可用, 1213产品编码不存在, 1215品牌编码不存在, 1216活动校验错误, 
+                1217特服校验错误, 1219合约协议期校验错误, 1220活动已结束, 1448 最大用户数超过限制, 1479 首月付费模式错误, 8888 其他错误原因，具体见错误描述, -->
+        </RESP_CODE>
+        <RESP_DESC length="V500" mappedName="detail">
+            <!--错误描述 -->
+        </RESP_DESC>
+        <SOLE_BUSI_ACCNT_INFO constraint="?" mappedName="soleBusiAccntInfo">
+            <!--单业务新装预提交应答信息 -->
+            <PROVINCE_ORDER_ID length="V30" mappedName="provinceOrderId">
+                <!--省分订单ID -->
+            </PROVINCE_ORDER_ID>
+            <PRE_FEE_INFO_RSP constraint="*" mappedName="preFeeInfoRsp">
+                <!--预提交返回费用 -->
+                <OPERATE_TYPE length="F1" mappedName="operatorType">
+                    <!--操作类型 1：收费；2：退费，默认为1 -->
+                </OPERATE_TYPE>
+                <FEE_MODE length="F1" mappedName="feeCategory">
+                    <!--费用种类, ESS提供，省分进行适配，见附录 -->
+                </FEE_MODE>
+                <FEE_TYPE_CODE length="V8" mappedName="feeId">
+                    <!--费用科目编码, 以省分编码为准 -->
+                </FEE_TYPE_CODE>
+                <FEE_TYPE_NAME length="V50" mappedName="feeDes">
+                    <!--费用科目名称 -->
+                </FEE_TYPE_NAME>
+                <MAX_DERATE_FEE length="V11" mappedName="maxRelief">
+                    <!--最大减免金额（为正整数，单位：分） -->
+                </MAX_DERATE_FEE>
+                <OLDFEE length="V11" mappedName="origFee">
+                    <!--金额（为正整数，单位：分） -->
+                </OLDFEE>
+            </PRE_FEE_INFO_RSP>
+            <TOTAL_FEE length="V11" mappedName="totalFee">
+                <!--应收总金额（为正整数，单位：分） -->
+            </TOTAL_FEE>
+            <!-- 宽带账户信息 -->
+            <BROADBAND_INFO constraint="?" mappedName="broadbandInfo">
+                <!-- 宽带帐号，宽带必填 -->
+                <BROADBAND_ID length="V40" mappedName="broadbandId" />
+                <!-- 宽带密码，宽带必填 -->
+                <BROADBAND_PASSWORD length="V128" mappedName="broadbandPassword" />
+            </BROADBAND_INFO>
+            <PARA constraint="?" mappedName="para">
+                <!--保留字段 -->
+                <PARA_ID length="V20" mappedName="paraId">
+                    <!--保留字段ID -->
+                </PARA_ID>
+                <PARA_VALUE length="V60" mappedName="paraValue">
+                    <!--保留字段值 -->
+                </PARA_VALUE>
+            </PARA>
+        </SOLE_BUSI_ACCNT_INFO>
+    </SOLE_BUSI_ACCNT_RSP>
+</UNI_BSS_BODY>

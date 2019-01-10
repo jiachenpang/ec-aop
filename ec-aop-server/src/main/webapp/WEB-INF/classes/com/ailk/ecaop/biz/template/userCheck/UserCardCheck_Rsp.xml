@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserInfoQueryRsp mappedOut="true">
+    <!-- 应答编码 0000 成功 0100 该号码不存在 0200 密码错误 0300 此集团用户没有责任人/使用人信息，请补录 0002 
+        老客户信息不完整 0003 老客户证件不合规 0090 身份证件需要升位； 0091 客户资料未返档 1000 停机用户不能受理补换卡业务 9999 
+        其它错误 -->
+    <RespCode range="0000,0100,0200,0300,0002,0003,0090,0091,1000,9999"
+        mappedName="code" />
+    <RespDesc length="V100" mappedName="detail" /> <!-- 错误描述 -->
+    <CustMess constraint="?" mappedName="custInfo">
+        <!-- 客户编号custId -->
+        <Custid constraint="?" length="V30" mappedName="custId" />
+        <!-- 客户名称custName -->
+        <CustName constraint="?" length="V128" mappedName="custName" />
+        <!-- 客户类型custType;01-个人客户02-集团客户 -->
+        <CustomerType length="V20" constraint="?"
+            mappedName="custType" />
+        <!-- 证件失效日期格式certEndDate：yyyymmdd -->
+        <CertExpireDate constraint="?" length="F8"
+            mappedName="certEndDate" />
+        <!-- 证件地址 -->
+        <CertAddr constraint="?" length="V256" mappedName="certAddr" />
+        <!-- 证件类型 -->
+        <CerType constraint="?" length="F2" mappedName="certTypeCode" />
+        <!-- 证件号码 -->
+        <CertNum constraint="?" length="V60" mappedName="certCode" />
+
+        <CustSex constraint="?" length="F1" mappedName="custSex" /> <!-- 客户性别;0-女，1-男 -->
+        <ManagerName constraint="?" length="V128"
+            mappedName="managerName" /> <!-- 客户经理 -->
+        <ManagerContact constraint="?" length="V128"
+            mappedName="managerContact" /> <!-- 客户经理联系方式 -->
+        <ContactPhone length="V128" constraint="?"
+            mappedName="contactPhone" /> <!-- 联系方式 -->
+        <ContactPerson length="V128" constraint="?"
+            mappedName="contactPerson" /> <!-- 联系人 -->
+        <CustLvl constraint="?" length="V256" mappedName="custLvl" /> <!-- 客户分级说明 -->
+        <ContactAddr length="V256" constraint="?"
+            mappedName="contactAddr" /> <!-- 联系人地址 -->
+        <TaxpayerTag length="F1" constraint="?" mappedName="taxpayerTag" /> <!-- 联系人地址 -->
+    </CustMess>
+
+    <UserMess constraint="?" mappedName="userInfo">
+        <!-- 用户编码 -->
+        <SubscrbID length="V30" mappedName="userId" />
+        <!-- 用户状态编码 -->
+        <SubscrbStat length="F2" range="10~15,21,30"
+            mappedName="userState" />
+        <!-- 品牌标识 -->
+        <Brand length="F1" range="1~6,8,9" mappedName="brandCode" />
+        <!-- 入网时间；yyyymmddhh24miss -->
+        <OpenDate length="F14" mappedName="openDate"/>
+        <!-- 产品编码 -->
+        <ProductId length="V64" mappedName="productId" />
+        <!-- 产品名称 -->
+        <ProductName length="V128" mappedName="productName" />
+
+        <!-- 省分代码 -->
+        <ProvCode length="F2" constraint="?" mappedName="provCode" />
+        <CityCode length="F3" constraint="?" mappedName="cityCode" />
+        <SubscrbType length="F1" constraint="?" range="0,1"
+            mappedName="subscrbType" /> <!-- 用户类型 -->
+        <InteNetType length="F1" constraint="?" range="0,1"
+            mappedName="inteNetType" /> <!-- 智能网标识 -->
+        <LandLvl length="F1" constraint="?" range="1~6"
+            mappedName="landLvl" /> <!-- 通话级别 -->
+        <RoamStat length="F1" constraint="?" range="1~5"
+            mappedName="roamStat" /> <!-- 漫游状态 -->
+
+        <ProductInfo constraint="*" mappedName="productInfo">
+            <ProductID length="V28" mappedName="productID" />
+            <!-- 产品名称 -->
+            <ProductName length="V128" mappedName="productName" />
+            <ProductActiveTime length="F14"
+                mappedName="productActiveTime" />
+            <ProductInActiveTime length="F14"
+                mappedName="productInActiveTime" />
+        </ProductInfo>
+        <GoodNumLogo length="F1" constraint="?" mappedName="goodNumLogo" />
+        <Simcard length="V20" constraint="?" mappedName="simCard" /> <!-- SIM/UIM卡号 -->
+        <VpnName constraint="?" length="V128" mappedName="vpnName" /> <!-- 所属虚拟网名称 -->
+        <CreditVale constraint="?" length="V20" mappedName="creditVale" /> <!-- 信用度 -->
+        <LastStatDate constraint="?" length="F14" mappedName="lastStatDate" /> <!-- 用户最后状态变更时间；YYYYMMDDHHMMSS -->
+        <!-- 转网信息 -->
+        <TransNetInfo constraint="?" mappedName="transNetInfo">
+            <TransInTime constraint="?" length="F14" mappedName="transInTime" /> <!-- 携入日期；YYYYMMDDHHMMSS -->
+            <TransInOper constraint="?" length="V256"
+                mappedName="transInOper" /> <!-- 携入运营商 -->
+            <TransOutTime constraint="?" length="F14" mappedName="transOutTime" /> <!-- 携出日期；YYYYMMDDHHMMSS -->
+        </TransNetInfo>
+    </UserMess>
+    <PARA constraint="*" mappedName="para">
+        <PARA_ID length="V20" mappedName="paraId" />
+        <PARA_VALUE length="V60" mappedName="paraValue" />
+    </PARA> <!-- 保留字段 -->
+</UserInfoQueryRsp>
