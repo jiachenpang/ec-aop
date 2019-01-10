@@ -1,0 +1,11 @@
+[students]
+# 注释
+#! id*,  name, sex, age
+001, wang, 01,  19
+002, li,   02,  18
+
+# 注释2
+[teachers]
+#! id*, sex, name*, age, className
+T001,   01,  zhang, 59, 3班
+T002,   02,  chen, 72, 1班

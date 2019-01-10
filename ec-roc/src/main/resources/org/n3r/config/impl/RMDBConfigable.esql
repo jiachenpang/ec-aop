@@ -1,0 +1,9 @@
+[QueryN3Config]
+SELECT T.KEY, T.VALUE
+FROM $$ T
+WHERE KEY LIKE ##
+
+[QueryVersionSum]
+SELECT TO_CHAR(SUM(T.VERSION)) 
+FROM $$ T
+WHERE KEY LIKE ##

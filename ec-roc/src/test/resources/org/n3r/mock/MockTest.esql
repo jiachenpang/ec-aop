@@ -1,0 +1,73 @@
+[createTable onerr=resume]
+drop table $$;
+create table $$
+(
+  key       VARCHAR2(100) not null,
+  condition VARCHAR2(1000),
+  mock_rsp  VARCHAR2(4000) not null,
+  priority  NUMBER(4) default 0 not null
+);
+comment on table $$
+  is ' 模拟表';
+comment on column $$.key
+  is '对应的method';
+comment on column $$.condition
+  is '模拟的表达式';
+comment on column $$.mock_rsp
+  is '模拟返回值';
+comment on column $$.priority
+  is '优先级';
+  
+[insertData]
+insert into $$ (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.check', 'id == ''321321198706245812''', '19890624', 0);
+
+insert into $$ (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.check', 'id == ''32132119870624581X''', '19890627', 0);
+
+insert into $$ (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.check', '', '19890628', 0);
+
+insert into $$ (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.check2', '', '19890630', 0);
+
+insert into $$ (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.check3', 'id == ''321321198706245812''', '19890627', 0);
+
+insert into $$ (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.check3', 'name  == ''wang''', '19890628', 1);
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.nocondition', 'id == ''1''', 'no1', 0);
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('ecaop.trades.query.common.certificate.nocondition', 'id == ''2''', 'no2', 0);
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('here is key', '', 'here is value', '0');
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('condition key', 'condition == ''Rocket-Man''', 'Rocket-Man', 0);
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('condition key', 'condition == ''Iron-Man''', 'Iron-Man', 0);
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('priority key', 'condition_height == ''I am taller!''', 'you win!taller!', 0);
+
+insert into n3_mock (KEY, CONDITION, MOCK_RSP, PRIORITY)
+values ('priority key', 'condition_weight == ''I am fatter!''', 'you win!fatter!', 1);
+
+
+
+
+[updateData]
+update $$ t
+set t.mock_rsp = '19890633'
+where t.key = 'ecaop.trades.query.common.certificate.check'
+and t.condition = 'id == ''32132119870624581X''';
+
+update $$ t
+set t.mock_rsp = '19890644'
+where t.key = 'ecaop.trades.query.common.certificate.check3'
+and t.condition = 'name == ''wang''';

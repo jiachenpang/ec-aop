@@ -1,0 +1,65 @@
+[testSql]
+select * from dual
+
+[dropConfigTable]
+drop table N3_CONFIG
+
+[createConfigTable]
+-- Create table
+create table N3_CONFIG
+(
+  key     VARCHAR2(100) not null,
+  value   VARCHAR2(1024) not null,
+  version NUMBER(32) not null,
+  remark  VARCHAR2(200)
+)
+tablespace SYSAUX
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table N3_CONFIG
+  is '配置表';
+-- Add comments to the columns 
+comment on column N3_CONFIG.key
+  is '主键 配置Key';
+comment on column N3_CONFIG.value
+  is '对应VALUE';
+comment on column N3_CONFIG.version
+  is '版本号';
+comment on column N3_CONFIG.remark
+  is '备注';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table N3_CONFIG
+  add constraint PK_N3_CONFIG primary key (KEY)
+  using index 
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    minextents 1
+    maxextents unlimited
+  );
+  
+[insertConfigData]
+insert into N3_CONFIG (KEY, VALUE, VERSION, REMARK)
+values ('bizconfig.config.key1', 'value1', 1, '备注');
+insert into N3_CONFIG (KEY, VALUE, VERSION, REMARK)
+values ('bizconfig.config.key2', '200', 2, '');
+insert into N3_CONFIG (KEY, VALUE, VERSION, REMARK)
+values ('bizconfig.config.key3', 'true', 3, '');
+insert into N3_CONFIG (KEY, VALUE, VERSION, REMARK)
+values ('bizconfig.config2.key3', 'value2', 1, '');
+
+[increaseConfigKey1Version]
+UPDATE N3_CONFIG
+SET VERSION = VERSION + 1
+WHERE KEY = 'bizconfig.config.key1'

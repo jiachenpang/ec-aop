@@ -1,0 +1,36 @@
+[queryorder]
+select '1', 100, '1370238797000'
+
+[insertOrder]
+insert into upay(gid,startdate,enddate,id,money,provinceid,unknown1,phonenum,
+unknown2,IVR,unknown3,unknown4,mode,bill,unknown5,unknown6,if1,all1)
+values(#1#,#2#,#3#,#4#,#5#,#6#,#7#,#8#,#9#,#10#,#11#,#12#,#13#,#14#,#15#,#16#,#17#,#18#)
+
+[mysqlload]
+TRUNCATE TABLE $1$;
+
+LOAD DATA LOCAL INFILE '$2$'
+INTO TABLE $1$
+FIELDS TERMINATED BY ','
+ENCLOSED BY ''
+LINES TERMINATED BY '\n'
+
+[compare]
+SELECT T.PROVINCE_CODE, T.ORDER_NO, T.INCOME_MONEY/10 INCOME_MONEY,
+        DECODE(B.PROCESS_STATE,'KO','00','KC','01','KD','02','KX','02') PROCESS_STATE
+    FROM TF_B_ORDER T,TF_B_ORDER_BROADBAND B
+   WHERE T.ORDER_ID = B.ORDER_ID
+     AND B.PROCESS_STATE IN ('KC','KD','KO','KX')
+     --AND T.PAY_STATE not in('0','2') --不为已退款或未支付
+     AND t.UPDATE_TIME > to_date('20130619','yyyymmdd')
+     AND t.UPDATE_TIME < to_date('20130619','yyyymmdd') + 1
+     AND T.ORDER_FROM = 'EMAL'
+     AND T.PROVINCE_CODE = '11'
+
+[diffIntoDb]
+
+INSERT INTO  NEWTABLE(BATCHNO,DIFFTYPE,LEFTDATA,RIGHTDATA,DIFF,LEFTKEY,RIGHTKEY) VALUES(##, ##, ##, ##, ##,##,##)
+
+[diffStatIntoDb]
+
+INSERT INTO STATTABLE(BATCHNO,LOS,ORS,LRS,STARTTIME,ENDTIME,TOTALLINE,COSTTIME) VALUES(##,##,##,##,##,##,##,##)

@@ -1,0 +1,4 @@
+[configRefresh]
+#! appid*,          time
+  org.n3r.add,    5000
+  org.n3r.del,    3000  

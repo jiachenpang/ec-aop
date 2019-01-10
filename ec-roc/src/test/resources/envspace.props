@@ -1,0 +1,2 @@
+bizconfigdir=bizconfig
+#config.implementation=org.n3r.config.impl.RedisConfigable(192.168.93.134,6379)

@@ -1,0 +1,36 @@
+[setup onerr=resume]
+create table demo_attr (id varchar2(32), attr varchar2(64))
+[teardown]
+drop table demo_attr
+
+[testIn]
+select * from dual
+where 1 in (''
+<#list lst as x>
+  ,#lst[${x_index}]#
+</#list>
+)
+-- in (#lst[0]#, #lst[1]#, #list[3]#)
+[testInSeq]
+select * from dual
+where 1 in (''
+<#list _1 as x>
+  ,#_1[${x_index}]#
+</#list>
+)
+
+[testInsertAll]
+insert all
+<#list arr as x>
+ into demo_attr(id, attr)
+ values(#id#, #arr[${x_index}]#)
+</#list>
+select 1 from dual
+
+[testInsertAllSeq]
+insert all
+<#list _1 as x>
+ into demo_attr(id, attr)
+ values(#_2#, #_1[${x_index}]#)
+</#list>
+select 1 from dual
